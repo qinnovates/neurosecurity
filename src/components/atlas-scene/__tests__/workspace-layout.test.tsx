@@ -38,27 +38,36 @@ const rows = (container: HTMLElement): HTMLButtonElement[] => [...container.quer
 describe('the explorer is laid out around the picture', () => {
   /**
    * The picture used to be a sibling above the main grid, so picking a region in it scrolled the
-   * answer off the screen. It now stands in a column of that grid with the region's detail beside
-   * it. This is the whole point of the page, so it is asserted rather than left to the stylesheet.
+   * answer off the screen; then the lens panel stood above the whole grid, so the page opened on a
+   * form and not on the brain. The picture is now the first thing in the grid, the lens bar beside
+   * it, the list under the picture and the region's details beside the list. This is the whole
+   * point of the page, so it is asserted rather than left to the stylesheet.
    */
-  it('puts the picture and the region pane side by side inside one grid, with the picture above the list', async () => {
+  it('opens on the picture: picture, then the lens bar, then the list, then the region pane, all in one grid', async () => {
     const container = await renderExplorer();
     const main = container.querySelector('.atlas-main') as HTMLElement;
     const column = main.querySelector(':scope > .atlas-main-list') as HTMLElement;
+    const lens = main.querySelector(':scope > .atlas-lens-panel') as HTMLElement;
+    const list = main.querySelector(':scope > .atlas-list') as HTMLElement;
     const pane = main.querySelector(':scope > .atlas-inspector') as HTMLElement;
-    expect(column).not.toBeNull();
-    expect(pane).not.toBeNull();
+    for (const part of [column, lens, list, pane]) expect(part).not.toBeNull();
+    // Reading order, which is the tab order: the picture, the lens that colours it, the list it governs, the details.
+    const order = [...main.children];
+    expect([column, lens, list, pane].map((part) => order.indexOf(part))).toEqual([0, 1, 2, 3]);
+    // The picture is the first thing in its column and in the grid; nothing stands above it any more.
     const viewport = container.querySelector('.atlas-viewport') as HTMLElement;
     expect(column.contains(viewport)).toBe(true);
-    expect(pane.contains(viewport)).toBe(false);
-    const inColumn = [...column.children];
-    expect(inColumn.indexOf(viewport)).toBeLessThan(inColumn.findIndex((child) => child.classList.contains('atlas-list')));
-    expect(inColumn.indexOf(viewport)).toBe(0);
-    // The lens bar governs both columns, so it is above the grid and not inside either one.
-    const lens = container.querySelector('.atlas-lens-panel') as HTMLElement;
-    expect(lens.parentElement?.classList.contains('atlas-workspace')).toBe(true);
-    expect(main.contains(lens)).toBe(false);
-    expect([...(lens.parentElement?.children ?? [])].indexOf(lens)).toBeLessThan([...(main.parentElement?.children ?? [])].indexOf(main));
+    expect([...column.children].indexOf(viewport)).toBe(0);
+    expect(main.contains(lens)).toBe(true);
+    expect(main.querySelector('.atlas-lens-panel')).toBe(lens);
+    expect(container.querySelector('.atlas-workspace > .atlas-lens-panel')).toBeNull();
+    // Nothing 3D is fetched before the button: the page opens on the picture's place, not the picture.
+    expect(viewport.getAttribute('data-gate')).toBe('closed');
+    expect(screen.getByRole('button', { name: 'Show the 3D view' })).not.toBeNull();
+    // The stylesheet names the four areas in that order, wide and stacked.
+    const workspace = fs.readFileSync(WORKSPACE_CSS, 'utf-8');
+    expect(workspace).toContain('grid-template-areas: "picture lens" "list inspector";');
+    expect(workspace).toContain('grid-template-areas: "picture" "lens" "list" "inspector";');
   });
 
   it('keeps the stacked layout and the sticky pane the narrow screen depends on, and reflows to one column at 320 px', () => {

@@ -61,13 +61,15 @@ function useAnnouncement(message: string): string {
 /**
  * The explorer once its data has loaded, laid out around the picture.
  *
- * The brain is the subject of this page, so the picture stands inside the main
- * grid with the chosen region's details beside it: picking a region in the
- * picture no longer scrolls the answer off the screen. The lens bar spans both
- * columns above them, because it governs both. Under the picture is the region
- * list, which is the whole of this page for anyone the 3D view is gated for.
+ * The brain is the subject of this page, so the page opens on the picture: it
+ * stands first in the main grid, with the lens bar beside it, because the lens
+ * is what the picture is coloured by and the first thing to reach for. Under
+ * the picture is the region list, which is the whole of this page for anyone
+ * the 3D view is gated for, and beside the list the chosen region's details,
+ * so picking a region in the picture never scrolls the answer off the screen.
  * Then the layers of the 3D view, the device stages, network names and the
- * notes on limits. Tab order follows that reading order. One reducer holds the
+ * notes on limits. Tab order follows that reading order: picture, lens, list,
+ * details. The grid areas are in atlas-workspace.css. One reducer holds the
  * state, and the selection survives every lens, layer and filter change.
  */
 export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = false, initialSelection = null }: Props) {
@@ -161,10 +163,6 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
 
   return (
     <div className="atlas-root atlas-workspace" data-lens={state.lens.kind}>
-      <LensPanel
-        model={model} lens={state.lens} previousLens={state.previousLens} tally={tally} onChooseKind={(kind) => dispatch({ type: 'lens_kind_chosen', kind })}
-        onRestoreLens={restoreLens} onChooseSubject={chooseSubject} onSelectRegion={(regionId) => selectRegion(regionId, 'keyboard')}
-      />
       <div className="atlas-main" ref={mainRef}>
         <div className="atlas-main-list">
           <AtlasViewport
@@ -177,11 +175,15 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
               <DeviceGeometry index={model.index} electrodeId={electrodeId} onPickElectrode={setElectrodeId} />
             </Suspense>
           )}
-          <StructureList
-            groups={groups} unfilteredGroups={allGroups} regionCount={model.regions.length} filter={state.filter} lensLabel={LENS_LABELS[state.lens.kind]} selectedRegionId={selectedRegionId}
-            onFilter={(filter) => dispatch({ type: 'filter_changed', filter })} onClearFilter={() => dispatch({ type: 'filter_cleared' })} onSelect={(regionId, byKeyboard) => selectRegion(regionId, byKeyboard ? 'keyboard' : 'pointer')}
-          />
         </div>
+        <LensPanel
+          model={model} lens={state.lens} previousLens={state.previousLens} tally={tally} onChooseKind={(kind) => dispatch({ type: 'lens_kind_chosen', kind })}
+          onRestoreLens={restoreLens} onChooseSubject={chooseSubject} onSelectRegion={(regionId) => selectRegion(regionId, 'keyboard')}
+        />
+        <StructureList
+          groups={groups} unfilteredGroups={allGroups} regionCount={model.regions.length} filter={state.filter} lensLabel={LENS_LABELS[state.lens.kind]} selectedRegionId={selectedRegionId}
+          onFilter={(filter) => dispatch({ type: 'filter_changed', filter })} onClearFilter={() => dispatch({ type: 'filter_cleared' })} onSelect={(regionId, byKeyboard) => selectRegion(regionId, byKeyboard ? 'keyboard' : 'pointer')}
+        />
         <RegionInspector
           model={model} detail={detail} atlasCoverage={atlasCoverage} headingRef={inspectorHeadingRef} anatomyEvidence={anatomyEvidence.state} regionEvidence={regionEvidence.state}
           onRetryAnatomyEvidence={anatomyEvidence.retry} onRetryRegionEvidence={regionEvidence.retry}

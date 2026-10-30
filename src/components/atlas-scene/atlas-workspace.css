@@ -12,15 +12,40 @@
  * alone, and nothing here is carried by a bar alone.
  */
 
-/* The picture shares the left column with the list, so that column takes a little more of the row than the pane. */
-.atlas-workspace .atlas-main { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+/*
+ * The page opens on the picture. The main grid is four named areas: the picture first, with the lens bar beside it
+ * (the lens is what the picture is coloured by); under the picture the region list, and beside the list the region's
+ * details, which stay in view while the list scrolls. The picture's column takes a little more of the row than the
+ * pane. The DOM order is the reading order (picture, lens, list, details), and at one column the page keeps it.
+ */
+.atlas-workspace .atlas-main {
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  grid-template-areas: "picture lens" "list inspector";
+}
+/* The picture's column fills its row, so the stage stands as tall as the lens panel beside it and leaves no void under the picture. */
+.atlas-workspace .atlas-main > .atlas-main-list { grid-area: picture; align-self: stretch; grid-template-rows: minmax(0, 1fr); grid-auto-rows: auto; }
+.atlas-workspace .atlas-main > .atlas-lens-panel { grid-area: lens; }
+.atlas-workspace .atlas-main > .atlas-list { grid-area: list; min-width: 0; }
+.atlas-workspace .atlas-main > .atlas-inspector { grid-area: inspector; }
 
 /* The picture stands in a column, so its controls and legend go under it rather than beside it, and it is as wide as the column. */
 .atlas-workspace .atlas-main-list .atlas-viewport-body { grid-template-columns: minmax(0, 1fr); }
 .atlas-workspace .atlas-main-list .atlas-canvas { height: min(54vh, 30rem); }
 
-/* The lens bar spans both columns above the grid: it governs the picture and the list together. */
-.atlas-workspace > .atlas-lens-panel { grid-column: 1 / -1; }
+/*
+ * Before the view is asked for it holds the picture's place at the picture's height, with its one sentence and its one
+ * button, so the page visibly opens on the picture even though nothing 3D is fetched until the button is pressed.
+ * The glow is the same stand-in the homepage hero uses while its picture loads.
+ */
+.atlas-workspace .atlas-main-list .atlas-viewport[data-gate="closed"] {
+  position: relative; overflow: hidden; min-height: min(54vh, 30rem); display: grid; align-content: center; justify-items: start; gap: 0.75rem;
+}
+.atlas-workspace .atlas-main-list .atlas-viewport[data-gate="closed"]::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 60% 55% at 50% 50%, color-mix(in srgb, var(--atlas-accent) 14%, transparent), transparent 70%);
+}
+.atlas-workspace .atlas-main-list .atlas-viewport[data-gate="closed"] > * { position: relative; }
+.atlas-workspace .atlas-main-list .atlas-viewport[data-gate="closed"] > .atlas-fact { max-width: 36rem; }
 .atlas-lenses[data-fact-lens="false"] .atlas-lens-thumb { opacity: 0; }
 .atlas-lens-blocked { margin: 0.375rem 0 0; padding: 0 0.125rem; font-size: 0.75rem; color: var(--atlas-ink-soft); }
 .atlas-lens[aria-disabled="true"] { cursor: not-allowed; color: var(--atlas-ink-soft); text-decoration: line-through; text-decoration-thickness: 1px; }
@@ -67,8 +92,11 @@
 }
 
 @media (max-width: 960px) {
+  /* One column, in reading order: the picture, the lens bar, the list, the details. */
+  .atlas-workspace .atlas-main { grid-template-columns: minmax(0, 1fr); grid-template-areas: "picture" "lens" "list" "inspector"; }
   /* Stacked, the picture no longer shares a row with the pane, so it takes the window's height again. */
   .atlas-workspace .atlas-main-list .atlas-canvas { height: min(60vh, 32rem); }
+  .atlas-workspace .atlas-main-list .atlas-viewport[data-gate="closed"] { min-height: min(40vh, 20rem); }
 }
 
 /* Reflow, WCAG 1.4.10: at 320 px every grid here is one column and nothing is measured in a width the window may not have. */
