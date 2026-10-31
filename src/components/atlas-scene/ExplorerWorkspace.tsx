@@ -9,6 +9,7 @@ import { LENS_LABELS, LENS_SUBJECT_NOUNS, type Lens, type LensKind } from '@/lib
 import { INITIAL_EXPLORER_STATE, explorerReducer, type Target } from './atlas-state';
 import AtlasViewport, { VIEWPORT_HEADING_ID } from './AtlasViewport';
 import ChainView from './ChainView';
+import ColourModePicker from './ColourModePicker';
 import { loadAnatomyEvidence, loadRegionEvidence } from './explorer-companions';
 import H01Card from './H01Card';
 import LayerPanel from './LayerPanel';
@@ -66,8 +67,9 @@ function useAnnouncement(message: string): string {
  * The explorer once its data has loaded, laid out around the picture.
  *
  * The brain is the subject of this page, so the page opens on the picture: it
- * stands first in the main grid, with the lens bar beside it, because the lens
- * is what the picture is coloured by and the first thing to reach for. Under
+ * stands first in the main grid, with the lens bar in its header, because the
+ * lens is what the picture is coloured by and a change has to be seen to happen.
+ * Beside it stands what qualifies that lens. Under
  * the picture is the region list, which is the whole of this page for anyone
  * the 3D view is gated for, and beside the list the chosen region's details,
  * so picking a region in the picture never scrolls the answer off the screen.
@@ -179,7 +181,7 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
           <AtlasViewport
             model={model} lens={state.lens} layers={state.layers} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep}
             chain={chainView.frame} electrodeId={electrodeId} onPickElectrode={setElectrodeId} onSelectRegion={(regionId) => selectRegion(regionId, 'picture')} onShowDetails={showDetails} lensWays={lensWays}
-            onCaptionChange={noteCaption}
+            onCaptionChange={noteCaption} headerControls={<ColourModePicker activeKind={state.lens.kind} onChoose={(kind) => dispatch({ type: 'lens_kind_chosen', kind })} />}
           />
           {isDevicesLayerShown(model.index, state.layers) && (
             <Suspense fallback={<p className="atlas-loading" role="status">Loading the electrode layout…</p>}>
@@ -188,7 +190,7 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
           )}
         </div>
         <LensPanel
-          model={model} lens={state.lens} previousLens={state.previousLens} tally={tally} onChooseKind={(kind) => dispatch({ type: 'lens_kind_chosen', kind })}
+          model={model} lens={state.lens} previousLens={state.previousLens} tally={tally}
           onRestoreLens={restoreLens} onChooseSubject={chooseSubject} onSelectRegion={(regionId) => selectRegion(regionId, 'keyboard')}
         />
         <StructureList

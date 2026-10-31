@@ -100,8 +100,9 @@ describe('the brain hero: the way in', () => {
     // The view's own words stay in the picture: the caption, its sources link and the lens it colours by. Band first: every region holds a value under it.
     expect(container.querySelector('[data-viewport-caption]')?.textContent).toContain('Band lens.');
     expect(container.querySelector('[data-viewport-caption] a')?.getAttribute('href')).toBe('/atlas/attribution/');
-    // The lens switch under the picture: two choices, the pressed one first, and the picture follows the choice.
-    const lensSwitch = container.querySelector('.brain-hero-lenses') as HTMLElement;
+    // The lens switch in the view's header, above the picture: two choices, the pressed one first, and the picture follows the choice.
+    const lensSwitch = container.querySelector('[data-viewport-header] .brain-hero-lenses') as HTMLElement;
+    expect(lensSwitch.compareDocumentPosition(container.querySelector('figure') as HTMLElement) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     const lensButtons = within(lensSwitch).getAllByRole('button');
     expect(lensButtons.map((button) => [button.textContent, button.getAttribute('aria-pressed')])).toEqual([['Band', 'true'], ['NISS severity', 'false']]);
     act(() => { lensButtons[1].click(); });

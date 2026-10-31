@@ -30,7 +30,7 @@ export const HERO_DEFAULT_LENS: Lens = HERO_LENSES[0];
  */
 export const HERO_LAYERS: Readonly<Record<LayerId, boolean>> = { ...INITIAL_EXPLORER_STATE.layers, deep: false };
 
-/** Two buttons under the picture: what the brain is coloured by. The caption under the picture names the lens in words. */
+/** Two buttons in the view's header, above the picture: what the brain is coloured by. The caption under the picture names the lens in words. */
 function HeroLensSwitch({ lens, onChoose }: { lens: Lens; onChoose: (lens: Lens) => void }) {
   return (
     <div className="brain-hero-lenses" role="group" aria-label="Colour the brain by">
@@ -66,9 +66,8 @@ export default function BrainHeroView({ model, isIndexPinned, isOutOfStep, probe
     <div className="atlas-root brain-hero" data-brain-hero="open" data-hero-lens={lens.kind}>
       <AtlasViewport
         model={model} lens={lens} layers={HERO_LAYERS} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep} isAsked
-        onSelectRegion={setSelectedRegionId} probe={probe} loadOpenView={loadOpenView}
+        onSelectRegion={setSelectedRegionId} probe={probe} loadOpenView={loadOpenView} headerControls={<HeroLensSwitch lens={lens} onChoose={setLens} />}
       />
-      <HeroLensSwitch lens={lens} onChoose={setLens} />
       <BrainHeroSummary model={model} regionId={selectedRegionId} lens={lens} />
     </div>
   );

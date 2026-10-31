@@ -345,6 +345,16 @@ describe('AtlasViewport: open', () => {
     expect(canvasProps?.slice).toBeNull();
   });
 
+  it('puts what the page hands it in the view\'s header, above the picture, and nothing there when the page hands it nothing', async () => {
+    const container = await openViewport({ headerControls: <span data-page-control="true" /> });
+    const header = container.querySelector('[data-viewport-header]') as HTMLElement;
+    expect(header.querySelector('[data-page-control]')).not.toBeNull();
+    expect(header.compareDocumentPosition(container.querySelector('figure') as HTMLElement) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    cleanup();
+    const bare = await openViewport();
+    expect(bare.querySelector('[data-page-control]')).toBeNull();
+  });
+
   it('hides again on request and starts fresh the next time', async () => {
     const container = await openViewport();
     fireEvent.click(screen.getByRole('button', { name: 'Hide the 3D view' }));

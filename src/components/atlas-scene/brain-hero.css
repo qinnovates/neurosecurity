@@ -12,10 +12,10 @@
 .brain-hero .atlas-heading { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .brain-hero .atlas-viewport > *, .brain-hero .atlas-picture, .brain-hero .atlas-viewport-side, .brain-hero-card { min-width: 0; }
 
-/* Reading and tab order are the view's own; only the drawn order changes: picture, card, the lens switch, the hide button, then the controls and legend. */
+/* Reading and tab order are the view's own; only the drawn order changes: the lens switch in the view's header, the picture, the card, the hide button, then the controls and legend. */
+.brain-hero .atlas-viewport-header { order: -1; margin: 0; }
 .brain-hero .atlas-picture { order: 0; border-radius: 0.875rem; box-shadow: 0 0 0 1px var(--atlas-line-strong), 0 24px 80px -24px var(--atlas-tint); }
 .brain-hero-card { order: 1; }
-.brain-hero-lenses { order: 2; }
 .brain-hero .atlas-viewport > .atlas-link-button { order: 3; justify-self: start; }
 .brain-hero .atlas-viewport-side { order: 4; font-size: 0.75rem; color: var(--atlas-ink-soft); }
 .brain-hero .atlas-viewport > :is(.atlas-failure, .atlas-fact, .atlas-button-primary, .atlas-loading) { order: 0; }
@@ -85,11 +85,12 @@
 
 @media (min-width: 961px) {
   .brain-hero[data-brain-hero="open"] { grid-template-columns: minmax(0, 1.8fr) minmax(17rem, 1fr); gap: 0.75rem 1.25rem; align-items: start; }
-  /* The picture spans the card's row and the controls' row, so the controls and legend stand under the card beside it and not under the picture. */
-  .brain-hero[data-brain-hero="open"] .atlas-picture { grid-column: 1; grid-row: 1 / span 2; }
-  .brain-hero[data-brain-hero="open"] .atlas-viewport > .atlas-loading { grid-column: 1; grid-row: 1; }
-  .brain-hero[data-brain-hero="open"] .atlas-viewport > .atlas-link-button { grid-column: 1; grid-row: 3; }
-  .brain-hero[data-brain-hero="open"] .brain-hero-card { grid-column: 2; grid-row: 1; }
-  .brain-hero[data-brain-hero="open"] .atlas-viewport-side { grid-column: 2; grid-row: 2; }
+  /* The header stands over the picture, and the picture spans the card's row and the controls' row, so the controls and legend stand under the card beside it and not under the picture. */
+  .brain-hero[data-brain-hero="open"] .atlas-viewport-header { grid-column: 1; grid-row: 1; }
+  .brain-hero[data-brain-hero="open"] .atlas-picture { grid-column: 1; grid-row: 2 / span 2; }
+  .brain-hero[data-brain-hero="open"] .atlas-viewport > .atlas-loading { grid-column: 1; grid-row: 2; }
+  .brain-hero[data-brain-hero="open"] .atlas-viewport > .atlas-link-button { grid-column: 1; grid-row: 4; }
+  .brain-hero[data-brain-hero="open"] .brain-hero-card { grid-column: 2; grid-row: 1 / span 2; }
+  .brain-hero[data-brain-hero="open"] .atlas-viewport-side { grid-column: 2; grid-row: 3; }
 }
 @media (prefers-reduced-motion: reduce) { .brain-hero-card[data-hero-card="selected"] { animation: none; } }

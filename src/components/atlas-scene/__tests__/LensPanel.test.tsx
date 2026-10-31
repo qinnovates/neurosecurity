@@ -14,7 +14,7 @@ const noop = (): void => undefined;
 
 function hasTally(kind: LensKind, hasSubject: boolean): boolean {
   const lens = hasSubject ? withLensSubject(kind, 'chosen_subject') : emptyLens(kind);
-  const { container } = render(<LensPanel model={model} lens={lens} previousLens={null} tally={tally} onChooseKind={noop} onRestoreLens={noop} onChooseSubject={noop} onSelectRegion={noop} />);
+  const { container } = render(<LensPanel model={model} lens={lens} previousLens={null} tally={tally} onRestoreLens={noop} onChooseSubject={noop} onSelectRegion={noop} />);
   const found = container.querySelector('[data-tally="true"]') !== null;
   cleanup();
   return found;
@@ -22,14 +22,14 @@ function hasTally(kind: LensKind, hasSubject: boolean): boolean {
 
 describe('the lens panel explains itself', () => {
   it.each(LENS_KINDS)('says in one line what the %s lens colours by', (kind) => {
-    const { container } = render(<LensPanel model={model} lens={emptyLens(kind)} previousLens={null} tally={tally} onChooseKind={noop} onRestoreLens={noop} onChooseSubject={noop} onSelectRegion={noop} />);
+    const { container } = render(<LensPanel model={model} lens={emptyLens(kind)} previousLens={null} tally={tally} onRestoreLens={noop} onChooseSubject={noop} onSelectRegion={noop} />);
     expect(container.querySelector(`[data-lens-description="${kind}"]`)?.textContent).toBe(LENS_DESCRIPTIONS[kind]);
     expect(screen.queryByRole('button', { name: /^Back to the .* lens$/ })).toBeNull();
   });
 
   it('offers the way back to the lens a drill-down replaced, as a real button', () => {
     const onRestoreLens = vi.fn();
-    render(<LensPanel model={model} lens={withLensSubject('technique', 'QIF-T0001')} previousLens={{ kind: 'band' }} tally={tally} onChooseKind={noop} onRestoreLens={onRestoreLens} onChooseSubject={noop} onSelectRegion={noop} />);
+    render(<LensPanel model={model} lens={withLensSubject('technique', 'QIF-T0001')} previousLens={{ kind: 'band' }} tally={tally} onRestoreLens={onRestoreLens} onChooseSubject={noop} onSelectRegion={noop} />);
     fireEvent.click(screen.getByRole('button', { name: 'Back to the Band lens' }));
     expect(onRestoreLens).toHaveBeenCalledTimes(1);
   });

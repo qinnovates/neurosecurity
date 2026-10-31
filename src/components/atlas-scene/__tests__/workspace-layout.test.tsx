@@ -70,6 +70,22 @@ describe('the explorer is laid out around the picture', () => {
     expect(workspace).toContain('grid-template-areas: "picture" "lens" "list" "inspector";');
   });
 
+  it('puts the lens bar in the 3D view\'s header, open or closed, and leaves the words about each lens in the panel below', async () => {
+    const container = await renderExplorer();
+    const header = container.querySelector('.atlas-viewport [data-viewport-header]') as HTMLElement;
+    expect(header.querySelector('h2')?.textContent).toBe('3D view');
+    expect(container.querySelectorAll('.atlas-lenses')).toHaveLength(1);
+    expect(header.querySelector('.atlas-lenses')).not.toBeNull();
+    expect(container.querySelector('.atlas-lens-panel .atlas-lenses')).toBeNull();
+    // The one lens that cannot be used keeps its reason, in the panel the legend and limits stay in.
+    const blocked = lensButton('Body function');
+    expect(document.getElementById(blocked.getAttribute('aria-describedby') ?? '')?.closest('.atlas-lens-panel')).not.toBeNull();
+    expect(container.querySelector('.atlas-lens-panel [data-lens-description="band"]')).not.toBeNull();
+    fireEvent.click(lensButton('NISS severity'));
+    expect(container.querySelector('.atlas-root')?.getAttribute('data-lens')).toBe('niss');
+    expect(lensButton('NISS severity').getAttribute('aria-pressed')).toBe('true');
+  });
+
   it('keeps the stacked layout and the sticky pane the narrow screen depends on, and reflows to one column at 320 px', () => {
     const scene = fs.readFileSync(SCENE_CSS, 'utf-8');
     const workspace = fs.readFileSync(WORKSPACE_CSS, 'utf-8');
