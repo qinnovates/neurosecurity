@@ -833,12 +833,13 @@ code, pre {
 /* ═══ Signal Bench (homepage hero strip chart) ═══ */
 .signal-bench {
   --signal-trace: #3D86FF;
-  --signal-event: #B81F55;
+  --signal-event: #F0709A;
   font-family: var(--font-heading);
 }
 
 :root[data-theme="light"] .signal-bench {
   --signal-trace: #1F4FD1;
+  --signal-event: #B81F55;
 }
 
 .signal-bench-event {
