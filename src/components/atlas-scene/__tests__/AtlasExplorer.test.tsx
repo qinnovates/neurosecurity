@@ -23,6 +23,8 @@ beforeEach(() => {
 afterEach(() => {
   cleanup();
   vi.unstubAllGlobals();
+  // The explorer writes its state to the address, and the next test reads the address it opens on.
+  window.history.replaceState(null, '', '/atlas/anatomy/');
   const warnings = reactWarnings.mock.calls.map((call: unknown[]) => String(call[0]));
   reactWarnings.mockRestore();
   expect(warnings).toEqual([]);
@@ -76,6 +78,25 @@ async function chooseTechnique(container: HTMLElement, query: string): Promise<v
   highlight(query);
   await waitFor(() => expect(container.querySelector('.atlas-subject')).not.toBeNull());
 }
+
+describe('AtlasExplorer: the highlight chip', () => {
+  it.each([
+    ['technique', 'QIF-T0030', 'Technique QIF-T0030'],
+    ['device', 'neuralink-n1', 'Device neuralink-n1'],
+  ])('shows a chosen %s as a chip beside the lens bar, and its cross restores the lens it replaced', async (_kind, subjectId, words) => {
+    const container = await renderExplorer();
+    const lensOf = (): string | null | undefined => container.querySelector('.atlas-root')?.getAttribute('data-lens');
+    fireEvent.click(lensButton('NISS severity'));
+    expect(container.querySelector('[data-highlight-chip]')).toBeNull();
+    highlight(subjectId);
+    await waitFor(() => expect(lensOf()).not.toBe('niss'));
+    const chip = container.querySelector('[data-viewport-header] [data-highlight-chip]') as HTMLElement;
+    expect(chip.textContent).toBe(`${words}×`);
+    fireEvent.click(within(chip).getByRole('button', { name: `Clear ${words}, back to the NISS severity lens` }));
+    await waitFor(() => expect(lensOf()).toBe('niss'));
+    expect(container.querySelector('[data-highlight-chip]')).toBeNull();
+  });
+});
 
 describe('AtlasExplorer: the list', () => {
   it('fetches the index and the catalog only, and nothing lazy, before the visitor asks', async () => {
@@ -156,6 +177,25 @@ describe('AtlasExplorer: the list', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Back to the Band lens' }));
     await waitFor(() => expect(container.querySelector('.atlas-root')?.getAttribute('data-lens')).toBe('band'));
     expect(screen.queryByRole('button', { name: /^Back to the .* lens$/ })).toBeNull();
+  });
+
+  it('moves nothing but the pane when a row is chosen on a wide screen, so the picture stays where it is', async () => {
+    const documentScroll = vi.fn();
+    const paneScroll = vi.fn();
+    window.HTMLElement.prototype.scrollIntoView = documentScroll;
+    window.HTMLElement.prototype.scrollTo = paneScroll;
+    const focus = vi.spyOn(window.HTMLElement.prototype, 'focus');
+    const container = await renderExplorer();
+    pressEnterOn(rowOf(container, 'hippocampus'));
+    await waitFor(() => expect(document.activeElement?.id).toBe('atlas-inspector-heading'));
+    expect(focus).toHaveBeenLastCalledWith({ preventScroll: true });
+    expect(paneScroll).toHaveBeenLastCalledWith({ top: 0 });
+    expect(paneScroll.mock.contexts.at(-1)).toBe(container.querySelector('.atlas-inspector'));
+    fireEvent.click(rowOf(container, 'pfc'), { detail: 1 });
+    await screen.findByRole('heading', { level: 2, name: 'Prefrontal Cortex' });
+    await waitFor(() => expect(paneScroll.mock.contexts.at(-1)).toBe(container.querySelector('.atlas-inspector')));
+    expect(documentScroll).not.toHaveBeenCalled();
+    focus.mockRestore();
   });
 
   it('moves focus and the view to the details when a row is tapped on a narrow, stacked screen', async () => {

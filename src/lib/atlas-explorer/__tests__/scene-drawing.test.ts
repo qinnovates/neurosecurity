@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { poseForView, turnPose } from '../camera-views';
 import {
   BRAIN_OUTLINE_OPACITY, DRAW_ORDER, FILL_OPACITY, HOVER_EMISSIVE, HOVER_EMISSIVE_INTENSITY, HOVER_OPACITY, IDLE_RADIANS_PER_MS, INSIDE_COLOUR, OWN_COLOUR_HOVER_EMISSIVE_INTENSITY,
-  OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY, RING_OUTER_MM, SELECTED_EMISSIVE_INTENSITY, axisDirectionsFor, choosePick, hoverParamsFor, idleTurnSpeed,
+  RING_OUTER_MM, axisDirectionsFor, choosePick, hoverParamsFor, idleTurnSpeed,
   isPickable, materialParamsFor, pointerToNdc, ringParamsFor, type PickHit, type RingParams,
 } from '../scene-drawing';
 import { FILL_KINDS, NEUTRAL_COLOUR, NISS_COLOURS, NISS_COLOURS_DARK, SIZE_MARKS } from '../scene-shapes';
@@ -44,12 +44,10 @@ describe('hoverParamsFor', () => {
   it('lifts a see-through shape by opacity alone, keeps it short of filled, and adds no light to it whether or not it has a colour of its own', () => {
     for (const fill of FILL_KINDS.filter((kind) => kind !== 'solid')) {
       for (const own of [null, OWN_COLOUR]) {
-        for (const lift of ['hover', 'selected'] as const) {
-          const params = hoverParamsFor(shape(fill, 'cortical', '#123456', own), lift);
-          expect(params.opacity, `${fill} ${lift}`).toBeGreaterThan(FILL_OPACITY[fill]);
-          expect(params.opacity, `${fill} ${lift}`).toBeLessThan(1);
-          expect(params, `${fill} ${lift}`).toMatchObject({ emissiveColour: null, emissiveIntensity: 0 });
-        }
+        const params = hoverParamsFor(shape(fill, 'cortical', '#123456', own));
+        expect(params.opacity, fill).toBeGreaterThan(FILL_OPACITY[fill]);
+        expect(params.opacity, fill).toBeLessThan(1);
+        expect(params, fill).toMatchObject({ emissiveColour: null, emissiveIntensity: 0 });
       }
     }
     expect(HOVER_OPACITY.translucent).toBeGreaterThan(HOVER_OPACITY.lines);
@@ -57,10 +55,8 @@ describe('hoverParamsFor', () => {
 
   it('lights a filled shape with no colour of its own in white, and one with a region colour in that colour, never in white', () => {
     expect(hoverParamsFor(shape('solid'))).toEqual({ opacity: 1, emissiveColour: HOVER_EMISSIVE, emissiveIntensity: HOVER_EMISSIVE_INTENSITY });
-    expect(hoverParamsFor(shape('solid'), 'selected')).toEqual({ opacity: 1, emissiveColour: HOVER_EMISSIVE, emissiveIntensity: SELECTED_EMISSIVE_INTENSITY });
     const own = shape('solid', 'cortical', '#123456', OWN_COLOUR);
     expect(hoverParamsFor(own)).toEqual({ opacity: 1, emissiveColour: OWN_COLOUR, emissiveIntensity: OWN_COLOUR_HOVER_EMISSIVE_INTENSITY });
-    expect(hoverParamsFor(own, 'selected')).toEqual({ opacity: 1, emissiveColour: OWN_COLOUR, emissiveIntensity: OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY });
     expect(HOVER_EMISSIVE).toBe('#ffffff');
   });
 
@@ -125,15 +121,10 @@ describe('axisDirectionsFor', () => {
   });
 });
 
-describe('the selection glow', () => {
-  it('is held below the pointer\'s lift in either light, so the shape under the pointer still stands out over a selected one', () => {
-    expect(SELECTED_EMISSIVE_INTENSITY).toBeGreaterThan(0);
-    expect(SELECTED_EMISSIVE_INTENSITY).toBeLessThan(HOVER_EMISSIVE_INTENSITY);
-    expect(OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY).toBeGreaterThan(0);
-    expect(OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY).toBeLessThan(OWN_COLOUR_HOVER_EMISSIVE_INTENSITY);
-    const own = shape('solid', 'cortical', '#123456', OWN_COLOUR);
-    expect(hoverParamsFor(own, 'selected').emissiveIntensity).toBeLessThan(hoverParamsFor(own, 'hover').emissiveIntensity);
-    expect(hoverParamsFor(shape('solid'), 'selected').emissiveIntensity).toBeLessThan(hoverParamsFor(shape('solid'), 'hover').emissiveIntensity);
+describe('the pointer\'s lift', () => {
+  it('stays quieter than the selection\'s brackets: under the pointer a shape keeps its hue and gains little light', () => {
+    expect(HOVER_EMISSIVE_INTENSITY).toBeLessThanOrEqual(0.35);
+    expect(OWN_COLOUR_HOVER_EMISSIVE_INTENSITY).toBeLessThanOrEqual(0.25);
   });
 });
 
@@ -223,7 +214,8 @@ describe('ringParamsFor', () => {
 describe('idleTurnSpeed', () => {
   it('is zero under reduced motion and one slow turn in a minute otherwise', () => {
     expect(idleTurnSpeed(true)).toBe(0);
-    expect(idleTurnSpeed(false)).toBe(IDLE_RADIANS_PER_MS);
-    expect((Math.PI * 2) / IDLE_RADIANS_PER_MS).toBeCloseTo(60_000);
+    // Nothing moves at rest: a camera turn is a consequence of input, for everyone.
+    expect(IDLE_RADIANS_PER_MS).toBe(0);
+    expect(idleTurnSpeed(false)).toBe(0);
   });
 });

@@ -24,7 +24,7 @@ function setReducedMotion(isReduced: boolean): void {
 }
 
 beforeEach(() => { fetchMock = serveFiles(REAL_FILES); setReducedMotion(false); });
-afterEach(() => { cleanup(); vi.useRealTimers(); vi.unstubAllGlobals(); });
+afterEach(() => { cleanup(); vi.useRealTimers(); vi.unstubAllGlobals(); window.history.replaceState(null, '', '/atlas/anatomy/'); });
 
 async function renderExplorer(): Promise<HTMLElement> {
   const { container } = render(<AtlasExplorer />);

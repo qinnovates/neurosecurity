@@ -4,7 +4,7 @@ import atlas from '@shared/qif-brain-bci-atlas.json';
 import { GEOMETRY_STATES } from '@/lib/anatomy/anatomy-index-types';
 import { parseRegionEvidence } from '@/lib/anatomy/parse-region-evidence';
 import { isAboutRegionItself } from '@/lib/anatomy/region-evidence-types';
-import { describeBands, limitForGeometry, limitForLayer, limitForSource, limitsForEvidenceAnatomy, limitsForLens } from '../limit-selection';
+import { describeBands, limitForGeometry, limitForLayer, limitForSource, limitsForEvidenceAnatomy, limitsForLens, limitForRegionUnderLens } from '../limit-selection';
 import { buildRegionEvidenceView } from '../region-evidence-view';
 import { FIXTURE_IDS, buildFixtureModel, loadRealModel } from './explorer-fixtures';
 
@@ -97,5 +97,17 @@ describe('evidence statements', () => {
     expect(cea.emptyLimit?.text).not.toMatch(/this session|filed under bla/);
     expect(buildRegionEvidenceView(evidence, 'sacral_cord', 'Sacral').emptyLimit?.id).toBe('evidence_none_no_abstract_found');
     expect(buildRegionEvidenceView(evidence, 'ppc', 'PPC').emptyLimit).toBeNull();
+  });
+});
+
+describe('limitForRegionUnderLens', () => {
+  it('says the lens holds no value for a region with no data or only a named link, and says neither is low', () => {
+    expect(limitForRegionUnderLens({ kind: 'niss' }, { standing: 'no_data', reason: 'no technique is linked to this region' })?.text).toBe('No value under the NISS severity lens: no technique is linked to this region. This is not a low value.');
+    expect(limitForRegionUnderLens({ kind: 'technique', techniqueId: 'QIF-T0001' }, { standing: 'named_not_counted', reason: 'the catalog names a part of this region, not the region' })?.id).toBe('region_no_value');
+  });
+
+  it('says nothing for a region the lens holds a value for, or while the lens waits for a subject', () => {
+    expect(limitForRegionUnderLens({ kind: 'band' }, { standing: 'value', reason: 'any' })).toBeNull();
+    expect(limitForRegionUnderLens({ kind: 'technique', techniqueId: null }, { standing: 'awaiting_subject', reason: 'this lens needs a subject' })).toBeNull();
   });
 });

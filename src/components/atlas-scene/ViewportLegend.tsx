@@ -1,5 +1,5 @@
 import { limitSentence } from '@/lib/anatomy/limits-copy';
-import type { PickedShape } from '@/lib/atlas-explorer/resolve-pick';
+import { nameShape, type PickedShape } from '@/lib/atlas-explorer/resolve-pick';
 import { listLegendSteps, type SceneShape } from '@/lib/atlas-explorer/scene-shapes';
 import type { ViewportCaption } from '@/lib/atlas-explorer/viewport-caption';
 import { LAYER_NOUNS } from '@/lib/atlas-explorer/viewport-caption';
@@ -8,6 +8,7 @@ import Disclosure from './Disclosure';
 import LimitNote from './LimitNote';
 import MarkGlyph from './MarkGlyph';
 import { ASSET_FAILURE_SENTENCES } from './scene-assets';
+import ShapeNames from './ShapeNames';
 import type { SceneAssetStates } from './use-scene-assets';
 
 interface Props {
@@ -59,7 +60,7 @@ function AssetStatuses({ assets, assetStates, onRetryAssets }: Pick<Props, 'asse
 function PickedPanel({ picked, onSelectRegion, onClearPick }: Pick<Props, 'onSelectRegion' | 'onClearPick'> & { picked: PickedShape }) {
   return (
     <div className="atlas-picked" data-picked-key={picked.structureKey}>
-      <p className="atlas-fact">Picked shape: <strong>{picked.label}</strong>, from {picked.sourceName}.</p>
+      <p className="atlas-fact">Picked shape: <strong><ShapeNames name={nameShape(picked)} /></strong>, from {picked.sourceName}.</p>
       {picked.regions.length === 0 && <LimitNote limit={limitSentence('picked_shape_unowned')} />}
       {picked.regions.length > 0 && picked.selectedRegionId === null && <LimitNote limit={limitSentence(picked.regions.length === 1 ? 'picked_shape_larger' : 'picked_shape_shared')} />}
       {picked.regions.length > 0 && (
@@ -89,7 +90,8 @@ export default function ViewportLegend({ caption, drawnShapes, assets, assetStat
         <li data-legend-row="mark"><MarkGlyph mark="no_data" /> lines only: no data</li>
         {hasCoarseRing && <li data-legend-row="mark"><span className="atlas-ring-swatch" data-ring="coarse_outline" aria-hidden="true" /> ring: the shape it sits on is outlined only roughly</li>}
         {hasPlaceOnlyRing && <li data-legend-row="mark"><span className="atlas-ring-swatch" data-ring="place_only" aria-hidden="true" /> ring with a centre: no outline at all, only a place</li>}
-        <li data-legend-row="mark"><span className="atlas-selection-swatch" aria-hidden="true" /> in a colour of its own: under the pointer, or selected. The colour identifies the shape and nothing else</li>
+        <li data-legend-row="mark"><span className="atlas-selection-swatch" aria-hidden="true" /> corner marks: selected. The other filled shapes dim while something is selected, and keep their colours</li>
+        <li data-legend-row="mark">in a colour of its own: under the pointer. The colour identifies the shape and nothing else</li>
         {steps.map((entry) => <li key={entry.step} data-legend-row="step"><span className="atlas-step-swatch" style={{ background: entry.colour }} aria-hidden="true" /> {entry.step.replaceAll('_', ' ')}</li>)}
       </ul>
       {/* How a ring reads under the lens is a limit sentence like the others now: it arrives in caption.markLimits, from limits-copy.ts, rather than being typed here. */}

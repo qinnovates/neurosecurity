@@ -3,6 +3,7 @@ import { webcrypto } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, cleanup, render, screen, waitFor, within } from '@testing-library/react';
 import { HERO_COPY } from '@/lib/anatomy/hero-copy';
+import { listLitLinks } from '@/lib/atlas-explorer/explorer-model';
 import { HERO_RISK_CAP, rankRegionRisks, techniquePagePath } from '@/lib/atlas-explorer/hero-risks';
 import { buildRegionDetail } from '@/lib/atlas-explorer/region-detail';
 import { resolvePick } from '@/lib/atlas-explorer/resolve-pick';
@@ -100,17 +101,18 @@ describe('the brain hero: the way in', () => {
     // The view's own words stay in the picture: the caption, its sources link and the lens it colours by. Band first: every region holds a value under it.
     expect(container.querySelector('[data-viewport-caption]')?.textContent).toContain('Band lens.');
     expect(container.querySelector('[data-viewport-caption] a')?.getAttribute('href')).toBe('/atlas/attribution/');
-    // The lens switch under the picture: two choices, the pressed one first, and the picture follows the choice.
-    const lensSwitch = container.querySelector('.brain-hero-lenses') as HTMLElement;
+    // The lens switch in the view's header, above the picture: two choices, the pressed one first, and the picture follows the choice.
+    const lensSwitch = container.querySelector('[data-viewport-header] .brain-hero-lenses') as HTMLElement;
+    expect(lensSwitch.compareDocumentPosition(container.querySelector('figure') as HTMLElement) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     const lensButtons = within(lensSwitch).getAllByRole('button');
     expect(lensButtons.map((button) => [button.textContent, button.getAttribute('aria-pressed')])).toEqual([['Band', 'true'], ['NISS severity', 'false']]);
     act(() => { lensButtons[1].click(); });
     await waitFor(() => expect(container.querySelector('[data-viewport-caption]')?.textContent).toContain('NISS severity lens.'));
     expect(lensButtons[1].getAttribute('aria-pressed')).toBe('true');
     expect(container.querySelector('[data-brain-hero]')?.getAttribute('data-hero-lens')).toBe('niss');
-    // The picture carries the three moves as a hint until the first touch, and nothing is drawn around a selection.
+    // The picture carries the three moves as a hint until the first touch, and with nothing selected nothing is bracketed.
     expect(container.querySelector('[data-picture-hint]')?.textContent).toContain('Drag to turn');
-    expect(canvasProps).not.toHaveProperty('bracketGroups');
+    expect(canvasProps?.bracketGroups).toEqual([]);
     // The view's heading is kept for assistive technology and the keyboard proxy still moves the camera.
     expect(screen.getByRole('heading', { name: '3D view' })).not.toBeNull();
     expect(container.querySelector('[data-viewport-proxy]')).not.toBeNull();
@@ -174,7 +176,23 @@ describe('the brain hero: a pick and the way on', () => {
     expect(container.querySelector('[data-hero-card] [role="status"]')?.textContent).toBe(HERO_COPY.selected_announcement(ownRegion.name));
   });
 
-  it('hands the renderer the visitor\'s motion preference, so the idle turn and the eased moves stop under reduced motion', async () => {
+  it('marks the picked region as every other view does, and keeps the card on it through a change of lens, saying when the lens holds no value for it', async () => {
+    const quietRegion = model.regions.find((region) => listLitLinks(model, region.id).length === 0 && region.geometry.state === 'drawn' && region.structure_keys.some((key) => resolvePick(model, key)?.selectedRegionId === region.id));
+    if (quietRegion === undefined) throw new Error('No region with a shape of its own and no linked technique.');
+    const shapeKey = quietRegion.structure_keys.find((key) => resolvePick(model, key)?.selectedRegionId === quietRegion.id) ?? '';
+    const container = await openHero();
+    act(() => canvasProps?.onPick(shapeKey));
+    await waitFor(() => expect(container.querySelector('[data-hero-card="selected"]')).not.toBeNull());
+    expect(canvasProps?.bracketGroups).toEqual([quietRegion.structure_keys]);
+    expect(container.querySelector('[data-inspector-lens]')).toBeNull();
+    act(() => { within(container.querySelector('.brain-hero-lenses') as HTMLElement).getAllByRole('button')[1].click(); });
+    await waitFor(() => expect(container.querySelector('[data-brain-hero]')?.getAttribute('data-hero-lens')).toBe('niss'));
+    const card = container.querySelector('[data-hero-card="selected"]') as HTMLElement;
+    expect(card.getAttribute('data-hero-selected')).toBe(quietRegion.id);
+    expect(card.querySelector('[data-inspector-lens="niss"] [data-limit-id="region_no_value"]')?.textContent).toContain('No value under the NISS severity lens');
+  });
+
+  it('hands the renderer the visitor\'s motion preference, so the eased moves stop under reduced motion', async () => {
     vi.stubGlobal('matchMedia', vi.fn((query: string) => ({ matches: query === '(prefers-reduced-motion: reduce)', media: query, addEventListener: () => undefined, removeEventListener: () => undefined })));
     await openHero();
     expect(canvasProps?.prefersLessMotion).toBe(true);

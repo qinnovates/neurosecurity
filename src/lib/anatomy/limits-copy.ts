@@ -64,6 +64,7 @@ export const LIMIT_TEMPLATES = {
   lens_stated_targets: 'These are the regions QIF\'s own atlas file lists for this device; no expert has reviewed the list, and QIF is a proposed framework. Where a device sits and what it affects is different in every person and is not shown here.',
   lens_needs_subject: 'Choose one from the list to see which regions it is linked to.',
   lens_no_data: 'No region has data under this lens. "No data" means nothing has been linked; it does not mean low.',
+  region_no_value: 'No value under the {lens} lens: {reason}. This is not a low value.',
   counts_are_entries: 'Counts are catalog entries, not measurements, and nothing is ranked by them.',
 
   // The inspector.
@@ -109,6 +110,7 @@ export const LIMIT_TEMPLATES = {
   position_not_checked: 'The position of the {layer} has not been independently checked.',
   position_not_checked_with_range: 'The position of the {layer} has not been independently checked. Where two atlases draw the same deep structure, their surfaces differ by about {range} mm.',
   position_failed: 'A position check failed for the {layer}. Treat that position as unreliable.',
+  picked_shape_not_region: 'This shape is not one QIF region.',
   picked_shape_shared: 'This shape holds more than one QIF region. Picking it selects the shape, not any one of them.',
   picked_shape_larger: 'This shape is larger than the QIF region it holds. Picking it selects the shape, not the region.',
   picked_shape_unowned: 'No QIF record maps to this shape. It is drawn for context and no lens colours it.',

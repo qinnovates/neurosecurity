@@ -1,4 +1,4 @@
-import { Suspense, lazy, useMemo, useRef, useState, type ComponentType } from 'react';
+import { Suspense, lazy, useMemo, useRef, useState, type ComponentType, type ReactNode } from 'react';
 import type { LayerId } from '@/lib/anatomy/source-types';
 import type { ChainFrame } from '@/lib/atlas-explorer/chain-steps';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
@@ -33,6 +33,8 @@ export interface AtlasViewportProps {
   selectedRegionGroups?: ReadonlyArray<readonly string[]>;
   /** The visitor already asked for the view with the embedding page's own control, so it starts decided, not closed. */
   isAsked?: boolean;
+  /** What the page keeps beside the view's heading: the control that says what the picture is coloured by. It stands above the picture whatever the gate says, so a change is never made blind. */
+  headerControls?: ReactNode;
   /** Told the caption the open picture is showing, and null once the picture is gone, so words beside it need not be said twice. */
   onCaptionChange?: (caption: ViewportCaption | null) => void;
   /** Replaceable in tests. In the page they are the real probe and the real view, fetched only once the gate opens. */
@@ -62,7 +64,7 @@ function sumRequestedBytes(model: ExplorerModel, layers: Readonly<Record<LayerId
  * facts are.
  */
 export default function AtlasViewport(props: AtlasViewportProps) {
-  const { model, lens, layers, selectedRegionId, isIndexPinned, isOutOfStep = false, chain = null, electrodeId = null, onPickElectrode = IGNORE_ELECTRODE, onSelectRegion, onShowDetails, lensWays = null, selectedRegionGroups = NO_GROUPS, isAsked = false, onCaptionChange, probe = probeWebGL, loadOpenView = loadRealOpenView } = props;
+  const { model, lens, layers, selectedRegionId, isIndexPinned, isOutOfStep = false, chain = null, electrodeId = null, onPickElectrode = IGNORE_ELECTRODE, onSelectRegion, onShowDetails, lensWays = null, selectedRegionGroups = NO_GROUPS, isAsked = false, headerControls = null, onCaptionChange, probe = probeWebGL, loadOpenView = loadRealOpenView } = props;
   const decide = (): GateState => decideGate(isIndexPinned, globalThis.crypto?.subtle !== undefined, probe, isOutOfStep);
   const [gate, setGate] = useState<GateState>(() => (isAsked ? decide() : 'closed'));
   const [run, setRun] = useState(0);
@@ -85,7 +87,10 @@ export default function AtlasViewport(props: AtlasViewportProps) {
 
   return (
     <section className="atlas-panel atlas-viewport" aria-labelledby="atlas-viewport-heading" data-gate={gate}>
-      <h2 className="atlas-heading" id={VIEWPORT_HEADING_ID} tabIndex={-1}>3D view</h2>
+      <div className="atlas-viewport-header" data-viewport-header="true">
+        <h2 className="atlas-heading" id={VIEWPORT_HEADING_ID} tabIndex={-1}>3D view</h2>
+        {headerControls}
+      </div>
       {gate !== 'closed' && gate !== 'open' && <p className="atlas-failure" role="alert" data-gate-notice={gate}>{GATE_NOTICES[gate]}</p>}
       {(gate === 'closed' || gate === 'context_lost') && (
         <>

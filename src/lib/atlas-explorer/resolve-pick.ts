@@ -18,6 +18,23 @@ export interface PickedShape {
   selectedRegionId: string | null;
 }
 
+/** What a shape is called on screen. */
+export interface ShapeName {
+  primary: string;
+  /** The atlas's own name, where the primary name is a QIF region's and differs from it. */
+  secondary: string | null;
+}
+
+/**
+ * The QIF region's name first where the shape is that region's own, and the atlas's name under it, smaller. A shape
+ * that is not one region's goes by the atlas's name alone: naming a region there would say the shape is that region.
+ */
+export function nameShape(picked: PickedShape): ShapeName {
+  const region = picked.regions.find((candidate) => candidate.id === picked.selectedRegionId);
+  if (region === undefined) return { primary: picked.label, secondary: null };
+  return { primary: region.name, secondary: region.name === picked.label ? null : picked.label };
+}
+
 /** @returns null for a key the index does not hold */
 export function resolvePick(model: ExplorerModel, structureKey: string): PickedShape | null {
   const structure = model.structuresByKey.get(structureKey);

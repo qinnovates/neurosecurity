@@ -2,14 +2,11 @@
  * Every decision the drawing code makes, as plain data and arithmetic with no
  * three.js in it, so each can be tested: what material a shape gets, what may
  * be picked, which of several shapes under the pointer a pick means, where the
- * pointer is, which way each anatomical direction points on screen, and the
- * selection mark.
+ * pointer is, and which way each anatomical direction points on screen.
  *
- * The selection is drawn on the selected shapes themselves: lit from within,
- * in the region's own colour where it has one and in white otherwise, at a
- * level below the pointer's lift, and a see-through shape drawn denser. Nothing
- * is drawn around a selection and no lens hue is added, so a selected shape
- * never reads as holding a value it does not hold.
+ * The selection is not among them: a selected shape is drawn exactly as the lens
+ * draws it, so it never reads as holding a value it does not hold, and its mark
+ * stands around it (selection-marks.ts).
  */
 
 import type { Point3 } from '@/lib/anatomy/ras-to-scene';
@@ -19,10 +16,12 @@ import { NEUTRAL_COLOUR, type FillKind, type SceneShape, type SceneTheme } from 
 /**
  * The selection role's ink: neutral, because selection is a state and not a
  * category. A hue could read as a band (the previous orange shared a hue family
- * with bands N3-N1), and no band is neutral. Shapes no longer wear it -- a
- * selected shape is lit from within instead -- but the picked electrode dot
- * does (device-objects.ts), and the palette tests hold the role apart from
- * every band on both surfaces.
+ * with bands N3-N1), and no band is neutral. No shape wears it: the corner
+ * brackets do (scene-brackets.ts), with the other surface's ink as their halo,
+ * and so does the picked electrode dot (device-objects.ts). It is the canvas's
+ * step of the page's --atlas-selection: the canvas is handed its surface and
+ * never reads the document. The palette tests hold the role apart from every
+ * band on both surfaces.
  */
 export const SELECTION_COLOUR = '#1a1a19';
 /** The same role stepped for the dark surface. */
@@ -56,10 +55,14 @@ export const INSIDE_COLOUR_DARK = '#a7adbd';
 export interface SurfaceInk {
   /** The "inside or mixed" fill. */
   inside: string;
+  /** The corner brackets. */
+  selection: string;
+  /** The contrasting edge around them, so they hold over a pale or a dark shape alike. */
+  selectionHalo: string;
 }
 export const SURFACE_INK: Readonly<Record<SceneTheme, SurfaceInk>> = {
-  light: { inside: INSIDE_COLOUR },
-  dark: { inside: INSIDE_COLOUR_DARK },
+  light: { inside: INSIDE_COLOUR, selection: SELECTION_COLOUR, selectionHalo: SELECTION_COLOUR_DARK },
+  dark: { inside: INSIDE_COLOUR_DARK, selection: SELECTION_COLOUR_DARK, selectionHalo: SELECTION_COLOUR },
 };
 
 const OUTLINE_LAYER = 'outline';
@@ -104,9 +107,10 @@ export function materialParamsFor(shape: Pick<SceneShape, 'layer' | 'fill' | 'co
 /**
  * How a shape under the pointer is lifted, so the visitor sees which shape a
  * click would pick. The lift keeps the fill kind: a see-through shape grows
- * denser and a filled one is lit from within. The one hue change is to the
- * shape's own region colour (highlight-colour.ts), which is no band's and no
- * step's, so a hovered shape still never reads as holding a value it does not hold.
+ * denser and a filled one gains a little light, always quieter than the
+ * selection's brackets. The one hue change is to the shape's own region colour
+ * (highlight-colour.ts), which is no band's and no step's, so a hovered shape
+ * still never reads as holding a value it does not hold.
  */
 export const HOVER_OPACITY: Readonly<Record<FillKind, number>> = { solid: 1, translucent: 0.7, lines: 0.55, neutral: 0.4 };
 /**
@@ -114,24 +118,12 @@ export const HOVER_OPACITY: Readonly<Record<FillKind, number>> = { solid: 1, tra
  * colour. A shape that has a region colour is lit in that colour instead (see `hoverParamsFor`).
  */
 export const HOVER_EMISSIVE = '#ffffff';
-export const HOVER_EMISSIVE_INTENSITY = 0.7;
+export const HOVER_EMISSIVE_INTENSITY = 0.35;
 /**
- * The selection: the same light, held, at a lower level than the pointer's lift, so a selected shape stays
- * recognisably its own colour and the one under the pointer still stands out over it. Nothing is drawn around a
- * selection; its name stands beside the picture.
+ * The level for a shape lit in its own region colour. A Lambert material adds its emissive colour straight onto
+ * the lit diffuse colour, so the same hue added to itself at this level brightens the shape without moving its hue.
  */
-export const SELECTED_EMISSIVE_INTENSITY = 0.35;
-/**
- * The levels for a shape lit in its own region colour. A Lambert material adds its emissive colour straight onto
- * the lit diffuse colour, so white at 0.7 under the scene's 1.6 headlight and 1.5 hemisphere light put every
- * channel near 1 and the region hue vanished into white. The same hue added to itself at these levels brightens
- * the shape without moving its hue, and the gap between the two keeps the pointer's lift above the selection's.
- */
-export const OWN_COLOUR_HOVER_EMISSIVE_INTENSITY = 0.35;
-export const OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY = 0.25;
-
-/** The two lifts a shape can wear; the selection's is the lower, so the shape under the pointer stands out over it. */
-export type LiftKind = 'hover' | 'selected';
+export const OWN_COLOUR_HOVER_EMISSIVE_INTENSITY = 0.25;
 
 export interface HoverParams {
   opacity: number;
@@ -141,18 +133,12 @@ export interface HoverParams {
   emissiveIntensity: number;
 }
 
-const WHITE_INTENSITY: Readonly<Record<LiftKind, number>> = { hover: HOVER_EMISSIVE_INTENSITY, selected: SELECTED_EMISSIVE_INTENSITY };
-const OWN_COLOUR_INTENSITY: Readonly<Record<LiftKind, number>> = { hover: OWN_COLOUR_HOVER_EMISSIVE_INTENSITY, selected: OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY };
-
-/**
- * How a shape is lifted for the pointer or for the selection. Only a filled shape is lit; it is lit in its own
- * region colour where it has one, and in white where it is shared or unowned and so has none.
- */
-export function hoverParamsFor(shape: Pick<SceneShape, 'fill' | 'highlightColour'>, lift: LiftKind = 'hover'): HoverParams {
+/** How a shape is lifted for the pointer. Only a filled shape is lit; it is lit in its own region colour where it has one, and in white where it is shared or unowned and so has none. */
+export function hoverParamsFor(shape: Pick<SceneShape, 'fill' | 'highlightColour'>): HoverParams {
   const opacity = HOVER_OPACITY[shape.fill];
   if (shape.fill !== 'solid') return { opacity, emissiveColour: null, emissiveIntensity: 0 };
-  if (shape.highlightColour === null) return { opacity, emissiveColour: HOVER_EMISSIVE, emissiveIntensity: WHITE_INTENSITY[lift] };
-  return { opacity, emissiveColour: shape.highlightColour, emissiveIntensity: OWN_COLOUR_INTENSITY[lift] };
+  if (shape.highlightColour === null) return { opacity, emissiveColour: HOVER_EMISSIVE, emissiveIntensity: HOVER_EMISSIVE_INTENSITY };
+  return { opacity, emissiveColour: shape.highlightColour, emissiveIntensity: OWN_COLOUR_HOVER_EMISSIVE_INTENSITY };
 }
 
 /* The marker ring: the mark that says how well the atlas resolves a structure. */
@@ -292,16 +278,16 @@ export function choosePickTarget(hits: readonly PickHit[]): PickTarget | null {
 
 export interface Box { min: Point3; max: Point3 }
 
-/** The one box around several boxes, or null for none: a region made of many shapes gets one selection mark around all of them. */
+/** The one box around several boxes, or null for none: a region made of many shapes gets one pair of brackets around all of them. */
 export function unionBoxes(boxes: readonly Box[]): Box | null {
   if (boxes.length === 0) return null;
   const pick = (side: 'min' | 'max', axis: number): number => Math[side](...boxes.map((box) => box[side][axis]));
   return { min: [pick('min', 0), pick('min', 1), pick('min', 2)], max: [pick('max', 0), pick('max', 1), pick('max', 2)] };
 }
 
-const subtract = (a: Point3, b: Point3): [number, number, number] => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+export const subtract = (a: Point3, b: Point3): [number, number, number] => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 const cross = (a: Point3, b: Point3): [number, number, number] => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
-const dot = (a: Point3, b: Point3): number => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+export const dot = (a: Point3, b: Point3): number => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const unit = (a: Point3): [number, number, number] => { const length = Math.hypot(a[0], a[1], a[2]); return [a[0] / length, a[1] / length, a[2] / length]; };
 
 export const ANATOMICAL_DIRECTIONS = ['left', 'right', 'front', 'back', 'top', 'bottom'] as const;
@@ -312,11 +298,17 @@ export type AxisDirections = Readonly<Record<AnatomicalDirection, readonly [numb
 /** Each direction in scene axes: the brain's left is scene -x, its front is scene -z. */
 const SCENE_AXES: Readonly<Record<AnatomicalDirection, Point3>> = { left: [-1, 0, 0], right: [1, 0, 0], front: [0, 0, -1], back: [0, 0, 1], top: [0, 1, 0], bottom: [0, -1, 0] };
 
+/** Where a pose puts the camera, and its three axes in the scene: the same up the renderer's camera looks along. */
+export function cameraBasis(pose: OrbitPose): { eye: Point3; forward: Point3; right: Point3; up: Point3 } {
+  const eye = positionOfPose(pose);
+  const forward = unit(subtract(pose.target, eye));
+  const right = unit(cross(forward, [0, 1, 0]));
+  return { eye, forward, right, up: cross(right, forward) };
+}
+
 /** Which way each anatomical direction points on screen for a camera pose, for the orientation marker. */
 export function axisDirectionsFor(pose: OrbitPose): AxisDirections {
-  const forward = unit(subtract(pose.target, positionOfPose(pose)));
-  const right = unit(cross(forward, [0, 1, 0]));
-  const up = cross(right, forward);
+  const { forward, right, up } = cameraBasis(pose);
   const project = (axis: Point3): [number, number, number] => [dot(axis, right), dot(axis, up), -dot(axis, forward)];
   return { left: project(SCENE_AXES.left), right: project(SCENE_AXES.right), front: project(SCENE_AXES.front), back: project(SCENE_AXES.back), top: project(SCENE_AXES.top), bottom: project(SCENE_AXES.bottom) };
 }
@@ -331,5 +323,5 @@ export function stepEaseDuration(prefersLessMotion: boolean): number {
 export function idleTurnSpeed(prefersLessMotion: boolean): number {
   return prefersLessMotion ? 0 : IDLE_RADIANS_PER_MS;
 }
-/** One slow turn takes about a minute: fast enough that the picture is seen to be a solid thing with depth, slow enough not to read as activity. */
-export const IDLE_RADIANS_PER_MS = (Math.PI * 2) / 60_000;
+/** Nothing turns at rest: motion in the picture follows from what the visitor does, and a brain that moves on its own reads as activity. */
+export const IDLE_RADIANS_PER_MS = 0;

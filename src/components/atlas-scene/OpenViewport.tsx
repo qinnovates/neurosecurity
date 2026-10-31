@@ -1,10 +1,11 @@
 import { lazy, useEffect, useMemo, useRef, useState, type ComponentType } from 'react';
+import { limitSentence } from '@/lib/anatomy/limits-copy';
 import type { LayerId } from '@/lib/anatomy/source-types';
 import { CAMERA_VIEW_LABELS, DEFAULT_CAMERA_VIEW, type CameraViewId } from '@/lib/atlas-explorer/camera-views';
 import type { ChainFrame } from '@/lib/atlas-explorer/chain-steps';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import type { Lens } from '@/lib/atlas-explorer/lens-state';
-import { resolvePick } from '@/lib/atlas-explorer/resolve-pick';
+import { nameShape, resolvePick } from '@/lib/atlas-explorer/resolve-pick';
 import type { ViewportCaption } from '@/lib/atlas-explorer/viewport-caption';
 import { clampSlice, listShapesCutAt, middleOf, stepSlice, type SliceState } from '@/lib/atlas-explorer/slice-plane';
 import type { AtlasCanvasProps, CanvasCommands } from './AtlasCanvas';
@@ -67,6 +68,8 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, ch
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const [directions, setDirections] = useState<AxisDirections | null>(null);
   const [activeView, setActiveView] = useState<CameraViewId | null>(DEFAULT_CAMERA_VIEW);
+  /** The region the last pick selected, so its own arrival back through the props is not taken for another selection. */
+  const pickedRegionId = useRef<string | null>(selectedRegionId);
   const commands = useRef<CanvasCommands>(NO_COMMANDS);
   const scene = useViewportScene(model, lens, layers, chain);
   const Canvas = useMemo(() => lazy(loadCanvas), [loadCanvas]);
@@ -75,8 +78,12 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, ch
   const regionKeys = selectedRegionId === null ? [] : model.regionsById.get(selectedRegionId)?.structure_keys ?? [];
   // The page's own selection, as shapes: each group of regions becomes one group of the shapes that draw them.
   const groupKeys = useMemo(() => selectedRegionGroups.map((regionIds) => [...new Set(regionIds.flatMap((regionId) => model.regionsById.get(regionId)?.structure_keys ?? []))]), [model, selectedRegionGroups]);
-  // The selection as shapes: the region's own, every group the page selected, and a picked shape outside them. Each is lit from within in the picture; the name stands beside it.
-  const selectedKeys = useMemo(() => new Set([...regionKeys, ...groupKeys.flat(), ...(pickedKey === null ? [] : [pickedKey])]), [regionKeys.join(' '), groupKeys, pickedKey]);
+  // The selection as shapes: the region's own, every group the page selected, and a picked shape outside them. Each pair of brackets goes around one of these; the name stands beside the picture.
+  const bracketGroups = useMemo(() => {
+    const isPickedApart = pickedKey !== null && !regionKeys.includes(pickedKey);
+    return [regionKeys, ...groupKeys, ...(isPickedApart ? [[pickedKey]] : [])].filter((keys) => keys.length > 0);
+  }, [regionKeys.join(' '), groupKeys, pickedKey]);
+  const selectedKeys = useMemo(() => new Set(bracketGroups.flat()), [bracketGroups]);
   const selectedRegionName = selectedRegionId === null ? null : model.regionsById.get(selectedRegionId)?.name ?? null;
   const focusMm = useMemo(() => meanOf(scene.drawnShapes.filter((shape) => regionKeys.includes(shape.structureKey)).map((shape) => shape.centroidMm)), [selectedRegionId, scene.drawnShapes.length]);
   useEffect(() => {
@@ -85,11 +92,16 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, ch
   }, [scene.caption, onCaption]);
   useEffect(() => { if (scene.bounds !== null && slice !== null) setSlice({ axis: slice.axis, positionMm: clampSlice(slice.axis, slice.positionMm, scene.bounds) }); }, [scene.bounds]);
 
+  const picked = pickedKey === null ? null : resolvePick(model, pickedKey);
+  const hovered = hoveredKey === null ? null : resolvePick(model, hoveredKey);
   const pick = (structureKey: string | null): void => {
     setPickedKey(structureKey);
     const regionId = structureKey === null ? null : resolvePick(model, structureKey)?.selectedRegionId ?? null;
+    pickedRegionId.current = regionId;
     if (regionId !== null) onSelectRegion(regionId);
   };
+  // A region chosen anywhere but here takes over from the picked shape, or two things stay marked and the legend names the old one.
+  useEffect(() => { if (selectedRegionId !== pickedRegionId.current) setPickedKey(null); }, [selectedRegionId]);
   const turnView = (viewId: CameraViewId): void => { commands.current.setView(viewId); setActiveView(viewId); };
   const byHand: CanvasCommands = { setView: turnView, zoom: (direction) => commands.current.zoom(direction), turn: (direction) => { commands.current.turn(direction); setActiveView(null); }, tilt: (direction) => { commands.current.tilt(direction); setActiveView(null); } };
   const cutNames = slice === null ? [] : [...new Set(listShapesCutAt(slice, [...scene.nodesByShapeId.values()]).map((node) => resolvePick(model, `${node.atlas}:${node.labelId}`)?.label ?? node.labelId))];
@@ -98,7 +110,7 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, ch
   const description = `3D picture of an average brain outline with ${atlasShapeCount} atlas shapes drawn inside it. ${scene.caption.lensLabel} View: ${activeView === null ? 'turned by hand' : CAMERA_VIEW_LABELS[activeView].toLowerCase()}. Every fact it shows is in the region list.${deviceWords}`;
 
   const canvasProps: Omit<AtlasCanvasProps, 'commands'> = {
-    shapes: scene.drawnShapes, nodesByShapeId: scene.nodesByShapeId, selectedKeys, devices: scene.devices, selectedElectrodeId: electrodeId, focusMm, slice, theme: scene.theme, prefersLessMotion, description,
+    shapes: scene.drawnShapes, nodesByShapeId: scene.nodesByShapeId, selectedKeys, bracketGroups, devices: scene.devices, selectedElectrodeId: electrodeId, focusMm, slice, theme: scene.theme, prefersLessMotion, description,
     onPick: pick, onPickElectrode, onHover: setHoveredKey, onCameraTurn: setDirections, onContextLost: () => onStopped('context_lost'), onUnavailable: () => onStopped('no_webgl'),
   };
   return (
@@ -108,7 +120,7 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, ch
         <ViewportStage
           Canvas={Canvas} canvasProps={canvasProps} commands={commands} caption={scene.caption} directions={directions} slice={slice}
           deviceCaption={scene.deviceCaption} isChainShown={chain !== null}
-          hoverLabel={hoveredKey === null ? null : resolvePick(model, hoveredKey)?.label ?? null}
+          hoverLabel={hovered === null ? null : nameShape(hovered)} shapeNote={picked === null || picked.selectedRegionId !== null ? null : limitSentence('picked_shape_not_region')}
           selection={selectedRegionName === null ? null : { name: selectedRegionName, onShowDetails }} lensWays={lensWays}
         />
         <div className="atlas-viewport-side">
@@ -121,7 +133,7 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, ch
           />
           <ViewportLegend
             caption={scene.caption} drawnShapes={scene.drawnShapes} assets={scene.assets} assetStates={scene.assetStates}
-            picked={pickedKey === null ? null : resolvePick(model, pickedKey)} onRetryAssets={scene.retryAssets} onSelectRegion={onSelectRegion} onClearPick={() => setPickedKey(null)}
+            picked={picked} onRetryAssets={scene.retryAssets} onSelectRegion={onSelectRegion} onClearPick={() => setPickedKey(null)}
           />
         </div>
       </div>

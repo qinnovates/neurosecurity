@@ -17,9 +17,11 @@ export class StandInGeometry {
   isDisposed = false;
   /** Set if any code asks to draw only part of the geometry. */
   drawRangeCalls = 0;
+  /** How many vertices the last such request asked for. */
+  drawCount = 0;
   setAttribute(name: string, attribute: StandInAttribute): void { this.attributes[name] = attribute; }
   setIndex(attribute: StandInAttribute): void { this.index = attribute; }
-  setDrawRange(): void { this.drawRangeCalls += 1; }
+  setDrawRange(_start: number, count: number): void { this.drawRangeCalls += 1; this.drawCount = count; }
   computeVertexNormals(): void { /* no shading in the stand-in */ }
   computeBoundingBox(): void {
     const positions = Array.from(this.attributes.position?.array ?? []);
@@ -66,6 +68,7 @@ class Vector {
 
 export class StandInObject {
   kind = 'group';
+  visible = true;
   children: StandInObject[] = [];
   userData: Record<string, unknown> = {};
   renderOrder = 0;
@@ -110,8 +113,12 @@ export function createThreeStandIn(): Record<string, unknown> {
     lookAt(): void { /* the pose arithmetic is tested on its own */ }
     updateProjectionMatrix(): void { /* nothing to project */ }
   }
+  class OrthographicCamera extends Camera {
+    constructor(public left = 0, public right = 0, public top = 0, public bottom = 0) { super(); }
+  }
   class WebGLRenderer {
     clippingPlanes: unknown[] = [];
+    autoClear = true;
     setPixelRatio(): void { /* no pixels */ }
     setSize(): void { /* no pixels */ }
     render(): void { standIn.rendered += 1; }
@@ -126,7 +133,7 @@ export function createThreeStandIn(): Record<string, unknown> {
   class CanvasTexture { constructor(public image: unknown) {} dispose(): void { /* nothing held */ } }
   return {
     BufferAttribute: StandInAttribute, Float32BufferAttribute: StandInAttribute, BufferGeometry: StandInGeometry, RingGeometry: StandInGeometry, SphereGeometry: StandInGeometry,
-    DoubleSide: 2, FrontSide: 0, BackSide: 1, Group: StandInObject, Scene, DirectionalLight: StandInObject, HemisphereLight: StandInObject, PerspectiveCamera: Camera,
+    DoubleSide: 2, FrontSide: 0, BackSide: 1, Group: StandInObject, Scene, DirectionalLight: StandInObject, HemisphereLight: StandInObject, PerspectiveCamera: Camera, OrthographicCamera,
     Mesh, LineSegments, Sprite, SpriteMaterial: StandInMaterial, CanvasTexture, MeshBasicMaterial: StandInMaterial, MeshLambertMaterial: StandInLitMaterial, LineBasicMaterial: StandInMaterial,
     WebGLRenderer, Raycaster, Plane, Vector2: Vector, Vector3: Vector,
   };

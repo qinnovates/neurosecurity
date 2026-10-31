@@ -1,11 +1,13 @@
 import { Suspense, useEffect, useState, type ComponentType, type ReactNode, type Ref } from 'react';
-import { limitSentence } from '@/lib/anatomy/limits-copy';
+import { limitSentence, type LimitSentence } from '@/lib/anatomy/limits-copy';
 import type { DeviceCaption } from '@/lib/atlas-explorer/device-drawing';
+import type { ShapeName } from '@/lib/atlas-explorer/resolve-pick';
 import { SLICE_AXIS_LABELS, type SliceState } from '@/lib/atlas-explorer/slice-plane';
 import type { ViewportCaption } from '@/lib/atlas-explorer/viewport-caption';
 import type { AtlasCanvasProps, CanvasCommands } from './AtlasCanvas';
 import LimitNote from './LimitNote';
 import type { AxisDirections } from './scene-renderer';
+import ShapeNames from './ShapeNames';
 
 interface Props {
   Canvas: ComponentType<AtlasCanvasProps>;
@@ -20,9 +22,11 @@ interface Props {
   /** A threat model's steps are on screen, so the caption says what their order does and does not mean. */
   isChainShown: boolean;
   /** The name of the shape under the pointer, or null. */
-  hoverLabel: string | null;
+  hoverLabel: ShapeName | null;
   /** What the picture has selected, said beside it, with the way to its details where the page has them. Null while nothing is selected. */
   selection: PictureSelection | null;
+  /** Said where the click was made when it landed on a shape that selects no region. Null otherwise. */
+  shapeNote: LimitSentence | null;
   /** The ways out of the current lens, offered under the picture so a lens that lights nothing can be left without leaving the picture. Null where there is none. */
   lensWays?: LensWays | null;
   /** Shown over the picture when nothing can be drawn yet. */
@@ -83,7 +87,7 @@ function OrientationMarker({ directions }: { directions: AxisDirections }) {
  * the review mark, the lens and its limit, and how far each layer's position
  * can be trusted. The caption lies inside the picture's own bounds.
  */
-export default function ViewportStage({ Canvas, canvasProps, commands, caption, directions, slice, deviceCaption, isChainShown, hoverLabel, selection, lensWays = null, children }: Props) {
+export default function ViewportStage({ Canvas, canvasProps, commands, caption, directions, slice, deviceCaption, isChainShown, hoverLabel, selection, shapeNote, lensWays = null, children }: Props) {
   const sliceLimits = slice === null ? [] : [limitSentence('slice_position', { position: String(slice.positionMm), axis: SLICE_AXIS_LABELS[slice.axis].toLowerCase() }), limitSentence('slice_view')];
   const [hasTouched, setTouched] = useState(false);
   return (
@@ -94,13 +98,14 @@ export default function ViewportStage({ Canvas, canvasProps, commands, caption, 
       {children}
       {!hasTouched && <MoveHint isDrawn={canvasProps.shapes.length > 0} />}
       {directions !== null && <OrientationMarker directions={directions} />}
-      {hoverLabel !== null && <p className="atlas-hover-label" aria-hidden="true">{hoverLabel}</p>}
+      {hoverLabel !== null && <p className="atlas-hover-label" aria-hidden="true"><ShapeNames name={hoverLabel} /></p>}
       {selection !== null && (
         <p className="atlas-picture-selected" data-picture-selected={selection.name}>
           <span>Selected: <strong>{selection.name}</strong>.</span>
           {selection.onShowDetails !== undefined && <button type="button" className="atlas-link-button" onClick={selection.onShowDetails}>{SHOW_DETAILS_LABEL}</button>}
         </p>
       )}
+      {shapeNote !== null && <div className="atlas-picture-shape-note" data-picture-shape-note="true" role="status"><LimitNote limit={shapeNote} /></div>}
       {lensWays !== null && (lensWays.choose !== null || lensWays.back !== null) && (
         <p className="atlas-picture-lens" data-picture-lens="true">
           {lensWays.choose !== null && <button type="button" className="atlas-link-button" onClick={lensWays.choose.onChoose}>{lensWays.choose.label}</button>}

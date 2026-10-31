@@ -11,7 +11,7 @@ const THREE_IMPORT_PATTERN = /(from|import\(|import)\s*['"](three|three\/[^'"]*)
 /** Labels are set in the sans face: no monospace utility, variable or family. */
 const MONOSPACE_PATTERN = /\bfont-mono\b|--font-mono|--lab-mono|\bmonospace\b|\btm-mono\b|\bui-monospace\b|\b(Menlo|Monaco|Consolas|Courier|SFMono|JetBrains Mono|Fira Code|Source Code Pro)\b/i;
 /** The modules that import three.js, and the canvas that is their only way in. */
-const THREE_FILES = ['scene-renderer.ts', 'scene-objects.ts', 'scene-marks.ts', 'device-objects.ts', 'TractLines.tsx'];
+const THREE_FILES = ['scene-renderer.ts', 'scene-objects.ts', 'scene-selection.ts', 'scene-brackets.ts', 'scene-marks.ts', 'device-objects.ts', 'TractLines.tsx'];
 const CANVAS_CHUNK_FILES = ['AtlasCanvas.tsx', ...THREE_FILES];
 const ISLAND_PATTERN = /<AtlasExplorer\b([^>]*)\/>/;
 
@@ -96,7 +96,7 @@ describe('explorer source rules', () => {
     const viewportOnly = [...classesIn(viewport)].filter((name) => !earlier.has(name));
     expect(viewportOnly.length).toBeGreaterThan(15);
     expect([...classesIn(viewport)].filter((name) => earlier.has(name) && !SHARED.includes(name))).toEqual([]);
-    const VIEWPORT_FILES = ['AtlasViewport.tsx', 'OpenViewport.tsx', 'ViewportStage.tsx', 'ViewportControls.tsx', 'ViewportLegend.tsx', 'AtlasCanvas.tsx', 'AtlasRegionView.tsx'];
+    const VIEWPORT_FILES = ['AtlasViewport.tsx', 'OpenViewport.tsx', 'ViewportStage.tsx', 'ViewportControls.tsx', 'ViewportLegend.tsx', 'ShapeNames.tsx', 'AtlasCanvas.tsx', 'AtlasRegionView.tsx'];
     const others = files.filter((filePath) => filePath.endsWith('.tsx') && !VIEWPORT_FILES.includes(path.basename(filePath)));
     const collisions = others.flatMap((filePath) => viewportOnly.filter((name) => new RegExp(`["' ]${name}["' ]`).test(fs.readFileSync(filePath, 'utf-8'))).map((name) => `${path.basename(filePath)}: ${name}`));
     expect(collisions).toEqual([]);

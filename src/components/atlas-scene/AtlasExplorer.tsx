@@ -1,8 +1,9 @@
 import { useCallback, useMemo } from 'react';
 import { ANATOMY_INDEX_PATH, type PinnedFile } from '@/lib/anatomy/anatomy-index-types';
-import { readLensDeepLink, readRegionDeepLink } from './atlas-deep-link';
+import { readHighlightDeepLink, readLensDeepLink, readRegionDeepLink } from './atlas-deep-link';
 import ExplorerWorkspace from './ExplorerWorkspace';
 import { loadExplorerModel } from './explorer-data';
+import { buildHighlights } from './HighlightPicker';
 import LoadNotice from './LoadNotice';
 import { useLoaded } from './use-loaded';
 import './atlas-scene.css';
@@ -34,8 +35,11 @@ export default function AtlasExplorer({ indexPin, search }: Props) {
   const model = state.status === 'ready' ? state.data.model : null;
   // Decided once per model, against the regions it holds: an id the index does not name selects nothing.
   const initialSelection = useMemo(() => (model === null ? null : readRegionDeepLink(search ?? readSearch(), model.regionsById)), [model, search]);
-  // The lens needs no model to be checked: it is one of a fixed few kinds, or nothing.
-  const initialLens = useMemo(() => readLensDeepLink(search ?? readSearch()), [search]);
+  // A highlight is checked against what the model offers. A lens needs no model: it is one of a fixed few kinds, or nothing.
+  const initialLens = useMemo(() => {
+    const address = search ?? readSearch();
+    return (model === null ? null : readHighlightDeepLink(address, buildHighlights(model).kindById)) ?? readLensDeepLink(address);
+  }, [model, search]);
   if (state.status === 'ready') {
     return (
       <>

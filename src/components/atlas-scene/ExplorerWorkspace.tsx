@@ -7,16 +7,20 @@ import { isDevicesLayerShown, layersAtStart } from '@/lib/atlas-explorer/devices
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { LENS_LABELS, LENS_SUBJECT_NOUNS, type Lens, type LensKind } from '@/lib/atlas-explorer/lens-state';
 import { INITIAL_EXPLORER_STATE, explorerReducer, type Target } from './atlas-state';
+import { writeExplorerAddress } from './atlas-deep-link';
 import AtlasViewport, { VIEWPORT_HEADING_ID } from './AtlasViewport';
 import ChainView from './ChainView';
+import ColourModePicker from './ColourModePicker';
 import { loadAnatomyEvidence, loadRegionEvidence } from './explorer-companions';
 import H01Card from './H01Card';
+import HighlightChip from './HighlightChip';
 import LayerPanel from './LayerPanel';
 import LensPanel, { LENS_HEADING_ID, restoreLensLabel } from './LensPanel';
 import LimitsPanel from './LimitsPanel';
 import NetworkNames from './NetworkNames';
 import { buildAtlasCoverage, buildRegionCoverage, describeCoverage } from './region-coverage';
 import RegionInspector from './RegionInspector';
+import { InspectorLensContext } from './RegionLensNote';
 import SignalChainRail from './SignalChainRail';
 import StructureList from './StructureList';
 import type { LensWays } from './ViewportStage';
@@ -32,7 +36,7 @@ interface Props {
   isIndexPinned: boolean;
   /** The page is pinned to an index the site no longer serves. */
   isOutOfStep?: boolean;
-  /** The selection the page's address asked for (atlas-deep-link.ts), already checked against the model. The state starts with it, so nothing is selected after the fact. */
+  /** The selection the page's address asked for (atlas-deep-link.ts), already checked against the model. The state starts with it, so nothing is selected after the fact, and the 3D view opens: following a link to a region is asking to see it. */
   initialSelection?: Target | null;
   /** The lens the page's address asked to open on (atlas-deep-link.ts), already checked. The state starts on it, so no lens change is announced. */
   initialLens?: Lens | null;
@@ -43,6 +47,8 @@ const TECHNIQUE_LENS = 'technique';
 const DeviceGeometry = lazy(() => import('./DeviceGeometry'));
 /** The width at which the list and the inspector stop sitting side by side. Matches atlas-scene.css. */
 const STACKED_LAYOUT_QUERY = '(max-width: 960px)';
+/** The pane that scrolls on its own beside the list. */
+const INSPECTOR_PANE_SELECTOR = '.atlas-inspector';
 /** Where a selection came from: the list by keyboard, the list by pointer, or the picture. */
 type SelectionSource = 'keyboard' | 'pointer' | 'picture';
 
@@ -64,8 +70,9 @@ function useAnnouncement(message: string): string {
  * The explorer once its data has loaded, laid out around the picture.
  *
  * The brain is the subject of this page, so the page opens on the picture: it
- * stands first in the main grid, with the lens bar beside it, because the lens
- * is what the picture is coloured by and the first thing to reach for. Under
+ * stands first in the main grid, with the lens bar in its header, because the
+ * lens is what the picture is coloured by and a change has to be seen to happen.
+ * Beside it stands what qualifies that lens. Under
  * the picture is the region list, which is the whole of this page for anyone
  * the 3D view is gated for, and beside the list the chosen region's details,
  * so picking a region in the picture never scrolls the answer off the screen.
@@ -93,6 +100,8 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
   const mainRef = useRef<HTMLDivElement>(null);
   const selectedRegionId = state.selection?.kind === 'region' ? state.selection.id : null;
 
+  useEffect(() => writeExplorerAddress({ regionId: selectedRegionId, lens: state.lens }), [selectedRegionId, state.lens]);
+
   const { groups, allGroups, tally, detail, rail } = useExplorerViews(model, state);
   // Counted once over the whole index: the pane states it before a region is chosen, and scales its bars by it.
   const atlasCoverage = useMemo(() => buildAtlasCoverage(model), [model]);
@@ -110,9 +119,10 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
   /**
    * Focus moves to the inspector when a region is chosen from the keyboard, and also when a row is tapped on a narrow
    * screen, where the inspector lies below the whole list and the tap would otherwise change nothing the visitor can
-   * see. A pick in the picture moves nothing: the picture names what it selected and offers the way to the details, so
-   * the visitor is not carried away from the view they were using. The move waits for the inspector to show the chosen
-   * region, so it lands on that region's heading and not on the one it replaces.
+   * see. Only there, or on the visitor's own "See its details", does the page itself scroll: on a wide screen the
+   * inspector stands beside the list, so a selection moves nothing but the pane, and the picture stays in view. A pick
+   * in the picture moves nothing either: the picture names what it selected and offers the way to the details. The move
+   * waits for the inspector to show the chosen region, so it lands on that region's heading and not on the one it replaces.
    */
   const [focusRequest, setFocusRequest] = useState<{ shouldScroll: boolean } | null>(null);
   const selectRegion = (regionId: string, source: SelectionSource): void => {
@@ -124,10 +134,14 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
   const showDetails = (): void => setFocusRequest({ shouldScroll: true });
   useEffect(() => {
     if (focusRequest === null) return;
-    inspectorHeadingRef.current?.focus({ preventScroll: focusRequest.shouldScroll });
+    inspectorHeadingRef.current?.focus({ preventScroll: true });
     // Brought to the top of the screen, so the choice visibly lands on the region's details.
     if (focusRequest.shouldScroll) inspectorHeadingRef.current?.scrollIntoView?.({ block: 'start' });
   }, [focusRequest]);
+  // The pane scrolls inside itself. Element.scrollIntoView would also scroll the page, which is what carried the picture off the screen.
+  useEffect(() => {
+    if (state.selection !== null) inspectorHeadingRef.current?.closest(INSPECTOR_PANE_SELECTOR)?.scrollTo?.({ top: 0 });
+  }, [state.selection]);
   /** The way back from the details to the picture: the 3D view's heading, brought to the top of the screen. */
   const showViewport = (): void => {
     const heading = mainRef.current?.closest<HTMLElement>('.atlas-root')?.querySelector<HTMLElement>(`#${VIEWPORT_HEADING_ID}`) ?? null;
@@ -172,7 +186,13 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
           <AtlasViewport
             model={model} lens={state.lens} layers={state.layers} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep}
             chain={chainView.frame} electrodeId={electrodeId} onPickElectrode={setElectrodeId} onSelectRegion={(regionId) => selectRegion(regionId, 'picture')} onShowDetails={showDetails} lensWays={lensWays}
-            onCaptionChange={noteCaption}
+            onCaptionChange={noteCaption} isAsked={initialSelection !== null}
+            headerControls={(
+              <>
+                <ColourModePicker activeKind={state.lens.kind} onChoose={(kind) => dispatch({ type: 'lens_kind_chosen', kind })} />
+                <HighlightChip lens={state.lens} previousLens={state.previousLens} onClear={() => dispatch({ type: 'highlight_cleared' })} />
+              </>
+            )}
           />
           {isDevicesLayerShown(model.index, state.layers) && (
             <Suspense fallback={<p className="atlas-loading" role="status">Loading the electrode layout…</p>}>
@@ -181,19 +201,21 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
           )}
         </div>
         <LensPanel
-          model={model} lens={state.lens} previousLens={state.previousLens} tally={tally} onChooseKind={(kind) => dispatch({ type: 'lens_kind_chosen', kind })}
+          model={model} lens={state.lens} previousLens={state.previousLens} tally={tally}
           onRestoreLens={restoreLens} onChooseSubject={chooseSubject} onSelectRegion={(regionId) => selectRegion(regionId, 'keyboard')}
         />
         <StructureList
           groups={groups} unfilteredGroups={allGroups} regionCount={model.regions.length} filter={state.filter} lensLabel={LENS_LABELS[state.lens.kind]} selectedRegionId={selectedRegionId}
           onFilter={(filter) => dispatch({ type: 'filter_changed', filter })} onClearFilter={() => dispatch({ type: 'filter_cleared' })} onSelect={(regionId, byKeyboard) => selectRegion(regionId, byKeyboard ? 'keyboard' : 'pointer')}
         />
-        <RegionInspector
-          model={model} detail={detail} atlasCoverage={atlasCoverage} headingRef={inspectorHeadingRef} anatomyEvidence={anatomyEvidence.state} regionEvidence={regionEvidence.state}
-          onRetryAnatomyEvidence={anatomyEvidence.retry} onRetryRegionEvidence={regionEvidence.retry}
-          onChooseTechnique={(techniqueId) => drillInto(TECHNIQUE_LENS, techniqueId)} onChooseDevice={(deviceId) => drillInto('stated_targets', deviceId)}
-          onSelectRegion={(regionId) => selectRegion(regionId, 'keyboard')} onBackToList={focusSelectedRow} onBackToView={showViewport}
-        />
+        <InspectorLensContext.Provider value={state.lens}>
+          <RegionInspector
+            model={model} detail={detail} atlasCoverage={atlasCoverage} headingRef={inspectorHeadingRef} anatomyEvidence={anatomyEvidence.state} regionEvidence={regionEvidence.state}
+            onRetryAnatomyEvidence={anatomyEvidence.retry} onRetryRegionEvidence={regionEvidence.retry}
+            onChooseTechnique={(techniqueId) => drillInto(TECHNIQUE_LENS, techniqueId)} onChooseDevice={(deviceId) => drillInto('stated_targets', deviceId)}
+            onSelectRegion={(regionId) => selectRegion(regionId, 'keyboard')} onBackToList={focusSelectedRow} onBackToView={showViewport}
+          />
+        </InspectorLensContext.Provider>
       </div>
       <LayerPanel layers={model.index.layers} sources={model.index.sources} requested={state.layers} onToggle={(layerId) => dispatch({ type: 'layer_toggled', layerId })} />
       <ChainView model={model} view={chainView} />

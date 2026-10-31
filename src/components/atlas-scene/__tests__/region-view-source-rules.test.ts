@@ -15,7 +15,7 @@ const MOUNTS = [
 ];
 const SOURCE_EXTENSIONS = ['.astro', '.ts', '.tsx'];
 /** three.js, the canvas chunk's modules, and the two lazy chunks that lead to them. A page or a host may name none of them in a static import. */
-const HEAVY_MODULES = ['AtlasCanvas', 'scene-renderer', 'scene-objects', 'scene-marks', 'device-objects', 'TractLines', 'OpenViewport', 'RegionViewPanel', 'AtlasRegionView', 'AtlasViewport', 'explorer-data', 'BrainHeroPanel', 'BrainHeroView'];
+const HEAVY_MODULES = ['AtlasCanvas', 'scene-renderer', 'scene-objects', 'scene-brackets', 'scene-selection', 'scene-marks', 'device-objects', 'TractLines', 'OpenViewport', 'RegionViewPanel', 'AtlasRegionView', 'AtlasViewport', 'explorer-data', 'BrainHeroPanel', 'BrainHeroView'];
 const STATIC_HEAVY_IMPORT = new RegExp(String.raw`^\s*import (?!type )[^;]*from ['"](three|three/[^'"]*|@react-three/[^'"]*|[^'"]*/(${HEAVY_MODULES.join('|')})(\.tsx?)?)['"]`, 'm');
 const read = (filePath: string): string => fs.readFileSync(filePath, 'utf-8');
 

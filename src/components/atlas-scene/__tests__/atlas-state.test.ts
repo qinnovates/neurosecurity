@@ -46,6 +46,14 @@ describe('explorerReducer', () => {
     expect(explorerReducer(onTechnique, { type: 'lens_kind_chosen', kind: 'niss' }).previousLens).toEqual(onTechnique.lens);
   });
 
+  it('clears a highlight back to the lens it replaced, and to the default lens when it replaced none', () => {
+    const highlighted = apply([{ type: 'lens_kind_chosen', kind: 'niss' }, { type: 'lens_subject_chosen', kind: 'technique', subjectId: 'QIF-T0030' }]);
+    expect(explorerReducer(highlighted, { type: 'highlight_cleared' })).toMatchObject({ lens: { kind: 'niss' }, previousLens: null });
+    // Restored onto a highlight, there is nothing left to go back to, and the chip still has to end it.
+    const alone: ExplorerState = { ...INITIAL_EXPLORER_STATE, lens: { kind: 'technique', techniqueId: 'QIF-T0030' }, previousLens: null };
+    expect(explorerReducer(alone, { type: 'highlight_cleared' })).toMatchObject({ lens: { kind: 'band' }, previousLens: null });
+  });
+
   it('clears the filter only when asked, and closes a rail stage toggled twice', () => {
     const state = apply([{ type: 'target_selected', target: REGION }, { type: 'filter_changed', filter: { onlyWithData: true } }, { type: 'rail_stage_toggled', stageId: 'I0' }]);
     expect(explorerReducer(state, { type: 'filter_cleared' }).selection).toEqual(REGION);

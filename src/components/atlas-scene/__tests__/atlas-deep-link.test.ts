@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { ATLAS_EXPLORER_PATH } from '@/components/brain/AtlasExplorerLink';
 import { loadRealModel } from '@/lib/atlas-explorer/__tests__/explorer-fixtures';
-import { LENS_KINDS, SUBJECT_FREE_LENS_KINDS, lensNeedsSubject } from '@/lib/atlas-explorer/lens-state';
-import { LENS_QUERY_PARAM, REGION_QUERY_PARAM, buildRegionDeepLink, readLensDeepLink, readRegionDeepLink } from '../atlas-deep-link';
+import { LENS_KINDS, SUBJECT_FREE_LENS_KINDS, lensNeedsSubject, type LensKind } from '@/lib/atlas-explorer/lens-state';
+import { HIGHLIGHT_QUERY_PARAM, LENS_QUERY_PARAM, REGION_QUERY_PARAM, buildExplorerSearch, buildRegionDeepLink, readHighlightDeepLink, readLensDeepLink, readRegionDeepLink } from '../atlas-deep-link';
 
 const model = loadRealModel();
 const [firstRegion] = model.regions;
@@ -59,5 +59,48 @@ describe('the explorer\'s lens deep link', () => {
     const url = new URL(buildRegionDeepLink('pfc', { kind: 'band' }), 'https://example.test');
     expect(readLensDeepLink(url.search)).toEqual({ kind: 'band' });
     expect(readRegionDeepLink(url.search, new Set(['pfc']))).toEqual({ kind: 'region', id: 'pfc' });
+  });
+});
+
+describe('the explorer\'s highlight deep link', () => {
+  const kindById = new Map<string, LensKind>([['QIF-T0030', 'technique'], ['neuralink-n1', 'stated_targets']]);
+
+  it('reads a technique or a device the page holds, and gives it the lens that shows it', () => {
+    expect(readHighlightDeepLink(`?${HIGHLIGHT_QUERY_PARAM}=QIF-T0030`, kindById)).toEqual({ kind: 'technique', techniqueId: 'QIF-T0030' });
+    expect(readHighlightDeepLink(`${HIGHLIGHT_QUERY_PARAM}=neuralink-n1&${REGION_QUERY_PARAM}=pfc`, kindById)).toEqual({ kind: 'stated_targets', deviceId: 'neuralink-n1' });
+  });
+
+  it.each([
+    ['no parameter', ''],
+    ['an empty id', `?${HIGHLIGHT_QUERY_PARAM}=`],
+    ['an id the page does not hold', `?${HIGHLIGHT_QUERY_PARAM}=QIF-T9999`],
+    ['an id with markup in it', `?${HIGHLIGHT_QUERY_PARAM}=${encodeURIComponent('<b>x</b>')}`],
+  ])('reads nothing for %s', (_case, search) => {
+    expect(readHighlightDeepLink(search, kindById)).toBeNull();
+  });
+});
+
+describe('the explorer\'s state as an address', () => {
+  it('writes the region, the lens and the highlight, and leaves the default lens out', () => {
+    expect(buildExplorerSearch('', { regionId: null, lens: { kind: 'band' } })).toBe('');
+    expect(buildExplorerSearch('', { regionId: 'pfc', lens: { kind: 'band' } })).toBe(`?${REGION_QUERY_PARAM}=pfc`);
+    expect(buildExplorerSearch('', { regionId: 'pfc', lens: { kind: 'niss' } })).toBe(`?${REGION_QUERY_PARAM}=pfc&${LENS_QUERY_PARAM}=niss`);
+    expect(buildExplorerSearch('', { regionId: 'pfc', lens: { kind: 'technique', techniqueId: 'QIF-T0030' } })).toBe(`?${REGION_QUERY_PARAM}=pfc&${HIGHLIGHT_QUERY_PARAM}=QIF-T0030`);
+    expect(buildExplorerSearch('', { regionId: null, lens: { kind: 'stated_targets', deviceId: 'neuralink-n1' } })).toBe(`?${HIGHLIGHT_QUERY_PARAM}=neuralink-n1`);
+  });
+
+  it('writes no lens that waits for a subject, and no lens it could not read back', () => {
+    expect(buildExplorerSearch('', { regionId: null, lens: { kind: 'technique', techniqueId: null } })).toBe('');
+    expect(buildExplorerSearch('', { regionId: null, lens: { kind: 'dsm', cluster: 'mood' } })).toBe('');
+  });
+
+  it('replaces its own parameters and keeps every other one', () => {
+    expect(buildExplorerSearch(`?from=hero&${REGION_QUERY_PARAM}=m1&${LENS_QUERY_PARAM}=niss&${HIGHLIGHT_QUERY_PARAM}=QIF-T0030`, { regionId: 'pfc', lens: { kind: 'band' } })).toBe(`?from=hero&${REGION_QUERY_PARAM}=pfc`);
+  });
+
+  it('reads back what it wrote', () => {
+    const search = buildExplorerSearch('', { regionId: firstRegion.id, lens: { kind: 'niss' } });
+    expect(readRegionDeepLink(search, model.regionsById)).toEqual({ kind: 'region', id: firstRegion.id });
+    expect(readLensDeepLink(search)).toEqual({ kind: 'niss' });
   });
 });

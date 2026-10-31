@@ -99,7 +99,7 @@ describe('the viewport once the page\'s own control has asked for it', () => {
 });
 
 describe('the visitor\'s selection in the picture', () => {
-  it('selects every shape of each chosen group, lit from within, and changes no fill, colour or step of any shape', async () => {
+  it('brackets each chosen group as one, and changes no fill, colour or step of any shape', async () => {
     const plain = await openViewport();
     const plainShapes = plain.shapes.map((shape) => ({ ...shape }));
     cleanup();
@@ -109,8 +109,9 @@ describe('the visitor\'s selection in the picture', () => {
     expect(chosen.shapes).toEqual(plainShapes);
     expect([...chosen.selectedKeys].sort()).toEqual([...new Set(groups.flat().flatMap((regionId) => model.regionsById.get(regionId)?.structure_keys ?? []))].sort());
     expect(plain.selectedKeys.size).toBe(0);
-    // Nothing is handed to the picture to draw around the selection: no groups, no label. The name stands beside it.
-    expect(Object.keys(chosen)).not.toContain('bracketGroups');
+    // One bracket per group, however many shapes the group holds. No label: the name stands beside the picture.
+    expect(chosen.bracketGroups).toEqual(groups.map((regionIds) => [...new Set(regionIds.flatMap((regionId) => model.regionsById.get(regionId)?.structure_keys ?? []))]));
+    expect(plain.bracketGroups).toEqual([]);
     expect(Object.keys(chosen)).not.toContain('selectionLabel');
   });
 

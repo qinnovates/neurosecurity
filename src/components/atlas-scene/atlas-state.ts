@@ -37,6 +37,7 @@ export type ExplorerAction =
   | { type: 'lens_kind_chosen'; kind: LensKind }
   | { type: 'lens_subject_chosen'; kind: LensKind; subjectId: string }
   | { type: 'lens_restored' }
+  | { type: 'highlight_cleared' }
   | { type: 'layer_toggled'; layerId: LayerId }
   | { type: 'filter_changed'; filter: Partial<ListFilter> }
   | { type: 'filter_cleared' }
@@ -65,6 +66,8 @@ export function explorerReducer(state: ExplorerState, action: ExplorerAction): E
     case 'lens_kind_chosen': return state.lens.kind === action.kind ? state : { ...state, lens: emptyLens(action.kind), previousLens: state.lens };
     case 'lens_subject_chosen': return { ...state, lens: withLensSubject(action.kind, action.subjectId), previousLens: state.lens.kind === action.kind ? state.previousLens : state.lens };
     case 'lens_restored': return state.previousLens === null ? state : { ...state, lens: state.previousLens, previousLens: null };
+    // Unlike a restore this always ends the highlight: with no lens to go back to, it goes to the default.
+    case 'highlight_cleared': return { ...state, lens: state.previousLens ?? DEFAULT_LENS, previousLens: null };
     case 'layer_toggled': return { ...state, layers: { ...state.layers, [action.layerId]: !state.layers[action.layerId] } };
     case 'filter_changed': return { ...state, filter: { ...state.filter, ...action.filter } };
     case 'filter_cleared': return { ...state, filter: EMPTY_LIST_FILTER };

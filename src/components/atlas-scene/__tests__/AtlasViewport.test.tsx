@@ -240,27 +240,95 @@ describe('AtlasViewport: open', () => {
     const regionName = model.regionsById.get(regionId)?.name ?? '';
     const onShowDetails = vi.fn();
     const container = await openViewport({ selectedRegionId: regionId, onShowDetails });
-    // The picture is handed the selected shapes to light from within, and no label: nothing is drawn around a selection.
+    // The picture is handed the selected shapes to bracket as one, and no label: the name stands beside it.
     expect(model.regionsById.get(regionId)?.structure_keys.every((key) => canvasProps?.selectedKeys.has(key))).toBe(true);
+    expect(canvasProps?.bracketGroups).toEqual([model.regionsById.get(regionId)?.structure_keys]);
     expect(canvasProps).not.toHaveProperty('selectionLabel');
     const row = container.querySelector('[data-picture-selected]');
     expect(row?.getAttribute('data-picture-selected')).toBe(regionName);
     expect(container.querySelector('figure')?.contains(row)).toBe(true);
     fireEvent.click(within(row as HTMLElement).getByRole('button', { name: 'See its details' }));
     expect(onShowDetails).toHaveBeenCalledTimes(1);
-    expect(screen.getByText(/in a colour of its own: under the pointer, or selected/)).not.toBeNull();
+    expect(screen.getByText(/corner marks: selected/)).not.toBeNull();
   });
 
-  it('lights a picked shape that selects no region and names it in the legend, and says nothing beside the picture', async () => {
+  it('brackets a picked shape that selects no region and names it in the legend, and says nothing beside the picture', async () => {
     const container = await openViewport();
     expect(container.querySelector('[data-picture-selected]')).toBeNull();
     canvasProps?.onPick(sharedShapeKey);
     await waitFor(() => expect(canvasProps?.selectedKeys.has(sharedShapeKey)).toBe(true));
+    expect(canvasProps?.bracketGroups).toEqual([[sharedShapeKey]]);
     const picked = container.querySelector('[data-picked-key]');
     expect(picked?.getAttribute('data-picked-key')).toBe(sharedShapeKey);
     expect(picked?.textContent).toContain(resolvePick(model, sharedShapeKey)?.label ?? '');
     expect(container.querySelector('[data-picture-selected]')).toBeNull();
     expect(container.querySelector('button[name="See its details"]')).toBeNull();
+  });
+
+  describe('a selection made outside the picture', () => {
+    const viewportFor = (selectedRegionId: string | null) => (
+      <AtlasViewport model={model} lens={{ kind: 'band' }} layers={INITIAL_EXPLORER_STATE.layers} selectedRegionId={selectedRegionId} isIndexPinned isAsked onSelectRegion={onSelectRegion} probe={() => true} loadOpenView={loadOpenView} />
+    );
+    const open = async (selectedRegionId: string | null) => {
+      const view = render(viewportFor(selectedRegionId));
+      await waitFor(() => expect(view.container.querySelector('[data-asset-status]')).not.toBeNull());
+      await waitFor(() => expect(view.container.querySelectorAll('[data-asset-status="loading"]')).toHaveLength(0));
+      return view;
+    };
+    const ownRegionId = resolvePick(model, ownShapeKey)?.selectedRegionId ?? '';
+
+    it('drops the picked shape when the list selects another region, so one thing is marked and the legend names it', async () => {
+      const view = await open(null);
+      canvasProps?.onPick(sharedShapeKey);
+      await waitFor(() => expect(canvasProps?.selectedKeys.has(sharedShapeKey)).toBe(true));
+      expect(view.container.querySelector('[data-picked-key]')).not.toBeNull();
+      view.rerender(viewportFor(ownRegionId));
+      await waitFor(() => expect(canvasProps?.selectedKeys.has(sharedShapeKey)).toBe(false));
+      expect(view.container.querySelector('[data-picked-key]')).toBeNull();
+      expect(model.regionsById.get(ownRegionId)?.structure_keys.every((key) => canvasProps?.selectedKeys.has(key))).toBe(true);
+    });
+
+    it('keeps the picked shape when the region it selected comes back as the page\'s selection', async () => {
+      const view = await open(null);
+      canvasProps?.onPick(ownShapeKey);
+      await waitFor(() => expect(view.container.querySelector('[data-picked-key]')).not.toBeNull());
+      view.rerender(viewportFor(ownRegionId));
+      await waitFor(() => expect(canvasProps?.selectedKeys.has(ownShapeKey)).toBe(true));
+      expect(view.container.querySelector('[data-picked-key]')?.getAttribute('data-picked-key')).toBe(ownShapeKey);
+    });
+  });
+
+  it('names a shape by its QIF region first and the atlas\'s own name second, under the pointer and once picked', async () => {
+    const namedApart = model.index.structures.map((structure) => resolvePick(model, structure.key)).find((pick) => pick !== null && pick.selectedRegionId !== null && pick.regions[0].name !== pick.label && (model.structuresByKey.get(pick.structureKey)?.nodes.length ?? 0) > 0);
+    if (namedApart === undefined || namedApart === null) throw new Error('No shape whose atlas name differs from its region\'s.');
+    const container = await openViewport();
+    act(() => canvasProps?.onHover(namedApart.structureKey));
+    const label = container.querySelector('.atlas-hover-label') as HTMLElement;
+    expect(label.querySelector('[data-label-region]')?.textContent).toBe(namedApart.regions[0].name);
+    expect(label.querySelector('[data-label-atlas]')?.textContent).toBe(namedApart.label);
+    act(() => canvasProps?.onHover(unownedShapeKey));
+    expect(container.querySelector('.atlas-hover-label [data-label-atlas]')).toBeNull();
+    expect(container.querySelector('.atlas-hover-label [data-label-region]')?.textContent).toBe(resolvePick(model, unownedShapeKey)?.label);
+    act(() => canvasProps?.onPick(namedApart.structureKey));
+    const picked = container.querySelector('[data-picked-key]') as HTMLElement;
+    expect(picked.querySelector('[data-label-region]')?.textContent).toBe(namedApart.regions[0].name);
+    expect(picked.querySelector('[data-label-atlas]')?.textContent).toBe(namedApart.label);
+  });
+
+  it('says in the picture\'s footer when a click landed on a shape that is not one QIF region, and stops saying it when it no longer holds', async () => {
+    const container = await openViewport();
+    const note = (): Element | null => container.querySelector('[data-picture-shape-note] [data-limit-id="picked_shape_not_region"]');
+    expect(note()).toBeNull();
+    act(() => canvasProps?.onPick(sharedShapeKey));
+    expect(note()?.textContent).toBe('This shape is not one QIF region.');
+    expect(container.querySelector('figure')?.contains(note())).toBe(true);
+    act(() => canvasProps?.onPick(unownedShapeKey));
+    expect(note()?.textContent).toBe('This shape is not one QIF region.');
+    act(() => canvasProps?.onPick(ownShapeKey));
+    expect(note()).toBeNull();
+    act(() => canvasProps?.onPick(sharedShapeKey));
+    act(() => canvasProps?.onPick(null));
+    expect(note()).toBeNull();
   });
 
   it('offers the ways out of the lens under the picture, as real buttons, and nothing when there is none', async () => {
@@ -343,6 +411,16 @@ describe('AtlasViewport: open', () => {
     expect(container.textContent).toMatch(/It passes through \d+ shapes\./);
     fireEvent.click(screen.getByRole('button', { name: 'Cut through the brain' }));
     expect(canvasProps?.slice).toBeNull();
+  });
+
+  it('puts what the page hands it in the view\'s header, above the picture, and nothing there when the page hands it nothing', async () => {
+    const container = await openViewport({ headerControls: <span data-page-control="true" /> });
+    const header = container.querySelector('[data-viewport-header]') as HTMLElement;
+    expect(header.querySelector('[data-page-control]')).not.toBeNull();
+    expect(header.compareDocumentPosition(container.querySelector('figure') as HTMLElement) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    cleanup();
+    const bare = await openViewport();
+    expect(bare.querySelector('[data-page-control]')).toBeNull();
   });
 
   it('hides again on request and starts fresh the next time', async () => {

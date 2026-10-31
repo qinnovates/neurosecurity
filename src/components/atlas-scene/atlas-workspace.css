@@ -38,8 +38,11 @@
  * The glow is the same stand-in the homepage hero uses while its picture loads.
  */
 .atlas-workspace .atlas-main-list .atlas-viewport[data-gate="closed"] {
-  position: relative; overflow: hidden; min-height: min(54vh, 30rem); display: grid; align-content: center; justify-items: start; gap: 0.75rem;
+  position: relative; overflow: hidden; min-height: min(54vh, 30rem); display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem;
 }
+/* The header holds the top of the panel, with the lens bar across it; what stands below is centred in what is left. */
+.atlas-workspace .atlas-main-list .atlas-viewport[data-gate="closed"] > .atlas-viewport-header { align-self: stretch; margin-bottom: auto; }
+.atlas-workspace .atlas-main-list .atlas-viewport[data-gate="closed"] > :last-child { margin-bottom: auto; }
 .atlas-workspace .atlas-main-list .atlas-viewport[data-gate="closed"]::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background: radial-gradient(ellipse 60% 55% at 50% 50%, color-mix(in srgb, var(--atlas-accent) 14%, transparent), transparent 70%);
@@ -47,6 +50,13 @@
 .atlas-workspace .atlas-main-list .atlas-viewport[data-gate="closed"] > * { position: relative; }
 .atlas-workspace .atlas-main-list .atlas-viewport[data-gate="closed"] > .atlas-fact { max-width: 36rem; }
 .atlas-lenses[data-fact-lens="false"] .atlas-lens-thumb { opacity: 0; }
+/* In the picture's header the bar takes what the heading leaves, and wraps under it on a narrow window. */
+.atlas-viewport-header > .atlas-lenses { flex: 1 1 18rem; max-width: 34rem; }
+/* What carries the colour while no lens button does. */
+.atlas-highlight-chip { display: inline-flex; align-items: center; gap: 0.25rem; min-height: 2rem; margin: 0; padding: 0 0.1875rem 0 0.75rem; font-weight: 600; background: var(--atlas-ground); border: 1px solid var(--atlas-accent); border-radius: 999px; }
+.atlas-highlight-clear { width: 1.625rem; height: 1.625rem; padding: 0; font: inherit; line-height: 1; color: inherit; background: transparent; border: 0; border-radius: 999px; cursor: pointer; }
+.atlas-highlight-clear:hover { background: var(--atlas-line); }
+.atlas-highlight-clear:focus-visible { outline: 2px solid var(--atlas-accent); outline-offset: 1px; }
 .atlas-lens-blocked { margin: 0.375rem 0 0; padding: 0 0.125rem; font-size: 0.75rem; color: var(--atlas-ink-soft); }
 .atlas-lens[aria-disabled="true"] { cursor: not-allowed; color: var(--atlas-ink-soft); text-decoration: line-through; text-decoration-thickness: 1px; }
 .atlas-highlight { border-top: 1px solid var(--atlas-line); padding-top: 0.625rem; }

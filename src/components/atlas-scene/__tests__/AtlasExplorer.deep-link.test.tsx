@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import AtlasExplorer from '../AtlasExplorer';
 import { buildRegionDeepLink } from '../atlas-deep-link';
 import { buildServedFiles, serveFiles } from './explorer-test-server';
@@ -81,5 +81,53 @@ describe('AtlasExplorer: opening on a lens', () => {
     const container = await renderExplorer(search);
     expect(lensOf(container)).toBe('band');
     expect(currentRows(container)).toEqual([]);
+  });
+});
+
+describe('AtlasExplorer: the address follows the state', () => {
+  const row = (container: HTMLElement, regionId: string): HTMLButtonElement => container.querySelector(`button[data-region-id="${regionId}"]`) as HTMLButtonElement;
+  const lensButton = (label: string): HTMLButtonElement => [...document.querySelectorAll<HTMLButtonElement>('button.atlas-lens')].find((button) => button.textContent === label) as HTMLButtonElement;
+
+  it('writes the region and the lens as they change, replacing the entry rather than adding to the history', async () => {
+    const pushed = vi.spyOn(window.history, 'pushState');
+    const entries = window.history.length;
+    const container = await renderExplorer();
+    expect(window.location.search).toBe('');
+    fireEvent.click(row(container, 'pfc'), { detail: 1 });
+    await waitFor(() => expect(window.location.search).toBe('?region=pfc'));
+    fireEvent.click(lensButton('NISS severity'));
+    await waitFor(() => expect(window.location.search).toBe('?region=pfc&lens=niss'));
+    fireEvent.click(lensButton('Band'));
+    await waitFor(() => expect(window.location.search).toBe('?region=pfc'));
+    expect(pushed).not.toHaveBeenCalled();
+    expect(window.history.length).toBe(entries);
+    pushed.mockRestore();
+  });
+
+  it('writes a highlight as the subject it is, and leaves the lens out', async () => {
+    const container = await renderExplorer();
+    const input = screen.getByRole('combobox', { name: 'Choose a technique or device' });
+    fireEvent.change(input, { target: { value: 'neuralink-n1' } });
+    fireEvent.keyDown(input, { key: 'Enter' });
+    await waitFor(() => expect(window.location.search).toBe('?highlight=neuralink-n1'));
+    expect(container.querySelector('.atlas-workspace')?.getAttribute('data-lens')).toBe('stated_targets');
+  });
+
+  it('opens on a highlight the address names, and on nothing for one the page does not hold', async () => {
+    const container = await renderExplorer('highlight=neuralink-n1');
+    expect(container.querySelector('.atlas-workspace')?.getAttribute('data-lens')).toBe('stated_targets');
+    expect(container.querySelector('[data-highlight-chip]')?.textContent).toContain('Device neuralink-n1');
+    cleanup();
+    const unknown = await renderExplorer('highlight=QIF-T9999');
+    expect(unknown.querySelector('.atlas-workspace')?.getAttribute('data-lens')).toBe('band');
+  });
+
+  it('counts an address that names a region as having asked for the 3D view, and a bare address as not', async () => {
+    const asked = await renderExplorer('region=hippocampus');
+    // The fixture page carries no pin, so the gate answers at once and says why; the point is that it was asked.
+    expect(asked.querySelector('.atlas-viewport')?.getAttribute('data-gate')).not.toBe('closed');
+    cleanup();
+    const bare = await renderExplorer('');
+    expect(bare.querySelector('.atlas-viewport')?.getAttribute('data-gate')).toBe('closed');
   });
 });
