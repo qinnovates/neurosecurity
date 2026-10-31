@@ -43,6 +43,8 @@ const TECHNIQUE_LENS = 'technique';
 const DeviceGeometry = lazy(() => import('./DeviceGeometry'));
 /** The width at which the list and the inspector stop sitting side by side. Matches atlas-scene.css. */
 const STACKED_LAYOUT_QUERY = '(max-width: 960px)';
+/** The pane that scrolls on its own beside the list. */
+const INSPECTOR_PANE_SELECTOR = '.atlas-inspector';
 /** Where a selection came from: the list by keyboard, the list by pointer, or the picture. */
 type SelectionSource = 'keyboard' | 'pointer' | 'picture';
 
@@ -110,9 +112,10 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
   /**
    * Focus moves to the inspector when a region is chosen from the keyboard, and also when a row is tapped on a narrow
    * screen, where the inspector lies below the whole list and the tap would otherwise change nothing the visitor can
-   * see. A pick in the picture moves nothing: the picture names what it selected and offers the way to the details, so
-   * the visitor is not carried away from the view they were using. The move waits for the inspector to show the chosen
-   * region, so it lands on that region's heading and not on the one it replaces.
+   * see. Only there, or on the visitor's own "See its details", does the page itself scroll: on a wide screen the
+   * inspector stands beside the list, so a selection moves nothing but the pane, and the picture stays in view. A pick
+   * in the picture moves nothing either: the picture names what it selected and offers the way to the details. The move
+   * waits for the inspector to show the chosen region, so it lands on that region's heading and not on the one it replaces.
    */
   const [focusRequest, setFocusRequest] = useState<{ shouldScroll: boolean } | null>(null);
   const selectRegion = (regionId: string, source: SelectionSource): void => {
@@ -124,10 +127,14 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
   const showDetails = (): void => setFocusRequest({ shouldScroll: true });
   useEffect(() => {
     if (focusRequest === null) return;
-    inspectorHeadingRef.current?.focus({ preventScroll: focusRequest.shouldScroll });
+    inspectorHeadingRef.current?.focus({ preventScroll: true });
     // Brought to the top of the screen, so the choice visibly lands on the region's details.
     if (focusRequest.shouldScroll) inspectorHeadingRef.current?.scrollIntoView?.({ block: 'start' });
   }, [focusRequest]);
+  // The pane scrolls inside itself. Element.scrollIntoView would also scroll the page, which is what carried the picture off the screen.
+  useEffect(() => {
+    if (state.selection !== null) inspectorHeadingRef.current?.closest(INSPECTOR_PANE_SELECTOR)?.scrollTo?.({ top: 0 });
+  }, [state.selection]);
   /** The way back from the details to the picture: the 3D view's heading, brought to the top of the screen. */
   const showViewport = (): void => {
     const heading = mainRef.current?.closest<HTMLElement>('.atlas-root')?.querySelector<HTMLElement>(`#${VIEWPORT_HEADING_ID}`) ?? null;

@@ -158,6 +158,25 @@ describe('AtlasExplorer: the list', () => {
     expect(screen.queryByRole('button', { name: /^Back to the .* lens$/ })).toBeNull();
   });
 
+  it('moves nothing but the pane when a row is chosen on a wide screen, so the picture stays where it is', async () => {
+    const documentScroll = vi.fn();
+    const paneScroll = vi.fn();
+    window.HTMLElement.prototype.scrollIntoView = documentScroll;
+    window.HTMLElement.prototype.scrollTo = paneScroll;
+    const focus = vi.spyOn(window.HTMLElement.prototype, 'focus');
+    const container = await renderExplorer();
+    pressEnterOn(rowOf(container, 'hippocampus'));
+    await waitFor(() => expect(document.activeElement?.id).toBe('atlas-inspector-heading'));
+    expect(focus).toHaveBeenLastCalledWith({ preventScroll: true });
+    expect(paneScroll).toHaveBeenLastCalledWith({ top: 0 });
+    expect(paneScroll.mock.contexts.at(-1)).toBe(container.querySelector('.atlas-inspector'));
+    fireEvent.click(rowOf(container, 'pfc'), { detail: 1 });
+    await screen.findByRole('heading', { level: 2, name: 'Prefrontal Cortex' });
+    await waitFor(() => expect(paneScroll.mock.contexts.at(-1)).toBe(container.querySelector('.atlas-inspector')));
+    expect(documentScroll).not.toHaveBeenCalled();
+    focus.mockRestore();
+  });
+
   it('moves focus and the view to the details when a row is tapped on a narrow, stacked screen', async () => {
     vi.stubGlobal('matchMedia', (query: string) => ({ matches: query === '(max-width: 960px)', addEventListener: () => undefined, removeEventListener: () => undefined }));
     const scrolled = vi.fn();
