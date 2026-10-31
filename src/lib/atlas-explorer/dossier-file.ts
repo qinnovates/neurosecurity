@@ -6,9 +6,8 @@
  * as its own static file, pinned by the anatomy index, and fetched only once a
  * region is opened. Every word is copied from a datalake file.
  *
- * A device's name is the landscape file's where one of its devices matches the
- * record, and otherwise the record's id made readable: `has_listed_name` says
- * which. No product name of a CVE is carried, only its id.
+ * A device's name is the hardware inventory's, and its company the landscape
+ * file's where one matches. No product name of a CVE is carried, only its id.
  */
 
 import { rootOf } from '@/lib/anatomy/field-readers';
@@ -69,8 +68,6 @@ export interface DossierCompany {
 export interface DossierDevice {
   id: string;
   name: string;
-  /** True when `name` is a device name from the landscape file; false when it is only `id` made readable. */
-  has_listed_name: boolean;
   relation: DeviceRelation;
   interface_type: InterfaceType;
   region_ids: string[];
@@ -136,7 +133,7 @@ const REGION_DOSSIER_SHAPE = shapes.record({
   protection_layers: shapes.list(shapes.record({ name: text, band_ids: ids })),
   hazards: shapes.list(shapes.record({ id, name: text, band_ids: ids })),
   devices: shapes.list(shapes.record({
-    id, name: text, has_listed_name: shapes.boolean, relation: shapes.word(DEVICE_RELATIONS), interface_type: shapes.word(INTERFACE_TYPES), region_ids: ids, company: shapes.nullable(company),
+    id, name: text, relation: shapes.word(DEVICE_RELATIONS), interface_type: shapes.word(INTERFACE_TYPES), region_ids: ids, company: shapes.nullable(company),
   })),
   techniques: shapes.list(shapes.record({ id, evidence_tier: shapes.nullable(shapes.word(EVIDENCE_TIER_CODES)), detection: shapes.nullable(text), cve_ids: ids })),
   chain_steps: shapes.list(shapes.record({

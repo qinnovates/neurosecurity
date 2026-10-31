@@ -26,6 +26,7 @@ const NEUROLOGICAL_FILE = 'datalake/qif-neurological-mappings.json';
 export interface DossierSources {
   atlas: unknown;
   landscape: unknown;
+  hardware: unknown;
   controls: unknown;
   hazards: unknown;
   pathways: unknown;
@@ -147,7 +148,7 @@ export function buildRegionDossierFile(engineData: EngineData, sources: DossierS
     controls: readBandControls(sources.controls),
     protection_layers: readProtectionLayers(sources.controls),
     hazards: readHazards(sources.hazards),
-    devices: buildDossierDevices(sources.atlas, sources.landscape),
+    devices: buildDossierDevices(sources.atlas, sources.landscape, sources.hardware),
     techniques: buildTechniques(engineData, linkedTechniqueIds),
     chain_steps: buildChainSteps(sources.chains, linkedTechniqueIds),
     pathway_ends: buildPathwayEnds(sources.pathways, sources.atlas),

@@ -23,6 +23,7 @@ import landscape from '@shared/bci-landscape.json';
 import securityControls from '@shared/qif-security-controls.json';
 import hazards from '@shared/qif-hazards.json';
 import neurological from '@shared/qif-neurological-mappings.json';
+import hardware from '../../site/bci-hardware-inventory.json';
 import { parseAnatomyFiles, type AnatomyData } from '@/lib/anatomy/anatomy-inputs';
 import { buildAnatomyBundle, type AnatomyBundle } from '@/lib/anatomy/build-anatomy-index';
 import { AnatomyDataError } from '@/lib/anatomy/errors';
@@ -78,7 +79,7 @@ export function loadAnatomyData(): AnatomyData {
 /** The dossier's file: the datalake's records for every region, restricted to the techniques with a drafted link. */
 function buildDossierJson(data: AnatomyData, chains: AtlasChains): string {
   const linkedTechniqueIds = new Set(Object.entries(data.techniqueRegions.techniques).filter(([, entry]) => entry.links.length > 0).map(([techniqueId]) => techniqueId));
-  const sources = { atlas, landscape, controls: securityControls, hazards, pathways, neurological, chains };
+  const sources = { atlas, landscape, hardware, controls: securityControls, hazards, pathways, neurological, chains };
   return JSON.stringify(buildRegionDossierFile(data.engineData, sources, (bandId) => layerOf(bandId as BandId), linkedTechniqueIds));
 }
 

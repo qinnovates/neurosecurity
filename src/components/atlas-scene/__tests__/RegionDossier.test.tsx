@@ -85,12 +85,12 @@ describe('RegionDossier', () => {
   it('groups devices by the relation their record states, and hands a choice back by id', async () => {
     const { container, onChooseDevice } = mount('m1');
     await waitFor(() => expect(container.querySelector(LOADED_SELECTOR)).not.toBeNull());
-    expect(container.querySelector('[data-device-relation="implanted_in"] [data-dossier-device="neuralink-n1"]')?.textContent).toContain('N1 Chip');
+    expect(container.querySelector('[data-device-relation="implanted_in"] [data-dossier-device="neuralink-n1"]')?.textContent).toContain('N1 Implant (Link)');
     expect(container.querySelector('[data-device-relation="endovascular_adjacent_to"] [data-dossier-device="synchron-stentrode"]')).not.toBeNull();
     expect(container.querySelector('[data-device-relation="scalp_position_over"] [data-dossier-device="emotiv-epoc-x"]')).not.toBeNull();
     expect(container.querySelector('[data-dossier-company="Neuralink"]')?.textContent).toBe('Neuralink: invasive, active.');
     expect(container.querySelector('[data-limit-id="company_is_context"]')).not.toBeNull();
-    fireEvent.click(screen.getByRole('button', { name: 'N1 Chip' }));
+    fireEvent.click(screen.getByRole('button', { name: 'N1 Implant (Link)' }));
     expect(onChooseDevice).toHaveBeenCalledWith('neuralink-n1');
   });
 

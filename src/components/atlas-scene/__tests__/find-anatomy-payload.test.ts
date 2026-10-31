@@ -102,7 +102,7 @@ describe('findAnatomyPayload', () => {
     expect(findAnatomyPayload(asIslandProp({ caveats: JSON.parse(cardJson).must_not_imply, numbers_that_differ_by_source: [] })).length).toBeGreaterThan(0);
     expect(findAnatomyPayload(asScript(JSON.parse(catalogJson)))).toEqual(expect.arrayContaining(['device_stage_techniques']));
     expect(findAnatomyPayload(asScript(JSON.parse(literatureJson).rows.slice(0, 1)))).toEqual(expect.arrayContaining(['anatomy_as_stated', 'verifier_verdict']));
-    expect(findAnatomyPayload(asScript(JSON.parse(seed.companionJsonByPath['/atlas/anatomy-dossier.json'])))).toEqual(expect.arrayContaining(['pathway_ends', 'protection_layers', 'has_listed_name']));
+    expect(findAnatomyPayload(asScript(JSON.parse(seed.companionJsonByPath['/atlas/anatomy-dossier.json'])))).toEqual(expect.arrayContaining(['pathway_ends', 'protection_layers']));
   });
 
   it('puts every column of the exported tables in exactly one list: a key marker, or a name left unmarked on purpose', () => {

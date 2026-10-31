@@ -501,7 +501,7 @@
         "src/components/atlas-scene/load-anatomy-data.ts",
         "src/lib/anatomy/limits-copy.ts"
       ],
-      "note": "Its data is one companion file pinned by the index, fetched once a region is opened; a device's name is the landscape file's only where the match rule in build-dossier-devices.ts finds one",
+      "note": "Its data is one companion file pinned by the index, fetched once a region is opened; a device's name is the hardware inventory's by id, and its company the landscape file's only where the match rule in build-dossier-devices.ts finds one",
       "commands": [
         "npx vitest run src/lib/atlas-explorer/__tests__/region-dossier.test.ts src/lib/atlas-explorer/__tests__/build-dossier-devices.test.ts src/components/atlas-scene/__tests__/RegionDossier.test.tsx"
       ],
