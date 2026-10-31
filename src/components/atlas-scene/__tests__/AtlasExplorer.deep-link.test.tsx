@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import AtlasExplorer from '../AtlasExplorer';
 import { buildRegionDeepLink } from '../atlas-deep-link';
+import { SIGNAL_BENCH_TECHNIQUES } from '@/components/signal-bench/signal-bench-events';
 import { buildServedFiles, serveFiles } from './explorer-test-server';
 
 const REAL_FILES = buildServedFiles();
@@ -120,6 +121,15 @@ describe('AtlasExplorer: the address follows the state', () => {
     cleanup();
     const unknown = await renderExplorer('highlight=QIF-T9999');
     expect(unknown.querySelector('.atlas-workspace')?.getAttribute('data-lens')).toBe('band');
+  });
+
+  it.each(SIGNAL_BENCH_TECHNIQUES.map(({ id }) => id))('opens on the technique the signal bench links to, %s, and keeps it in the address', async (techniqueId) => {
+    const address = `?highlight=${techniqueId}`;
+    window.history.replaceState(null, '', `/atlas/anatomy/${address}`);
+    const container = await renderExplorer();
+    expect(container.querySelector('.atlas-workspace')?.getAttribute('data-lens')).toBe('technique');
+    expect(container.querySelector('[data-highlight-chip]')?.textContent).toContain(`Technique ${techniqueId}`);
+    expect(window.location.search).toBe(address);
   });
 
   it('counts an address that names a region as having asked for the 3D view, and a bare address as not', async () => {
