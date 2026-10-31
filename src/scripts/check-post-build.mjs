@@ -87,7 +87,7 @@ export const ATLAS_ASSET_CHECKS = [
 
 /**
  * The ordinary pages that mount the 3D view under a list (REGION_VIEW_PAGES). They have no byte budget; what is
- * checked is that every `import()` they can reach is declared and that three.js sits only behind the declared gate.
+ * checked is that every `import()` they can reach is declared and that three.js sits only behind a chunk the page names.
  */
 export function findRegionViewFailures(distDirectory, pages = REGION_VIEW_PAGES) {
   return checkFirstLoadBudgets(distDirectory, pages, { isAdHoc: true }).failures;
@@ -95,7 +95,7 @@ export function findRegionViewFailures(distDirectory, pages = REGION_VIEW_PAGES)
 
 /** Checks of the pages listed in REGION_VIEW_PAGES. They take their own page list, not the tool pages'. */
 export const REGION_VIEW_CHECKS = [
-  { name: 'pages that mount the 3D view keep three.js behind its button', findFailures: (distDirectory) => findRegionViewFailures(distDirectory) },
+  { name: 'pages that mount the 3D view reach three.js only through a chunk they name', findFailures: (distDirectory) => findRegionViewFailures(distDirectory) },
 ];
 
 /** The preview host's `_headers`, emitted by prebuild from the policy module; it takes no page list. */

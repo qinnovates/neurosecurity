@@ -12,6 +12,7 @@ const MOUNTS = [
   { page: 'src/pages/atlas/tara/[id].astro', host: 'src/components/brain/BandViewPanel.tsx', builtPath: '/atlas/tara/QIF-T0001/' },
   { page: 'src/pages/atlas/clinical.astro', host: 'src/components/atlas/brainmap/RegionPicker.tsx', builtPath: '/atlas/clinical/' },
   { page: 'src/pages/atlas/index.astro', host: 'src/components/brain/BandViewPanel.tsx', builtPath: '/atlas/' },
+  { page: 'src/pages/index.astro', host: 'src/components/signal-bench/SignalBenchSelection.tsx', builtPath: '/' },
 ];
 const SOURCE_EXTENSIONS = ['.astro', '.ts', '.tsx'];
 /** three.js, the canvas chunk's modules, and the two lazy chunks that lead to them. A page or a host may name none of them in a static import. */
@@ -151,5 +152,10 @@ describe('the declarations the post-build check reads', () => {
     const listed = [...REGION_VIEW_PAGES.map((page) => page.urlPath), '/atlas/model/'].sort();
     expect(listed).toEqual(MOUNTS.map((mount) => mount.builtPath).sort());
     for (const page of REGION_VIEW_PAGES) expect(page.interactionGatedEntryNames, page.urlPath).toEqual(['RegionViewPanel']);
+  });
+
+  it('names one chunk that reaches three.js without the visitor asking: the homepage\'s brain hero', () => {
+    const arrivals = [...REGION_VIEW_PAGES, ...TOOL_PAGES].filter((page) => 'arrivalEntryNames' in page);
+    expect(arrivals.map((page) => [page.urlPath, page.arrivalEntryNames])).toEqual([['/', ['BrainHeroPanel']]]);
   });
 });

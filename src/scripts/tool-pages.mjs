@@ -80,6 +80,8 @@ export const ATLAS_EXPLORER_DOCUMENT_HEADROOM_GZIP_BYTES = 1_024;
  *   (src/scripts/browser-evidence, with --forbid-request) confirms each is not requested before the interaction.
  * @property {readonly string[]} onDemandLazyEntryNames chunks fetched when the visitor goes somewhere else in
  *   the page. Not counted, and they must not lead to three.js.
+ * @property {readonly string[]} [arrivalEntryNames] chunks a page fetches on its own, on purpose, that do lead to
+ *   three.js. Kept apart from the interaction gates because no visitor asks for them. Tool pages have none.
  * @property {boolean} scriptsMayCarryAnatomy whether the page's scripts are meant to hold anatomy code and data: true for a page
  *   that exists to show the anatomy (the atlas explorer), false for every other page. Where it is false, the built-page check scans
  *   every script the page can load for the anatomy tables and data files, and the source walk (tool-page-imports.mjs) forbids the
@@ -96,6 +98,9 @@ export const ATLAS_EXPLORER_DOCUMENT_HEADROOM_GZIP_BYTES = 1_024;
 
 /** The three lists that between them must name every `import()` a page can reach. */
 export const LAZY_ENTRY_LISTS = ['onMountLazyEntryNames', 'interactionGatedEntryNames', 'onDemandLazyEntryNames'];
+
+/** The optional list beside those three. A page that names a chunk here has said three.js loads without asking. */
+export const ARRIVAL_ENTRY_LIST = 'arrivalEntryNames';
 
 /** @type {readonly ToolPage[]} */
 export const TOOL_PAGES = [
@@ -135,11 +140,13 @@ export const TOOL_PAGES = [
  * Pages outside the tool list that mount the 3D region view (RegionViewMount) under one of their lists. They are
  * ordinary site pages and carry no byte budget. The post-build check holds each to one thing: three.js, and every
  * `import()` that leads to it, can be reached only through the chunk the visitor's button fetches. One technique
- * page stands for all of them, since they are built from one template.
+ * page stands for all of them, since they are built from one template. The homepage also draws the brain hero as its
+ * first picture, so its way to three.js without asking is named too, and nothing else may lead there.
  *
- * @type {readonly { urlPath: string, interactionGatedEntryNames: readonly string[] }[]}
+ * @type {readonly { urlPath: string, interactionGatedEntryNames: readonly string[], arrivalEntryNames?: readonly string[] }[]}
  */
 export const REGION_VIEW_PAGES = [
+  { urlPath: '/', interactionGatedEntryNames: ['RegionViewPanel'], arrivalEntryNames: ['BrainHeroPanel'] },
   { urlPath: '/atlas/', interactionGatedEntryNames: ['RegionViewPanel'] },
   { urlPath: '/atlas/clinical/', interactionGatedEntryNames: ['RegionViewPanel'] },
   { urlPath: '/atlas/tara/QIF-T0001/', interactionGatedEntryNames: ['RegionViewPanel'] },

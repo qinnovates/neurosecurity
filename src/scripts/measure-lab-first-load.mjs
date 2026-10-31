@@ -28,7 +28,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 import { chunkStem, extractPageEntries, readBuiltFile, traceImportChain, walkImportGraph } from './first-load-closure.mjs';
-import { DEFAULT_DIST_DIRECTORY, LAZY_ENTRY_LISTS, TOOL_PAGES, ToolPageCheckError } from './tool-pages.mjs';
+import { ARRIVAL_ENTRY_LIST, DEFAULT_DIST_DIRECTORY, LAZY_ENTRY_LISTS, TOOL_PAGES, ToolPageCheckError } from './tool-pages.mjs';
 
 /**
  * Libraries that must never load before the visitor asks, each recognised by text only the
@@ -100,7 +100,7 @@ function findAmbiguousNames(names, knownChunks) {
  * list, and every name in a list is an `import()` the page really makes.
  */
 function findLazyDeclarationProblems(page, staticWalk, reach) {
-  const declared = LAZY_ENTRY_LISTS.flatMap((list) => (page[list] ?? []).map((name) => ({ name, list })));
+  const declared = [...LAZY_ENTRY_LISTS, ARRIVAL_ENTRY_LIST].flatMap((list) => (page[list] ?? []).map((name) => ({ name, list })));
   const names = [...new Set(declared.map(({ name }) => name))];
   const importedNames = reach.dynamicTargets.map(chunkStem);
   const undeclared = reach.dynamicTargets.filter((target) => !names.includes(chunkStem(target)) && !staticWalk.closure.includes(target));
@@ -138,7 +138,7 @@ export function measureFirstLoad(distDirectory, page) {
   }
   const entries = extractPageEntries(html.toString('utf-8'), page.urlPath);
   const staticWalk = walkImportGraph(distDirectory, entries.scriptEntries);
-  const reach = walkImportGraph(distDirectory, entries.scriptEntries, { followDynamicImports: true, gatedEntryStems: page.interactionGatedEntryNames ?? [] });
+  const reach = walkImportGraph(distDirectory, entries.scriptEntries, { followDynamicImports: true, gatedEntryStems: [...(page.interactionGatedEntryNames ?? []), ...(page[ARRIVAL_ENTRY_LIST] ?? [])] });
   const onMount = walkOnMountEntries(distDirectory, staticWalk, reach, page.onMountLazyEntryNames ?? []);
   const { files, absentFiles } = measureFiles(distDirectory, [
     [page.urlPath, 'html', PARTS.document],

@@ -260,6 +260,14 @@ describe('three.js must not load before the visitor asks', () => {
     expect(measurement.gatedEntries).toEqual(['/_astro/scene-gate.js']);
   });
 
+  it('passes when the page names that chunk as one it fetches on arrival, and holds that name to the same rules', () => {
+    expect(failuresFor({ urlPath: '/gated/', arrivalEntryNames: ['scene-gate'] })).toEqual([]);
+    expect(failuresFor({ urlPath: '/gated/', arrivalEntryNames: ['scene-gate'], interactionGatedEntryNames: ['scene-gate'] })).toEqual([
+      '"scene-gate" is declared in more than one list (interactionGatedEntryNames, arrivalEntryNames); it must be in exactly one',
+    ]);
+    expect(failuresFor({ urlPath: '/gated/', arrivalEntryNames: ['renamed-gate'] })).toContain('"renamed-gate" in arrivalEntryNames is not a dynamic import of this page; remove or correct it in tool-pages.mjs');
+  });
+
   it('fails the same page when that chunk is declared on-demand instead of gated', () => {
     const failures = failuresFor({ urlPath: '/gated/', onDemandLazyEntryNames: ['scene-gate'] });
     expect(failures).toHaveLength(1);
