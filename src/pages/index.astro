@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import TrustBar from '../components/TrustBar.astro';
 import { HOURGLASS_BANDS, HOURGLASS_WIDTHS } from '../lib/qif-constants';
+import { NEURORIGHT_COUNT } from '../lib/neurorights-taxonomy';
 import SignalBench from '../components/signal-bench/SignalBench';
 import { buildSignalBenchEvents } from '../components/signal-bench/signal-bench-events';
 import { THREAT_VECTORS } from '../lib/threat-data';
@@ -387,7 +388,7 @@ const neurorightsFold = foldNeurorights(
     <div class="max-w-4xl mx-auto text-center mb-10">
       <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--color-accent-tertiary)] mb-3">Governance & Neurorights</p>
       <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-4">
-        Four proposed neurorights, mapped. Governance spanning all {HOURGLASS_BANDS.length} bands.
+        {NEURORIGHT_COUNT} proposed neurorights, mapped. Governance spanning all {HOURGLASS_BANDS.length} bands.
       </h2>
       <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto">
         Neuroethics scholarship proposed these rights (Ienca &amp; Andorno, 2017); TARA maps cataloged techniques to them for threat modeling. Equal access is treated as a governance commitment, not a separate right. The policy bridge connects those findings to accelerating regulation.

@@ -5,6 +5,7 @@ import NeurorightCards from '@/components/neurogovernance/NeurorightCards';
 import { getNeurogovernanceData } from '@/lib/neurogovernance-data';
 import { getBrainViewData } from '@/lib/brain-view-data';
 import { HOURGLASS_BANDS, HOURGLASS_WIDTHS, TARA_TECHNIQUES } from '@/lib/qif-constants';
+import { NEURORIGHT_COUNT } from '@/lib/neurorights-taxonomy';
 import { GOVERNING_BODIES, FRAMEWORK_LESSONS, ENGAGEMENT_COLORS, ENGAGEMENT_LABELS } from '@/data/convergence-data';
 import type { Domain } from '@/data/convergence-data';
 
@@ -19,7 +20,7 @@ const breadcrumbs = [
 
 <PageLayout
   title="Governance — Your Brain Has Rights"
-  description={`How ${TARA_TECHNIQUES} cataloged techniques bear on four neurorights proposed by Ienca & Andorno (2017), which are scholarly proposals, not established law. A threat-modeling view; proposed research.`}
+  description={`How ${TARA_TECHNIQUES} cataloged techniques bear on ${NEURORIGHT_COUNT} neurorights proposed by Ienca & Andorno (2017), which are scholarly proposals, not established law. A threat-modeling view; proposed research.`}
   breadcrumbs={breadcrumbs}
   wide
 >
@@ -180,7 +181,7 @@ const breadcrumbs = [
               <td class="py-2.5 pr-3 font-medium text-[var(--color-text-primary)]">Justice</td>
               <td class="py-2.5 pr-3">Equitable access (governance principle)</td>
               <td class="py-2.5 pr-3">Open-source framework, Apache 2.0</td>
-              <td class="py-2.5">BCI safety cannot be proprietary. Equitable access is a governance commitment, not a separate neuroright &mdash; it is implied by treating the four rights as universal</td>
+              <td class="py-2.5">BCI safety cannot be proprietary. Equitable access is a governance commitment, not a separate neuroright &mdash; it is implied by treating the {NEURORIGHT_COUNT} rights as universal</td>
             </tr>
           </tbody>
         </table>

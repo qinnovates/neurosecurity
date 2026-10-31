@@ -8,6 +8,7 @@ import { getAtlasData, getThreatsForBandDetail } from '@/lib/atlas-data';
 import { getBrainViewData } from '@/lib/brain-view-data';
 import { getKqlTables } from '@/lib/kql-tables';
 import { HOURGLASS_BANDS, TARA_TECHNIQUES } from '@/lib/qif-constants';
+import { NEURORIGHT_COUNT } from '@/lib/neurorights-taxonomy';
 import { getCollection } from 'astro:content';
 import { getPostDate } from '@/lib/utils';
 import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
@@ -32,7 +33,6 @@ for (const band of HOURGLASS_BANDS) {
 // Each technique once. Summing per-band counts would count a technique once per band it spans.
 const totalThreats = TARA_TECHNIQUES;
 const totalDevices = atlasData.devices.length;
-const totalNeurorights = atlasData.neurorights.length;
 const totalDsmCodes = atlasData.dsmClusters.reduce((sum, c) => sum + c.conditions.length, 0);
 const avgNiss = (Object.values(threatDetails).reduce((sum: number, d: any) => sum + d.avgNiss, 0) / Object.values(threatDetails).length).toFixed(1);
 
@@ -161,7 +161,7 @@ const iconSvg: Record<string, string> = {
       {[
         { label: 'Attack Techniques', value: totalThreats },
         { label: 'BCI Devices', value: totalDevices },
-        { label: 'Neurorights', value: totalNeurorights },
+        { label: 'Neurorights', value: NEURORIGHT_COUNT },
         { label: 'DSM-5 Codes', value: totalDsmCodes },
         { label: 'Hourglass Bands', value: 11 },
       ].map((stat, index) => {

@@ -34,7 +34,7 @@ const FIXED_DESCRIPTIONS: Record<string, DatasetDescription> = {
   techniques: { label: 'TARA Techniques', description: 'BCI threat techniques with NISS scores, severity, and dual-use classification', category: 'Threats' },
   variants: { label: 'TARA Technique Variants', description: 'Variants of a technique: same mechanism, tactic and harm as one parent, differing in one named dimension. Counted apart from techniques; proposed and unvalidated', category: 'Threats' },
   technique_dsm: { label: 'Technique-DSM Bridge', description: 'Maps techniques to DSM-5-TR diagnostic categories (for threat modeling)', category: 'Threats' },
-  technique_neurorights: { label: 'Technique-Neurorights', description: 'Maps techniques to the 5 neurorights they affect', category: 'Threats' },
+  technique_neurorights: { label: 'Technique-Neurorights', description: 'Maps techniques to the neurorights codes they carry', category: 'Threats' },
   impact_chains: { label: 'Impact Chains', description: 'Technique-to-condition associations by shared band, for threat modeling only: not demonstrated neural paths and not diagnostic claims', category: 'Threats' },
   attack_chains: { label: 'Attack Chains', description: 'Multi-step TARA attack chains, one row per step, each carrying how far it is evidenced (demonstrated / partly demonstrated / projected). Compositions of catalogued techniques, not reported incidents.', category: 'Threats' },
   hazards: { label: 'Non-Adversarial Hazards', description: 'Hazards with no attacker, such as loss of device support. Kept apart from attack techniques; proposed and unvalidated, for threat modeling only', category: 'Threats' },

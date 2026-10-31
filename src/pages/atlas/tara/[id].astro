@@ -15,6 +15,8 @@ import { getValidationForTechnique, TIER_COLORS, STATUS_LABELS, STATUS_COLORS, V
 import type { ValidationTierId } from '@/lib/validation-data';
 import type { BrainView, BrainViewRegion } from '@/lib/brain-view-data';
 import { NEURAL_BAND_REGIONS } from '@/lib/qif-constants';
+import { countRightsReached } from '@/lib/neurorights-fold';
+import { NEURORIGHT_COUNT, NEURORIGHT_TAXONOMY } from '@/lib/neurorights-taxonomy';
 
 export function getStaticPaths() {
   return THREAT_VECTORS.map((threat) => ({
@@ -463,7 +465,7 @@ const hasGovernance = nr || reg;
                 <div>
                   <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--color-text-faint)] mb-1">Neurorights at Risk</h4>
                   <p class="text-xs text-[var(--color-text-muted)] mb-3">
-                    This technique threatens {nr.affected.length} of the 4 proposed neurorights (Ienca &amp; Andorno, 2017).
+                    This technique threatens {countRightsReached(NEURORIGHT_TAXONOMY, nr.affected)} of the {NEURORIGHT_COUNT} proposed neurorights (Ienca &amp; Andorno, 2017).
                   </p>
                   <div class="flex flex-wrap gap-1.5 mb-3">
                     {nr.affected.map((code: string) => (

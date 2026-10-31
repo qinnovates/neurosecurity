@@ -3,6 +3,7 @@ import Search from 'astro-pagefind/components/Search.astro';
 import GliaTeaser from './GliaTeaser.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import { TARA_TECHNIQUES } from '../lib/qif-constants';
+import { NEURORIGHT_COUNT } from '../lib/neurorights-taxonomy';
 
 const currentPath = Astro.url.pathname;
 
@@ -35,7 +36,7 @@ const frameworkGroups: NavGroup[] = [
     title: "What TARA Is Built On",
     links: [
       { href: '/framework/', label: 'QIF Hourglass Architecture', desc: 'Proposed 11-band model TARA techniques are mapped against' },
-      { href: '/governance/rights/', label: 'Neurorights', desc: '5 proposed neurorights TARA techniques are scored against' },
+      { href: '/governance/rights/', label: 'Neurorights', desc: `${NEURORIGHT_COUNT} proposed neurorights TARA techniques are scored against` },
     ],
   },
   {

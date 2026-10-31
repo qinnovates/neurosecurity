@@ -6,6 +6,7 @@ import { getWhitepaperStats } from '@/lib/whitepaper-stats';
 import { TARA_FDA_STATUS } from '@/lib/whitepaper-corrections';
 import { getLatestChangelog, getTacticsWithCounts, THREAT_DOMAINS } from '@/lib/threat-data';
 import { PILLARS, HOURGLASS_BANDS, HOURGLASS_WIDTHS, TARA_TECHNIQUES } from '@/lib/qif-constants';
+import { NEURORIGHT_COUNT } from '@/lib/neurorights-taxonomy';
 
 // Visualization components
 import HourglassChart from '@/components/whitepaper/HourglassChart.astro';
@@ -1402,7 +1403,7 @@ const tacticColors: Record<string, string> = {
         <div class="glass rounded-xl p-6 mb-8" style="border-left: 4px solid #ef4444;">
           <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-3">The Gap</h3>
           <p class="text-sm text-[var(--color-text-muted)] mb-4">
-            Ienca &amp; Andorno (2017) proposed four neurorights. With Equitable Access (from Yuste/NeuroRights Foundation, 2017), QIF maps five. Philosophical frameworks define what they mean. None specify how a BCI system would actually enforce them.
+            Ienca &amp; Andorno (2017) proposed four neurorights, and QIF maps {NEURORIGHT_COUNT}. Equitable Access (from Yuste/NeuroRights Foundation, 2017) sits beside them as a governance commitment, not a separate right. Philosophical frameworks define what they mean. None specify how a BCI system would actually enforce them.
           </p>
           <div class="space-y-4">
             <div>
@@ -2584,7 +2585,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
         <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">13.6 Neurorights as ACL Flags</h3>
         <div class="prose mb-4">
           <p>
-            The five proposed neurorights (Yuste et al., 2017; Ienca &amp; Andorno, 2017) map to access control flags enforced at the protocol level:
+            The {NEURORIGHT_COUNT} proposed neurorights (Ienca &amp; Andorno, 2017) and the Equal Access governance commitment (Yuste et al., 2017) map to access control flags enforced at the protocol level:
           </p>
         </div>
 
@@ -2947,7 +2948,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
 
   <div class="prose mb-6">
     <p>
-      Every governance question maps to one or more of the five proposed neurorights:
+      Every governance question maps to one or more of the {NEURORIGHT_COUNT} proposed neurorights or to the Equal Access governance commitment:
     </p>
   </div>
 
