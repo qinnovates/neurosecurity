@@ -2,12 +2,14 @@
  * Consent for the one optional thing this site can do: count page views with Cloudflare Web
  * Analytics, which sets no cookie and stores nothing in the browser.
  *
- * The Cloudflare script is not even requested until a visitor presses "Accept analytics".
- * "Reject analytics" and "Accept analytics" are the same size and weight. A browser that sends
- * Global Privacy Control is treated as a rejection and is not asked. The choice is kept in
- * localStorage for 180 days, then asked again, and can be changed from any element marked
- * data-consent-open (the footer's "Privacy choices"). Cloudflare's own automatic injection must
- * stay switched off in the Cloudflare dashboard, or it would load the script before any choice.
+ * The Cloudflare script is not even requested until a visitor presses "Accept all" or turns
+ * analytics on under "Customize". "Necessary only" and "Accept all" are the same size and weight,
+ * and "Customize" opens a category list with the necessary storage locked on and analytics off.
+ * A browser that sends Global Privacy Control is treated as a rejection and is not asked. The
+ * choice is kept in localStorage for 180 days, then asked again, and can be changed from any
+ * element marked data-consent-open (the footer's "Privacy choices"). Cloudflare's own automatic
+ * injection must stay switched off in the Cloudflare dashboard, or it would load the script
+ * before any choice.
  *
  * Plain module, no dependencies, no eval, no markup built from strings: every node is made with
  * createElement and textContent.
@@ -83,12 +85,21 @@ export function loadAnalytics(win, doc) {
 const BANNER_CSS = `
 #${BANNER_ID}{position:fixed;z-index:2147483000;left:max(1rem,env(safe-area-inset-left,0px));right:max(1rem,env(safe-area-inset-right,0px));bottom:max(1rem,env(safe-area-inset-bottom,0px));max-width:38rem;margin-inline:auto;padding:1.125rem 1.25rem;border:1px solid rgba(255,255,255,.28);border-radius:.75rem;background:#0b0b10;color:#e8e8ee;font:400 .875rem/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 12px 40px rgba(0,0,0,.55)}
 #${BANNER_ID} h2{margin:0 0 .375rem;font:600 1rem/1.3 "Space Grotesk",Inter,system-ui,sans-serif;color:#fff}
+#${BANNER_ID} h2:focus{outline:none}
 #${BANNER_ID} p{margin:0 0 .5rem}
 #${BANNER_ID} a{color:#9bbcff;text-decoration:underline}
 #${BANNER_ID} .qc-actions{display:flex;flex-wrap:wrap;gap:.625rem;margin-top:.875rem}
-#${BANNER_ID} button{flex:1 1 9rem;min-height:2.75rem;padding:.5rem 1rem;border:1px solid #1d5fe6;border-radius:.5rem;background:#1d5fe6;color:#fff;font:600 .875rem/1.2 inherit;cursor:pointer}
+#${BANNER_ID} button{flex:1 1 8rem;min-height:2.75rem;padding:.5rem 1rem;border:1px solid #1d5fe6;border-radius:.5rem;background:#1d5fe6;color:#fff;font:600 .875rem/1.2 inherit;cursor:pointer}
 #${BANNER_ID} button:hover{background:#2468f0}
-#${BANNER_ID} button:focus-visible,#${BANNER_ID} a:focus-visible{outline:3px solid #fff;outline-offset:2px}
+#${BANNER_ID} button.qc-secondary{background:transparent;border-color:rgba(255,255,255,.55)}
+#${BANNER_ID} button.qc-secondary:hover{background:rgba(255,255,255,.1)}
+#${BANNER_ID} button:focus-visible,#${BANNER_ID} a:focus-visible,#${BANNER_ID} input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+#${BANNER_ID} .qc-row{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;padding:.75rem 0;border-top:1px solid rgba(255,255,255,.18)}
+#${BANNER_ID} .qc-row strong{display:block;color:#fff}
+#${BANNER_ID} .qc-row span{display:block;color:#c9cad6}
+#${BANNER_ID} .qc-state{flex:none;font-weight:600;color:#c9cad6;white-space:nowrap}
+#${BANNER_ID} .qc-switch{flex:none;display:flex;align-items:center;gap:.5rem;min-height:2.75rem;font-weight:600;color:#fff;cursor:pointer}
+#${BANNER_ID} .qc-switch input{width:1.5rem;height:1.5rem;margin:0;accent-color:#3d86ff;cursor:pointer}
 .qc-reopen{padding:.5rem .25rem;border:0;background:none;color:inherit;font:inherit;text-decoration:underline;cursor:pointer}
 `;
 
@@ -107,35 +118,75 @@ function element(doc, tag, text, attributes = {}) {
   return node;
 }
 
-function choiceButton(doc, label, onChoose) {
+function choiceButton(doc, label, onChoose, extraClass) {
   const button = element(doc, 'button', label, { type: 'button' });
+  if (extraClass !== undefined) button.className = extraClass;
   button.addEventListener('click', onChoose);
   return button;
 }
 
 function describeCurrentChoice(consent) {
   if (consent === null) return null;
-  return consent.analytics ? 'Your current choice: analytics accepted.' : 'Your current choice: analytics rejected.';
+  return consent.analytics ? 'Your current choice: analytics on.' : 'Your current choice: necessary only.';
 }
 
 export function removeBanner(doc) {
   doc.getElementById(BANNER_ID)?.remove();
 }
 
+function titleNode(doc, text) {
+  return element(doc, 'h2', text, { id: 'qc-title', tabindex: '-1' });
+}
+
+function renderSummary(doc, banner, consent, onChoose, openPreferences) {
+  const nodes = [titleNode(doc, 'Privacy choices')];
+  nodes.push(element(doc, 'p', 'This site works without analytics. What it needs to remember your choice and display settings stays in your browser and is never sent to us. With your permission, Cloudflare Web Analytics also counts which pages are read. It sets no cookies.'));
+  const current = describeCurrentChoice(consent);
+  if (current !== null) nodes.push(element(doc, 'p', current));
+  const policy = element(doc, 'p');
+  policy.append(element(doc, 'a', 'How this site handles data', { href: PRIVACY_PATH }), doc.createTextNode('. You can change your choice at any time from Privacy choices in the footer.'));
+  nodes.push(policy);
+  const actions = element(doc, 'div', undefined, { class: 'qc-actions' });
+  actions.append(
+    choiceButton(doc, 'Necessary only', () => onChoose(false)),
+    choiceButton(doc, 'Customize', openPreferences, 'qc-secondary'),
+    choiceButton(doc, 'Accept all', () => onChoose(true)),
+  );
+  nodes.push(actions);
+  banner.replaceChildren(...nodes);
+}
+
+function renderPreferences(doc, banner, consent, onChoose, backToSummary) {
+  const nodes = [titleNode(doc, 'Customize your choices')];
+  const necessary = element(doc, 'div', undefined, { class: 'qc-row' });
+  const necessaryText = element(doc, 'div');
+  necessaryText.append(element(doc, 'strong', 'Strictly necessary'), element(doc, 'span', 'Remembers this choice and your display settings, such as theme, in your browser. Never sent to us.'));
+  necessary.append(necessaryText, element(doc, 'span', 'Always on', { class: 'qc-state' }));
+  const analytics = element(doc, 'div', undefined, { class: 'qc-row' });
+  const analyticsText = element(doc, 'div');
+  analyticsText.append(element(doc, 'strong', 'Analytics', { id: 'qc-analytics-name' }), element(doc, 'span', 'Cloudflare Web Analytics counts which pages are read. Off unless you turn it on.', { id: 'qc-analytics-note' }));
+  const toggle = element(doc, 'label', undefined, { class: 'qc-switch' });
+  const checkbox = element(doc, 'input', undefined, { type: 'checkbox', id: 'qc-analytics', 'aria-labelledby': 'qc-analytics-name', 'aria-describedby': 'qc-analytics-note' });
+  checkbox.checked = consent !== null && consent.analytics === true;
+  toggle.append(checkbox, doc.createTextNode('Allow'));
+  analytics.append(analyticsText, toggle);
+  const actions = element(doc, 'div', undefined, { class: 'qc-actions' });
+  actions.append(
+    choiceButton(doc, 'Save choices', () => onChoose(checkbox.checked)),
+    choiceButton(doc, 'Back', backToSummary, 'qc-secondary'),
+  );
+  nodes.push(necessary, analytics, actions);
+  banner.replaceChildren(...nodes);
+}
+
 export function renderBanner(doc, consent, onChoose) {
   removeBanner(doc);
   ensureStyle(doc);
   const banner = element(doc, 'section', undefined, { id: BANNER_ID, role: 'region', 'aria-labelledby': 'qc-title' });
-  banner.append(element(doc, 'h2', 'Privacy choices', { id: 'qc-title' }));
-  banner.append(element(doc, 'p', 'We would like to count which pages are read, using Cloudflare Web Analytics. If you accept, your browser sends usage data to Cloudflare for this. It sets no cookies. If you reject or do not choose, the analytics script is not loaded and nothing is sent for analytics.'));
-  const current = describeCurrentChoice(consent);
-  if (current !== null) banner.append(element(doc, 'p', current));
-  const policy = element(doc, 'p');
-  policy.append(element(doc, 'a', 'How this site handles data', { href: PRIVACY_PATH }), doc.createTextNode('. You can change your choice at any time from Privacy choices in the footer.'));
-  banner.append(policy);
-  const actions = element(doc, 'div', undefined, { class: 'qc-actions' });
-  actions.append(choiceButton(doc, 'Reject analytics', () => onChoose(false)), choiceButton(doc, 'Accept analytics', () => onChoose(true)));
-  banner.append(actions);
+  const focusTitle = () => doc.getElementById('qc-title')?.focus();
+  const showSummary = () => { renderSummary(doc, banner, consent, onChoose, showPreferences); focusTitle(); };
+  const showPreferences = () => { renderPreferences(doc, banner, consent, onChoose, showSummary); focusTitle(); };
+  renderSummary(doc, banner, consent, onChoose, showPreferences);
   doc.body.appendChild(banner);
 }
 

@@ -70,18 +70,18 @@ describe('startConsent', () => {
   const buttons = () => [...document.querySelectorAll('#qinnovate-consent-banner button')];
   const noReload = () => {};
 
-  it('requests nothing until the visitor accepts, shows both buttons alike, then adds only Cloudflare', () => {
+  it('requests nothing until the visitor accepts all, offers three equal first-layer choices, then adds only Cloudflare', () => {
     consent.startConsent(window, document, memoryStorage(), noReload);
     expect(beacons()).toHaveLength(0);
-    expect(buttons().map((button) => button.textContent)).toEqual(['Reject analytics', 'Accept analytics']);
-    buttons()[1].click();
+    expect(buttons().map((button) => button.textContent)).toEqual(['Necessary only', 'Customize', 'Accept all']);
+    buttons()[2].click();
     expect(beacons()).toHaveLength(1);
     expect(JSON.parse(beacons()[0].getAttribute('data-cf-beacon')).token).toMatch(/^[0-9a-f]{32}$/);
     expect([...document.head.querySelectorAll('script')].every((script) => script.src === '' || script.src.startsWith('https://static.cloudflareinsights.com/'))).toBe(true);
     expect(document.getElementById('qinnovate-consent-banner')).toBeNull();
   });
 
-  it('keeps analytics off after a rejection and remembers it', () => {
+  it('keeps analytics off after "Necessary only" and remembers it', () => {
     const storage = memoryStorage();
     consent.startConsent(window, document, storage, noReload);
     buttons()[0].click();
@@ -106,9 +106,56 @@ describe('startConsent', () => {
     let reloads = 0;
     consent.startConsent(window, document, memoryStorage({ [consent.CONSENT_KEY]: stored(true, Date.now()) }), () => { reloads += 1; });
     document.querySelector('[data-consent-open]').click();
-    expect(document.getElementById('qinnovate-consent-banner').textContent).toContain('Your current choice: analytics accepted.');
+    expect(document.getElementById('qinnovate-consent-banner').textContent).toContain('Your current choice: analytics on.');
     buttons()[0].click();
     expect(reloads).toBe(1);
+  });
+
+  const labelled = () => [...document.querySelectorAll('#qinnovate-consent-banner button')].map((button) => button.textContent);
+  const analyticsBox = () => document.getElementById('qc-analytics');
+
+  it('opens a category list with the necessary storage locked on and analytics off', () => {
+    consent.startConsent(window, document, memoryStorage(), noReload);
+    buttons()[1].click();
+    const banner = document.getElementById('qinnovate-consent-banner');
+    expect(banner.textContent).toContain('Strictly necessary');
+    expect(banner.textContent).toContain('Always on');
+    expect(analyticsBox().type).toBe('checkbox');
+    expect(analyticsBox().checked).toBe(false);
+    expect(labelled()).toEqual(['Save choices', 'Back']);
+    expect(beacons()).toHaveLength(0);
+  });
+
+  it('saves the analytics switch as the choice, and leaves it off by default', () => {
+    const storage = memoryStorage();
+    consent.startConsent(window, document, storage, noReload);
+    buttons()[1].click();
+    buttons()[0].click();
+    expect(JSON.parse(storage.peek(consent.CONSENT_KEY)).analytics).toBe(false);
+    expect(beacons()).toHaveLength(0);
+    document.querySelector('[data-consent-open]').click();
+    buttons()[1].click();
+    analyticsBox().checked = true;
+    buttons()[0].click();
+    expect(JSON.parse(storage.peek(consent.CONSENT_KEY)).analytics).toBe(true);
+    expect(beacons()).toHaveLength(1);
+  });
+
+  it('returns from the category list to the first layer and shows the saved choice when reopened', () => {
+    consent.startConsent(window, document, memoryStorage({ [consent.CONSENT_KEY]: stored(true, Date.now()) }), noReload);
+    document.querySelector('[data-consent-open]').click();
+    buttons()[1].click();
+    expect(analyticsBox().checked).toBe(true);
+    buttons()[1].click();
+    expect(labelled()).toEqual(['Necessary only', 'Customize', 'Accept all']);
+  });
+
+  it('gives the switch an accessible name and moves focus to the new heading', () => {
+    consent.startConsent(window, document, memoryStorage(), noReload);
+    buttons()[1].click();
+    expect(analyticsBox().getAttribute('aria-labelledby')).toBe('qc-analytics-name');
+    expect(document.getElementById('qc-analytics-name').textContent).toBe('Analytics');
+    expect(document.activeElement.id).toBe('qc-title');
   });
 
   it('builds the banner from text nodes only', () => {
