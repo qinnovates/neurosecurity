@@ -3,7 +3,7 @@ title: "Encrypted Is Not the Same as Verified"
 subtitle: "Secure LSL protects the wire. It doesn't say which device sent the data, or whether the file changed after capture."
 date_posted: "2026-10-31"
 status: "published"
-source:
+sources:
   - "https://eeglab.org/secureLSL/getting-started/quickstart/"
   - "https://eeglab.org/secureLSL/getting-started/configuration/"
   - "https://eeglab.org/secureLSL/security/how-it-works/"
