@@ -33,7 +33,7 @@ React 19 and Astro components for the qinnovate.com site. Organized by feature d
 | `Breadcrumbs.astro` | Astro | Breadcrumb navigation |
 | `HourglassReveal.tsx` | React | Hourglass scroll animation |
 | `FloatingOrbs.tsx` | React | Decorative particle effects |
-| `signal-bench/SignalBench.tsx` | React | Homepage hero strip chart: catalogued interference classes on synthetic traces |
+| `signal-bench/SignalBench.tsx` | React | Homepage hero strip chart: catalogued interference classes on synthetic traces; each event is a button that brackets its layer in an inline region view |
 | `ThreatMatrix.tsx` | React | Threat matrix grid view |
 | `TaraVisualization.tsx` | React | TARA data visualization |
 | `radar/RadarChart.tsx` | React | The shared radar primitive: one polar geometry, one palette, a plotted state and a withheld state |

@@ -831,6 +831,36 @@ code, pre {
 }
 
 /* ═══ Signal Bench (homepage hero strip chart) ═══ */
+.signal-bench {
+  --signal-trace: #3D86FF;
+  --signal-event: #B81F55;
+  font-family: var(--font-heading);
+}
+
+:root[data-theme="light"] .signal-bench {
+  --signal-trace: #1F4FD1;
+}
+
+.signal-bench-event {
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+}
+
+.signal-bench-event[data-playing="true"] {
+  border-color: var(--signal-trace);
+}
+
+.signal-bench-event[aria-pressed="true"] {
+  border-color: var(--signal-event);
+  box-shadow: inset 0 0 0 1px var(--signal-event);
+}
+
+.signal-bench-event:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+
 .signal-bench-strip {
   border-block: 1px solid var(--color-border);
   mask-image: linear-gradient(to right, transparent, #000 14%);

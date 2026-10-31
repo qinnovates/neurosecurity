@@ -12,7 +12,6 @@ import {
 export interface SignalBenchPalette {
   trace: string;
   adversarial: string;
-  grid: string;
   background: string;
 }
 
@@ -51,7 +50,7 @@ const WRITE_HEAD_RADIUS_PX = 2.5;
 const LANE_AMPLITUDE_RATIO = 0.4;
 const TRACE_WIDTH_PX = 1.25;
 const ADVERSARIAL_WIDTH_PX = 1.75;
-/** Healthy traces sit back at this alpha (3.35:1 on black, 3.42:1 on the light ground) so the altered run is the brightest thing on the strip. */
+/** Healthy traces sit back at this alpha so the altered run leads the strip. */
 const TRACE_ALPHA = 0.7;
 /** The altered run and its write head carry a soft halo of their own colour. */
 const ADVERSARIAL_GLOW_PX = 6;
@@ -100,19 +99,6 @@ function getVisibleEvents(frame: SignalBenchFrame, geometry: StripGeometry): Vis
 function getEventForTime(visibleEvents: VisibleEvents, time: number): SignalEventWindow {
   // Falls back to the oldest window if float rounding lands just outside the range.
   return visibleEvents.windows[getEventIndexAt(time) - visibleEvents.firstIndex] ?? visibleEvents.windows[0];
-}
-
-function drawTimeGrid(frame: SignalBenchFrame, geometry: StripGeometry): void {
-  const { context } = frame;
-  context.strokeStyle = frame.palette.grid;
-  context.lineWidth = 1;
-  context.beginPath();
-  for (let second = Math.ceil(getTimeAtX(frame, geometry, 0)); second <= frame.time; second++) {
-    const x = Math.round(getXAtTime(frame, geometry, second)) + 0.5;
-    context.moveTo(x, 0);
-    context.lineTo(x, frame.height);
-  }
-  context.stroke();
 }
 
 function setAdversarialGlow(frame: SignalBenchFrame): void {
@@ -275,7 +261,6 @@ export function drawSignalBench(frame: SignalBenchFrame): void {
   const visibleEvents = getVisibleEvents(frame, geometry);
   frame.context.clearRect(0, 0, frame.width, frame.height);
   frame.context.lineJoin = 'round';
-  drawTimeGrid(frame, geometry);
   for (const event of visibleEvents.windows) drawEventWash(frame, geometry, event);
   for (let channel = 0; channel < frame.channelCount; channel++) {
     drawChannelTrace(frame, geometry, visibleEvents, channel);
