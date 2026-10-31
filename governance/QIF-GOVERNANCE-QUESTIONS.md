@@ -466,7 +466,7 @@ This is a Catch-22: the consent mechanism depends on the device that needs to be
 
 Every governance question maps back to one or more neurorights. This table makes the connection explicit.
 
-### The Five Neurorights Applied
+### The Neurorights and Equal Access Applied
 
 | Neuroright | Core Principle | Governance Questions It Addresses |
 |-----------|---------------|----------------------------------|
@@ -474,13 +474,13 @@ Every governance question maps back to one or more neurorights. This table makes
 | **Cognitive Liberty (CL)** | The right to freedom of thought and mental self-determination | Q1.2 (domain access), Q2.2 (motor vs cognitive), Q3.1 (root access), Q4.2 (patient vs clinician), Q4.3 (identity) |
 | **Mental Integrity (MI)** | The right to be protected from unauthorized mental manipulation | Q1.1 (amplitude ceiling), Q2.1 (therapeutic vs enhancement), Q4.1 (escalation), Q9.1 (military) |
 | **Psychological Continuity (PC)** | The right to preservation of personal identity | Q4.3 (device as identity), Q1.4 (firmware updates), Q8.1 (support commitment), Q10.1 (evolving capabilities) |
-| **Equal Access (EA)** | The right to equitable access to mental augmentation | Q2.4 (interoperability), Q5.1 (open vs proprietary), Q6 (Neural Atlas), Q5.3 (funding) |
+| **Equal Access (EA)** | A governance commitment to equitable access to mental augmentation, not a separate right | Q2.4 (interoperability), Q5.1 (open vs proprietary), Q6 (Neural Atlas), Q5.3 (funding) |
 
 ### Neuroethics Literature Mapping
 
 | Ethicist / Source | Key Contribution | QIF Governance Question |
 |-------------------|-----------------|------------------------|
-| **Yuste et al. (2017)** — Nature 551:159-163 | "Four ethical priorities for neurotechnologies and AI." Proposed neurorights framework | Foundation for all 5 neurorights in RACI |
+| **Yuste et al. (2017)** — Nature 551:159-163 | "Four ethical priorities for neurotechnologies and AI." Proposed neurorights framework | Foundation for the neurorights in RACI |
 | **Ienca & Andorno (2017)** — Life Sci Soc Policy 13:5 | Proposed 4 specific neurorights: CL, MP, MI, PC | Tier 4-5 consent model, neurorights as ACL flags |
 | **Goering et al. (2021)** — Science 373:988-990 | DBS and agency: patients report personality changes with device on/off | Q4.3 (device as identity), PC |
 | **Kellmeyer (2022)** — Cambridge Handbook of RAI | "Mental privacy" and "mental integrity" lack agreed operational definitions | Q1.2 (domain access), why ACL flags need technical specification |

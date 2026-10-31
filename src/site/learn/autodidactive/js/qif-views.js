@@ -355,6 +355,6 @@ export function renderBrainAtlas(container, BRAIN_REGIONS) {
 }
 
 function getBandName(band) {
-  const names = { N7:'Neocortex', N6:'Limbic System', N5:'Basal Ganglia', N4:'Diencephalon', N3:'Cerebellum', N2:'Brainstem', N1:'Spinal Cord', I0:'Neural Interface', S1:'Analog Front-End', S2:'Digital Processing', S3:'Application Layer' };
+  const names = { N7:'Neocortex', N6:'Limbic System', N5:'Basal Ganglia', N4:'Diencephalon', N3:'Cerebellum', N2:'Brainstem', N1:'Spinal Cord', I0:'Neural Interface', S1:'Near-Field / On-Device', S2:'Guided-Wave / Host-Local', S3:'Far-Field / Wide-Area' };
   return names[band] || band;
 }

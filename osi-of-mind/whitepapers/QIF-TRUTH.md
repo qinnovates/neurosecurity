@@ -74,9 +74,9 @@
 
 | Band | Name | Function | Determinacy | QI Range |
 |------|------|----------|-------------|----------|
-| **S1** | Analog Front-End | Amplification, filtering, ADC/DAC | Stochastic (analog noise) | 0.001–0.01 |
-| **S2** | Digital Processing | Decoding, algorithms, classification | Deterministic | ~0 |
-| **S3** | Application | Clinical software, UI, data storage | Deterministic | 0 |
+| **S1** | Near-Field / On-Device | Amplification, ADC, near-field EM coupling (0-10 kHz, on-device) | Stochastic (analog noise) | 0.001–0.01 |
+| **S2** | Guided-Wave / Host-Local | Firmware, drivers, host compute, USB, decoding, BLE/WiFi baseband (10 kHz - 1 GHz, device-local) | Deterministic | ~0 |
+| **S3** | Far-Field / Wide-Area | RF transmission, directed energy, application layer (1 GHz+, off-device) | Deterministic | 0 |
 
 ### v3.1 → v4.0 Migration
 
@@ -91,7 +91,7 @@
 - **38 brain regions mapped** (was 17 in v3.1). Each region has a canonical band assignment and documented inter-region connections.
 - **Severity stratification (superseded 2026-10-06):** v4.0 ordered bands by clinical severity if compromised (N7 highest cognitive impact, N1 reflex/motor only). Since 2026-10-06 the band number carries no severity meaning.
 - **BCI device mapping:** Each band lists which real-world devices interface with it (e.g., N4: Medtronic Percept STN DBS; N7: Neuralink N1).
-- **S1_cortex:** Primary somatosensory cortex renamed to avoid collision with S1 (Analog Front-End) band ID.
+- **S1_cortex:** Primary somatosensory cortex renamed to avoid collision with S1 (Near-Field / On-Device) band ID.
 
 ### Naming Convention
 - Format: `{Zone}{Number}` — N7, N6, N5, N4, N3, N2, N1, I0, S1, S2, S3

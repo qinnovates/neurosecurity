@@ -75,13 +75,14 @@ describe('createCatalogTermResolver', () => {
     ['STN', 'stn:id'],
     ['prefrontal cortex', 'pfc:synonym'],
     ['amygdala', 'bla:whole_to_part'],
+    ['motor cortex', 'm1:whole_to_part'],
     ['PAG', 'midbrain:part_to_whole'],
     ['nucleus_accumbens', 'striatum:part_to_whole'],
   ])('resolves "%s" against the real atlas as %s (guard)', (term, expected) => {
     expect(resolve(term)).toBe(expected);
   });
 
-  it.each(["Broca's area", 'motor cortex', 'DLPFC', 'NTS', 'HIPP', 'hippocampal', 'cochlea', 'M1_larynx', 'anterior insula'])(
+  it.each(["Broca's area", 'visual cortex', 'DLPFC', 'NTS', 'HIPP', 'hippocampal', 'cochlea', 'M1_larynx', 'anterior insula'])(
     'resolves nothing for "%s": a display name, a wider or narrower name, an unlisted abbreviation or an adjective (guard)', (term) => {
       expect(resolve(term)).toBeNull();
     });

@@ -6,6 +6,7 @@ import RadarFillLegend from '@/components/radar/RadarFillLegend';
 // The page itself keys rows off `data-radar-fill`, so it imports the palette rather than relying on an island to pull it in.
 import '@/components/radar/radar-palette.css';
 import { NISS_SPEC, THREAT_VECTORS, getNissStats, NISS_UNSCORED_REASON_LABELS } from '@/lib/threat-data';
+import { NEURORIGHT_COUNT } from '@/lib/neurorights-taxonomy';
 import scoringGaps from '@shared/tara-scoring-gaps.json';
 import { getCatalogCoverage } from '@/lib/purpose-and-limits';
 import { VALIDATION_ENTRIES, getCheckedTechniqueCount } from '@/lib/validation-data';
@@ -194,7 +195,7 @@ const unscoredReading: NissReading = {
             When a vulnerability affects a brain, the severity score should reflect what happens to the patient — not just what happens to the device. Following the extension method in the CVSS v4.0 User Guide (§3.11), NISS adds a separate metric group alongside unmodified CVSS v4.0 Base, Threat and Environmental metrics. The CVSS SIG does not officially approve extensions; NISS is not approved or endorsed by FIRST. Like CVSS Base scores, NISS scores are not a risk assessment. Every scored technique in the <a href="/atlas/tara/">TARA atlas</a> carries both vectors: how the attack works <em>and</em> its potential neural impact.
           </p>
           <p>
-            NISS serves as the technique-level scoring input to the <a href="#nsv2">Neurosecurity Score (NSv2.1)</a>, a proposed multi-layer risk framework that aggregates NISS scores across four neurorights dimensions (Ienca &amp; Andorno, 2017) and an Equal Access governance dimension, with physics-based feasibility gating and population-adjusted context baselines. NISS is the scoring metric; NSv2.1 is the risk framework.
+            NISS serves as the technique-level scoring input to the <a href="#nsv2">Neurosecurity Score (NSv2.1)</a>, a proposed multi-layer risk framework that aggregates NISS scores across {NEURORIGHT_COUNT} neurorights dimensions (Ienca &amp; Andorno, 2017) and an Equal Access governance dimension, with physics-based feasibility gating and population-adjusted context baselines. NISS is the scoring metric; NSv2.1 is the risk framework.
           </p>
         </div>
 
@@ -737,7 +738,7 @@ const unscoredReading: NissReading = {
             <strong>NISS is the scoring metric. NSv2.1 is the risk framework that models NISS in operational context.</strong>
           </p>
           <p>
-            The Neurosecurity Score v2.1 (NSv2.1) consumes NISS technique scores as input and produces a device-level risk assessment across the four neurorights dimensions (Ienca &amp; Andorno, 2017) plus an Equal Access governance dimension.
+            The Neurosecurity Score v2.1 (NSv2.1) consumes NISS technique scores as input and produces a device-level risk assessment across the {NEURORIGHT_COUNT} neurorights dimensions (Ienca &amp; Andorno, 2017) plus an Equal Access governance dimension.
           </p>
         </div>
 
@@ -749,7 +750,7 @@ const unscoredReading: NissReading = {
               { layer: '2', name: 'Base Neurosecurity Score', detail: 'Weighted geometric mean (CES, rho=0): NISS 0.40, DSM 0.40, CCI 0.20' },
               { layer: '3', name: 'Feasibility Gating', detail: 'ISO 31000 risk: Hazard x P_realize. Physics tiers gate speculative attacks (Tier 3 = 10% probability)' },
               { layer: '4', name: 'Per-Right Aggregation', detail: 'OWA (Yager 1988) with exponential weighting across techniques per neurorights dimension' },
-              { layer: '5', name: 'Overall Score', detail: 'Geometric mean across five dimensions: the 4 neurorights (CL, MI, MP, PC) plus Equal Access (EA), a governance dimension rather than a separate neuroright' },
+              { layer: '5', name: 'Overall Score', detail: `Geometric mean across five dimensions: the ${NEURORIGHT_COUNT} neurorights (CL, MI, MP, PC) plus Equal Access (EA), a governance dimension rather than a separate neuroright` },
               { layer: '6', name: 'Population Adjustment', detail: 'Contextual Risk Baseline (CRB): multiplicative adjustment for vulnerable populations (children, elderly, ALS, autism)' },
             ].map(l => (
               <div class="flex gap-4 items-start">

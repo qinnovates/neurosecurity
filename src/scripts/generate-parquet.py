@@ -365,7 +365,8 @@ def main():
     # === Brain atlas ===
     atlas = load_json(SHARED / "qif-brain-bci-atlas.json")
     write_parquet("brain_regions", build_flat_table(atlas, "brain_regions"), catalog)
-    write_parquet("hourglass_bands", build_flat_table(atlas, "qif_bands"), catalog)
+    # from_pylist takes its columns from the first row, and only S1-S3 hold a legacy_name.
+    write_parquet("hourglass_bands", build_flat_table(atlas, "qif_bands", lambda band: {**band, "legacy_name": band.get("legacy_name")}), catalog)
     if "bci_devices" in atlas and isinstance(atlas["bci_devices"], list):
         write_parquet("atlas_devices", build_flat_table(atlas, "bci_devices"), catalog)
 

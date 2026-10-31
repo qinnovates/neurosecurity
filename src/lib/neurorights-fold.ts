@@ -49,6 +49,26 @@ export class NeurorightsFoldError extends Error {
   }
 }
 
+/** The codes that stand on their own: the neurorights, once the codes that fold are set aside. */
+export function listStandingNeurorights(taxonomy: readonly IndexNeurorightCode[]): IndexNeurorightCode[] {
+  return taxonomy.filter((entry) => entry.folds_into === null);
+}
+
+/**
+ * How many distinct neurorights one technique's raw codes reach. `codes.length`
+ * is not that number: a technique tagged MI and DI reaches one right, and a raw
+ * count can exceed the number of rights there are.
+ */
+export function countRightsReached(taxonomy: readonly IndexNeurorightCode[], codes: readonly string[]): number {
+  const foldTargetByCode = new Map(taxonomy.map((entry) => [entry.code as string, entry.folds_into ?? entry.code]));
+  const reached = new Set(codes.map((code) => {
+    const target = foldTargetByCode.get(code);
+    if (target === undefined) throw new NeurorightsFoldError(`A technique carries "${code}", which the glossary does not define.`);
+    return target;
+  }));
+  return reached.size;
+}
+
 /**
  * @param taxonomy The registrar's glossary as the index carries it: every code, its name, and the code it folds into.
  * @param records One entry per technique: its raw, unfolded codes, or null for a technique with no record at all.
@@ -58,7 +78,7 @@ export function foldNeurorights(
   records: readonly (readonly NeurorightCode[] | null)[],
 ): NeurorightsFold {
   const defined = new Map(taxonomy.map((entry) => [entry.code, entry]));
-  const standing = taxonomy.filter((entry) => entry.folds_into === null);
+  const standing = listStandingNeurorights(taxonomy);
   if (standing.length === 0) throw new NeurorightsFoldError('The glossary defines no code that stands on its own, so there is nothing to fold onto.');
 
   for (const entry of taxonomy) {

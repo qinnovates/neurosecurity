@@ -155,6 +155,7 @@ function buildHourglassBands(): Row[] {
   return (atlas.qif_bands || []).map((b: any) => ({
     id: b.id,
     name: b.name,
+    legacy_name: b.legacy_name || '',
     zone: b.zone,
     determinacy: b.determinacy || '',
     qi_range: (b.qi_range || []).join('-'),

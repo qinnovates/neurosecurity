@@ -34,12 +34,12 @@ const EXPECTED_BAND_LEVEL_BY_REASON: Record<string, string[]> = {
   text_contradicts_band_tags: ['QIF-T0104', 'QIF-T0105', 'QIF-T0106', 'QIF-T0107'],
 };
 const EXPECTED_BAND_LEVEL_TECHNIQUES = Object.values(EXPECTED_BAND_LEVEL_BY_REASON).flat().length;
-/** Re-pinned 2026-10-31 for addressing version 2: the VTA moved from N5 to N2, so three N2-tagged techniques light their VTA link and one N5-tagged technique (QIF-T0116) stops agreeing. */
+/** Re-pinned 2026-10-31 for addressing version 2: the VTA moved from N5 to N2, so three N2-tagged techniques light their VTA link and one N5-tagged technique (QIF-T0116) stops agreeing. Re-pinned again the same day: `motor cortex` became a whole_to_part alias of m1, so QIF-T0030 and QIF-T0131 move from unresolved to alias scope. */
 const EXPECTED_OUTCOMES = {
   [TECHNIQUE_OUTCOME.LIT]: 14,
   [TECHNIQUE_OUTCOME.BAND_DISAGREES]: 7,
-  [TECHNIQUE_OUTCOME.ALIAS_SCOPE]: 4,
-  [TECHNIQUE_OUTCOME.UNRESOLVED]: 23,
+  [TECHNIQUE_OUTCOME.ALIAS_SCOPE]: 6,
+  [TECHNIQUE_OUTCOME.UNRESOLVED]: 21,
 };
 /**
  * Every link, as `technique:term`. Pinned by identity so that swapping one
@@ -79,7 +79,7 @@ const EXPECTED_LINK_TERMS = [
   'QIF-T0156:spinal', 'QIF-T0156:brainstem', 'QIF-T0161:cortex',
 ];
 const EXPECTED_LINKS = EXPECTED_LINK_TERMS.length;
-const EXPECTED_LINK_RESOLUTIONS = { id: 20, synonym: 3, whole_to_part: 9, part_to_whole: 2, unresolved: 89 };
+const EXPECTED_LINK_RESOLUTIONS = { id: 20, synonym: 3, whole_to_part: 12, part_to_whole: 2, unresolved: 86 };
 /**
  * Every link that lights a region, as `technique:term->region`. Pinned by
  * identity: short region ids (m1, a1, acc, sma, ant) resolve whatever their

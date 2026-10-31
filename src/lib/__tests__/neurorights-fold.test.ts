@@ -5,9 +5,12 @@
  * read from `folds_into`, never from the name text.
  */
 
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import registrar from '@shared/qtara-registrar.json';
-import { foldNeurorights, NeurorightsFoldError } from '@/lib/neurorights-fold';
+import ethics from '@shared/qif-ethics-controls.json';
+import { countRightsReached, foldNeurorights, listStandingNeurorights, NeurorightsFoldError } from '@/lib/neurorights-fold';
+import { NEURORIGHT_COUNT, NEURORIGHT_TAXONOMY } from '@/lib/neurorights-taxonomy';
 import { readNeurorightsTaxonomy, type IndexNeurorightCode, type NeurorightCode } from '@/lib/anatomy/technique-tags';
 
 const GLOSSARY: IndexNeurorightCode[] = [
@@ -133,5 +136,54 @@ describe('the registrar as it stands', () => {
 
   it('carries nothing named cci out of the registrar', () => {
     expect(JSON.stringify(fold)).not.toMatch(/cci/i);
+  });
+});
+
+describe('the neurorights count the site states', () => {
+  /** The pages that state the count. Each must read it from NEURORIGHT_COUNT. */
+  const PAGES_STATING_THE_COUNT = [
+    'src/components/Nav.astro',
+    'src/pages/index.astro',
+    'src/pages/atlas/index.astro',
+    'src/pages/atlas/scoring.astro',
+    'src/pages/atlas/tara/[id].astro',
+    'src/pages/governance/rights.astro',
+    'src/pages/research/whitepaper/index.astro',
+  ];
+  const HARD_CODED_COUNT = /(?:the|across) (?:\d+|four|five|six) (?:proposed )?neurorights/i;
+
+  it('is the codes that stand on their own, which are the rights the ethics file defines', () => {
+    expect(listStandingNeurorights(NEURORIGHT_TAXONOMY).map((entry) => entry.code).sort()).toEqual(Object.keys(ethics.neurorights).sort());
+    expect(NEURORIGHT_COUNT).toBe(Object.keys(ethics.neurorights).length);
+    expect(NEURORIGHT_COUNT).toBeLessThan(NEURORIGHT_TAXONOMY.length);
+  });
+
+  it.each(PAGES_STATING_THE_COUNT)('is read from the constant by %s, with no numeral of its own', (file) => {
+    const source = readFileSync(file, 'utf-8');
+    expect(source).toContain('NEURORIGHT_COUNT');
+    expect(source).not.toMatch(HARD_CODED_COUNT);
+  });
+});
+
+describe('countRightsReached', () => {
+  it('counts a right once when a technique carries it and a code folded into it', () => {
+    expect(countRightsReached(GLOSSARY, ['MI', 'DI'])).toBe(1);
+    expect(countRightsReached(GLOSSARY, ['MP', 'CL', 'MI', 'DI', 'PC'])).toBe(4);
+  });
+
+  it('reaches a right through a fold alone', () => {
+    expect(countRightsReached(GLOSSARY, ['DI', 'IDA'])).toBe(2);
+    expect(countRightsReached(GLOSSARY, [])).toBe(0);
+  });
+
+  it('refuses a code the glossary does not define', () => {
+    expect(() => countRightsReached(GLOSSARY, ['EA'])).toThrow(NeurorightsFoldError);
+  });
+
+  it('never exceeds the number of rights on any registrar technique', () => {
+    const techniques = (registrar as { techniques: { id: string; neurorights?: { affected?: string[] } | null }[] }).techniques;
+    const reached = techniques.map((technique) => countRightsReached(NEURORIGHT_TAXONOMY, technique.neurorights?.affected ?? []));
+    expect(Math.max(...reached)).toBe(NEURORIGHT_COUNT);
+    expect(techniques.some((technique) => (technique.neurorights?.affected?.length ?? 0) > NEURORIGHT_COUNT)).toBe(true);
   });
 });

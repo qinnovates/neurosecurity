@@ -57,7 +57,7 @@
         "reviewed_by": null
       }
     ],
-    "description": "Comprehensive machine-readable atlas unifying brain regions (38 structures across QIF 7-1-3 hourglass), BCI hardware (24 devices), device-region mappings, neural latency metrics, and physics constraints. Designed for dynamic visualization rendering and API consumption.",
+    "description": "Comprehensive machine-readable atlas unifying brain regions (38 structures across QIF 7-1-3 hourglass), device-region mappings, neural latency metrics, and physics constraints. Designed for dynamic visualization rendering and API consumption.",
     "qif_version": "v4.0 Hourglass (7-1-3)",
     "primary_neuroanatomical_source": "Kandel ER, et al. Principles of Neural Science. 6th ed. McGraw Hill, 2021",
     "license": "CC-BY-4.0",
@@ -66,7 +66,8 @@
       "Confidence levels: HIGH = primary literature with DOI; MEDIUM = review paper or textbook; LOW = inferred or estimated.",
       "BCI device specs sourced from FDA filings, manufacturer datasheets, and peer-reviewed papers.",
       "null values indicate data not publicly available.",
-      "Brain region IDs use snake_case. Device IDs use kebab-case."
+      "Brain region IDs use snake_case. Device IDs use kebab-case.",
+      "This file holds no device records. The device population is device_region_mappings, one entry per mapped device, plus bci-landscape.json companies[].devices, the wider market list, which carries no region mappings. Hardware specs for the mapped device ids are in src/site/bci-hardware-inventory.json."
     ],
     "detailed_regions": 38
   },
@@ -169,7 +170,8 @@
     },
     {
       "id": "S1",
-      "name": "Analog Front-End",
+      "name": "Near-Field / On-Device",
+      "legacy_name": "Analog Front-End",
       "zone": "silicon",
       "determinacy": "Stochastic (analog noise)",
       "qi_range": [
@@ -177,11 +179,12 @@
         0.01
       ],
       "severity_if_compromised": "MEDIUM (signal integrity)",
-      "description": "Amplification, filtering, ADC/DAC conversion. Analog noise introduces residual stochasticity."
+      "description": "Amplification, ADC, near-field EM coupling (0-10 kHz, on-device). Analog noise introduces residual stochasticity."
     },
     {
       "id": "S2",
-      "name": "Digital Processing",
+      "name": "Guided-Wave / Host-Local",
+      "legacy_name": "Digital Processing",
       "zone": "silicon",
       "determinacy": "Deterministic",
       "qi_range": [
@@ -189,11 +192,12 @@
         0
       ],
       "severity_if_compromised": "MEDIUM (algorithm integrity)",
-      "description": "Decoding algorithms, classification, digital signal processing. Fully deterministic."
+      "description": "Firmware, drivers, host compute, USB, decoding, BLE/WiFi baseband (10 kHz - 1 GHz, device-local). Fully deterministic."
     },
     {
       "id": "S3",
-      "name": "Application",
+      "name": "Far-Field / Wide-Area",
+      "legacy_name": "Application",
       "zone": "silicon",
       "determinacy": "Deterministic",
       "qi_range": [
@@ -201,7 +205,7 @@
         0
       ],
       "severity_if_compromised": "LOW-MEDIUM (software)",
-      "description": "Clinical software, user interface, data storage, network. Classical IT security domain."
+      "description": "RF transmission, directed energy, application layer (1 GHz+, off-device). Classical IT security domain."
     }
   ],
   "layers": {
@@ -2681,7 +2685,8 @@
     "C1-C3_medullary_neurons": "medulla",
     "spinal_cord": "cervical_cord",
     "spinal_dorsal_horn": "cervical_cord",
-    "PAG": "midbrain"
+    "PAG": "midbrain",
+    "motor_cortex": "m1"
   },
   "region_alias_relations": {
     "_note": "States the kind of every entry of region_aliases. Every alias is listed under exactly one of synonym, whole_to_part and part_to_whole. An alias listed under none is unclassified: it is never assumed to be a synonym, a join through it stops the datalake scripts, and it lights no region. synonym: the alias names the same structure as its atlas region. whole_to_part: the alias names a structure larger than, or spanning beyond, the single atlas region it maps to, so a join through it attributes the whole structure to that one part. part_to_whole: the alias names a sub-structure of the atlas region it maps to, so a join through it attributes the sub-structure to the whole region. Scripts that join through region_aliases carry this classification on their output (see region_match in impact-chains.json). The classification is an AI-drafted first pass that has not had expert anatomical review (see _classification), and it covers aliases only: a file that writes an atlas id directly as a stand-in for a smaller or larger structure is not flagged by it.",
@@ -2697,7 +2702,8 @@
       "amygdala",
       "basal_ganglia",
       "spinal_cord",
-      "spinal_dorsal_horn"
+      "spinal_dorsal_horn",
+      "motor_cortex"
     ],
     "part_to_whole": [
       "nucleus_accumbens",
@@ -2735,7 +2741,7 @@
       "sacral_spinal_cord"
     ]
   },
-  "bci_devices": "SEE docs/bci-hardware-inventory.json \u2014 24 devices with full hardware specs. This field cross-references device IDs for the mapping table below.",
+  "bci_devices": "SEE src/site/bci-hardware-inventory.json \u2014 hardware specs for the device ids in device_region_mappings below.",
   "device_region_relation_kinds": {
     "_note": "States, for every entry of device_region_mappings, what its target_regions list means. The field was overloaded: it was used for an electrode placed in the tissue of a region, for a scalp sensor positioned over a region at centimetre scale, for stimulation of a peripheral afferent whose signal later arrives at a region, and for a sensor inside a blood vessel next to a region. Those are four different relations and a consumer could not tell them apart. Every mapping now carries region_relation, one of the kinds below, and region_relation_basis, which says what the kind rests on. i0_depth was used as evidence for the kind, not as the kind itself: synchron-stentrode carries i0_depth I0-cortical and is still endovascular_adjacent_to, because its own notes record that it has no tissue contact. region_relation states where a device is and what it acts on. It is not a claim that the device reaches, affects or decodes the region.",
     "_classification": {

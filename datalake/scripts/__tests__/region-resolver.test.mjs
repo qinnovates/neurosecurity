@@ -67,6 +67,7 @@ const PINNED_ALIAS_KINDS = Object.freeze({
   spinal_cord: 'whole_to_part',
   spinal_dorsal_horn: 'whole_to_part',
   PAG: 'part_to_whole',
+  motor_cortex: 'whole_to_part',
 });
 
 function readAtlas() {
