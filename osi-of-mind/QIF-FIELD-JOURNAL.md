@@ -62,7 +62,7 @@ Keep it raw. Future-you will thank present-you for not polishing.
 | [028](#entry-028) | 2026-03-20 | The Day I Thought About the Future of Society |
 | [027](#entry-027) | 2026-03-17 | Quorum at Scale — Socrates and Plato Built Into Agents |
 | [026](#entry-026) | 2026-03-13 | The LiDAR Moment — From Theory to Sensors in Our Pockets |
-| [025](#entry-025) | 2026-03-13 | AI Hallucinated Environments, Digital Worlds, and Who Gets Left Behind |
+| [030](#entry-030) | 2026-03-13 | AI Hallucinated Environments, Digital Worlds, and Who Gets Left Behind |
 | [022](#entry-022) | 2026-03-06 | The Reckoning — I Was Breaking My Own Rules |
 | [021](#entry-021) | 2026-02-28 | Brain Organoids Are the Neural Firewall Test Bed |
 | [020](#entry-020) | 2026-02-21 | The Day Everything Became One Page |
@@ -195,7 +195,7 @@ Like how Apple only uses on-device for Face ID to match your face, everything st
 
 ---
 
-## Entry 025 — AI Hallucinated Environments, Digital Worlds, and Who Gets Left Behind {#entry-025}
+## Entry 030 — AI Hallucinated Environments, Digital Worlds, and Who Gets Left Behind {#entry-030}
 
 **Date:** 2026-03-13, ~01:15
 **State:** Exploring ways to use AI to take a vertical video and make it horizontal without cropping. The AI fills in the surrounding environment using context. That triggered something bigger.
