@@ -64,7 +64,7 @@ My version asks that each summary keep a path back to its source, checked agains
 
 Two problems are built into the video on purpose.
 
-**A false summary hashes perfectly.** A hash proves the bytes didn't change. It says nothing about whether the meaning survived. That needs separate checks, and they are the hard part. I made the same point about neural data in [Encrypted Is Not the Same as Verified](./2026-10-31-encrypted-is-not-the-same-as-verified.md).
+**A false summary hashes perfectly.** A hash proves the bytes didn't change. It says nothing about whether the meaning survived. That needs separate checks, and they are the hard part. I made the same point about neural data in [Encrypted Is Not the Same as Verified](/research/papers/2026-10-31-encrypted-is-not-the-same-as-verified/).
 
 **Top-down routing may not help.** RAPTOR compared walking its tree with searching every node at once, and on 20 QASPER stories the flat search consistently did better. My design routes top-down. I don't know yet whether that survives testing.
 
@@ -84,7 +84,7 @@ That's where provenance gets interesting to me. If agents share state nobody can
 4. Build a small summary tree over your notes. Compare walking it with searching every node.
 5. Tell me how you'd catch a wrong summary with a valid hash.
 
-If you want the wider picture first, the earlier film [What Does It Actually Take to Build Intelligence?](./2026-10-31-what-does-it-take-to-build-intelligence.md) maps where this problem sits.
+If you want the wider picture first, the earlier film [What Does It Actually Take to Build Intelligence?](/research/papers/2026-10-31-what-does-it-take-to-build-intelligence/) maps where this problem sits.
 
 ## About the video
 
