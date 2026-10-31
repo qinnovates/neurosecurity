@@ -20,7 +20,7 @@ describe('parseConsent', () => {
     expect(consent.parseConsent(stored(true, NOW - 181 * DAY), NOW)).toBeNull();
     expect(consent.parseConsent(stored(true, NOW + 10 * DAY), NOW)).toBeNull();
     expect(consent.parseConsent(stored(true, NOW - DAY, 0), NOW)).toBeNull();
-    expect(consent.parseConsent('{"version":1,"analytics":"yes","decidedAt":1}', NOW)).toBeNull();
+    expect(consent.parseConsent('{"version":2,"analytics":"yes","decidedAt":1}', NOW)).toBeNull();
     expect(consent.parseConsent('not json', NOW)).toBeNull();
     expect(consent.parseConsent('null', NOW)).toBeNull();
   });
@@ -60,74 +60,59 @@ describe('startConsent', () => {
     document.head.innerHTML = '';
     document.body.innerHTML = '<footer></footer>';
     delete window.__qinnovateAnalyticsLoaded;
-    delete window.dataLayer;
   });
 
   afterEach(() => {
     window.navigator.globalPrivacyControl = false;
   });
 
-  const analyticsScripts = () => [...document.head.querySelectorAll('script')].filter((script) => script.src.includes('googletagmanager'));
+  const beacons = () => [...document.head.querySelectorAll('script')].filter((script) => script.src.includes('cloudflareinsights'));
+  const buttons = () => [...document.querySelectorAll('#qinnovate-consent-banner button')];
+  const noReload = () => {};
 
-  it('requests nothing from Google until the visitor accepts, and shows both buttons alike', () => {
-    consent.startConsent(window, document, memoryStorage(), () => {});
-    expect(analyticsScripts()).toHaveLength(0);
-    const buttons = [...document.querySelectorAll('#qinnovate-consent-banner button')];
-    expect(buttons.map((button) => button.textContent)).toEqual(['Reject analytics', 'Accept analytics']);
-    buttons[1].click();
-    expect(analyticsScripts()).toHaveLength(1);
-    expect(analyticsScripts()[0].src).toContain(consent.ANALYTICS_ID);
-    expect(document.getElementById('qinnovate-consent-banner')).toBeNull();
-  });
-
-  it('loads the Cloudflare beacon only after acceptance, and reloads the page on withdrawal', () => {
-    const beacons = () => [...document.head.querySelectorAll('script')].filter((script) => script.src.includes('cloudflareinsights'));
-    let reloads = 0;
-    consent.startConsent(window, document, memoryStorage(), () => { reloads += 1; });
+  it('requests nothing until the visitor accepts, shows both buttons alike, then adds only Cloudflare', () => {
+    consent.startConsent(window, document, memoryStorage(), noReload);
     expect(beacons()).toHaveLength(0);
-    [...document.querySelectorAll('#qinnovate-consent-banner button')][1].click();
+    expect(buttons().map((button) => button.textContent)).toEqual(['Reject analytics', 'Accept analytics']);
+    buttons()[1].click();
     expect(beacons()).toHaveLength(1);
     expect(JSON.parse(beacons()[0].getAttribute('data-cf-beacon')).token).toMatch(/^[0-9a-f]{32}$/);
-    document.querySelector('[data-consent-open]').click();
-    [...document.querySelectorAll('#qinnovate-consent-banner button')][0].click();
-    expect(reloads).toBe(1);
+    expect([...document.head.querySelectorAll('script')].every((script) => script.src === '' || script.src.startsWith('https://static.cloudflareinsights.com/'))).toBe(true);
+    expect(document.getElementById('qinnovate-consent-banner')).toBeNull();
   });
 
   it('keeps analytics off after a rejection and remembers it', () => {
     const storage = memoryStorage();
-    consent.startConsent(window, document, storage, () => {});
-    [...document.querySelectorAll('#qinnovate-consent-banner button')][0].click();
-    expect(analyticsScripts()).toHaveLength(0);
+    consent.startConsent(window, document, storage, noReload);
+    buttons()[0].click();
+    expect(beacons()).toHaveLength(0);
     expect(JSON.parse(storage.peek(consent.CONSENT_KEY)).analytics).toBe(false);
   });
 
   it('does not ask again, and loads analytics at once, for a visitor who accepted earlier', () => {
-    consent.startConsent(window, document, memoryStorage({ [consent.CONSENT_KEY]: stored(true, Date.now()) }), () => { window.__reloaded = true; });
+    consent.startConsent(window, document, memoryStorage({ [consent.CONSENT_KEY]: stored(true, Date.now()) }), noReload);
     expect(document.getElementById('qinnovate-consent-banner')).toBeNull();
-    expect(analyticsScripts()).toHaveLength(1);
+    expect(beacons()).toHaveLength(1);
   });
 
   it('does not ask a browser that sends Global Privacy Control, and sends nothing', () => {
     window.navigator.globalPrivacyControl = true;
-    consent.startConsent(window, document, memoryStorage(), () => {});
+    consent.startConsent(window, document, memoryStorage(), noReload);
     expect(document.getElementById('qinnovate-consent-banner')).toBeNull();
-    expect(analyticsScripts()).toHaveLength(0);
+    expect(beacons()).toHaveLength(0);
   });
 
-  it('lets a visitor reopen the choice and withdraw, which stops measurement and clears the cookies', () => {
-    consent.startConsent(window, document, memoryStorage({ [consent.CONSENT_KEY]: stored(true, Date.now()) }), () => { window.__reloaded = true; });
-    document.cookie = '_ga=GA1.1.1; path=/';
-    document.cookie = '_ga_ABC=GS1; path=/';
+  it('lets a visitor reopen the choice and withdraw, which reloads the page to stop the running script', () => {
+    let reloads = 0;
+    consent.startConsent(window, document, memoryStorage({ [consent.CONSENT_KEY]: stored(true, Date.now()) }), () => { reloads += 1; });
     document.querySelector('[data-consent-open]').click();
-    const banner = document.getElementById('qinnovate-consent-banner');
-    expect(banner.textContent).toContain('Your current choice: analytics accepted.');
-    [...banner.querySelectorAll('button')][0].click();
-    expect(window[`ga-disable-${consent.ANALYTICS_ID}`]).toBe(true);
-    expect(document.cookie).not.toContain('_ga');
+    expect(document.getElementById('qinnovate-consent-banner').textContent).toContain('Your current choice: analytics accepted.');
+    buttons()[0].click();
+    expect(reloads).toBe(1);
   });
 
   it('builds the banner from text nodes only', () => {
-    consent.startConsent(window, document, memoryStorage(), () => {});
+    consent.startConsent(window, document, memoryStorage(), noReload);
     const banner = document.getElementById('qinnovate-consent-banner');
     expect(banner.querySelector('a').getAttribute('href')).toBe('/privacy/');
     expect(banner.querySelectorAll('script, img, iframe')).toHaveLength(0);

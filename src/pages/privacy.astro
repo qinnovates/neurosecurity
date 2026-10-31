@@ -36,7 +36,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
             </thead>
             <tbody>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-4">Your IP address and the page you asked for, in server logs</td><td class="py-2 pr-4">Every visit</td><td class="py-2">GitHub and Cloudflare</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-4">Page-view statistics</td><td class="py-2 pr-4">Only if you accept analytics</td><td class="py-2">Google Analytics (two cookies) and Cloudflare Web Analytics (no cookies)</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-4">Page-view statistics</td><td class="py-2 pr-4">Only if you accept analytics</td><td class="py-2">Cloudflare Web Analytics (no cookies)</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-4">Your email address</td><td class="py-2 pr-4">Only if you subscribe to the newsletter</td><td class="py-2">Buttondown</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-4">Settings kept in your browser</td><td class="py-2 pr-4">When you use a feature that remembers a choice</td><td class="py-2">Your device only</td></tr>
             </tbody>
@@ -47,11 +47,10 @@ import PageLayout from '@/layouts/PageLayout.astro';
 
       <!-- Analytics & cookies -->
       <section id="cookies">
-        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Analytics, cookies and local storage</h2>
-        <p><strong>Analytics are off until you accept.</strong> The first time you visit, a banner asks whether we may use two analytics services, Google Analytics and Cloudflare Web Analytics, to count which pages are read. Rejecting is as easy as accepting. Until you accept, your browser makes no request to either service and no analytics cookie is set. If your browser sends a Global Privacy Control signal, we treat it as a rejection and do not ask.</p>
-        <p class="mt-2">If you accept, Google Analytics sets two cookies, <code>_ga</code> and <code>_ga_</code> followed by our measurement ID, that last up to 180 days. Google receives the pages you view, the time, your browser and device type, and an approximate location derived from your IP address. We turn off Google signals and ad personalization in the tag. We use the statistics to see which research is read; we do not use them for advertising or to identify you.</p>
-        <p class="mt-2">Cloudflare Web Analytics, also only if you accept, receives the pages you view, the page you came from, your browser and device type, and an approximate location. According to Cloudflare, it does not use cookies or local storage and does not fingerprint visitors. It sets nothing in your browser, so it adds no row to the table below. See <a href="https://www.cloudflare.com/web-analytics/" class="text-[var(--color-accent-primary)] hover:underline">Cloudflare Web Analytics</a>.</p>
-        <p class="mt-2">Your choice is stored in your browser for 180 days and then we ask again. <button type="button" data-consent-open class="underline text-[var(--color-accent-primary)] hover:no-underline cursor-pointer">Change your choice</button> at any time, or use "Privacy choices" in the footer. Withdrawing reloads the page, stops measurement by both services and deletes the analytics cookies on your browser.</p>
+        <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Analytics and local storage</h2>
+        <p><strong>Analytics are off until you accept.</strong> The first time you visit, a banner asks whether we may use Cloudflare Web Analytics to count which pages are read. Rejecting is as easy as accepting. Until you accept, your browser does not load the analytics script and nothing is sent for analytics. If your browser sends a Global Privacy Control signal, we treat it as a rejection and do not ask.</p>
+        <p class="mt-2">If you accept, Cloudflare Web Analytics receives the pages you view, the page you came from, your browser and device type, and an approximate location. According to Cloudflare, it does not use cookies or local storage and does not fingerprint visitors. We use the statistics to see which research is read; we do not use them for advertising or to identify you. See <a href="https://www.cloudflare.com/web-analytics/" class="text-[var(--color-accent-primary)] hover:underline">Cloudflare Web Analytics</a>.</p>
+        <p class="mt-2">Your choice is stored in your browser for 180 days and then we ask again. <button type="button" data-consent-open class="underline text-[var(--color-accent-primary)] hover:no-underline cursor-pointer">Change your choice</button> at any time, or use "Privacy choices" in the footer. Withdrawing reloads the page and stops measurement.</p>
 
         <h3 class="text-lg font-semibold mt-6 mb-2">What this site keeps in your browser</h3>
         <div class="overflow-x-auto">
@@ -69,11 +68,10 @@ import PageLayout from '@/layouts/PageLayout.astro';
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-4"><code>theme</code>, <code>qif-lens</code>, <code>bci-vision</code></td><td class="py-2 pr-4">Light or dark mode and viewing options you picked</td><td class="py-2 pr-4">Until you clear them</td><td class="py-2">No, you asked for the setting</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-4"><code>tara-lab:remember</code>, <code>tara-lab:device:v1</code></td><td class="py-2 pr-4">A device model you chose to save in the TARA Lab</td><td class="py-2 pr-4">Until you clear them</td><td class="py-2">No, only when you choose to save</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-4"><code>autodidactive-*</code></td><td class="py-2 pr-4">Progress, notes and views in the learning app</td><td class="py-2 pr-4">Until you clear them</td><td class="py-2">No, it never leaves your device</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-4"><code>_ga</code>, <code>_ga_*</code></td><td class="py-2 pr-4">Google Analytics</td><td class="py-2 pr-4">Up to 180 days</td><td class="py-2">Yes, only after you accept</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="mt-4">Everything except the two Google cookies stays on your device and is never sent to us. This site sets no cookies of its own.</p>
+        <p class="mt-4">Everything in this table stays on your device and is never sent to us. This site sets no cookies.</p>
       </section>
 
       <!-- Newsletter -->
@@ -90,7 +88,6 @@ import PageLayout from '@/layouts/PageLayout.astro';
           <li><strong>GitHub Pages</strong> hosts this site. GitHub (Microsoft) may log your IP address, browser type and the pages requested, per its <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" class="text-[var(--color-accent-primary)] hover:underline">privacy statement</a>.</li>
           <li><strong>Cloudflare</strong> sits in front of the site as a content delivery and security service. It processes each request, including your IP address, to deliver pages and block abuse, per its <a href="https://www.cloudflare.com/privacypolicy/" class="text-[var(--color-accent-primary)] hover:underline">privacy policy</a>.</li>
           <li><strong>Cloudflare Web Analytics</strong>, only if you accept it, as described above.</li>
-          <li><strong>Google Analytics</strong>, only if you accept it, as described above. See <a href="https://policies.google.com/privacy" class="text-[var(--color-accent-primary)] hover:underline">Google's privacy policy</a>.</li>
           <li><strong>Buttondown</strong>, only if you subscribe, as described above.</li>
           <li><strong>GitHub</strong> also hosts the source code and issue tracker. If you open an issue or pull request, GitHub handles your account information under its own policy, and what you write is public.</li>
           <li><strong>Links to other sites</strong> (papers, news, Reddit, Substack and others) leave this site. Those sites have their own policies.</li>
@@ -105,7 +102,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
           <li><strong>Analytics and the newsletter:</strong> your consent. You can withdraw it at any time, and withdrawing does not affect what happened before.</li>
           <li><strong>Delivering and securing the site:</strong> our legitimate interest in a site that works and resists abuse. This is the logging done by GitHub and Cloudflare.</li>
           <li><strong>Settings in your browser:</strong> you asked for them, and they stay on your device.</li>
-          <li><strong>Retention:</strong> analytics data is kept no longer than 14 months, the longest period Google Analytics allows. Newsletter addresses are kept until you unsubscribe. Server logs follow GitHub's and Cloudflare's own retention.</li>
+          <li><strong>Retention:</strong> analytics data follows Cloudflare's own retention for Web Analytics. Newsletter addresses are kept until you unsubscribe. Server logs follow GitHub's and Cloudflare's own retention.</li>
           <li><strong>Children:</strong> this site is not directed to children under 16, and we do not knowingly collect their data.</li>
         </ul>
       </section>
@@ -213,8 +210,8 @@ import PageLayout from '@/layouts/PageLayout.astro';
       <section id="rights">
         <h2 class="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">Your rights</h2>
         <p><strong>Under the GDPR and similar laws</strong> (including the UK GDPR, Brazil's LGPD and South Korea's PIPA) you can ask us for access to your personal data, correction, deletion, restriction, a portable copy, and you can object to processing or withdraw consent at any time. You can also complain to your local data protection authority.</p>
-        <p class="mt-2"><strong>Under the CCPA and CPRA</strong> California residents can ask what personal information we collect and use, ask for it to be deleted or corrected, and ask us not to sell or share it. We do not sell personal information, and we do not share it for cross-context behavioral advertising. We will not treat you differently for using these rights. The categories we may handle are identifiers such as IP address and cookie IDs, internet activity such as pages viewed, approximate location, and an email address if you subscribe. We collect no sensitive personal information.</p>
-        <p class="mt-2"><strong>How to ask:</strong> use the contact in "Who we are". We answer within 30 days. We hold little that identifies you: we do not have the server logs of GitHub or Cloudflare, and Google Analytics data is not tied to a name or an email address, so for those you may need to contact the provider. For the newsletter, we can remove your address or you can unsubscribe in any email.</p>
+        <p class="mt-2"><strong>Under the CCPA and CPRA</strong> California residents can ask what personal information we collect and use, ask for it to be deleted or corrected, and ask us not to sell or share it. We do not sell personal information, and we do not share it for cross-context behavioral advertising. We will not treat you differently for using these rights. The categories we may handle are identifiers such as IP address, internet activity such as pages viewed, approximate location, and an email address if you subscribe. We collect no sensitive personal information.</p>
+        <p class="mt-2"><strong>How to ask:</strong> use the contact in "Who we are". We answer within 30 days. We hold little that identifies you: we do not have the server logs of GitHub or Cloudflare, and analytics data is not tied to a name or an email address, so for those you may need to contact the provider. For the newsletter, we can remove your address or you can unsubscribe in any email.</p>
       </section>
 
       <!-- Changes -->

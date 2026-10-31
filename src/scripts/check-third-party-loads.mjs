@@ -4,7 +4,7 @@
  *
  * A page that does this sends every visitor's IP address and browser details to that origin
  * before they have chosen anything, and runs code the repository did not review. The one
- * deliberate exception, Google Analytics, is not in any page's HTML: src/site/js/consent.js
+ * deliberate exception, Cloudflare Web Analytics, is not in any page's HTML: src/site/js/consent.js
  * adds it only after a visitor accepts, so it cannot appear here.
  *
  * Images are held to the same rule, matching the policy's img-src of this origin and data: only.

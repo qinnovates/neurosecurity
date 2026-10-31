@@ -7,13 +7,13 @@ import { findThirdPartyLoadFailures, findThirdPartyLoads } from '../check-third-
 describe('findThirdPartyLoads', () => {
   it('finds scripts, stylesheets, preconnects and frames on other origins, whatever the attribute order', () => {
     const html = [
-      '<script async src="https://www.googletagmanager.com/gtag/js?id=G-X"></script>',
+      '<script async src="https://cdn.example.net/tag.js"></script>',
       '<link href="https://fonts.googleapis.com/css2?family=Inter" rel="stylesheet">',
       '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
       '<iframe title="t" src="//example.org/embed"></iframe>',
     ].join('');
     expect(findThirdPartyLoads(html)).toEqual([
-      { kind: 'script', host: 'www.googletagmanager.com' },
+      { kind: 'script', host: 'cdn.example.net' },
       { kind: 'link', host: 'fonts.googleapis.com' },
       { kind: 'link', host: 'fonts.gstatic.com' },
       { kind: 'iframe', host: 'example.org' },
