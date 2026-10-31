@@ -9,6 +9,9 @@ order: 5
 
 # Decision Log
 
+> **Notice: the AI attributions on this page are not reliable.** The AI tools that recorded them were inaccurate. Their accuracy also degrades with the context window and the limits of current language models, so the attributions cannot be relied on as an audit trail. Per-decision tracking costs more tokens than it is worth, so we no longer keep it. Treat any attribution published before this notice as unverified.
+
+
 Rolling record of framework decisions extracted from the [QIF Derivation Log](../osi-of-mind/QIF-DERIVATION-LOG.md).
 Each entry links back to the full derivation context.
 
