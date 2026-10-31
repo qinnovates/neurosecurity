@@ -40,7 +40,7 @@ A sixth pathway appears when technology starts interacting directly with the ner
 
 ## Where to go next
 
-One problem on this pyramid is how a system remembers what it knows, and whether anyone can check. That's the subject of [What If AI Didn't Need More Context?](./2026-10-31-what-if-ai-didnt-need-more-context.md)
+One problem on this pyramid is how a system remembers what it knows, and whether anyone can check. That's the subject of [What If AI Didn't Need More Context?](/research/papers/2026-10-31-what-if-ai-didnt-need-more-context/)
 
 ## Credits
 
