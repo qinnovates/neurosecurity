@@ -49,7 +49,7 @@ export async function checkLiveInjection(urls, fetchPage = fetch) {
       continue;
     }
     if (hasInjectedAnalytics(await response.text())) {
-      failures.push(`${url} carries a Cloudflare analytics tag in its HTML, so it is requested before any consent choice; switch off automatic setup under Web Analytics in the Cloudflare dashboard`);
+      failures.push(`${url} carries a Cloudflare analytics tag in its HTML that the edge injected before any consent choice; the page policy blocks that copy and logs a violation on every load, so switch off automatic setup under Web Analytics in the Cloudflare dashboard`);
     }
   }
   return failures;

@@ -36,8 +36,11 @@ export const TOOL_PAGE_CSP = [
 /**
  * The hosts Cloudflare Web Analytics needs once a visitor has accepted it (src/site/js/consent.js).
  * They are in the policy so the tag can run; the tag is never requested before consent.
+ * The script source names one exact file, with no trailing slash, which a browser matches exactly. The tag
+ * src/site/js/consent.js adds loads that file. The tag Cloudflare's automatic setup injects loads
+ * /beacon.min.js/<version>, a different path, so the policy blocks it and consent stays the only way in.
  */
-const ANALYTICS_SCRIPT_SOURCES = ['https://static.cloudflareinsights.com'] as const;
+const ANALYTICS_SCRIPT_SOURCES = ['https://static.cloudflareinsights.com/beacon.min.js'] as const;
 const ANALYTICS_CONNECT_SOURCES = ['https://cloudflareinsights.com'] as const;
 
 /**
