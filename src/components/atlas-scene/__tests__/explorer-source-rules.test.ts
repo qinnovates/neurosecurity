@@ -11,7 +11,7 @@ const THREE_IMPORT_PATTERN = /(from|import\(|import)\s*['"](three|three\/[^'"]*)
 /** Labels are set in the sans face: no monospace utility, variable or family. */
 const MONOSPACE_PATTERN = /\bfont-mono\b|--font-mono|--lab-mono|\bmonospace\b|\btm-mono\b|\bui-monospace\b|\b(Menlo|Monaco|Consolas|Courier|SFMono|JetBrains Mono|Fira Code|Source Code Pro)\b/i;
 /** The modules that import three.js, and the canvas that is their only way in. */
-const THREE_FILES = ['scene-renderer.ts', 'scene-objects.ts', 'scene-brackets.ts', 'scene-marks.ts', 'device-objects.ts', 'TractLines.tsx'];
+const THREE_FILES = ['scene-renderer.ts', 'scene-objects.ts', 'scene-selection.ts', 'scene-brackets.ts', 'scene-marks.ts', 'device-objects.ts', 'TractLines.tsx'];
 const CANVAS_CHUNK_FILES = ['AtlasCanvas.tsx', ...THREE_FILES];
 const ISLAND_PATTERN = /<AtlasExplorer\b([^>]*)\/>/;
 

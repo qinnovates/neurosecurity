@@ -15,24 +15,22 @@
  */
 
 import {
-  DirectionalLight, HemisphereLight, type Material, type Mesh, type Object3D, PerspectiveCamera, Plane, Raycaster, Scene, Vector2, Vector3, WebGLRenderer, type BufferGeometry,
+  DirectionalLight, HemisphereLight, type Mesh, type Object3D, PerspectiveCamera, Plane, Raycaster, Scene, Vector2, Vector3, WebGLRenderer, type BufferGeometry,
 } from 'three';
 import { HEAD_VIEW_SCALE, type DeviceDrawing } from '@/lib/atlas-explorer/device-drawing';
-import { axisDirectionsFor, choosePickTarget, hoverParamsFor, idleTurnSpeed, isPickable, pointerToNdc, stepEaseDuration, unionBoxes, type AxisDirections, type Box, type PickHit, type PickTarget } from '@/lib/atlas-explorer/scene-drawing';
+import { axisDirectionsFor, choosePickTarget, idleTurnSpeed, pointerToNdc, stepEaseDuration, type AxisDirections, type PickHit, type PickTarget } from '@/lib/atlas-explorer/scene-drawing';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import { rasToScene } from '@/lib/anatomy/ras-to-scene';
 import {
   DEFAULT_CAMERA_VIEW, DEFAULT_DISTANCE_MM, blendPoses, clampDistance, planCameraMove, poseForView, positionOfPose, turnPose, type CameraViewId, type OrbitPose,
 } from '@/lib/atlas-explorer/camera-views';
 import type { SceneShape, SceneTheme } from '@/lib/atlas-explorer/scene-shapes';
-import {
-  BRACKET_ENTRANCE_MS, DIMMED_HOVER_OPACITY, DIMMED_OPACITY, DIM_MS, LENS_RECOLOUR_EASE, LENS_RECOLOUR_MS, entrancePadPx, motionMs, padRect, projectBox, type ViewSize,
-} from '@/lib/atlas-explorer/selection-marks';
+import type { ViewSize } from '@/lib/atlas-explorer/selection-marks';
 import { slicePlane, type SliceState } from '@/lib/atlas-explorer/slice-plane';
 import { buildDeviceObjects, type DeviceObjects } from './device-objects';
-import { createSelectionBrackets } from './scene-brackets';
-import { buildStepLabels, createEaser, createMaterialTweens, disposeTree, easeKeyOf, listMaterials, readLabelFont, type MaterialLook } from './scene-marks';
+import { buildStepLabels, createEaser, disposeTree, easeKeyOf, listMaterials, readLabelFont } from './scene-marks';
 import { buildGeometry, buildShapeObjects, listDisposables, type ShapeObjects } from './scene-objects';
+import { createSelectionPainter, type ShapeLooks } from './scene-selection';
 
 export type { AxisDirections };
 
@@ -82,21 +80,7 @@ const CLICK_SLOP_PX = 4;
 /** Set on the canvas while a shape a click would pick lies under the pointer; the stylesheet shows the pick cursor for it. */
 const PICK_ATTRIBUTE = 'data-pick';
 const PICK_VALUE = 'shape';
-const EMISSIVE_OFF = '#000000';
-
-/** A colour as three.js holds it on a material: set from a hex string, read back without the hash. */
-interface MaterialColour { set: (colour: string) => void; getHexString: () => string }
-/** A material with a colour, which three.js's drawn materials have, and that can glow, as its lit ones can and its flat ones cannot. */
-type Glowing = Material & { color?: MaterialColour; emissive?: MaterialColour; emissiveIntensity?: number };
-/** How a material stands with nothing selected. A dim is worked out from this, and leaves it to come back to. */
-interface RestingLook { opacity: number; transparent: boolean }
-/** What a lifted material was before the pointer reached it. */
-interface HoverRestore { material: Glowing; colour: string | null; opacity: number; transparent: boolean; emissiveColour: string | null; emissiveIntensity: number | undefined }
-
-/** A material's ink as a colour string, or null for a material with none. */
-function inkOf(material: Glowing): string | null {
-  return material.color === undefined ? null : `#${material.color.getHexString()}`;
-}
+const NO_LOOKS: ShapeLooks = new Map();
 
 function easeOut(progress: number): number {
   return 1 - (1 - progress) ** 3;
@@ -140,120 +124,15 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
   let press: { x: number; y: number; pointerId: number } | null = null;
   let clip: Plane | null = null;
   let drawn: { shapes: readonly SceneShape[]; nodesByShapeId: ReadonlyMap<string, DecodedNode>; selectedKeys: ReadonlySet<string>; bracketGroups: ReadonlyArray<readonly string[]> } | null = null;
-  const brackets = createSelectionBrackets(theme);
-  /** One box per pair of brackets, in scene axes, for the shapes drawn now. */
-  let bracketBoxes: Box[] = [];
+  const selection = createSelectionPainter(prefersLessMotion, theme);
   let viewSize: ViewSize = { widthPx: 0, heightPx: 0, fieldOfViewDegrees: FIELD_OF_VIEW };
-  const restingLooks = new Map<Material, RestingLook>();
-  const tweens = createMaterialTweens();
-  const dimMs = motionMs(DIM_MS, prefersLessMotion);
-  const recolourMs = motionMs(LENS_RECOLOUR_MS, prefersLessMotion);
-  const bracketEntranceMs = motionMs(BRACKET_ENTRANCE_MS, prefersLessMotion);
-  /** Names the groups the brackets stand around, so they enter when those change and not on every redraw. */
-  let bracketKey = '';
-  let bracketsEnteredAt = 0;
-  /** The materials lifted for the shape under the pointer, with what to put back. */
-  let lifted: HoverRestore[] = [];
   const raycaster = new Raycaster();
 
-  /** Whether a shape stands dimmed: it is filled, it can be picked, it is not selected, and something that is selected is drawn. */
-  const isDimmed = (entry: ShapeObjects): boolean => {
-    const selectedKeys = drawn?.selectedKeys;
-    if (selectedKeys === undefined || selectedKeys.has(entry.shape.structureKey)) return false;
-    return entry.shape.fill === 'solid' && isPickable(entry.shape) && bracketBoxes.length > 0;
-  };
-
-  /** Puts back what the pointer lifted, glow included. */
-  const dropLift = (): void => {
-    for (const { material, colour, opacity, transparent, emissiveColour, emissiveIntensity } of lifted) {
-      Object.assign(material, { opacity, transparent });
-      if (colour !== null) material.color?.set(`#${colour}`);
-      if (emissiveIntensity !== undefined) { material.emissive?.set(emissiveColour === null ? EMISSIVE_OFF : `#${emissiveColour}`); material.emissiveIntensity = emissiveIntensity; }
-    }
-    lifted = [];
-  };
-
-  /**
-   * Lifts every drawn shape of the hovered structure and puts the last one back as it was. A selected shape is not
-   * lifted: it already carries the stronger mark. A dimmed one comes up part of the way. A marker ring is not lifted:
-   * its pick target is an invisible sphere, and making it visible would add a surface the data does not hold.
-   */
+  /** Lifts the shape under the pointer, or puts it back, and shows the pick cursor while there is one. */
   const applyHover = (key: string | null): void => {
-    dropLift();
     if (key === null) canvas.removeAttribute(PICK_ATTRIBUTE);
     else canvas.setAttribute(PICK_ATTRIBUTE, PICK_VALUE);
-    if (key === null || drawn?.selectedKeys.has(key) === true) return;
-    for (const entry of objects.filter((item) => item.shape.structureKey === key && item.shape.sizeMark !== 'ring_only')) {
-      const params = hoverParamsFor(entry.shape);
-      const opacity = isDimmed(entry) ? DIMMED_HOVER_OPACITY : params.opacity;
-      for (const target of entry.pickTargets) {
-        const material = target.material as Glowing;
-        tweens.finish(material);
-        const emissive = material.emissive;
-        lifted.push({
-          material, colour: material.color?.getHexString() ?? null, opacity: material.opacity, transparent: material.transparent,
-          emissiveColour: emissive === undefined ? null : emissive.getHexString(),
-          emissiveIntensity: emissive === undefined ? undefined : material.emissiveIntensity,
-        });
-        Object.assign(material, { opacity, transparent: opacity < 1 });
-        // The region's own colour, so the shape under the pointer is told from its neighbours; it is no step's colour.
-        if (entry.shape.highlightColour !== null) material.color?.set(entry.shape.highlightColour);
-        if (params.emissiveColour !== null && material.emissive !== undefined) { material.emissive.set(params.emissiveColour); material.emissiveIntensity = params.emissiveIntensity; }
-      }
-    }
-  };
-
-  /**
-   * What the selection is on the objects drawn now: which shapes a click prefers, the boxes to bracket, and which shapes dim.
-   *
-   * @param durationMs how long the dim takes: a selection arrives over time, and shapes built under one are simply drawn dimmed
-   */
-  const applySelection = (durationMs: number): void => {
-    if (drawn === null) return;
-    const { selectedKeys, bracketGroups } = drawn;
-    const now = performance.now();
-    for (const entry of objects) for (const target of entry.pickTargets) target.userData.isSelected = selectedKeys.has(entry.shape.structureKey);
-    bracketBoxes = bracketGroups.flatMap((keys) => unionBoxes(objects.filter((entry) => keys.includes(entry.shape.structureKey)).flatMap((entry) => entry.box ?? [])) ?? []);
-    const nextBracketKey = bracketGroups.map((keys) => keys.join(' ')).join('|');
-    if (nextBracketKey !== bracketKey) bracketsEnteredAt = now;
-    bracketKey = nextBracketKey;
-    if (bracketBoxes.length === 0) brackets.setRects([]);
-    for (const entry of objects) {
-      const shouldDim = isDimmed(entry);
-      for (const material of listMaterials(entry.group)) {
-        const resting = restingLooks.get(material);
-        if (resting === undefined) continue;
-        const opacity = shouldDim ? Math.min(resting.opacity, DIMMED_OPACITY) : resting.opacity;
-        tweens.start(material, { from: { opacity: material.opacity, colour: null }, to: { opacity, colour: null }, endsTransparent: resting.transparent || opacity < 1, durationMs, ease: LENS_RECOLOUR_EASE }, now);
-      }
-    }
-  };
-
-  /** How each shape's fill looks now, so a change of lens can carry it over to the new one. A marker's fill is its ring, which is rebuilt as it stands. */
-  const readLooks = (): Map<string, MaterialLook & { fill: SceneShape['fill'] }> => new Map(objects.flatMap((entry) => {
-    const [target] = entry.pickTargets;
-    const material = target?.material as Glowing | undefined;
-    if (material === undefined || entry.shape.sizeMark === 'ring_only') return [];
-    return [[entry.shape.id, { opacity: material.opacity, colour: inkOf(material), fill: entry.shape.fill }]];
-  }));
-
-  /**
-   * Carries each rebuilt shape's fill from what it was to what the lens now says. A wireframe and a surface are
-   * different things and cannot blend, so one that becomes the other comes up from nothing in its own ink.
-   */
-  const recolourFrom = (before: ReadonlyMap<string, MaterialLook & { fill: SceneShape['fill'] }>): void => {
-    const now = performance.now();
-    for (const entry of objects) {
-      const previous = before.get(entry.shape.id);
-      const material = entry.pickTargets[0]?.material as Glowing | undefined;
-      const resting = material === undefined ? undefined : restingLooks.get(material);
-      if (previous === undefined || material === undefined || resting === undefined) continue;
-      const to: MaterialLook = { opacity: material.opacity, colour: inkOf(material) };
-      if (previous.colour === to.colour && previous.opacity === to.opacity) continue;
-      const isSameKindOfDrawing = (previous.fill === 'lines') === (entry.shape.fill === 'lines');
-      const from: MaterialLook = isSameKindOfDrawing ? previous : { opacity: 0, colour: to.colour };
-      tweens.start(material, { from, to, endsTransparent: resting.transparent || to.opacity < 1, durationMs: recolourMs, ease: LENS_RECOLOUR_EASE }, now);
-    }
+    selection.lift(key);
   };
 
   const invalidate = (): void => {
@@ -295,7 +174,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
     const isCameraMoving = stepCamera(now);
     lastFrameAt = isCameraMoving ? now : 0;
     const isEasing = easer.step(now);
-    const isTweening = tweens.step(now);
+    const isTweening = selection.step(now);
     applyPose();
     for (const mark of objects.flatMap((entry) => entry.billboards)) mark.quaternion.copy(camera.quaternion);
     if (hoverPoint !== null) {
@@ -309,13 +188,8 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
       }
     }
     renderer.render(scene, camera);
-    const entrance = bracketEntranceMs === 0 ? 1 : Math.min(1, Math.max(0, (now - bracketsEnteredAt) / bracketEntranceMs));
-    if (bracketBoxes.length > 0) {
-      const padPx = entrancePadPx(entrance);
-      brackets.setRects(bracketBoxes.flatMap((box) => { const rect = projectBox(box, pose, viewSize); return rect === null ? [] : [padRect(rect, padPx, viewSize)]; }));
-      brackets.render(renderer);
-    }
-    if (isCameraMoving || isEasing || isTweening || (bracketBoxes.length > 0 && entrance < 1)) invalidate();
+    const isBracketEntering = selection.drawBrackets(renderer, pose, viewSize, now);
+    if (isCameraMoving || isEasing || isTweening || isBracketEntering) invalidate();
   }
 
   /** How far back the default view stands: further once the head surface is drawn, so the whole head is in the picture. */
@@ -379,9 +253,6 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
   for (const [type, listener, options] of listeners) canvas.addEventListener(type, listener, options);
 
   const clearObjects = (): void => {
-    lifted = [];
-    tweens.clear();
-    restingLooks.clear();
     for (const entry of objects) {
       scene.remove(entry.group);
       for (const owned of listDisposables(entry, geometries.get(entry.shape.id) ?? null)) owned.dispose();
@@ -402,9 +273,9 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
    */
   const rebuild = (isNewLook: boolean): void => {
     if (drawn === null) return;
-    const { shapes, nodesByShapeId, selectedKeys } = drawn;
-    dropLift();
-    const before = isNewLook ? readLooks() : new Map<string, MaterialLook & { fill: SceneShape['fill'] }>();
+    const { shapes, nodesByShapeId, selectedKeys, bracketGroups } = drawn;
+    selection.dropLift();
+    const before = isNewLook ? selection.readLooks() : NO_LOOKS;
     clearObjects();
     const brainOutline = shapes.find((shape) => shape.layer === 'outline');
     if (brainOutline !== undefined && home.every((value) => value === 0)) {
@@ -420,16 +291,16 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
       const entry = buildShapeObjects(shape, geometry, selectedKeys.has(shape.structureKey), clip !== null, surface);
       scene.add(entry.group);
       objects.push(entry);
-      for (const material of listMaterials(entry.group)) restingLooks.set(material, { opacity: material.opacity, transparent: material.transparent });
     }
     marks = buildStepLabels(objects, labelFont);
     for (const mark of marks) scene.add(mark);
     // The objects were rebuilt: the selection goes on the new ones first, then the shape under the pointer is lifted over it.
-    applySelection(0);
+    selection.adopt(objects);
+    selection.select(selectedKeys, bracketGroups, false);
     // A step's marks fade in once, when the step arrives; a redraw for any other reason leaves them as they are.
     const easeKey = easeKeyOf(objects);
     // A step brings its own arrival, so only a lens's colours are carried over.
-    if (easeKey === '') recolourFrom(before);
+    if (easeKey === '') selection.recolourFrom(before);
     applyHover(hoveredKey);
     const stepMarked = objects.filter((entry) => (entry.shape.stepNumbers ?? []).length > 0).map((entry) => entry.group);
     if (easeKey !== easedKey) easer.begin([...stepMarked, ...marks.filter((mark) => mark.userData.labelText !== undefined)].flatMap(listMaterials), performance.now());
@@ -444,8 +315,8 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
       drawn = { shapes, nodesByShapeId, selectedKeys, bracketGroups };
       if (!isSameDrawing) { rebuild(true); return; }
       easer.settle();
-      dropLift();
-      applySelection(dimMs);
+      selection.dropLift();
+      selection.select(selectedKeys, bracketGroups, true);
       applyHover(hoveredKey);
       invalidate();
     },
@@ -463,7 +334,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
     setTheme(next) {
       if (next === surface) return;
       surface = next;
-      brackets.setTheme(next);
+      selection.setTheme(next);
       // The shapes carry what the surface decides -- their pale fills -- so they are rebuilt from what setShapes was last given. The electrode dots take no surface ink (see device-objects.ts).
       rebuild(false);
       invalidate();
@@ -488,7 +359,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
       camera.aspect = width / Math.max(height, 1);
       camera.updateProjectionMatrix();
       viewSize = { ...viewSize, widthPx: width, heightPx: height };
-      brackets.setSize(width, height);
+      selection.setSize(width, height);
       invalidate();
     },
     dispose() {
@@ -498,7 +369,7 @@ export function createSceneRenderer(canvas: HTMLCanvasElement, callbacks: SceneC
       clearObjects();
       if (devices !== null) disposeTree(devices.group);
       for (const geometry of geometries.values()) geometry.dispose();
-      brackets.dispose();
+      selection.dispose();
       renderer.dispose();
       // Hands the WebGL context back at once: browsers allow only a handful, and a view opened and hidden many times would run out.
       renderer.forceContextLoss();
