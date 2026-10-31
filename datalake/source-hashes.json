@@ -1,0 +1,174 @@
+{
+  "_schema": {
+    "description": "SHA-256 digests of the third-party files the anatomy pipeline ingests, derived from datalake/qif-anatomy-sources.json (downloads) and src/scripts/atlas-pipeline/registry/pipeline-inputs.json (files extracted from archives). Only ingested files, meaning rows with a recorded sha256 pin, are listed. Candidate sources in the registry that have not been downloaded are intentionally not listed.",
+    "hash_algorithm": "sha256",
+    "statement": "A matching digest shows the bytes are identical to what was ingested. It does not show that the publisher's copy is safe.",
+    "version": 2
+  },
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 1815762,
+          "digest_origin": "first_download",
+          "kind": "download",
+          "name": "annotation_full.nii.gz",
+          "sha256": "2b05581e39c44f2623d9b0a69f64e3df0823c20d054abef92973812313335dc3"
+        },
+        {
+          "bytes": 479643,
+          "digest_origin": "first_download",
+          "kind": "download",
+          "name": "voxel_count.csv",
+          "sha256": "7348be087e6c2b6cb1fde1d604761cdd2d70e0e33ded6e1f322db334959d162f"
+        }
+      ],
+      "id": "allen_hra_3d_2020",
+      "license_id": "cc-by-4.0",
+      "name": "Allen Human Reference Atlas - 3D, 2020",
+      "redistribute": true
+    },
+    {
+      "files": [
+        {
+          "bytes": 18158937,
+          "digest_origin": "publisher",
+          "kind": "download",
+          "name": "CIT168toMNI152-2009c_T1w.nii.gz",
+          "sha256": "d6f18f858867ca46f982b6b88e0333957ef7cdbcaadf0372cf2f2826cbf34a93"
+        },
+        {
+          "bytes": 857744,
+          "digest_origin": "publisher",
+          "kind": "download",
+          "name": "CIT168toMNI152-2009c_prob.nii.gz",
+          "sha256": "7a91c36701f36d9d908479b862e65a879d15f54badcec6878e61d857ab570f66"
+        },
+        {
+          "bytes": 123,
+          "digest_origin": "publisher",
+          "kind": "download",
+          "name": "labels.txt",
+          "sha256": "5e00265a7bbbdf242356345e0f6615d84791ada54aa9739539096aab3c1e1b41"
+        }
+      ],
+      "id": "cit168_rl",
+      "license_id": "cc-by-4.0",
+      "name": "CIT168 Reinforcement Learning atlas v1.1.0 (Pauli 2018)",
+      "redistribute": true
+    },
+    {
+      "files": [
+        {
+          "bytes": 364272316,
+          "digest_origin": "first_download",
+          "kind": "download",
+          "name": "mni_icbm152_nlin_sym_09b_nifti.zip",
+          "sha256": "acce3b85039176aaf7de2c3169272551ddfcae5d9a4e5ce642025b795f9f1d20"
+        },
+        {
+          "archive": "mni_icbm152_nlin_sym_09b_nifti.zip",
+          "bytes": null,
+          "digest_origin": "pipeline_inputs_registry",
+          "kind": "extracted_member",
+          "member_path": "mni_icbm152_nlin_sym_09b/mni_icbm152_t1_tal_nlin_sym_09b_hires.nii",
+          "name": "mni_icbm152_t1_tal_nlin_sym_09b_hires.nii",
+          "sha256": "b2ca5ca7c94471f0ca77b64485c0d9655737b9029ec19ef7486ab89f1ce4bf79"
+        }
+      ],
+      "id": "mni_icbm152_2009b_sym",
+      "license_id": "mni-icbm-notice",
+      "name": "MNI ICBM152 2009b nonlinear symmetric template",
+      "redistribute": false
+    },
+    {
+      "files": [
+        {
+          "bytes": 58602393,
+          "digest_origin": "first_download",
+          "kind": "download",
+          "name": "mni_icbm152_nlin_asym_09c_nifti.zip",
+          "sha256": "804382e5d68a42ff8096ee845a7600b6658434da762fa67840a149eb25d48bd4"
+        },
+        {
+          "archive": "mni_icbm152_nlin_asym_09c_nifti.zip",
+          "bytes": null,
+          "digest_origin": "pipeline_inputs_registry",
+          "kind": "extracted_member",
+          "member_path": "mni_icbm152_nlin_asym_09c/mni_icbm152_csf_tal_nlin_asym_09c.nii",
+          "name": "mni_icbm152_csf_tal_nlin_asym_09c.nii",
+          "sha256": "6baf048a874ebabb252e028229cbfd19ddfc835fa7d89efe18ceab86926c87b3"
+        },
+        {
+          "archive": "mni_icbm152_nlin_asym_09c_nifti.zip",
+          "bytes": null,
+          "digest_origin": "pipeline_inputs_registry",
+          "kind": "extracted_member",
+          "member_path": "mni_icbm152_nlin_asym_09c/mni_icbm152_gm_tal_nlin_asym_09c.nii",
+          "name": "mni_icbm152_gm_tal_nlin_asym_09c.nii",
+          "sha256": "781550eec4b7f0e33abfba267b96887a32cf57f9482c958c700f9e35199cc666"
+        },
+        {
+          "archive": "mni_icbm152_nlin_asym_09c_nifti.zip",
+          "bytes": null,
+          "digest_origin": "pipeline_inputs_registry",
+          "kind": "extracted_member",
+          "member_path": "mni_icbm152_nlin_asym_09c/mni_icbm152_t1_tal_nlin_asym_09c.nii",
+          "name": "mni_icbm152_t1_tal_nlin_asym_09c.nii",
+          "sha256": "67fe8b2e8fed7fa318d293e79a31416f5b31d70f0330312f58125fcd3dde43a1"
+        },
+        {
+          "archive": "mni_icbm152_nlin_asym_09c_nifti.zip",
+          "bytes": null,
+          "digest_origin": "pipeline_inputs_registry",
+          "kind": "extracted_member",
+          "member_path": "mni_icbm152_nlin_asym_09c/mni_icbm152_t1_tal_nlin_asym_09c_mask.nii",
+          "name": "mni_icbm152_t1_tal_nlin_asym_09c_mask.nii",
+          "sha256": "7d80b651fc5f11bae015f28577b9e9b4211d11910b4d215f6a8fb47fc2ab2b40"
+        },
+        {
+          "archive": "mni_icbm152_nlin_asym_09c_nifti.zip",
+          "bytes": null,
+          "digest_origin": "pipeline_inputs_registry",
+          "kind": "extracted_member",
+          "member_path": "mni_icbm152_nlin_asym_09c/mni_icbm152_wm_tal_nlin_asym_09c.nii",
+          "name": "mni_icbm152_wm_tal_nlin_asym_09c.nii",
+          "sha256": "337525d68780df3eef82539cf1ff3f44efeb4d988379407cf7a678303bd913d4"
+        }
+      ],
+      "id": "mni_icbm152_2009c_asym",
+      "license_id": "mni-icbm-notice",
+      "name": "MNI ICBM152 2009c nonlinear asymmetric template",
+      "redistribute": true
+    },
+    {
+      "files": [
+        {
+          "bytes": 58882009,
+          "digest_origin": "first_download",
+          "kind": "download",
+          "name": "MDA_990HCP_t1_MNI152b_0.5.nii.gz",
+          "sha256": "20e35d3dcb39f798afc3c2340adfcb6b1a571e29f1892942585ef95f07125c14"
+        },
+        {
+          "bytes": 563185,
+          "digest_origin": "first_download",
+          "kind": "download",
+          "name": "MNI152b_atlas_labels_0.5mm.nii.gz",
+          "sha256": "128ff46e2a996345c249456de7536eab03171a147c0a97d0bfe74f3d1953e5df"
+        },
+        {
+          "bytes": 2068,
+          "digest_origin": "first_download",
+          "kind": "download",
+          "name": "Volumes_names-labels.csv",
+          "sha256": "31ce37c47edb7aafc0c69661289f2b6e7c12a7c3b6c36c063432333b9ac8a201"
+        }
+      ],
+      "id": "neudorfer_hypothalamus",
+      "license_id": "cc-by-4.0",
+      "name": "Neudorfer 2020 atlas of the hypothalamic region",
+      "redistribute": true
+    }
+  ]
+}
