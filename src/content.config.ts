@@ -18,7 +18,7 @@ const blog = defineCollection({
 });
 
 const governance = defineCollection({
-  loader: glob({ pattern: ['DECISION-LOG.md', 'TRANSPARENCY.md', 'SHIP-LOG.md'], base: './governance' }),
+  loader: glob({ pattern: ['DECISION-LOG.md', 'TRANSPARENCY.md'], base: './governance' }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),

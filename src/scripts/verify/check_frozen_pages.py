@@ -3,7 +3,7 @@
 
 src/site is Astro's publicDir, and 18 complete build artifacts are committed
 inside it. No route regenerates them: the governance content collection globs
-only DECISION-LOG, TRANSPARENCY and SHIP-LOG, and the whitepaper v2/v3/v5
+only DECISION-LOG and TRANSPARENCY, and the whitepaper v2/v3/v5
 archives are static by design (whitepaper-archival.md requires every
 /research/whitepaper/v*/ URL to keep returning 200).
 

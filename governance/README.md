@@ -25,7 +25,6 @@ governance/
 ├── CONTEXT.md                   # Root project context (AI agent entry point)
 ├── DECISION-LOG.md              # Auto-generated from derivation log
 ├── TRANSPARENCY.md              # Auto-generated from derivation log
-├── SHIP-LOG.md                  # Feature release tracking
 ├── SCAFFOLD-LOG.md              # Project initialization decisions
 ├── MATURITY.md                  # Capability maturity model
 ├── QIF-GOVERNANCE-QUESTIONS.md  # Who decides what for the brain (RACI)

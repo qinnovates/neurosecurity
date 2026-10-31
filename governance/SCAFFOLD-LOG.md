@@ -517,4 +517,4 @@ _This section is a running backlog. Add items as they are identified. Mark compl
 
 ---
 
-*This document is part of the qinnovate governance infrastructure. It is maintained alongside DECISION-LOG.md, TRANSPARENCY.md, and SHIP-LOG.md as a record of how the project's agentic AI systems are designed and evolved.*
+*This document is part of the qinnovate governance infrastructure. It is maintained alongside DECISION-LOG.md and TRANSPARENCY.md as a record of how the project's agentic AI systems are designed and evolved.*

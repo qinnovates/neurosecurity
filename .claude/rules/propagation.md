@@ -58,13 +58,11 @@ Region links are AI-drafted and unreviewed. The registrar, the public API, the P
 |--------|-----|-----------|
 | governance/DECISION-LOG.md | `npm run governance` | Semi-auto (run after commit) |
 | governance/TRANSPARENCY.md | `npm run governance` | Semi-auto (run after commit) |
-| governance/SHIP-LOG.md | Add entry manually if feature shipped | Manual |
 | src/data/qif-timeline.json derivation_log_entries count | `npm run health` warns if stale | Manual |
 
 ## When a new page/component is created
 | Update | How | Automated? |
 |--------|-----|-----------|
-| governance/SHIP-LOG.md | Add entry | Manual |
 | CHANGELOG.md | Auto-generated on next commit | Yes (changelog workflow) |
 
 ## When datalake/eeg-samples.json changes
