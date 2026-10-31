@@ -247,6 +247,92 @@ describe('the selection', () => {
   });
 });
 
+describe('motion comes from input', () => {
+  const FILLED = SHAPES.map((shape, at) => ({ ...shape, fill: 'solid' as const, colour: at % 2 === 0 ? '#102030' : '#405060' }));
+  const RECOLOURED = FILLED.map((shape) => ({ ...shape, colour: '#a0b0c0' }));
+  const bracketVertices = (): number => (listSceneObjects().find((object) => object.userData.selectionBrackets === true)?.children[0]?.geometry?.drawCount ?? 0);
+  const inkOf = (key: string): string => litMaterialOf(key).color.getHexString();
+
+  it('takes the stated time to dim, and stops asking for frames when it is done', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, false, 'light');
+    renderer.resize(800, 500);
+    renderer.setShapes(FILLED, NODES, new Set());
+    runFrame(1000);
+    expect(frames).toEqual([]);
+    renderer.setShapes(FILLED, NODES, new Set(['a:front']));
+    expect(litMaterialOf('a:back').opacity).toBe(1);
+    // three.js compiles an opaque material without its alpha, so a material that starts to blend has to say so.
+    expect(litMaterialOf('a:back')).toMatchObject({ transparent: true, needsUpdate: true });
+    expect(litMaterialOf('a:front').transparent).toBe(false);
+    runFrame(1000 + DIM_MS / 2);
+    expect(litMaterialOf('a:back').opacity).toBeLessThan(1);
+    expect(litMaterialOf('a:back').opacity).toBeGreaterThan(DIMMED_OPACITY);
+    runFrame(1000 + Math.max(DIM_MS, BRACKET_ENTRANCE_MS));
+    expect(litMaterialOf('a:back').opacity).toBe(DIMMED_OPACITY);
+    expect(litMaterialOf('a:front').opacity).toBe(1);
+    expect(bracketVertices()).toBeGreaterThan(0);
+    expect(frames).toEqual([]);
+  });
+
+  it('carries the old colour over to the new one when the lens changes, and ends exactly on the lens\'s colour', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, false, 'light');
+    renderer.setShapes(FILLED, NODES, new Set());
+    runFrame(1000);
+    renderer.setShapes(RECOLOURED, NODES, new Set());
+    expect(inkOf('a:front')).toBe('102030');
+    runFrame(1000 + LENS_RECOLOUR_MS / 2);
+    expect(inkOf('a:front')).not.toBe('102030');
+    expect(inkOf('a:front')).not.toBe('a0b0c0');
+    runFrame(1000 + LENS_RECOLOUR_MS);
+    expect(inkOf('a:front')).toBe('a0b0c0');
+    expect(frames).toEqual([]);
+  });
+
+  it('brings a shape that changes from surface to wireframe up from nothing, since the two cannot blend', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, false, 'light');
+    renderer.setShapes(FILLED, NODES, new Set());
+    runFrame(1000);
+    renderer.setShapes(FILLED.map((shape) => ({ ...shape, fill: 'lines' as const })), NODES, new Set());
+    expect(litMaterialOf('a:front').opacity).toBe(0);
+    runFrame(1000 + LENS_RECOLOUR_MS);
+    expect(litMaterialOf('a:front').opacity).toBe(FILL_OPACITY.lines);
+  });
+
+  it('leaves shapes that look the same as they are when new ones arrive, and asks for no frames for them', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, false, 'light');
+    renderer.setShapes(FILLED, NODES, new Set());
+    runFrame(1000);
+    renderer.setShapes([...FILLED], NODES, new Set());
+    runFrame(1016);
+    expect(frames).toEqual([]);
+  });
+
+  it('does not bring the brackets in again when the lens changes under a selection', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, false, 'light');
+    renderer.resize(800, 500);
+    renderer.setShapes(FILLED, NODES, new Set(['a:front']));
+    runFrame(1000 + BRACKET_ENTRANCE_MS);
+    expect(frames).toEqual([]);
+    renderer.setShapes(RECOLOURED, NODES, new Set(['a:front']));
+    runFrame(1000 + BRACKET_ENTRANCE_MS + LENS_RECOLOUR_MS);
+    expect(frames).toEqual([]);
+  });
+
+  it('does all of it at once under reduced motion, in the frame that follows', () => {
+    const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
+    renderer.resize(800, 500);
+    renderer.setShapes(FILLED, NODES, new Set());
+    runFrame(1000);
+    renderer.setShapes(RECOLOURED, NODES, new Set());
+    expect(inkOf('a:front')).toBe('a0b0c0');
+    renderer.setShapes(RECOLOURED, NODES, new Set(['a:front']));
+    expect(litMaterialOf('a:back').opacity).toBe(DIMMED_OPACITY);
+    runFrame(1016);
+    expect(bracketVertices()).toBeGreaterThan(0);
+    expect(frames).toEqual([]);
+  });
+});
+
 describe('no line joins two regions', () => {
   const stepShapes = (numbers: Record<string, number[]>): SceneShape[] => SHAPES.map((shape) => ({ ...shape, stepNumbers: numbers[shape.structureKey] ?? [], fill: numbers[shape.structureKey] === undefined ? shape.fill : 'solid' as const }));
 

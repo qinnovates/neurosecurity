@@ -323,5 +323,5 @@ export function stepEaseDuration(prefersLessMotion: boolean): number {
 export function idleTurnSpeed(prefersLessMotion: boolean): number {
   return prefersLessMotion ? 0 : IDLE_RADIANS_PER_MS;
 }
-/** One slow turn takes about a minute: fast enough that the picture is seen to be a solid thing with depth, slow enough not to read as activity. */
-export const IDLE_RADIANS_PER_MS = (Math.PI * 2) / 60_000;
+/** Nothing turns at rest: motion in the picture follows from what the visitor does, and a brain that moves on its own reads as activity. */
+export const IDLE_RADIANS_PER_MS = 0;

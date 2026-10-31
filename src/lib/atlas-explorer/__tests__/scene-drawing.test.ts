@@ -214,7 +214,8 @@ describe('ringParamsFor', () => {
 describe('idleTurnSpeed', () => {
   it('is zero under reduced motion and one slow turn in a minute otherwise', () => {
     expect(idleTurnSpeed(true)).toBe(0);
-    expect(idleTurnSpeed(false)).toBe(IDLE_RADIANS_PER_MS);
-    expect((Math.PI * 2) / IDLE_RADIANS_PER_MS).toBeCloseTo(60_000);
+    // Nothing moves at rest: a camera turn is a consequence of input, for everyone.
+    expect(IDLE_RADIANS_PER_MS).toBe(0);
+    expect(idleTurnSpeed(false)).toBe(0);
   });
 });

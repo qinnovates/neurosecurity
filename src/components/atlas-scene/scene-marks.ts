@@ -9,6 +9,7 @@
 import { CanvasTexture, Sprite, SpriteMaterial, type Material, type Mesh, type Object3D } from 'three';
 import type { Point3 } from '@/lib/anatomy/ras-to-scene';
 import { DRAW_ORDER, type Box } from '@/lib/atlas-explorer/scene-drawing';
+import { mixColours } from '@/lib/atlas-explorer/selection-marks';
 import type { ShapeObjects } from './scene-objects';
 
 const FALLBACK_FONT = 'system-ui, sans-serif';
@@ -138,5 +139,82 @@ export function createEaser(durationMs: number): Easer {
       for (const { material, opacity, wasTransparent } of running) Object.assign(material, { opacity, transparent: wasTransparent, needsUpdate: true });
       running = [];
     },
+  };
+}
+
+/** How strongly a material is shown, and in what ink. A null colour leaves the ink as it is. */
+export interface MaterialLook { opacity: number; colour: string | null }
+/** A material whose ink can be read and set, as three.js's drawn materials can. */
+type Inked = Material & { color?: { set: (colour: string) => void } };
+
+export interface MaterialTween {
+  to: MaterialLook;
+  from: MaterialLook;
+  /** Whether the material draws as transparent once it arrives. */
+  endsTransparent: boolean;
+  durationMs: number;
+  ease: (progress: number) => number;
+}
+
+export interface MaterialTweens {
+  /** Takes a material from one look to another, in place of any move it was making. With no duration it arrives at once. */
+  start: (material: Material, tween: MaterialTween, now: number) => void;
+  /** Brings a material to the end of its move now, so something else may change it. */
+  finish: (material: Material) => void;
+  /** Advances every move. Returns whether another frame is needed. */
+  step: (now: number) => boolean;
+  clear: () => void;
+}
+
+/** three.js compiles a material differently once it blends: an opaque one drops its alpha, so a change here is not seen until the material is told. */
+function setTransparent(material: Material, transparent: boolean): void {
+  if (material.transparent !== transparent) Object.assign(material, { transparent, needsUpdate: true });
+}
+
+function paint(material: Inked, { from, to, ease }: MaterialTween, progress: number): void {
+  const eased = ease(progress);
+  material.opacity = from.opacity + (to.opacity - from.opacity) * eased;
+  if (from.colour !== null && to.colour !== null) material.color?.set(mixColours(from.colour, to.colour, eased));
+}
+
+/**
+ * Moves materials between two looks. It is what lets a lens recolour and a dim
+ * arrive over time, as a consequence of what the visitor did; nothing here
+ * starts on its own, and each material has at most one move, so a later change
+ * takes over from an earlier one rather than fighting it.
+ */
+export function createMaterialTweens(): MaterialTweens {
+  const running = new Map<Material, { tween: MaterialTween; startedAt: number }>();
+  const settle = (material: Material, tween: MaterialTween): void => {
+    paint(material, tween, 1);
+    setTransparent(material, tween.endsTransparent);
+  };
+  return {
+    start(material, tween, now) {
+      const earlier = running.get(material);
+      if (earlier === undefined && tween.from.opacity === tween.to.opacity && tween.from.colour === tween.to.colour) return;
+      if (earlier !== undefined) settle(material, earlier.tween);
+      running.delete(material);
+      if (tween.durationMs === 0) { settle(material, tween); return; }
+      setTransparent(material, true);
+      paint(material, tween, 0);
+      running.set(material, { tween, startedAt: now });
+    },
+    finish(material) {
+      const move = running.get(material);
+      if (move === undefined) return;
+      settle(material, move.tween);
+      running.delete(material);
+    },
+    step(now) {
+      for (const [material, { tween, startedAt }] of running) {
+        const progress = Math.min(1, Math.max(0, (now - startedAt) / tween.durationMs));
+        if (progress < 1) { paint(material, tween, progress); continue; }
+        settle(material, tween);
+        running.delete(material);
+      }
+      return running.size > 0;
+    },
+    clear: () => running.clear(),
   };
 }

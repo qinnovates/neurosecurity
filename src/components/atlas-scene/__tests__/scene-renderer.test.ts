@@ -155,17 +155,15 @@ describe('createSceneRenderer', () => {
     expect(lost.defaultPrevented).toBe(true);
   });
 
-  it('turns idly until touched, and never under reduced motion', () => {
-    const still = createSceneRenderer(canvas, callbacks, true, 'light');
-    still.setShapes(SHAPES, NODES, new Set());
-    runFrames(1);
-    expect(frames).toHaveLength(0);
-    expect(three.rendered).toBe(1);
-    const turning = createSceneRenderer(document.createElement('canvas'), callbacks, false, 'light');
-    turning.setShapes(SHAPES, NODES, new Set());
-    runFrames(3);
-    expect(frames).toHaveLength(1);
-    expect(three.rendered).toBe(4);
+  it('stands still at rest, with or without reduced motion: it draws once and asks for no further frame', () => {
+    for (const prefersLessMotion of [true, false]) {
+      three.rendered = 0;
+      const renderer = createSceneRenderer(document.createElement('canvas'), callbacks, prefersLessMotion, 'light');
+      renderer.setShapes(SHAPES, NODES, new Set());
+      runFrames(1);
+      expect(frames).toHaveLength(0);
+      expect(three.rendered).toBe(1);
+    }
   });
 
   it('never tests the brain outline for a pick, and picks a filled shape through a pale one in front of it', () => {
