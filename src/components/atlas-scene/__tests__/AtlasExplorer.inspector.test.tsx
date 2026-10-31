@@ -78,10 +78,11 @@ describe('AtlasExplorer: the inspector', () => {
 
   it('shows each linked technique with the catalog\'s own quoted words', async () => {
     const { inspector } = await openRegion(litRegionId);
-    const linked = [...inspector.querySelectorAll<HTMLElement>('.atlas-techniques')][0].querySelectorAll<HTMLElement>('.atlas-technique');
+    const linked = inspector.querySelectorAll<HTMLElement>('[data-dossier-technique]');
     expect(linked.length).toBeGreaterThan(0);
     for (const technique of linked) {
-      expect(technique.querySelector('blockquote')?.textContent?.length, technique.dataset.techniqueId).toBeGreaterThan(10);
+      expect(technique.textContent, technique.dataset.dossierTechnique).toContain('The catalog\u2019s word:');
+      expect(technique.querySelector('blockquote')?.textContent?.length, technique.dataset.dossierTechnique).toBeGreaterThan(10);
     }
     expect(inspector.querySelector('[data-limit-id="technique_quote"]')).not.toBeNull();
   });
@@ -91,7 +92,7 @@ describe('AtlasExplorer: the inspector', () => {
     const heading = within(inspector).getByRole('heading', { name: /^Tagged with this band only \(\d+\)$/ });
     expect(heading.nextElementSibling?.textContent).toMatch(/^Tagged with band N\d; the catalog's text names no structure\. This is not a link to this region\.$/);
     const bandOnlyNames = [...(heading.nextElementSibling?.nextElementSibling?.querySelectorAll('button') ?? [])].map((button) => button.textContent);
-    const linkedNames = [...inspector.querySelectorAll('.atlas-technique .atlas-link-button')].map((button) => button.textContent);
+    const linkedNames = [...inspector.querySelectorAll('[data-dossier-technique] .atlas-link-button')].map((button) => button.textContent);
     expect(bandOnlyNames.length).toBeGreaterThan(0);
     expect(bandOnlyNames.filter((name) => linkedNames.includes(name))).toEqual([]);
   });
@@ -99,19 +100,39 @@ describe('AtlasExplorer: the inspector', () => {
   it('says plainly when nothing is linked to a region, and reads its NISS and DSM facts as no data', async () => {
     const { inspector } = await openRegion(unlinkedRegionId);
     expect(inspector.querySelector('[data-limit-id="techniques_none"]')?.textContent).toContain('it does not mean the region is safe');
-    expect(inspector.querySelector('.atlas-technique')).toBeNull();
+    expect(inspector.querySelector('[data-dossier-technique]')).toBeNull();
     expect(inspector.querySelector('[data-fact="niss"]')?.textContent).toBe('Highest NISS step among linked techniques: no data.');
     expect(inspector.querySelector('[data-fact="dsm"]')?.textContent).toBe('DSM cluster tags on linked techniques: no data.');
   });
 
   it('names the devices whose record states the region as a target, or says there are none', async () => {
     const named = await openRegion('m1');
-    expect(within(named.inspector).getByRole('button', { name: 'neuralink-n1' })).toBeTruthy();
+    expect(await within(named.inspector).findByRole('button', { name: 'N1 Implant (Link)' })).toBeTruthy();
     expect(named.inspector.querySelector('[data-limit-id="qif_file_fact"]')?.textContent).toContain('which no expert has reviewed');
     cleanup();
     const targeted = new Set(REAL_INDEX.devices.stated_targets.flatMap((device) => device.region_ids));
     const untargeted = REAL_INDEX.subjects.find((subject) => subject.kind === 'region' && !targeted.has(subject.id))?.id ?? '';
-    expect((await openRegion(untargeted)).inspector.querySelector('[data-limit-id="stated_devices_none"]')).not.toBeNull();
+    const { inspector } = await openRegion(untargeted);
+    await waitFor(() => expect(inspector.querySelector('[data-limit-id="stated_devices_none"]')).not.toBeNull());
+  });
+});
+
+describe('AtlasExplorer: each fact once', () => {
+  const countOf = (container: HTMLElement, selector: string): number => container.querySelectorAll(selector).length;
+
+  it('gives the region\'s description, its techniques, its devices and its DSM references one place each', async () => {
+    const { inspector } = await openRegion('m1');
+    await waitFor(() => expect(inspector.querySelector('[data-device-relation]')).not.toBeNull());
+    const headings = [...inspector.querySelectorAll('h3')].map((heading) => heading.textContent);
+    expect(new Set(headings).size).toBe(headings.length);
+    expect(headings).toEqual(expect.not.arrayContaining(['What the QIF atlas file says it does', 'Techniques linked to this region', 'DSM-5-TR category references', 'Devices whose QIF record lists this region']));
+    for (const limitId of ['region_description', 'technique_quote', 'dsm_references', 'qif_file_fact', 'lens_niss', 'lens_dsm']) expect(countOf(inspector, `[data-limit-id="${limitId}"]`), limitId).toBe(1);
+    expect(countOf(inspector, '.atlas-quote > p')).toBeGreaterThan(0);
+    const descriptions = [...inspector.querySelectorAll('.atlas-quote > p')].map((quote) => quote.textContent);
+    expect(new Set(descriptions).size).toBe(descriptions.length);
+    expect(countOf(inspector, '[data-technique-id]')).toBe(0);
+    expect(countOf(inspector, '.atlas-chip')).toBe(0);
+    expect(within(inspector).getAllByRole('button', { name: 'N1 Implant (Link)' })).toHaveLength(1);
   });
 });
 
@@ -250,8 +271,8 @@ describe('AtlasExplorer: failures', () => {
     const { inspector } = await openRegion(litRegionId, { ...REAL_FILES, [ANATOMY_EVIDENCE_PATH]: SERVER_ERROR, [REGION_EVIDENCE_PATH]: SERVER_ERROR });
     const alerts = within(inspector).getAllByRole('alert');
     expect(alerts.map((alert) => alert.textContent?.split('.')[0])).toEqual(['Not shown: the quoted catalog text', 'Not shown: the literature statements']);
-    expect(inspector.querySelectorAll('.atlas-technique').length).toBeGreaterThan(0);
-    expect(inspector.querySelector('.atlas-technique blockquote')).toBeNull();
+    expect(inspector.querySelectorAll('[data-dossier-technique]').length).toBeGreaterThan(0);
+    expect(inspector.querySelector('[data-dossier-technique] blockquote')).toBeNull();
     expect(inspector.querySelector('.atlas-statement')).toBeNull();
     expect(inspector.querySelector('[data-limit-id^="geometry_"]')).not.toBeNull();
   });
@@ -266,7 +287,7 @@ describe('AtlasExplorer: failures', () => {
     expect(alerts[0].textContent).toContain('The page\'s data files are out of step with each other');
     expect(alerts[0].textContent).not.toContain('connection');
     expect(inspector.querySelector('.atlas-statement')).toBeNull();
-    expect(inspector.querySelector('.atlas-technique blockquote')).toBeNull();
+    expect(inspector.querySelector('[data-dossier-technique] blockquote')).toBeNull();
   });
 });
 
@@ -382,7 +403,7 @@ describe('AtlasExplorer: what each statement and section says', () => {
     const { inspector } = await openRegion(litRegionId);
     expect(inspector.querySelector('[data-fact="niss"] + [data-limit-id="lens_niss"]')).not.toBeNull();
     expect(inspector.querySelector('[data-fact="dsm"] + [data-limit-id="lens_dsm"]')).not.toBeNull();
-    const linkedSection = within(inspector).getByRole('heading', { name: 'Techniques linked to this region' }).parentElement as HTMLElement;
+    const linkedSection = within(inspector).getByRole('heading', { name: 'Techniques' }).parentElement as HTMLElement;
     expect(linkedSection.textContent).not.toContain('Tagged with this band only');
     const bandOnly = within(inspector).getByRole('heading', { name: /^Tagged with this band only/ }).parentElement as HTMLElement;
     expect(bandOnly.querySelectorAll('.atlas-chip')).toHaveLength(0);
@@ -391,12 +412,12 @@ describe('AtlasExplorer: what each statement and section says', () => {
   });
 
   /**
-   * The pane's order is the design's, not a convenience: a reader must know how much the atlas holds,
-   * and out of what, before reading anything derived from it, and must never meet band-sourced material
+   * The pane's order is the design's, not a convenience: the dossier, then how much the atlas holds and
+   * out of what, and a reader must never meet band-sourced material
    * mixed into the region's own claims. The band holds up to every region in the atlas, so it is last
    * and fenced off.
    */
-  it('orders the pane by what a reader needs first: the dossier, coverage, the region\'s own words, the techniques, then the mappings', async () => {
+  it('orders the pane by what a reader needs first: the dossier, coverage, then the mappings', async () => {
     const { inspector } = await openRegion(litRegionId);
     const headings = [...inspector.querySelectorAll('h3')].map((heading) => heading.textContent ?? '');
     const at = (text: string): number => {
@@ -407,10 +428,7 @@ describe('AtlasExplorer: what each statement and section says', () => {
     expect(at('Layer and function')).toBe(0);
     expect(['Techniques', 'Devices', 'Hazards for this layer', 'Connections', 'Conditions referenced'].map(at)).toEqual([1, 2, 3, 4, 5]);
     expect(at('Conditions referenced')).toBeLessThan(at('What we hold for this region'));
-    expect(at('What we hold for this region')).toBeLessThan(at('What the QIF atlas file says it does'));
-    expect(at('What the QIF atlas file says it does')).toBeLessThan(at('Techniques linked to this region'));
-    expect(at('Techniques linked to this region')).toBeLessThan(at('DSM-5-TR category references'));
-    expect(at('DSM-5-TR category references')).toBeLessThan(at('Evidence from the literature'));
+    expect(at('What we hold for this region')).toBeLessThan(at('Evidence from the literature'));
     // Band context is last, inside its own fence, and nothing above it is inside that fence.
     const bandContext = inspector.querySelector('[data-band-context="true"]') as HTMLElement;
     expect(bandContext.querySelector('h3')?.textContent).toMatch(/^Tagged with this band only \(\d+\)$/);

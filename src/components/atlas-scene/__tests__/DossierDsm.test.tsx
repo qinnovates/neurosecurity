@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, fireEvent, render } from '@testing-library/react';
 import { LIMIT_TEMPLATES, matchesLimitTemplate } from '@/lib/anatomy/limits-copy';
 import { buildFixtureModel, loadRealModel } from '@/lib/atlas-explorer/__tests__/explorer-fixtures';
-import InspectorDsm, { describeReferenceCount } from '../InspectorDsm';
+import DossierDsm, { describeReferenceCount } from '../DossierDsm';
 
 afterEach(cleanup);
 
@@ -11,10 +11,10 @@ const QUALIFIER = /diagnostic category references .* for threat modelling, not d
 const CLAIM_WORDS = /\b(causes?|leads? to|results? in|diagnos(?:is|es|ed)|treats?)\b/i;
 
 function renderFor(regionId: string, model = buildFixtureModel()): HTMLElement {
-  return render(<InspectorDsm model={model} regionId={regionId} />).container.querySelector('[aria-labelledby="atlas-inspector-dsm"]') as HTMLElement;
+  return render(<DossierDsm model={model} regionId={regionId} />).container;
 }
 
-describe('the inspector\'s DSM-5-TR references', () => {
+describe('the dossier\'s DSM-5-TR references', () => {
   it('always shows, in the same section, that they are category references for threat modelling and not diagnostic claims', () => {
     for (const regionId of ['pfc', 'cord']) {
       const qualifier = renderFor(regionId).querySelector('[data-limit-id="dsm_references"]')?.textContent ?? '';

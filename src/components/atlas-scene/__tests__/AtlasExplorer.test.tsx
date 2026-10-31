@@ -167,7 +167,7 @@ describe('AtlasExplorer: the list', () => {
     const container = await renderExplorer();
     pressEnterOn(rowOf(container, 'hippocampus'));
     await waitFor(() => expect(document.activeElement?.id).toBe('atlas-inspector-heading'));
-    const technique = panelOf('Hippocampus').querySelector<HTMLButtonElement>('.atlas-techniques .atlas-link-button');
+    const technique = panelOf('Hippocampus').querySelector<HTMLButtonElement>('[data-dossier-technique] .atlas-link-button');
     if (technique === null) throw new Error('No linked technique to drill into.');
     fireEvent.click(technique);
     await waitFor(() => expect(container.querySelector('.atlas-root')?.getAttribute('data-lens')).toBe('technique'));

@@ -1,14 +1,16 @@
 import { useCallback, useMemo, type ReactNode } from 'react';
 import { limitSentence } from '@/lib/anatomy/limits-copy';
+import type { ShownAnatomyEvidence } from '@/lib/anatomy/parse-anatomy-evidence';
 import { REGION_DOSSIER_PATH, type EndpointNaming } from '@/lib/atlas-explorer/dossier-file';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { buildRegionDetail, type RegionDetail } from '@/lib/atlas-explorer/region-detail';
-import { buildRegionDsm } from '@/lib/atlas-explorer/region-dsm';
 import { regionKqlHref } from '@/lib/atlas-explorer/region-kql';
 import Disclosure from './Disclosure';
 import DossierDevices from './DossierDevices';
+import DossierDsm from './DossierDsm';
 import DossierTechniques from './DossierTechniques';
 import { loadRegionDossier, peekRegionDossier } from './explorer-companions';
+import type { Loaded } from './explorer-data';
 import LimitNote from './LimitNote';
 import LoadNotice from './LoadNotice';
 import { useLoaded } from './use-loaded';
@@ -16,6 +18,9 @@ import { useLoaded } from './use-loaded';
 interface Props {
   model: ExplorerModel;
   regionId: string;
+  /** The quoted catalog words behind each technique link. The inspector loads them; idle reads as not asked for. */
+  anatomyEvidence: Loaded<ShownAnatomyEvidence>;
+  onRetryAnatomyEvidence: () => void;
   onChooseTechnique: (techniqueId: string) => void;
   onChooseDevice: (deviceId: string) => void;
 }
@@ -96,14 +101,11 @@ function ReferenceList({ references }: { references: ReadonlyArray<{ code: strin
 
 /** DSM-5-TR references through the region's techniques and pathways, and neurological references through its pathways. Each stands under its own qualifier. */
 function Conditions({ model, detail }: { model: ExplorerModel; detail: RegionDetail }) {
-  const dsm = buildRegionDsm(model, detail.region.id);
-  const dsmReferences = [...new Map([...dsm.viaTechniques, ...dsm.viaPathways].map((reference) => [`${reference.code} ${reference.name}`, reference])).values()];
   const neurological = detail.conditions ?? [];
   return (
     <section className="atlas-section" aria-labelledby="atlas-dossier-conditions">
       <h3 className="atlas-subheading" id="atlas-dossier-conditions">Conditions referenced</h3>
-      <LimitNote limit={limitSentence('dsm_references')} />
-      {dsmReferences.length === 0 ? <LimitNote limit={limitSentence('dsm_none')} /> : <Disclosure label={`Show the ${dsmReferences.length} DSM-5-TR references`}><ReferenceList references={dsmReferences} /></Disclosure>}
+      <DossierDsm model={model} regionId={detail.region.id} />
       {neurological.length > 0 && (
         <>
           <LimitNote limit={limitSentence('neurological_references')} />
@@ -117,10 +119,10 @@ function Conditions({ model, detail }: { model: ExplorerModel; detail: RegionDet
 /**
  * One region as a doorway into everything the datalake holds about it, in the order a neurosecurity reader needs: what
  * the region is, what names it, what touches it, what can go wrong with no attacker, how it connects, which conditions
- * are referenced, and how to query all of it. It holds its own load, so a page can mount it with a model and an id.
- * What needs the dossier's file appears once that file has arrived; the rest does not wait for it.
+ * are referenced, and how to query all of it. It holds the load of its own file; what needs that file appears once it
+ * has arrived, and the rest does not wait for it.
  */
-export default function RegionDossier({ model, regionId, onChooseTechnique, onChooseDevice }: Props) {
+export default function RegionDossier({ model, regionId, anatomyEvidence, onRetryAnatomyEvidence, onChooseTechnique, onChooseDevice }: Props) {
   const loadFile = useCallback(() => loadRegionDossier(model), [model]);
   const { state, retry } = useLoaded(loadFile, true, REGION_DOSSIER_PATH);
   const file = peekRegionDossier(model) ?? (state.status === 'ready' ? state.data : null);
@@ -130,7 +132,7 @@ export default function RegionDossier({ model, regionId, onChooseTechnique, onCh
     <div className="atlas-dossier" data-dossier={regionId}>
       <LayerAndFunction detail={detail} />
       {file === null && <LoadNotice what="this region's records" state={state} onRetry={retry} />}
-      <DossierTechniques detail={detail} onChooseTechnique={onChooseTechnique} />
+      <DossierTechniques detail={detail} evidence={anatomyEvidence} onRetryEvidence={onRetryAnatomyEvidence} onChooseTechnique={onChooseTechnique} />
       <DossierDevices detail={detail} onChooseDevice={onChooseDevice} />
       <Hazards detail={detail} />
       <Connections detail={detail} />

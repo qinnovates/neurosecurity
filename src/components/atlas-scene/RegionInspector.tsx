@@ -1,18 +1,15 @@
 import type { RefObject } from 'react';
-import { limitSentence } from '@/lib/anatomy/limits-copy';
 import type { ShownAnatomyEvidence } from '@/lib/anatomy/parse-anatomy-evidence';
 import type { RegionEvidence } from '@/lib/anatomy/region-evidence-types';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import type { RegionDetail } from '@/lib/atlas-explorer/region-detail';
 import { GEOMETRY_LABELS } from '@/lib/atlas-explorer/region-rows';
 import type { Loaded } from './explorer-data';
+import InspectorBandOnly from './InspectorBandOnly';
 import InspectorCoverage from './InspectorCoverage';
-import InspectorDsm from './InspectorDsm';
 import InspectorEmpty from './InspectorEmpty';
 import InspectorEvidence from './InspectorEvidence';
 import InspectorShapes from './InspectorShapes';
-import InspectorTechniques, { InspectorBandOnly } from './InspectorTechniques';
-import LimitNote from './LimitNote';
 import { buildRegionCoverage, type AtlasCoverage } from './region-coverage';
 import RegionDossier from './RegionDossier';
 
@@ -35,32 +32,12 @@ interface Props {
   onBackToView: () => void;
 }
 
-function Devices({ detail, onChooseDevice }: { detail: RegionDetail; onChooseDevice: (deviceId: string) => void }) {
-  return (
-    <section className="atlas-section" aria-labelledby="atlas-inspector-devices">
-      <h3 className="atlas-subheading" id="atlas-inspector-devices">Devices whose QIF record lists this region</h3>
-      <p className="atlas-route">via the device records in QIF&rsquo;s atlas file</p>
-      {detail.deviceIds.length === 0 ? <LimitNote limit={limitSentence('stated_devices_none')} /> : (
-        <>
-          <ul className="atlas-chips">
-            {detail.deviceIds.map((deviceId) => (
-              <li key={deviceId}><button type="button" className="atlas-chip" onClick={() => onChooseDevice(deviceId)}>{deviceId}</button></li>
-            ))}
-          </ul>
-          <LimitNote limit={limitSentence('qif_file_fact')} />
-        </>
-      )}
-    </section>
-  );
-}
-
 /**
- * Everything the atlas holds for the selected region, in the order a reader
- * needs in order not to be misled: who the region is and how reliable the
- * record is, then what we hold for it and out of what, and only then anything
- * derived from those records. Material that arrives through the region's band
- * is last and under its own heading, because a band holds up to every region
- * in the atlas and so describes the bucket rather than this region.
+ * Everything the atlas holds for the selected region: the dossier first, each
+ * fact once, then what we hold for it and out of what, what stands for it, and
+ * the literature. Material that arrives through the region's band is last and
+ * under its own heading, because a band holds up to every region in the atlas
+ * and so describes the bucket rather than this region.
  *
  * Its heading takes focus when a region is chosen from the keyboard; "Back to
  * the list" returns it to the region's row, and "Back to the 3D view" to the
@@ -82,18 +59,8 @@ export default function RegionInspector(props: Props) {
         <button type="button" className="atlas-link-button" onClick={props.onBackToList}>Back to the list</button>
         <button type="button" className="atlas-link-button" onClick={props.onBackToView}>Back to the 3D view</button>
       </p>
-      <RegionDossier model={props.model} regionId={region.id} onChooseTechnique={props.onChooseTechnique} onChooseDevice={props.onChooseDevice} />
+      <RegionDossier model={props.model} regionId={region.id} anatomyEvidence={props.anatomyEvidence} onRetryAnatomyEvidence={props.onRetryAnatomyEvidence} onChooseTechnique={props.onChooseTechnique} onChooseDevice={props.onChooseDevice} />
       <InspectorCoverage coverage={coverage} model={props.model} regionId={region.id} />
-      {detail.description !== null && (
-        <section className="atlas-section" aria-labelledby="atlas-inspector-what">
-          <h3 className="atlas-subheading" id="atlas-inspector-what">What the QIF atlas file says it does</h3>
-          <blockquote className="atlas-quote"><p>{detail.description}</p></blockquote>
-          <LimitNote limit={limitSentence('region_description')} />
-        </section>
-      )}
-      <InspectorTechniques detail={detail} evidence={props.anatomyEvidence} onRetryEvidence={props.onRetryAnatomyEvidence} onChooseTechnique={props.onChooseTechnique} />
-      <InspectorDsm model={props.model} regionId={region.id} />
-      <Devices detail={detail} onChooseDevice={props.onChooseDevice} />
       <InspectorShapes detail={detail} />
       <InspectorEvidence regionId={region.id} regionName={region.name} evidence={props.regionEvidence} onRetry={props.onRetryRegionEvidence} />
       {/*

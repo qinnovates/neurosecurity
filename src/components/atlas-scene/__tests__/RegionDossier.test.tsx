@@ -23,7 +23,7 @@ function mount(regionId: string, { model = freshModel(), files = REAL_FILES }: {
   const fetchMock = serveFiles(files);
   const onChooseTechnique = vi.fn();
   const onChooseDevice = vi.fn();
-  const view = render(<RegionDossier model={model} regionId={regionId} onChooseTechnique={onChooseTechnique} onChooseDevice={onChooseDevice} />);
+  const view = render(<RegionDossier model={model} regionId={regionId} anatomyEvidence={{ status: 'idle' }} onRetryAnatomyEvidence={vi.fn()} onChooseTechnique={onChooseTechnique} onChooseDevice={onChooseDevice} />);
   return { ...view, fetchMock, onChooseTechnique, onChooseDevice, model };
 }
 
@@ -62,7 +62,7 @@ describe('RegionDossier', () => {
     const detail = buildRegionDetail(baseModel, litRegionId);
     const [technique] = detail?.linked ?? [];
     if (detail === null || technique === undefined) throw new Error('The real index holds no linked technique.');
-    render(<DossierTechniques detail={{ ...detail, cves: [{ id: 'CVE-2000-0001', techniqueId: technique.id }, { id: 'CVE-2000-0002', techniqueId: technique.id }] }} onChooseTechnique={vi.fn()} />);
+    render(<DossierTechniques detail={{ ...detail, cves: [{ id: 'CVE-2000-0001', techniqueId: technique.id }, { id: 'CVE-2000-0002', techniqueId: technique.id }] }} evidence={{ status: 'idle' }} onRetryEvidence={vi.fn()} onChooseTechnique={vi.fn()} />);
     expect(screen.getByRole('link', { name: '2 CVE precedents' }).getAttribute('href')).toBe(`/atlas/tara/${technique.id}/`);
     expect(document.querySelector('[data-limit-id="cve_precedent"]')?.textContent).toBe(limitSentence('cve_precedent').text);
   });
@@ -107,7 +107,7 @@ describe('RegionDossier', () => {
     const { container, fetchMock, rerender, onChooseDevice, onChooseTechnique } = mount('m1', { model });
     expect(container.querySelector('h3')?.textContent).toBe('Layer and function');
     await waitFor(() => expect(container.querySelector(LOADED_SELECTOR)).not.toBeNull());
-    rerender(<RegionDossier key="pfc" model={model} regionId="pfc" onChooseTechnique={onChooseTechnique} onChooseDevice={onChooseDevice} />);
+    rerender(<RegionDossier key="pfc" model={model} regionId="pfc" anatomyEvidence={{ status: 'idle' }} onRetryAnatomyEvidence={vi.fn()} onChooseTechnique={onChooseTechnique} onChooseDevice={onChooseDevice} />);
     expect(container.querySelector('.atlas-loading')).toBeNull();
     expect(container.querySelector(LOADED_SELECTOR)).not.toBeNull();
     expect(requestedPaths(fetchMock).filter((path) => path === REGION_DOSSIER_PATH)).toHaveLength(1);
