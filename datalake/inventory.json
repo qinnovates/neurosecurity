@@ -3,7 +3,7 @@
   "_note": "Derived file. Do not hand-edit — run `npm run datalake:inventory`.",
   "generated_on": "2026-10-31",
   "totals": {
-    "datalake_files": 42,
+    "datalake_files": 41,
     "datasets_inventoried": 27,
     "records": 21075,
     "unique_dois": 268,

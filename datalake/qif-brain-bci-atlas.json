@@ -2681,7 +2681,8 @@
     "C1-C3_medullary_neurons": "medulla",
     "spinal_cord": "cervical_cord",
     "spinal_dorsal_horn": "cervical_cord",
-    "PAG": "midbrain"
+    "PAG": "midbrain",
+    "motor_cortex": "m1"
   },
   "region_alias_relations": {
     "_note": "States the kind of every entry of region_aliases. Every alias is listed under exactly one of synonym, whole_to_part and part_to_whole. An alias listed under none is unclassified: it is never assumed to be a synonym, a join through it stops the datalake scripts, and it lights no region. synonym: the alias names the same structure as its atlas region. whole_to_part: the alias names a structure larger than, or spanning beyond, the single atlas region it maps to, so a join through it attributes the whole structure to that one part. part_to_whole: the alias names a sub-structure of the atlas region it maps to, so a join through it attributes the sub-structure to the whole region. Scripts that join through region_aliases carry this classification on their output (see region_match in impact-chains.json). The classification is an AI-drafted first pass that has not had expert anatomical review (see _classification), and it covers aliases only: a file that writes an atlas id directly as a stand-in for a smaller or larger structure is not flagged by it.",
@@ -2697,7 +2698,8 @@
       "amygdala",
       "basal_ganglia",
       "spinal_cord",
-      "spinal_dorsal_horn"
+      "spinal_dorsal_horn",
+      "motor_cortex"
     ],
     "part_to_whole": [
       "nucleus_accumbens",
