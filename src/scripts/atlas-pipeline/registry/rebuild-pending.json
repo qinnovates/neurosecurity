@@ -1,0 +1,14 @@
+{
+  "note": "A rebuild is owed. The manifest keeps the code hash the shipped assets were really built under; current_code_hash is the pipeline as committed now. The test accepts exactly this pair, so any further pipeline change fails until this file is updated on review. Delete this file after a rebuild: the test then requires an exact match again.",
+  "built_code_hash": "5b56487a3a159ebabcbeafa22a7fac4a7df8d5c345bc532f9199a4c5dcf275e9",
+  "current_code_hash": "2ab52dc269f8b8a19c85e41ff64594c0edd40932a0d42e5730dea8e884029253",
+  "changes_since_build": [
+    {"commit": "97bf6f58", "change": "Dependency bump for a security advisory, later removed."},
+    {"commit": "9f8b96dd", "change": "Removed the Pillow dependency and the review sheet code that used it."},
+    {"commit": "4e9d0ea9", "change": "Dependency bump for a security advisory."}
+  ],
+  "blocked_by": [
+    "The cit168_rl input files are not in the build cache.",
+    "The archived registration transform is missing, so it must be restored or recomputed with owner review."
+  ]
+}
