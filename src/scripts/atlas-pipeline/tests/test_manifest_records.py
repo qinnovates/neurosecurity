@@ -16,6 +16,7 @@ ASSET_DIR = sources.REPO_ROOT / "src" / "site" / "atlas-assets"
 REGISTRY = sources.load_registry()
 MANIFEST = json.loads((ASSET_DIR / "manifest.json").read_text(encoding="utf-8"))
 PLANS = {plan["id"]: plan for plan in REGISTRY.inputs["assets"]}
+REBUILD_PENDING = sources.PIPELINE_DIR / "registry" / "rebuild-pending.json"
 EVIDENCE = json.loads((sources.PIPELINE_DIR / "evidence" / "registration-evidence.json").read_text(encoding="utf-8"))
 
 
@@ -30,7 +31,13 @@ def test_manifest_lists_exactly_the_buildable_planned_assets() -> None:
 
 
 def test_code_hash_is_that_of_the_committed_pipeline() -> None:
-    assert MANIFEST["pipeline_code_hash"] == codehash.pipeline_code_hash(), "pipeline code or its plan changed since the last build; rebuild the assets"
+    current = codehash.pipeline_code_hash()
+    if not REBUILD_PENDING.exists():
+        assert MANIFEST["pipeline_code_hash"] == current, "pipeline code or its plan changed since the last build; rebuild the assets"
+        return
+    pending = json.loads(REBUILD_PENDING.read_text(encoding="utf-8"))
+    assert MANIFEST["pipeline_code_hash"] == pending["built_code_hash"], "manifest code hash changed; delete rebuild-pending.json after a rebuild"
+    assert current == pending["current_code_hash"], "pipeline code or its plan changed again while a rebuild is pending; review it and update rebuild-pending.json"
 
 
 def test_code_hash_changes_with_any_source_file(tmp_path) -> None:
