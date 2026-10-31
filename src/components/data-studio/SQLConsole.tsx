@@ -360,7 +360,7 @@ export default function SQLConsole() {
           <div style={{ ...styles.loadingFill, width: `${loadProgress}%` }} />
         </div>
         <p style={{ ...styles.privacyNote, marginTop: '0.75rem', justifyContent: 'center' }}>
-          Downloading DuckDB-WASM from jsDelivr CDN
+          Loading DuckDB-WASM from this site
         </p>
       </div>
     );

@@ -46,6 +46,13 @@ const QUERY_TIMEOUT_MS = 10_000;
 // bundled by Rollup as its own chunk — see loadDuckDBModule below.
 const LOCAL_BASE = '/duckdb';
 
+// DuckDB fetches its Parquet reader as an extension on first use. The default source is a third
+// party host, which the page policy (connect-src 'self') blocks. The signed extension is served
+// from this origin instead; see src/site/duckdb/README.md for its pinned hash. The engine verifies
+// the signature itself and refuses an altered file, and a missing file is an error, never a
+// fallback to the default host.
+const EXTENSION_REPOSITORY_PATH = `${LOCAL_BASE}/ext`;
+
 // All known parquet datasets served from /data/parquet/
 const PARQUET_DATASETS = [
   'techniques',
@@ -131,6 +138,8 @@ async function initDuckDB(): Promise<DuckDBInstance> {
   await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 
   const conn = await db.connect();
+  // A fixed same-origin constant, never built from user input.
+  await conn.query(`SET custom_extension_repository='${window.location.origin}${EXTENSION_REPOSITORY_PATH}'`);
 
   // Register all parquet datasets as views using read_parquet()
   // Only uses relative URLs pointing to /data/parquet/*.parquet
