@@ -65,6 +65,27 @@ export function layerOf(bandId: BandId): QifLayer | typeof QIF_LAYER_SEAM {
   throw new Error(`layerOf: band id "${bandId}" is in no layer and not the seam; check datalake/qif-brain-bci-atlas.json layers`);
 }
 
+const bandsInZone = (zone: string) => HOURGLASS_BANDS.filter((band) => band.zone === zone).length;
+
+/** Model counts for published copy. Derived, so a changed band or layer cannot leave a stale number on a page. */
+export const QIF_MODEL_COUNTS = {
+  bands: HOURGLASS_BANDS.length,
+  neuralBands: bandsInZone('neural'),
+  interfaceBands: bandsInZone('interface'),
+  syntheticBands: bandsInZone('synthetic'),
+  layers: QIF_LAYERS.length,
+} as const;
+
+/** Techniques tagged to each band, counted from the registrar. A technique counts once per band it tags. */
+export function countTechniquesByBand(): Record<BandId, number> {
+  const techniques = (registrar as unknown as { techniques: { band_ids?: string[] }[] }).techniques;
+  const entries = HOURGLASS_BANDS.map((band) => {
+    const count = techniques.filter((technique) => technique.band_ids?.includes(band.id)).length;
+    return [band.id, count];
+  });
+  return Object.fromEntries(entries) as Record<BandId, number>;
+}
+
 /** Hourglass band radii for 3D visualization (maps 1:1 to HOURGLASS_BANDS) */
 export const HOURGLASS_RADII = [1.4, 1.3, 1.15, 1.0, 0.85, 0.7, 0.55, 0.45, 0.7, 0.9, 1.2] as const;
 

@@ -5,7 +5,7 @@ import WhitepaperVersionSelector from '@/components/WhitepaperVersionSelector.as
 import { getWhitepaperStats } from '@/lib/whitepaper-stats';
 import { TARA_FDA_STATUS } from '@/lib/whitepaper-corrections';
 import { getLatestChangelog, getTacticsWithCounts, THREAT_DOMAINS } from '@/lib/threat-data';
-import { PILLARS, HOURGLASS_BANDS, HOURGLASS_WIDTHS, TARA_TECHNIQUES } from '@/lib/qif-constants';
+import { PILLARS, HOURGLASS_BANDS, HOURGLASS_WIDTHS, QIF_LAYERS, QIF_LAYER_SEAM, QIF_MODEL_COUNTS, TARA_TECHNIQUES, countTechniquesByBand } from '@/lib/qif-constants';
 import { NEURORIGHT_COUNT } from '@/lib/neurorights-taxonomy';
 
 // Visualization components
@@ -21,6 +21,8 @@ import AttackChainWalkthrough from '@/components/whitepaper/AttackChainWalkthrou
 import RegulatoryTimeline from '@/components/whitepaper/RegulatoryTimeline.astro';
 
 const stats = getWhitepaperStats();
+const modelCounts = QIF_MODEL_COUNTS;
+const bandCounts = countTechniquesByBand();
 const latestChange = getLatestChangelog();
 const tacticsWithCounts = getTacticsWithCounts();
 const totalTactics = tacticsWithCounts.length;
@@ -40,7 +42,7 @@ const tacticColors: Record<string, string> = {
 
 <PageLayout
   title="QIF Whitepaper v8.0 — Working Draft"
-  description={`The Quantified Interconnection Framework — a proposed open security framework for brain-computer interfaces. ${stats.totalTechniques} techniques, 11 bands, 6 neural-specific scoring metrics. v8.0 adds Author's Note, Claims & Disclaimers, Defense Paradox, Design Principles, AI Ethics regulatory overview, and BCI industry survey.`}
+  description={`The Quantified Interconnection Framework — a proposed open security framework for brain-computer interfaces. ${stats.totalTechniques} techniques, ${modelCounts.bands} bands, 6 neural-specific scoring metrics. v8.0 adds Author's Note, Claims & Disclaimers, Defense Paradox, Design Principles, AI Ethics regulatory overview, and BCI industry survey.`}
   breadcrumbs={[{ label: 'Whitepaper' }]}
   wide={true}
 >
@@ -109,7 +111,7 @@ const tacticColors: Record<string, string> = {
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": "QIF Whitepaper v8.0: A Proposed Open Security Framework for Brain-Computer Interfaces",
-        "description": `The Quantified Interconnection Framework — ${stats.totalTechniques} techniques, 11 bands, 6 neural-specific scoring metrics. A proposed open security framework purpose-built for neural devices.`,
+        "description": `The Quantified Interconnection Framework — ${stats.totalTechniques} techniques, ${modelCounts.bands} bands, 6 neural-specific scoring metrics. A proposed open security framework purpose-built for neural devices.`,
         "author": { "@type": "Person", "name": "Qinnovate LLC", "url": "https://qinnovate.com/about/" },
         "publisher": { "@type": "Organization", "name": "Qinnovate", "url": "https://qinnovate.com" },
         "datePublished": "2026-02-18",
@@ -521,7 +523,7 @@ const tacticColors: Record<string, string> = {
           QIF is a proposed open framework that maps BCI techniques to their security risks, clinical applications, and potential psychiatric outcomes in a single unified model.
         </p>
         <p class="text-base text-[var(--color-text-muted)] mb-6">
-          {stats.totalTechniques} catalogued techniques. 11 architectural bands. 6 neural-specific scoring metrics. DSM-5-TR diagnostic category references (for threat modeling, not diagnostic claims). Therapeutic applications for the majority of known attack vectors. <em class="text-amber-500/80">Clinical mappings are research-based references requiring validation by psychiatrists and neuroscientists.</em>
+          {stats.totalTechniques} catalogued techniques. {modelCounts.bands} architectural bands. 6 neural-specific scoring metrics. DSM-5-TR diagnostic category references (for threat modeling, not diagnostic claims). Therapeutic applications for the majority of known attack vectors. <em class="text-amber-500/80">Clinical mappings are research-based references requiring validation by psychiatrists and neuroscientists.</em>
         </p>
       </section>
 
@@ -793,15 +795,15 @@ const tacticColors: Record<string, string> = {
         <div class="prose mb-8">
           <h3>3.1 Where the Architecture Comes From</h3>
           <p>
-            The 11-band model was not designed from first principles. It was derived by converging three established layered architectures:
+            The {modelCounts.bands}-band model was not designed from first principles. It was derived by converging three established layered architectures:
           </p>
           <ol>
             <li><strong>The OSI model</strong> (<a href="https://www.iso.org/standard/20269.html" class="text-[var(--color-accent-primary)]">ISO/IEC 7498</a>) &mdash; 7 layers that decompose a network into physical, data link, network, transport, session, presentation, and application. Every security framework for digital systems uses some variant of this decomposition. But the OSI model stops at the wire. It has no concept of the biological system connected to the other end.</li>
-            <li><strong>Neural systems anatomy</strong> (<a href="https://neurology.mhmedical.com/book.aspx?bookid=3024" class="text-[var(--color-accent-primary)]">Kandel et al., <em>Principles of Neural Science</em>, 6th ed., 2021</a>) &mdash; The brain is not a single structure. It is a set of anatomically distinct territories: spinal cord, brainstem, cerebellum, diencephalon (thalamus/hypothalamus), basal ganglia, limbic system, and neocortex. Each has different cellular architecture, different oscillatory regimes, and different clinical consequences if compromised. The 7 neural bands (N7&ndash;N1) are addresses for these territories, not an order: the number carries no severity, processing or traversal meaning. The thalamus (<a href="https://mitpress.mit.edu/9780262513449/exploring-the-thalamus-and-its-role-in-cortical-function/" class="text-[var(--color-accent-primary)]">Sherman &amp; Guillery, 2006</a>) is the principal route by which sensory input (except the first cortical stage of olfaction), cerebellar output and basal ganglia output reach neocortex; transmission through it is state-dependent. An architecture that treats &ldquo;the brain&rdquo; as one layer misses this entirely.</li>
+            <li><strong>Neural systems anatomy</strong> (<a href="https://neurology.mhmedical.com/book.aspx?bookid=3024" class="text-[var(--color-accent-primary)]">Kandel et al., <em>Principles of Neural Science</em>, 6th ed., 2021</a>) &mdash; The brain is not a single structure. It is a set of anatomically distinct territories: spinal cord, brainstem, cerebellum, diencephalon (thalamus/hypothalamus), basal ganglia, limbic system, and neocortex. Each has different cellular architecture, different oscillatory regimes, and different clinical consequences if compromised. The {modelCounts.neuralBands} neural bands (N7&ndash;N1) are addresses for these territories, not an order: the number carries no severity, processing or traversal meaning. The thalamus (<a href="https://mitpress.mit.edu/9780262513449/exploring-the-thalamus-and-its-role-in-cortical-function/" class="text-[var(--color-accent-primary)]">Sherman &amp; Guillery, 2006</a>) is the principal route by which sensory input (except the first cortical stage of olfaction), cerebellar output and basal ganglia output reach neocortex; transmission through it is state-dependent. An architecture that treats &ldquo;the brain&rdquo; as one layer misses this entirely.</li>
             <li><strong>The bio-digital boundary</strong> (<a href="https://www.ietf.org/proceedings/51/slides/plenary-1/" class="text-[var(--color-accent-primary)]">Deering, 2001</a>; the Internet hourglass principle) &mdash; Where electrodes touch tissue, signals transition from ionic to electronic. This is not a clean handoff. It is a physical interface with its own impedance characteristics, its own failure modes, and its own threat profile. The I0 band applies Deering&rsquo;s hourglass insight &mdash; that all traffic must pass through a narrow waist &mdash; to the electrode-tissue boundary, where every neural signal crosses from biology to silicon. Neither the OSI model nor neuroanatomy alone accounts for this zone.</li>
           </ol>
           <p>
-            QIF maps all three onto a single stack. The 7 neural bands (N7&ndash;N1) come from neuroanatomy; the codes are addresses, not an order of severity. The 3 synthetic bands (S1&ndash;S3) come from the electronic processing chain, analogous to OSI's lower layers. The interface band (I0) is the bridge &mdash; the electrode-tissue boundary where biology becomes data. The result is an 11-band, <strong>7-1-3 asymmetric hourglass</strong>: wide at the top (neural complexity), narrow at the center (physical bottleneck), and wider at the bottom (synthetic processing).
+            QIF maps all three onto a single stack. The {modelCounts.neuralBands} neural bands (N7&ndash;N1) come from neuroanatomy; the codes are addresses, not an order of severity. The {modelCounts.syntheticBands} synthetic bands (S1&ndash;S3) come from the electronic processing chain, analogous to OSI's lower layers. The interface band (I0) is the bridge &mdash; the electrode-tissue boundary where biology becomes data. The result is a {modelCounts.bands}-band, <strong>{modelCounts.neuralBands}-{modelCounts.interfaceBands}-{modelCounts.syntheticBands} asymmetric hourglass</strong>: wide at the top (neural complexity), narrow at the center (physical bottleneck), and wider at the bottom (synthetic processing).
           </p>
         </div>
 
@@ -823,16 +825,28 @@ const tacticColors: Record<string, string> = {
         <div class="prose mb-8">
           <h3>3.3 Architecture</h3>
           <p>
-            The QIF Hourglass is an 11-band architectural model that maps all potential threat surfaces within a BCI, from the highest cortical structures through the electrode-tissue boundary and into the synthetic processing chain.
+            The QIF Hourglass is a {modelCounts.bands}-band architectural model that maps all potential threat surfaces within a BCI, from the highest cortical structures through the electrode-tissue boundary and into the synthetic processing chain.
           </p>
           <p>
-            Seven bands are <strong>neural</strong> (N7 Neocortex through N1 Spinal Cord), representing biological tissue with distinct functional properties and vulnerability profiles. One band is the <strong>interface</strong> (I0), the electrode-tissue boundary where biological signals are converted to digital data, and where the highest concentration of techniques converges. Three bands are <strong>synthetic</strong> (S1 Near-Field through S3 Far-Field), covering the electronic processing, host compute, and communication chain.
+            {modelCounts.neuralBands} bands are <strong>neural</strong> (N7 Neocortex through N1 Spinal Cord), representing biological tissue with distinct functional properties and vulnerability profiles. {modelCounts.interfaceBands} band is the <strong>interface</strong> (I0), the electrode-tissue boundary where biological signals are converted to digital data, and the point every signal has to cross. {modelCounts.syntheticBands} bands are <strong>synthetic</strong> (S1 Near-Field through S3 Far-Field), covering the electronic processing, host compute, and communication chain.
           </p>
           <p>
-            The hourglass shape is deliberate. I0, the neural interface band, constitutes the architectural chokepoint. All signals must traverse this point. With over half of the {stats.totalTechniques} catalogued techniques targeting this band, it represents the majority of the total threat surface. Securing I0 is the single highest-leverage investment in BCI safety.
+            The hourglass shape is deliberate. I0, the neural interface band, constitutes the architectural chokepoint. All signals must traverse this point. {bandCounts.I0} of the {stats.totalTechniques} catalogued techniques are tagged to this band. Because every signal crosses it, securing I0 is a high-leverage place to invest in BCI safety, even though it is not the band with the most tagged techniques.
           </p>
         </div>
 
+        <div class="glass rounded-xl p-6 mb-6">
+          <h3 class="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1 text-[var(--color-text-primary)]">Public layers over the bands (proposed)</h3>
+          <p class="text-sm text-[var(--color-text-muted)] mb-4">
+            {modelCounts.layers} proposed, unvalidated presentation layers group the bands for reading. The band id stays the address, and the layers are not steps a signal passes through. The interface is a seam, not a layer.
+          </p>
+          <ul class="text-sm text-[var(--color-text-muted)] space-y-1">
+            {QIF_LAYERS.map((layer) => (
+              <li><strong class="text-[var(--color-text-primary)]">{layer.name}</strong>: {layer.band_ids.join(', ')}</li>
+            ))}
+            <li><strong class="text-[var(--color-text-primary)]">{QIF_LAYER_SEAM.name}</strong> (seam): {QIF_LAYER_SEAM.band_ids.join(', ')}</li>
+          </ul>
+        </div>
         <HourglassChart />
 
         <div class="glass rounded-xl p-5 mt-6 mb-8" style="border-left: 3px solid var(--color-accent-tertiary);">
@@ -3322,7 +3336,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
             { term: 'NSP', def: 'Neural Sensory Protocol. Post-quantum wire protocol for neural data streams.' },
             { term: 'CVSS', def: 'Common Vulnerability Scoring System (FIRST.org). Industry standard for IT.' },
             { term: 'PINS', def: 'Potential Impact to Neural Safety. Flag for techniques with ongoing harm risk.' },
-            { term: 'Hourglass', def: '11-band architecture model: 7 neural (N7-N1), 1 interface (I0), 3 synthetic (S1-S3).' },
+            { term: 'Hourglass', def: `${modelCounts.bands}-band architecture model: ${modelCounts.neuralBands} neural (N7-N1), ${modelCounts.interfaceBands} interface (I0), ${modelCounts.syntheticBands} synthetic (S1-S3).` },
             { term: 'I0', def: 'Interface band. The electrode-tissue boundary where biology meets silicon.' },
             { term: 'Dual-use', def: 'Same mechanism used for therapy and attack. Difference: consent, dosage, oversight.' },
             { term: 'Neuromodesty', def: 'Principle that neural correlates do not prove causation (Morse 2006).' },
@@ -3508,7 +3522,7 @@ requires: [device.owner.approval, manufacturer.signature]</pre>
           <div class="glass-subtle rounded-lg p-4">
             <p class="text-xs font-semibold text-amber-500 uppercase tracking-wider mb-2">Human-Originated</p>
             <ul class="space-y-1.5 text-xs text-[var(--color-text-muted)]">
-              <li>The 11-band hourglass architecture and its mathematical derivation</li>
+              <li>The {modelCounts.bands}-band hourglass architecture and its mathematical derivation</li>
               <li>TARA threat taxonomy structure and all {TARA_TECHNIQUES} technique classifications</li>
               <li>NISS scoring methodology, all metric assignments, and all NISS scores</li>
               <li>Neural Impact Chain pipeline and all DSM-5-TR diagnostic mappings</li>
