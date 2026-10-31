@@ -38,27 +38,31 @@
 
 > **v2.0 (14-layer OSI-based) is DEPRECATED.** Replaced 2026-02-02. See Derivation Log entries 1–14.
 >
-> **v3.0/3.1 (7-band, 3-1-3) refined to v4.0 (11-band, 7-1-3) on 2026-02-06.** The 3-band neural domain was expanded to 7 bands for complete neuroanatomical coverage. Each major brain structure now has its own band with severity stratification and BCI device mapping. See Derivation Log entries 33-34.
+> **v3.0/3.1 (7-band, 3-1-3) refined to v4.0 (11-band, 7-1-3) on 2026-02-06.** The 3-band neural domain was expanded to 7 bands so that the main surgical and recording targets (cortical arrays, hippocampal stimulation, STN/GPi/VIM/ANT deep-brain stimulation, cerebellar, brainstem and cord devices) each land in a band of their own. The seven bands are a coarse indexing convention over selected central-nervous-system territories; they are not a complete neuroanatomical atlas and peripheral structures are not among them. See Derivation Log entries 33-34 and 116.
 >
 > v3.1 (7-band) remains valid as a **strategic view** — the 7-band neural expansion is a tactical decomposition, analogous to how the 14-layer classical model is a "zoom in" of the hourglass.
 
 ### 3 Zones, 11 Bands (7-1-3)
 
-**NEURAL DOMAIN (Upper Hourglass) — 7 bands (addressing version 1)**
+**NEURAL DOMAIN (Upper Hourglass) — 7 bands (addressing version 2, 2026-10-31)**
 
-> Band codes are addresses, not an order: the number carries no severity, processing or traversal meaning. Membership follows addressing version 1, a functional grouping adapted from Kandel's hierarchy. A proposed version 2 would assign each structure to the territory that holds it, moving the substantia nigra and VTA from N5 to N2 and the STN from N5 to N4 and renaming N5 and N6; it is not applied. Source of truth for membership: `datalake/qif-brain-bci-atlas.json`.
+> Band codes are **unordered addresses**: the number carries no severity, processing, traversal or indeterminacy meaning. The cord-to-cortex ordering the bands were first derived from (Entries 5–7) is withdrawn as a claim: it placed stochastic, chaotic, computationally complex and quantum-uncertain dynamics on one scale with no estimator, and current systems neuroscience (pattern generators in cord and brainstem, cerebellar granule-cell dynamics, neuromodulatory broadcast systems, higher-order thalamus) supports no monotonic gradient. Membership follows **addressing version 2**: a region is addressed by the adult territory that holds its principal neurons, and what it does is a tag, not an address. Version 2 moved the subthalamic nucleus from N5 to N4, the substantia nigra and the ventral tegmental area from N5 to N2 and the posterior cingulate from N6 to N7; the cauda equina stays in N1 as a held, contradicted address because no peripheral band exists. Each move is recorded with its basis and citation in `_metadata.membership_changes`; the subthalamic placement is an adult-topography convention (the prosomeric model places its origin in the hypothalamic domain). Source of truth: `datalake/qif-brain-bci-atlas.json`. Every assignment is AI-drafted and reviewed by AI only until a neuroanatomist's review is recorded.
 >
-> Determinacy and QI Range are **hypotheses**: untested, with no estimator defined, and proposed for the version 1 memberships (`datalake/qif-hypotheses.json`).
+> Determinacy and QI Range are **hypotheses**: untested, with no estimator defined, and first proposed for the version 1 memberships (`datalake/qif-hypotheses.json`). They remain in the table for continuity with Entries 5–7 and carry no claim about the bands.
 
-| Band | Name | Key Structures | Determinacy | QI Range |
+| Band | Name | Key Structures (version 2) | Determinacy (hypothesis) | QI Range (hypothesis) |
 |------|------|----------------|-------------|----------|
-| **N7** | Neocortex | PFC, M1, V1, A1, Broca, Wernicke, PMC, SMA, PPC | Quantum Uncertain | 0.3–0.5 |
-| **N6** | Limbic System | Hippocampus, BLA, insula, ACC, cingulate | Chaotic → QU | 0.2–0.4 |
-| **N5** | Basal Ganglia | Striatum, GPi/GPe, STN, substantia nigra | Chaotic | 0.15–0.35 |
-| **N4** | Diencephalon | Thalamus, hypothalamus, VIM, ANT | Stochastic → Chaotic | 0.1–0.3 |
+| **N7** | Neocortex | PFC, M1, V1, A1, Broca, Wernicke, PMC, SMA, PPC, S1 cortex, posterior cingulate | Quantum Uncertain | 0.3–0.5 |
+| **N6** | Limbic System | Hippocampus, BLA, insula, ACC | Chaotic → QU | 0.2–0.4 |
+| **N5** | Basal Ganglia | Striatum, GPi/GPe, central amygdala | Chaotic | 0.15–0.35 |
+| **N4** | Diencephalon | Thalamus, hypothalamus, VIM, ANT, STN | Stochastic → Chaotic | 0.1–0.3 |
 | **N3** | Cerebellum | Cerebellar cortex, deep nuclei, vermis | Stochastic | 0.1–0.25 |
-| **N2** | Brainstem | Medulla, pons, midbrain, reticular formation | Stochastic | 0.05–0.15 |
-| **N1** | Spinal Cord | Cervical, thoracic, lumbar, sacral, cauda equina | Stochastic | 0.01–0.1 |
+| **N2** | Brainstem | Medulla, pons, midbrain, reticular formation, substantia nigra, VTA | Stochastic | 0.05–0.15 |
+| **N1** | Spinal Cord | Cervical, thoracic, lumbar, sacral; cauda equina held | Stochastic | 0.01–0.1 |
+
+**PUBLIC LAYERS (2026-10-31): eight, plus one seam.** The atlas pages speak in eight layers: the seven neural bands above, and a **classical stack** holding S1, S2 and S3 — the part of a neural device that existing security already models, addressed with the tools engineers already have (OSI as a networking reference model, MITRE ATT&CK and ATLAS, CVSS). **I0 is drawn as the seam between the two groups, not as a layer**: a typed device–tissue coupling (an implanted electrode through an evolving tissue response; an epidural or scalp electrode through volume conduction, never crossing tissue; a cochlear or vagal transducer to a peripheral nerve), whose recorded controls are biophysical. Band ids stay the address every dataset is tagged with; the layers are presentation and partition the 11 ids exactly. Source: `layers` in `datalake/qif-brain-bci-atlas.json`; `QIF_LAYERS`, `QIF_LAYER_SEAM` and `layerOf()` in `src/lib/qif-constants.ts`. "Layer 8" is never written: in the retired 14-layer model L8 was the neural interface.
+
+> Names: the version 1 band names (Limbic System, Basal Ganglia) are circuit names and are the reason the substantia nigra, VTA and STN were first misfiled. Territorial names (Allocortex and pallial nuclei; Cerebral nuclei) are recorded as `proposed_name_v2` on the layers and will replace them once a neuroanatomist has reviewed the membership; the circuit names then remain as searchable tags.
 
 **INTERFACE ZONE (Bottleneck) — Quasi-quantum**
 
@@ -95,12 +99,11 @@
 - No relation to OSI layer numbers
 
 ### Hourglass Geometry
-- **Width = state space / possibility space**
-- Widest at N7 (neocortex, max security-relevant indeterminacy) and S3 (max classical pathways)
-- Narrowest at I0 (measurement collapses possibilities)
+- **Width = state space / possibility space** (a drawing convention; see the withdrawal of the indeterminacy ordering above)
+- Drawn widest at N7 and S3, narrowest at I0; under the original hypothesis N7 held the most security-relevant indeterminacy and I0 the measurement bottleneck. The width now carries no ordering claim about the neural bands.
 - **7-1-3 asymmetry:** 7 neural bands, 1 interface band, 3 silicon bands
 - Neural side is wider because the brain has 500M years of evolutionary complexity; silicon is human-designed with bounded complexity
-- The bottleneck has **real thickness** (quasi-quantum zone, not a line)
+- The bottleneck has **real thickness** (the device–tissue coupling is a typed interface with its own tissue response, not a line)
 
 ### I0 Depth Subclassification (Entry 59, 2026-02-18)
 

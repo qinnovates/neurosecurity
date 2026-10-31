@@ -7,7 +7,7 @@
     "maintainer": "Qinnovate LLC"
   },
   "current_stats": {
-    "as_of": "2026-10-20",
+    "as_of": "2026-10-31",
     "threat_techniques": 178,
     "bci_devices": 71,
     "brain_regions": 38,
@@ -21,12 +21,12 @@
     "nsp_version": "v0.5",
     "tara_version": "v1.10",
     "atlas_version": "v1.2.0",
-    "derivation_log_entries": 121,
-    "field_journal_entries": 18,
+    "derivation_log_entries": 122,
+    "field_journal_entries": 19,
     "neurowall_version": "v0.8",
-    "blog_posts": 77,
+    "blog_posts": 81,
     "cross_ai_validations": 14,
-    "research_sources": 540,
+    "research_sources": 542,
     "techniques_niss_scored": 131,
     "tara_domains": 12,
     "bci_companies": 68,
@@ -37,7 +37,7 @@
     "whitepaper_version": "v8.0",
     "techniques_with_dsm5": 76,
     "techniques_niss_provisional": 10,
-    "technique_variants": 1
+    "technique_variants": 0
   },
   "milestones": [
     {

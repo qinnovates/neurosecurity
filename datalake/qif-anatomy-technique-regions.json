@@ -44,7 +44,8 @@
         {
           "term": "cortical",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -72,7 +73,8 @@
         {
           "term": "cochlea",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -135,7 +137,8 @@
         {
           "term": "motor cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -168,7 +171,8 @@
         {
           "term": "hippocampal",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -185,7 +189,8 @@
         {
           "term": "PFC",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -202,7 +207,8 @@
         {
           "term": "DLPFC",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -235,7 +241,8 @@
         {
           "term": "basal ganglia",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -252,7 +259,8 @@
         {
           "term": "PFC",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -280,7 +288,8 @@
         {
           "term": "insula",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -297,7 +306,8 @@
         {
           "term": "TPJ",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -314,7 +324,8 @@
         {
           "term": "mPFC",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -331,7 +342,8 @@
         {
           "term": "PFC",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -379,7 +391,8 @@
         {
           "term": "hippocampal",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -432,7 +445,8 @@
         {
           "term": "visual cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -449,7 +463,8 @@
         {
           "term": "prefrontal cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -497,7 +512,8 @@
         {
           "term": "temporal cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -555,7 +571,8 @@
         {
           "term": "auditory nerve",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -572,7 +589,8 @@
         {
           "term": "cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -589,7 +607,8 @@
         {
           "term": "auditory cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -606,7 +625,8 @@
         {
           "term": "cochlear",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -629,7 +649,8 @@
         {
           "term": "visual cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -646,7 +667,8 @@
         {
           "term": "retina",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -663,7 +685,8 @@
         {
           "term": "optic nerve",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -680,7 +703,8 @@
         {
           "term": "V1",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -723,7 +747,8 @@
         {
           "term": "vestibular nerve",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -740,7 +765,8 @@
         {
           "term": "vestibular nuclei",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -757,7 +783,8 @@
         {
           "term": "cortical",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -780,7 +807,8 @@
         {
           "term": "vestibular organ",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -797,7 +825,8 @@
         {
           "term": "vestibular nerve",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -814,7 +843,8 @@
         {
           "term": "vestibular nuclei",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -831,7 +861,8 @@
         {
           "term": "oculomotor nuclei",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -848,7 +879,8 @@
         {
           "term": "VOR arc",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -871,7 +903,8 @@
         {
           "term": "CN VIII",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -888,7 +921,8 @@
         {
           "term": "cochlea",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -905,7 +939,8 @@
         {
           "term": "vestibule",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -922,7 +957,8 @@
         {
           "term": "vestibular/cochlear nuclei",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -945,7 +981,8 @@
         {
           "term": "vestibular organ",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -962,7 +999,8 @@
         {
           "term": "vestibular nerve",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -979,7 +1017,8 @@
         {
           "term": "vestibular nuclei",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -996,7 +1035,8 @@
         {
           "term": "cortical",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1019,7 +1059,8 @@
         {
           "term": "cortical",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1042,7 +1083,8 @@
         {
           "term": "nucleus_accumbens",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1059,7 +1101,8 @@
         {
           "term": "VTA",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1076,7 +1119,8 @@
         {
           "term": "prefrontal",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1093,7 +1137,8 @@
         {
           "term": "reward network",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1116,7 +1161,8 @@
         {
           "term": "hippocampus",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1133,7 +1179,8 @@
         {
           "term": "cortical",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1150,7 +1197,8 @@
         {
           "term": "declarative memory systems",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1173,7 +1221,8 @@
         {
           "term": "Broca's area",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1190,7 +1239,8 @@
         {
           "term": "corticobulbar_tract",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1207,7 +1257,8 @@
         {
           "term": "cranial motor nuclei",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1230,7 +1281,8 @@
         {
           "term": "amygdala",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1247,7 +1299,8 @@
         {
           "term": "PFC",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1264,7 +1317,8 @@
         {
           "term": "default mode network",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1292,7 +1346,8 @@
         {
           "term": "thalamic sleep nuclei",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1309,7 +1364,8 @@
         {
           "term": "cortical",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1332,7 +1388,8 @@
         {
           "term": "amygdala",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1349,7 +1406,8 @@
         {
           "term": "hippocampus",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1372,7 +1430,8 @@
         {
           "term": "motor cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1389,7 +1448,8 @@
         {
           "term": "primary_motor_cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1406,7 +1466,8 @@
         {
           "term": "corticospinal tract",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1423,7 +1484,8 @@
         {
           "term": "motor neurons",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1446,7 +1508,8 @@
         {
           "term": "hippocampal",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1463,7 +1526,8 @@
         {
           "term": "PFC",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1480,7 +1544,8 @@
         {
           "term": "default mode network",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1508,7 +1573,8 @@
         {
           "term": "visual cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1531,7 +1597,8 @@
         {
           "term": "amygdala",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1548,7 +1615,8 @@
         {
           "term": "bed_nucleus_stria_terminalis",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1565,7 +1633,8 @@
         {
           "term": "hypothalamus",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1582,7 +1651,8 @@
         {
           "term": "PAG",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1599,7 +1669,8 @@
         {
           "term": "autonomic nervous system",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1622,7 +1693,8 @@
         {
           "term": "ventral striatum",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1639,7 +1711,8 @@
         {
           "term": "orbitofrontal cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1656,7 +1729,8 @@
         {
           "term": "subcallosal_cingulate",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1673,7 +1747,8 @@
         {
           "term": "reward network",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1696,7 +1771,8 @@
         {
           "term": "amygdala",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1713,7 +1789,8 @@
         {
           "term": "insula",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1730,7 +1807,8 @@
         {
           "term": "ACC",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1747,7 +1825,8 @@
         {
           "term": "prefrontal",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1770,7 +1849,8 @@
         {
           "term": "anterior_insula",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1787,7 +1867,8 @@
         {
           "term": "TPJ",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1804,7 +1885,8 @@
         {
           "term": "mirror_neuron_system",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1821,7 +1903,8 @@
         {
           "term": "social cognition network",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1844,7 +1927,8 @@
         {
           "term": "motor cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1861,7 +1945,8 @@
         {
           "term": "M1_larynx",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1878,7 +1963,8 @@
         {
           "term": "ventral premotor cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1895,7 +1981,8 @@
         {
           "term": "corticobulbar tract",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1912,7 +1999,8 @@
         {
           "term": "laryngeal motor neurons",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1935,7 +2023,8 @@
         {
           "term": "Wernicke's area",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1952,7 +2041,8 @@
         {
           "term": "auditory association cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1969,7 +2059,8 @@
         {
           "term": "posterior_STG",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -1986,7 +2077,8 @@
         {
           "term": "language comprehension network",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2009,7 +2101,8 @@
         {
           "term": "primary visual cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2026,7 +2119,8 @@
         {
           "term": "visual_cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2043,7 +2137,8 @@
         {
           "term": "thalamic relay",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2066,7 +2161,8 @@
         {
           "term": "auditory nerve",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2083,7 +2179,8 @@
         {
           "term": "cochlear nucleus",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2116,7 +2213,8 @@
         {
           "term": "VTA",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2139,7 +2237,8 @@
         {
           "term": "VTA",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2172,7 +2271,8 @@
         {
           "term": "VTA",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2189,7 +2289,8 @@
         {
           "term": "SNc",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2212,7 +2313,8 @@
         {
           "term": "cortical",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2235,7 +2337,8 @@
         {
           "term": "cortical",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2258,7 +2361,8 @@
         {
           "term": "M1",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2281,7 +2385,8 @@
         {
           "term": "M1",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2309,7 +2414,8 @@
         {
           "term": "thalamus",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2337,7 +2443,8 @@
         {
           "term": "vagal afferents",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2354,7 +2461,8 @@
         {
           "term": "NTS",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2371,7 +2479,8 @@
         {
           "term": "nucleus basalis of Meynert",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2388,7 +2497,8 @@
         {
           "term": "cortical",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2411,7 +2521,8 @@
         {
           "term": "auricular branch of vagus nerve",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2428,7 +2539,8 @@
         {
           "term": "NTS",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2451,7 +2563,8 @@
         {
           "term": "SMA",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2484,7 +2597,8 @@
         {
           "term": "vagal afferents",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2501,7 +2615,8 @@
         {
           "term": "NTS",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2518,7 +2633,8 @@
         {
           "term": "locus coeruleus",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2535,7 +2651,8 @@
         {
           "term": "dorsal raphe nucleus",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2552,7 +2669,8 @@
         {
           "term": "brainstem",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2575,7 +2693,8 @@
         {
           "term": "dorsal raphe nucleus",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2598,7 +2717,8 @@
         {
           "term": "dorsal raphe",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2615,7 +2735,8 @@
         {
           "term": "spinal",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2632,7 +2753,8 @@
         {
           "term": "brainstem",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",
@@ -2675,7 +2797,8 @@
         {
           "term": "cortex",
           "valid_for_addressing": [
-            1
+            1,
+            2
           ],
           "evidence": {
             "claim_basis": "catalog_text",

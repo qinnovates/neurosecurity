@@ -15,6 +15,7 @@
 ### October 2026 (Entries 106+) — Data Refresh, Citation Audit, Claim Corrections
 | Entry | Topic | Link |
 |-------|-------|------|
+| 116 | Addressing version 2 and eight public layers: band codes declared unordered addresses by the territory of their principal neurons (the cord-to-cortex indeterminacy ordering withdrawn); STN to N4, substantia nigra and VTA to N2, posterior cingulate to N7; a `layers` grouping (seven neural + classical stack, I0 as the seam) added to the atlas with `layerOf()`; pathway bands, technique links and impact chains re-derived | [Entry 116](#entry-116-addressing-v2-eight-layers) |
 | 115 | Status taxonomy: CONFIRMED retired and 27 techniques reclassified; colliding QIF-T0172/T0173 renumbered to T0177/T0178; Professor X source corrected; registry figures in the paper generated from the registrar; CI leak, staleness and paper-build checks | [Entry 115](#entry-115-status-taxonomy-renumbering-derived-figures) |
 | 114 | Descriptive technique notes and three renames (framing decision M2/M3, pending owner acceptance): 31 notes (the decision's 26 plus 5 "Extract..." openings found in verification) no longer read as instructions and end with the entry's detection text; T0011, T0046, T0099 renamed with `legacy_names` aliases (T0065 rename held for owner check 12); no technique removed | [Entry 113](#entry-114-describing-techniques-not-instructing) |
 | 113 | ICD-10-CM code integrity: 33 wildcard forms (`F20.x` and the like, 214 entries) replaced by the categories they stand for; 89 codes outside chapter F moved out of `dsm_conditions` into `icd10_conditions`; every code label set to its official FY2027 title; five wrong codes corrected; `niss_dsm_bridge` and "NISS metrics predict diagnostic clusters" retired; GUARDRAILS now describes NISS by its six metrics | [Entry 113](#entry-113-icd10cm-code-integrity) |
@@ -361,6 +362,44 @@ Each entry follows this structure:
 | 3 | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
 | 2 | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded by Entry 7 |
 | 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
+---
+
+## Entry 116: Addressing Version 2 and Eight Public Layers {#entry-116-addressing-v2-eight-layers}
+
+**Date:** 2026-10-31
+**Classification:** CORRECTION
+**AI Systems:** Claude Fable 5.1 (five-agent review panel); three external model reviews of the same brief, from other model families, cross-referenced
+**Connected entries:** Entry 5 (QI gradient), Entry 6 (determinacy spectrum), Entry 7 (hourglass), Entries 33–34 (seven neural bands), Entry 106 (October 2026 data refresh)
+**AI Contribution Level:** AI-generated, human-approved
+
+Taxonomy and schema change to the neural side of the layer model, and a correction to how the bands were first derived.
+
+### Correction: band codes are unordered addresses
+
+- Entries 5–7 derived the seven neural bands from a hypothesised gradient of security-relevant indeterminacy rising from spinal cord to neocortex, with per-band determinacy classes and QI ranges. That ordering is withdrawn as a claim. It placed stochastic, chaotic, computationally complex and quantum-uncertain dynamics on one scale with no estimator, and current systems neuroscience supports no monotonic gradient along the neuraxis: spinal and brainstem pattern generators (Grillner & El Manira 2020, doi:10.1152/physrev.00015.2019), cerebellar granule-cell dynamics and cerebellar cognitive roles (Schmahmann et al. 2019, doi:10.1146/annurev-neuro-070918-050258), neuromodulatory broadcast systems, and higher-order thalamic computation in place of relay (Sherman 2016, doi:10.1038/nn.4269). The determinacy and QI columns stay in `QIF-TRUTH.md` as hypotheses for continuity; they describe nothing about the bands.
+- The statement "the 3-band neural domain was expanded to 7 bands for complete neuroanatomical coverage" is corrected: seven is a coarse indexing convention over selected CNS territories that separates the main device targets; it is not an atlas and holds no peripheral structure.
+- The teaching sentence "all signals pass through the thalamus except olfaction" is retired from the framework text: most primary sensory pathways to neocortex include a thalamic synapse; motor output, cortico-cortical traffic, reflexes and neuromodulatory projections do not relay there.
+
+### Schema: membership version 2 (`datalake/qif-brain-bci-atlas.json`, 1.3.0 → 1.5.0)
+
+- `_metadata.addressing_version: 2` declared; `_metadata.membership_rule` ("a region is addressed by the adult territory that holds its principal neurons; what it does is a tag, not an address"); `_metadata.membership_changes` log, one record per move with basis, citation, status `proposed` and `reviewed_by: null`.
+- Moves: `stn` N5 → N4 (subthalamus, Terminologia Anatomica 1998; convention, developmental origin disputed under the prosomeric model), `substantia_nigra` N5 → N2 (UBERON:0002038), `vta` N5 → N2 (UBERON:0002691), `cingulate` (the posterior cingulate record, areas 23/29/30/31) N6 → N7 (Vogt 2005, doi:10.1038/nrn1704). `cauda_equina` held in N1 with `band_basis: contradicted` because no peripheral band exists. Each moved record carries `band_basis: territory` and a `band_basis_reason`.
+- Regions per band after the change: N7 11, N6 4, N5 4, N4 5, N3 3, N2 6, N1 5 (38). No region changed identity; the registrar's 178 `band_ids` are unchanged and 27 techniques tagged N5 await review under the registrar protocol, as do 18 tagged exactly `[I0, N1]`.
+- `layers` block added at top level: `_schema` (status, addressing version, membership rule, reading rule, open decisions), eight `entries` (seven neural, one `classical` holding S1–S3) and a `seam` (I0), partitioning the 11 band ids exactly. Band names unchanged; territorial names recorded as `proposed_name_v2`.
+- `src/lib/qif-constants.ts`: `BandId`, `QifLayer`, `QIF_LAYERS`, `QIF_LAYER_SEAM`, `layerOf()`; band descriptions updated to the version 2 memberships. `src/lib/anatomy/addressing-version.ts`: the undeclared-version default removed; an atlas file without `_metadata.addressing_version` now stops the build.
+
+### Derived data
+
+- `datalake/qif-neural-pathways.json` re-derived (`npm run derive:pathway-bands`): `pedunculopontine_cholinergic.target_bands` N4,N5 → N4,N2; `reward_circuit.origin_band` N5 → N2; `default_mode_network.target_bands` reordered.
+- `datalake/qif-anatomy-crosswalk.json`: all 34 rows `valid_for_addressing` [1] → [1, 2] (a row maps a region to atlas geometry; the region's band is not part of the row). `datalake/qif-anatomy-technique-regions.json` re-drafted (`draft-technique-regions.mjs`, `DRAFTED_FOR_ADDRESSING` [1, 2]): 123 links, scopes unchanged (48 region-scoped, 63 band-level).
+- `datalake/impact-chains.json` recomputed (`npm run compute:chains`): 19,658 → 19,798 rows, 111 of 178 techniques, 34 of 38 regions.
+- Inventory, KQL JSON and parquet regenerated by `npm run prebuild`; `layers` listed as a dataset.
+
+### Verification
+
+- `npm run derive:pathway-bands`, `node datalake/scripts/draft-technique-regions.mjs`, `npm run compute:chains`, `npm run prebuild`, `npm run type-check`, `npm test` (full suite, including the new `src/lib/__tests__/qif-layers.test.ts` partition test and the re-pinned addressing-version tripwire in `load-anatomy-data.test.ts`).
+- Membership and the layer grouping were reviewed by AI only, in two independent passes (a five-role panel, then three external model families on one brief). No human neuroanatomist has reviewed them; the review brief for one is `neural-structure-expert-brief.md` in the research staging area. Open: the 27 and 18 technique retags above; territorial band names; a two-address record (`port_anatomy`, `first_central_territory`) for peripheral devices; a blinded benchmark of seven against five and nine territories.
 
 ---
 

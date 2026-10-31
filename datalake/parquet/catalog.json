@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-31T02:54:56.147252+00:00",
+    "generated": "2026-10-31T06:52:08.369149+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
     "total_datasets": 39,
-    "total_rows": 24052
+    "total_rows": 24192
   },
   "datasets": {
     "techniques": {
@@ -81,7 +81,7 @@
       "source": "datalake/parquet/technique_neurorights.parquet"
     },
     "impact_chains": {
-      "rows": 19658,
+      "rows": 19798,
       "columns": 15,
       "column_names": [
         "technique_id",
@@ -100,8 +100,8 @@
         "dsm_name",
         "dsm_cluster"
       ],
-      "size_bytes": 23044,
-      "sha256": "c63ba94bb4c69e083f36e1387118e12d7fb92a25d68beaa628463a230b8a026b",
+      "size_bytes": 23233,
+      "sha256": "53da9ae37b54c656553427754aabf9ea1ef14c544d698d7475304830cbddd761",
       "compression": "zstd",
       "source": "datalake/parquet/impact_chains.parquet"
     },
@@ -160,7 +160,7 @@
         "highlight_hue"
       ],
       "size_bytes": 64373,
-      "sha256": "9f4fbf3c993ecc9fb96e6be982adebc77cc394e57c82e49efa1fdc4f81ca8025",
+      "sha256": "5a498d8e06d353bd3cfa5283c246ad2dfdb15ce91a10ffaf37d68826ca05ce96",
       "compression": "zstd",
       "source": "datalake/parquet/brain_regions.parquet"
     },
@@ -249,8 +249,8 @@
         "therapeutic_applications",
         "confidence"
       ],
-      "size_bytes": 19918,
-      "sha256": "4cfd4c058f8c63f40b29a202191f9acaf65e5c7947becae42268afa459d8fad1",
+      "size_bytes": 19911,
+      "sha256": "9b200cd233707aff556c187d50ec3a1546dbf9ff645c33b0cb260400e0ac11a0",
       "compression": "zstd",
       "source": "datalake/parquet/neural_pathways.parquet"
     },
@@ -879,7 +879,7 @@
         "addressing_version"
       ],
       "size_bytes": 18066,
-      "sha256": "7ea792c1edb1122cbbbb24e751abdad7e2e4cde54f6ba5affbb9517825df2df8",
+      "sha256": "e2d0c8b91a93242a584b11c415d72c3232e829b61b451e4845d0cbbd13a9761c",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_crosswalk.parquet"
     },
@@ -914,8 +914,8 @@
         "valid_for_current_addressing",
         "review_key"
       ],
-      "size_bytes": 16154,
-      "sha256": "96c553275bbf3762e6cd71cac8d2e6d70b8445520fdd98901ecf32803db1716e",
+      "size_bytes": 16151,
+      "sha256": "af34432330612c5f96e293affbc36ee7530002fd7d45da700727d98954fc938f",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_technique_terms.parquet"
     },
@@ -943,8 +943,8 @@
         "no_region_term_count",
         "reviewed_term_count"
       ],
-      "size_bytes": 11190,
-      "sha256": "d6028bbb860c913a3d3b3a04f797f83353d1d4a83327253974059a03c31f606c",
+      "size_bytes": 11194,
+      "sha256": "c3d62f5bc1de4c3ab05e5ce148d46f015e4c9df004bc40c79ec298be6ba40adc",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_technique_term_summary.parquet"
     }

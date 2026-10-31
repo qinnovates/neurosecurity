@@ -58,6 +58,7 @@ Keep it raw. Future-you will thank present-you for not polishing.
 
 | # | Date | Topic |
 |---|------|-------|
+| [029](#entry-029) | 2026-10-31 | The Layers Were Physics First, and the Brain Didn't Agree |
 | [028](#entry-028) | 2026-03-20 | The Day I Thought About the Future of Society |
 | [027](#entry-027) | 2026-03-17 | Quorum at Scale — Socrates and Plato Built Into Agents |
 | [026](#entry-026) | 2026-03-13 | The LiDAR Moment — From Theory to Sensors in Our Pockets |
@@ -87,6 +88,24 @@ Keep it raw. Future-you will thank present-you for not polishing.
 ---
 
 ## Entries
+
+---
+
+## Entry 029 — The Layers Were Physics First, and the Brain Didn't Agree {#entry-029}
+
+**Date:** 2026-10-31, late night
+**Mood:** humbled, clear, not discouraged
+**Trigger:** Redesigning the brain render and having to say, in public data, which layer each structure actually belongs to
+
+I defined the seven neural bands in February from a physics argument. Indeterminacy rising from cord to cortex, an hourglass with the electrode at the neck. It was a good first map. Tonight it stopped being the map.
+
+Putting the atlas on screen forced the question the whiteboard never did: when someone clicks the substantia nigra, which layer lights? Under my own numbers it lit "Basal Ganglia", because that is the circuit it belongs to. But it sits in the midbrain. The STN sat in the same band and it is diencephalon. The names were circuits; the addresses had to be territories. Once I ruled that the address is where the cell bodies are and the function is a tag, three structures moved and the whole "gradient" underneath the numbers went with them. I had five AI reviewers and then three other model families tell me the same thing from different directions. None of them is a neuroanatomist. I will take the finished version to one.
+
+What I keep noticing: there is so much work to do here, and so much I still do not know. Neuroscience moved while I was building — higher-order thalamus, prosomeres, cerebellar cognition, cell-type atlases — and the only honest process is to update the work each day as I learn something new, in the data, not just in my head. That is what the derivation log is for and why today's entry is a correction, not a feature.
+
+The other thing: I am learning to read EEGs, and it is a whole different animal. Rhythms on paper mean nothing until I can see the tissue under the electrode. The brain render redesign exists for exactly that reason — if I can hold the anatomy in my head, the traces start to make sense. Security is a signal problem before it is a brain problem, and I cannot model the signal if I cannot place it.
+
+**Connected to:** Derivation Log Entry 116 (addressing version 2), Entries 5–7 (the original physics derivation), Field Journal 012 (the thalamus analogy that boxed me in)
 
 ---
 

@@ -1,12 +1,12 @@
 {
   "_generator": "src/scripts/generate-datalake-inventory.mjs",
   "_note": "Derived file. Do not hand-edit — run `npm run datalake:inventory`.",
-  "generated_on": "2026-10-30",
+  "generated_on": "2026-10-31",
   "totals": {
-    "datalake_files": 41,
+    "datalake_files": 42,
     "datasets_inventoried": 27,
-    "records": 20927,
-    "unique_dois": 266,
+    "records": 21075,
+    "unique_dois": 268,
     "techniques_with_cve_evidence": 27,
     "cve_coverage_ratio": 0.1517
   },
@@ -14,7 +14,7 @@
     {
       "key": "impact_chains",
       "label": "Neural impact chains",
-      "count": 19658,
+      "count": 19798,
       "file": "datalake/impact-chains.json",
       "path": "",
       "group": "threat",
@@ -101,6 +101,15 @@
       "path": "qif_bands",
       "group": "anatomy",
       "unit": "bands"
+    },
+    {
+      "key": "layers",
+      "label": "Public layers over the bands",
+      "count": 8,
+      "file": "datalake/qif-brain-bci-atlas.json",
+      "path": "layers.entries",
+      "group": "anatomy",
+      "unit": "layers"
     },
     {
       "key": "brain_regions",

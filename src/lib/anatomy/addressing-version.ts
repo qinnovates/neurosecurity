@@ -9,13 +9,6 @@ import { ATLAS_FILE } from './datalake-files';
 import { AnatomyDataError } from './errors';
 import { childOf, failAt, readList, show, type FieldLocation } from './field-readers';
 
-/**
- * The addressing version of qif-brain-bci-atlas.json while the file declares
- * none. The day the file gains `_metadata.addressing_version`, the declared
- * value is read instead and a content test fails until this constant is removed.
- */
-export const UNDECLARED_ADDRESSING_VERSION = 1;
-
 const VERSION_KEY = 'addressing_version';
 const FIRST_VERSION = 1;
 
@@ -30,8 +23,13 @@ export function readDeclaredAddressingVersion(atlas: unknown): number | undefine
   return declared;
 }
 
+/** The atlas file has declared its addressing version since membership version 2 (2026-10-31); a file without one stops the build. */
 export function currentAddressingVersion(atlas: unknown): number {
-  return readDeclaredAddressingVersion(atlas) ?? UNDECLARED_ADDRESSING_VERSION;
+  const declared = readDeclaredAddressingVersion(atlas);
+  if (declared === undefined) {
+    throw new AnatomyDataError(ATLAS_FILE, `_metadata.${VERSION_KEY}`, 'the atlas file declares no addressing version', 'Write the membership version the brain_regions follow, for example 2.');
+  }
+  return declared;
 }
 
 /** The addressing versions a row holds for: at least one, each a positive whole number, none twice. */

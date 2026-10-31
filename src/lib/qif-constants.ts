@@ -4,6 +4,7 @@
  */
 
 import registrar from '../../datalake/qtara-registrar.json';
+import atlas from '../../datalake/qif-brain-bci-atlas.json';
 
 export const QIF_VERSION = '8.0';
 export const LATEST_WHITEPAPER_VERSION = '8.0';
@@ -17,12 +18,12 @@ export const TARA_TECHNIQUES = (registrar as { techniques: unknown[] }).techniqu
 
 /** Hourglass bands (7-1-3 asymmetric) */
 export const HOURGLASS_BANDS = [
-  { id: 'N7', name: 'Neocortex', zone: 'neural', color: '#166534', description: 'PFC, M1, V1, Broca, Wernicke — executive function, language, movement, perception' },
-  { id: 'N6', name: 'Limbic System', zone: 'neural', color: '#3a7d44', description: 'Hippocampus, amygdala, insula — emotion, memory, interoception' },
-  { id: 'N5', name: 'Basal Ganglia', zone: 'neural', color: '#5c7a38', description: 'Striatum, STN, substantia nigra — motor selection, reward, habit' },
-  { id: 'N4', name: 'Diencephalon', zone: 'neural', color: '#72772f', description: 'Thalamus, hypothalamus — sensory gating, consciousness relay' },
+  { id: 'N7', name: 'Neocortex', zone: 'neural', color: '#166534', description: 'PFC, M1, V1, Broca, Wernicke, posterior cingulate — executive function, language, movement, perception' },
+  { id: 'N6', name: 'Limbic System', zone: 'neural', color: '#3a7d44', description: 'Hippocampus, basolateral amygdala, insula, anterior cingulate — emotion, memory, interoception' },
+  { id: 'N5', name: 'Basal Ganglia', zone: 'neural', color: '#5c7a38', description: 'Striatum, pallidum, central amygdala — motor selection, reward, habit' },
+  { id: 'N4', name: 'Diencephalon', zone: 'neural', color: '#72772f', description: 'Thalamus, hypothalamus, subthalamic nucleus — sensory gating, state-dependent relay' },
   { id: 'N3', name: 'Cerebellum', zone: 'neural', color: '#877226', description: 'Cerebellar cortex, deep nuclei — motor coordination, timing' },
-  { id: 'N2', name: 'Brainstem', zone: 'neural', color: '#9b6c1e', description: 'Medulla, pons, midbrain — vital functions, arousal, reflexes' },
+  { id: 'N2', name: 'Brainstem', zone: 'neural', color: '#9b6c1e', description: 'Medulla, pons, midbrain, substantia nigra, VTA — vital functions, arousal, dopamine sources' },
   { id: 'N1', name: 'Spinal Cord', zone: 'neural', color: '#ae6616', description: 'Cervical through sacral — reflexes, peripheral relay' },
   { id: 'I0', name: 'Neural Interface', zone: 'interface', color: '#f59e0b', description: 'Electrode-tissue boundary — measurement/collapse, quasi-quantum zone' },
   { id: 'S1', name: 'Near-Field / On-Device', zone: 'synthetic', color: '#93c5fd', description: 'Amplification, ADC, near-field EM coupling (0-10 kHz, on-device)' },
@@ -34,6 +35,35 @@ export const HOURGLASS_BANDS = [
 export const NEURAL_BAND_REGIONS = HOURGLASS_BANDS
   .filter((band) => band.zone === 'neural')
   .map(({ id, name, description }) => ({ id, name, description }));
+
+export type BandId = (typeof HOURGLASS_BANDS)[number]['id'];
+
+/** A public layer: a presentation grouping over band ids. The band id stays the address. */
+export interface QifLayer {
+  id: string;
+  name: string;
+  band_ids: BandId[];
+  zone: 'neural' | 'silicon' | 'interface';
+  public_order: number;
+  description: string;
+  status: 'proposed';
+}
+
+type AtlasLayers = { layers: { entries: QifLayer[]; seam: Omit<QifLayer, 'public_order'> & { between: [string, string] } } };
+
+/** The eight public layers (seven neural, one classical stack), read from the atlas; proposed and unvalidated. */
+export const QIF_LAYERS: readonly QifLayer[] = (atlas as unknown as AtlasLayers).layers.entries;
+
+/** The seam between the neural layers and the classical stack (I0). Drawn as an edge, never counted as a layer. */
+export const QIF_LAYER_SEAM = (atlas as unknown as AtlasLayers).layers.seam;
+
+/** The layer or seam a band id belongs to. Throws on an unknown id so a bad tag fails the build, not the page. */
+export function layerOf(bandId: BandId): QifLayer | typeof QIF_LAYER_SEAM {
+  const layer = QIF_LAYERS.find((entry) => entry.band_ids.includes(bandId));
+  if (layer) return layer;
+  if (QIF_LAYER_SEAM.band_ids.includes(bandId)) return QIF_LAYER_SEAM;
+  throw new Error(`layerOf: band id "${bandId}" is in no layer and not the seam; check datalake/qif-brain-bci-atlas.json layers`);
+}
 
 /** Hourglass band radii for 3D visualization (maps 1:1 to HOURGLASS_BANDS) */
 export const HOURGLASS_RADII = [1.4, 1.3, 1.15, 1.0, 0.85, 0.7, 0.55, 0.45, 0.7, 0.9, 1.2] as const;

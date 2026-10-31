@@ -3,7 +3,7 @@ import { gzipSync } from 'node:zlib';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import type { AnatomyIndex, IndexReviewState } from '@/lib/anatomy/anatomy-index-types';
-import { readDeclaredAddressingVersion, UNDECLARED_ADDRESSING_VERSION } from '@/lib/anatomy/addressing-version';
+import { readDeclaredAddressingVersion } from '@/lib/anatomy/addressing-version';
 import { createStructureStyler, type ColourMode } from '@/lib/anatomy/colour-modes';
 import { REVIEWED_ENTRY_COUNTS, countEntriesByKind } from '@/lib/anatomy/review-state';
 import { sha256Hex } from '@/lib/anatomy/row-digest';
@@ -32,6 +32,9 @@ const PINNED_ANATOMY_STATE = {
   /** Changes when a LAYER GAINS ITS FIRST SHIPPED ASSET. Every other layer stays unavailable and says why. */
   availableLayerIds: ['outline', 'cortical', 'deep', 'devices'],
 } as const;
+
+/** Changes only with a membership diff in the atlas file's `_metadata.membership_changes` (version 2: stn to N4, substantia_nigra and vta to N2, cingulate to N7). */
+const DECLARED_ADDRESSING_VERSION = 2;
 
 /**
  * The most the anatomy index may weigh, uncompressed. It protects the atlas
@@ -199,9 +202,9 @@ describe('review ledger and addressing tripwires (guards)', () => {
     expect(data.ledger.reviewers.length).toBeGreaterThan(0);
   });
 
-  it('fails the day the atlas file declares an addressing version: remove UNDECLARED_ADDRESSING_VERSION then', () => {
-    expect(readDeclaredAddressingVersion(data.atlas)).toBeUndefined();
-    expect(index.addressing_version).toBe(UNDECLARED_ADDRESSING_VERSION);
+  it('reads the addressing version the atlas file declares (membership version 2 since 2026-10-31) and fails if the file ever drops it', () => {
+    expect(readDeclaredAddressingVersion(data.atlas)).toBe(DECLARED_ADDRESSING_VERSION);
+    expect(index.addressing_version).toBe(DECLARED_ADDRESSING_VERSION);
   });
 });
 

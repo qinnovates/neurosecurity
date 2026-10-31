@@ -42,7 +42,7 @@
       "type": "neurotransmitter",
       "neurotransmitter": "dopamine",
       "origin": ["ventral_tegmental_area"],
-      "origin_band": "N5",
+      "origin_band": "N2",
       "targets": ["prefrontal_cortex", "anterior_cingulate_cortex"],
       "target_bands": ["N7", "N6"],
       "endpoint_naming": {"origin": ["exact"], "targets": ["exact", "exact"]},
@@ -62,7 +62,7 @@
       "type": "neurotransmitter",
       "neurotransmitter": "dopamine",
       "origin": ["ventral_tegmental_area"],
-      "origin_band": "N5",
+      "origin_band": "N2",
       "targets": ["striatum", "basolateral_amygdala", "hippocampus"],
       "target_bands": ["N5", "N6"],
       "endpoint_naming": {"origin": ["exact"], "targets": ["container_stand_in", "exact", "exact"]},
@@ -85,7 +85,7 @@
       "type": "neurotransmitter",
       "neurotransmitter": "dopamine",
       "origin": ["substantia_nigra"],
-      "origin_band": "N5",
+      "origin_band": "N2",
       "targets": ["striatum"],
       "target_bands": ["N5"],
       "endpoint_naming": {"origin": ["container_stand_in"], "targets": ["exact"]},
@@ -229,7 +229,7 @@
       "origin": ["pons"],
       "origin_band": "N2",
       "targets": ["thalamus", "substantia_nigra", "subthalamic_nucleus"],
-      "target_bands": ["N4", "N5"],
+      "target_bands": ["N4", "N2"],
       "endpoint_naming": {"origin": ["container_stand_in"], "targets": ["exact", "exact", "exact"]},
       "endpoint_naming_notes": {
         "origin:pons": "This pathway's own name is 'Pedunculopontine Nucleus -> Thalamus (Cholinergic)'. brain_regions has no entry for the nucleus, and qif-brain-bci-atlas.json lists 'Pedunculopontine nucleus (PPN)' as a sub-structure of reticular_formation, not of pons, so the origin written here is a stand-in that also disagrees with where the same atlas files the nucleus. The PPN straddles the pontomesencephalic junction (Mena-Segovia & Bolam 2017, 10.1016/j.neuron.2017.02.027; Mesulam et al. 1983 group Ch5, 10.1016/0306-4522(83)90108-2). Retargeting it to reticular_formation is a separate change and is not made in this pass."
@@ -711,7 +711,7 @@
       "type": "limbic_circuit",
       "neurotransmitter": "dopamine",
       "origin": ["ventral_tegmental_area"],
-      "origin_band": "N5",
+      "origin_band": "N2",
       "targets": ["striatum", "prefrontal_cortex", "basolateral_amygdala", "hippocampus", "anterior_cingulate_cortex"],
       "target_bands": ["N5", "N7", "N6"],
       "endpoint_naming": {"origin": ["exact"], "targets": ["unreviewed", "exact", "exact", "exact", "exact"]},
@@ -760,7 +760,7 @@
       "origin": ["prefrontal_cortex"],
       "origin_band": "N7",
       "targets": ["cingulate", "hippocampus", "posterior_parietal_cortex"],
-      "target_bands": ["N6", "N7"],
+      "target_bands": ["N7", "N6"],
       "endpoint_naming": {"origin": ["unreviewed"], "targets": ["unreviewed", "unreviewed", "unreviewed"]},
       "endpoint_naming_notes": {
         "_pathway": "Network membership is parcellation-dependent. The repository's own Class C pass (datalake/intake/2026-10-21/atlas-class-c-networks.json) found most constituents of the large-scale networks unaddressable in the 38-entry region table and proposed that they light nothing. Every endpoint of this pathway is therefore left unreviewed rather than called exact."

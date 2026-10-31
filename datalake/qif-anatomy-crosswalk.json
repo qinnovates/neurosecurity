@@ -55,7 +55,8 @@
       "subject_id": "pfc",
       "subject_name_at_draft": "Prefrontal Cortex",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -94,7 +95,8 @@
       "subject_id": "m1",
       "subject_name_at_draft": "Primary Motor Cortex",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -125,7 +127,8 @@
       "subject_id": "v1",
       "subject_name_at_draft": "Primary Visual Cortex",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -157,7 +160,8 @@
       "subject_id": "a1",
       "subject_name_at_draft": "Primary Auditory Cortex",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -188,7 +192,8 @@
       "subject_id": "broca",
       "subject_name_at_draft": "Broca's Area",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -218,7 +223,8 @@
       "subject_id": "wernicke",
       "subject_name_at_draft": "Wernicke's Area",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -250,7 +256,8 @@
       "subject_id": "pmc",
       "subject_name_at_draft": "Premotor Cortex",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -282,7 +289,8 @@
       "subject_id": "sma",
       "subject_name_at_draft": "Supplementary Motor Area",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -312,7 +320,8 @@
       "subject_id": "ppc",
       "subject_name_at_draft": "Posterior Parietal Cortex",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -343,7 +352,8 @@
       "subject_id": "s1_cortex",
       "subject_name_at_draft": "Primary Somatosensory Cortex",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -374,7 +384,8 @@
       "subject_id": "hippocampus",
       "subject_name_at_draft": "Hippocampus",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -405,7 +416,8 @@
       "subject_id": "bla",
       "subject_name_at_draft": "Basolateral Amygdala",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -436,7 +448,8 @@
       "subject_id": "insula",
       "subject_name_at_draft": "Insular Cortex",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -467,7 +480,8 @@
       "subject_id": "acc",
       "subject_name_at_draft": "Anterior Cingulate Cortex",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -497,7 +511,8 @@
       "subject_id": "cingulate",
       "subject_name_at_draft": "Cingulate Gyrus (Posterior)",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -526,7 +541,8 @@
       "subject_id": "striatum",
       "subject_name_at_draft": "Striatum (Caudate + Putamen)",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "cit168_rl",
@@ -557,7 +573,8 @@
       "subject_id": "gpi",
       "subject_name_at_draft": "Globus Pallidus Internus",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "cit168_rl",
@@ -586,7 +603,8 @@
       "subject_id": "gpe",
       "subject_name_at_draft": "Globus Pallidus Externus",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "cit168_rl",
@@ -615,7 +633,8 @@
       "subject_id": "stn",
       "subject_name_at_draft": "Subthalamic Nucleus",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "cit168_rl",
@@ -644,7 +663,8 @@
       "subject_id": "substantia_nigra",
       "subject_name_at_draft": "Substantia Nigra",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "cit168_rl",
@@ -674,7 +694,8 @@
       "subject_id": "vta",
       "subject_name_at_draft": "Ventral Tegmental Area",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "cit168_rl",
@@ -703,7 +724,8 @@
       "subject_id": "thalamus",
       "subject_name_at_draft": "Thalamus",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -745,7 +767,8 @@
       "subject_id": "hypothalamus",
       "subject_name_at_draft": "Hypothalamus",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "neudorfer_hypothalamus",
@@ -801,7 +824,8 @@
       "subject_id": "vim",
       "subject_name_at_draft": "Ventral Intermediate Nucleus (Thalamus)",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -831,7 +855,8 @@
       "subject_id": "ant",
       "subject_name_at_draft": "Anterior Nucleus of Thalamus",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -860,7 +885,8 @@
       "subject_id": "cerebellum_cortex",
       "subject_name_at_draft": "Cerebellar Cortex",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -890,7 +916,8 @@
       "subject_id": "cerebellum_nuclei",
       "subject_name_at_draft": "Deep Cerebellar Nuclei",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -919,7 +946,8 @@
       "subject_id": "vermis",
       "subject_name_at_draft": "Cerebellar Vermis",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -948,7 +976,8 @@
       "subject_id": "medulla",
       "subject_name_at_draft": "Medulla Oblongata",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -979,7 +1008,8 @@
       "subject_id": "pons",
       "subject_name_at_draft": "Pons",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -1009,7 +1039,8 @@
       "subject_id": "midbrain",
       "subject_name_at_draft": "Midbrain (Mesencephalon)",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -1042,7 +1073,8 @@
       "subject_id": "midbrain",
       "subject_name_at_draft": "Midbrain (Mesencephalon)",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "cit168_rl",
@@ -1071,7 +1103,8 @@
       "subject_id": "cea",
       "subject_name_at_draft": "Central Amygdala",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",
@@ -1100,7 +1133,8 @@
       "subject_id": "reticular_formation",
       "subject_name_at_draft": "Reticular Formation",
       "valid_for_addressing": [
-        1
+        1,
+        2
       ],
       "part": null,
       "atlas": "allen_hra_3d_2020",

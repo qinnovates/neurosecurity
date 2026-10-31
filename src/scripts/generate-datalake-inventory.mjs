@@ -110,6 +110,7 @@ const DATASETS = [
   { key: 'guardrails', label: 'Physics guardrails', file: 'datalake/qif-guardrails.json', path: 'guardrails', group: 'threat', unit: 'guardrails' },
 
   { key: 'bands', label: 'QIF bands', file: 'datalake/qif-brain-bci-atlas.json', path: 'qif_bands', group: 'anatomy', unit: 'bands' },
+  { key: 'layers', label: 'Public layers over the bands', file: 'datalake/qif-brain-bci-atlas.json', path: 'layers.entries', group: 'anatomy', unit: 'layers' },
   { key: 'brain_regions', label: 'Brain regions', file: 'datalake/qif-brain-bci-atlas.json', path: 'brain_regions', group: 'anatomy', unit: 'regions' },
   { key: 'device_region_mappings', label: 'Device to region mappings', file: 'datalake/qif-brain-bci-atlas.json', path: 'device_region_mappings', group: 'anatomy', unit: 'mappings' },
   { key: 'neural_pathways', label: 'Neural pathways', file: 'datalake/qif-neural-pathways.json', path: 'pathways', group: 'anatomy', unit: 'pathways' },

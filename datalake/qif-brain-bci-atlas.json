@@ -1,8 +1,62 @@
 {
   "_metadata": {
     "title": "QIF Brain-BCI Unified Atlas",
-    "version": "1.3.0",
+    "version": "1.5.0",
     "created": "2026-02-18",
+    "addressing_version": 2,
+    "membership_rule": "A region is addressed by the adult territory that holds its principal neurons; what it does is a tag, not an address. Band codes are addresses with no order.",
+    "membership_changes": [
+      {
+        "addressing_version": 2,
+        "region_id": "stn",
+        "from": "N5",
+        "to": "N4",
+        "basis": "subthalamus is a division of the diencephalon (adult topography)",
+        "citation": "Terminologia Anatomica 1998; developmental origin disputed: Puelles & Rubenstein 2003, doi:10.1016/S0166-2236(03)00234-0",
+        "status": "proposed",
+        "reviewed_by": null
+      },
+      {
+        "addressing_version": 2,
+        "region_id": "substantia_nigra",
+        "from": "N5",
+        "to": "N2",
+        "basis": "midbrain nucleus",
+        "citation": "UBERON:0002038",
+        "status": "proposed",
+        "reviewed_by": null
+      },
+      {
+        "addressing_version": 2,
+        "region_id": "vta",
+        "from": "N5",
+        "to": "N2",
+        "basis": "midbrain tegmentum",
+        "citation": "UBERON:0002691",
+        "status": "proposed",
+        "reviewed_by": null
+      },
+      {
+        "addressing_version": 2,
+        "region_id": "cingulate",
+        "from": "N6",
+        "to": "N7",
+        "basis": "posterior cingulate is largely isocortical",
+        "citation": "Vogt 2005, doi:10.1038/nrn1704",
+        "status": "proposed",
+        "reviewed_by": null
+      },
+      {
+        "addressing_version": 2,
+        "region_id": "cauda_equina",
+        "from": "N1",
+        "to": "N1",
+        "basis": "held in N1: nerve roots, not cord parenchyma, but no peripheral band exists; band_basis on the record stays contradicted",
+        "citation": "Standring, Gray's Anatomy, 42nd ed.",
+        "status": "held",
+        "reviewed_by": null
+      }
+    ],
     "description": "Comprehensive machine-readable atlas unifying brain regions (38 structures across QIF 7-1-3 hourglass), BCI hardware (24 devices), device-region mappings, neural latency metrics, and physics constraints. Designed for dynamic visualization rendering and API consumption.",
     "qif_version": "v4.0 Hourglass (7-1-3)",
     "primary_neuroanatomical_source": "Kandel ER, et al. Principles of Neural Science. 6th ed. McGraw Hill, 2021",
@@ -150,6 +204,130 @@
       "description": "Clinical software, user interface, data storage, network. Classical IT security domain."
     }
   ],
+  "layers": {
+    "_schema": {
+      "status": "proposed",
+      "addressing_version": 2,
+      "note": "Public grouping over qif_bands for the atlas pages: eight layers plus one seam. Band ids remain the address every dataset is tagged with; layers are presentation and must partition the 11 band ids exactly. The seven neural layers are unordered addresses: the original cord-to-cortex indeterminacy ordering is withdrawn (five AI reviews across three model families, 2026-10-31; no human neuroanatomist has checked any of it). Grouping is valid for membership version 2 (addressing_version 2 in _metadata, with its membership_changes log). Proposed, unvalidated.",
+      "membership_rule": "A region is addressed by the adult territory that holds its principal neurons; what a region does is a tag, not an address. Version 2 moved the subthalamic nucleus to N4, the substantia nigra and ventral tegmental area to N2 and the posterior cingulate to N7; the cauda equina stays in N1 as a held, contradicted address because no peripheral band exists.",
+      "reading_rule": "Layers are addresses, like postcodes, not steps. A technique tags any subset of bands (one to nine). Nothing here says a signal visits every layer on its way.",
+      "open_decisions": [
+        "Public names for the N6 and N5 layers once membership version 2 lands. Three external model reviews and the internal panel all recommend territorial names (Isocortex; Allocortex and pallial nuclei; Cerebral nuclei) as primary with the circuit names (limbic system, basal ganglia) kept as searchable tags. Until version 2 the version 1 band names stand because the records inside them still follow version 1.",
+        "Peripheral tissue (cochlea, retina, vagus, roots, dorsal root ganglia): all reviews rank a two-address device record first: port_anatomy plus coupling_mechanism, and first_central_territory with downstream_targets allowed to be several or unknown, each assignment naming its anatomical_ontology. No peripheral region exists in brain_regions today, so nothing is misfiled yet. Owner decision pending.",
+        "Every version 2 assignment must name the ontology it follows (Terminologia Neuroanatomica, UBERON id, or a named atlas), because the subthalamic nucleus and the hypothalamus sit in N4 only under adult topography and elsewhere under the prosomeric model.",
+        "Review of the 27 techniques tagged N5 and the 18 tagged exactly [I0,N1] before any membership move.",
+        "Benchmark seven against five and nine with blinded human annotators on a corpus of real device targets before claiming the count is right."
+      ]
+    },
+    "entries": [
+      {
+        "id": "neocortex",
+        "name": "Neocortex",
+        "band_ids": [
+          "N7"
+        ],
+        "zone": "neural",
+        "public_order": 1,
+        "description": "Isocortex, including the posterior cingulate: perception, language, planning, voluntary movement.",
+        "status": "proposed"
+      },
+      {
+        "id": "limbic",
+        "name": "Limbic System",
+        "proposed_name_v2": "Allocortex and pallial nuclei",
+        "band_ids": [
+          "N6"
+        ],
+        "zone": "neural",
+        "public_order": 2,
+        "description": "Hippocampus, basolateral amygdala, insula, anterior cingulate: memory, emotion, interoception. Allocortex, mesocortex and pallial nuclei.",
+        "status": "proposed"
+      },
+      {
+        "id": "basal-ganglia",
+        "name": "Basal Ganglia",
+        "proposed_name_v2": "Cerebral nuclei",
+        "band_ids": [
+          "N5"
+        ],
+        "zone": "neural",
+        "public_order": 3,
+        "description": "Striatum, pallidum and the central amygdala: action selection, reward. Subpallial nuclei of the telencephalon; the subthalamic nucleus and the midbrain dopamine nuclei are addressed in N4 and N2 and carry the basal_ganglia_circuit tag.",
+        "status": "proposed"
+      },
+      {
+        "id": "diencephalon",
+        "name": "Diencephalon",
+        "band_ids": [
+          "N4"
+        ],
+        "zone": "neural",
+        "public_order": 4,
+        "description": "Thalamus and hypothalamus: relay, gating, homeostasis.",
+        "status": "proposed"
+      },
+      {
+        "id": "cerebellum",
+        "name": "Cerebellum",
+        "band_ids": [
+          "N3"
+        ],
+        "zone": "neural",
+        "public_order": 5,
+        "description": "Coordination, timing, error correction.",
+        "status": "proposed"
+      },
+      {
+        "id": "brainstem",
+        "name": "Brainstem",
+        "band_ids": [
+          "N2"
+        ],
+        "zone": "neural",
+        "public_order": 6,
+        "description": "Midbrain, pons, medulla: vital functions, arousal, cranial relays.",
+        "status": "proposed"
+      },
+      {
+        "id": "spinal-cord",
+        "name": "Spinal Cord",
+        "band_ids": [
+          "N1"
+        ],
+        "zone": "neural",
+        "public_order": 7,
+        "description": "Cord parenchyma: reflex arcs, ascending and descending tracts.",
+        "status": "proposed"
+      },
+      {
+        "id": "classical",
+        "name": "Classical stack",
+        "band_ids": [
+          "S1",
+          "S2",
+          "S3"
+        ],
+        "zone": "silicon",
+        "public_order": 8,
+        "description": "The part of a neural device that existing security already models: analog front end, firmware and radio, decoder, application, companion and clinician software, cloud. Addressed with the tools engineers already have, among them OSI (a networking reference model, not the whole stack), MITRE ATT&CK and ATLAS, CVSS. It stops at the device-tissue interface: a clean score here says nothing about tissue or cognition on the other side of the seam.",
+        "status": "proposed"
+      }
+    ],
+    "seam": {
+      "id": "interface",
+      "name": "Neural Interface",
+      "band_ids": [
+        "I0"
+      ],
+      "zone": "interface",
+      "between": [
+        "spinal-cord",
+        "classical"
+      ],
+      "description": "The device-tissue coupling where biological signal becomes electronic. Drawn on the public page as the edge between the neural layers and the classical stack, never as a ninth layer. It is a typed interface, not one boundary: an implanted electrode couples through an evolving tissue response (glial scar, impedance drift), an epidural or scalp electrode couples through volume conduction and never crosses tissue, a cochlear or vagal transducer couples to a peripheral nerve. Its recorded controls are biophysical (charge density, tissue temperature, impedance), which no classical model covers.",
+      "status": "proposed"
+    }
+  },
   "brain_regions": [
     {
       "id": "pfc",
@@ -1061,7 +1239,9 @@
       "id": "cingulate",
       "name": "Cingulate Gyrus (Posterior)",
       "abbreviation": "PCC",
-      "qif_band": "N6",
+      "qif_band": "N7",
+      "band_basis": "territory",
+      "band_basis_reason": "Addressing version 2: this record is the posterior cingulate (areas 23, 29, 30, 31), which is largely isocortical (Vogt 2005, doi:10.1038/nrn1704). The anterior cingulate record (acc) stays N6 as mesocortex. The cingulate as a whole spans N6 and N7.",
       "parent_structure": "cingulate_gyrus",
       "depth_class": "cortical",
       "hemisphere": "bilateral",
@@ -1294,7 +1474,9 @@
       "id": "stn",
       "name": "Subthalamic Nucleus",
       "abbreviation": "STN",
-      "qif_band": "N5",
+      "qif_band": "N4",
+      "band_basis": "territory",
+      "band_basis_reason": "Addressing version 2: the subthalamic nucleus lies in the subthalamus, a division of the diencephalon (Terminologia Anatomica 1998). Its developmental origin is debated under the prosomeric model, so N4 is the adult-topography convention. It keeps the basal_ganglia_circuit tag; the circuit is a function, not an address.",
       "parent_structure": "basal_ganglia",
       "depth_class": "subcortical",
       "hemisphere": "bilateral",
@@ -1352,7 +1534,9 @@
       "id": "substantia_nigra",
       "name": "Substantia Nigra",
       "abbreviation": "SNr/SNc",
-      "qif_band": "N5",
+      "qif_band": "N2",
+      "band_basis": "territory",
+      "band_basis_reason": "Addressing version 2: the substantia nigra is a midbrain nucleus (UBERON:0002038, part of midbrain). Under version 1 it was banded N5 by circuit membership. It keeps the basal_ganglia_circuit tag.",
       "parent_structure": "midbrain",
       "depth_class": "subcortical",
       "hemisphere": "bilateral",
@@ -1406,7 +1590,9 @@
       "id": "vta",
       "name": "Ventral Tegmental Area",
       "abbreviation": "VTA",
-      "qif_band": "N5",
+      "qif_band": "N2",
+      "band_basis": "territory",
+      "band_basis_reason": "Addressing version 2: the ventral tegmental area is in the midbrain tegmentum (UBERON:0002691). Under version 1 it was banded N5 by circuit membership. It keeps the reward and dopaminergic tags.",
       "parent_structure": "midbrain",
       "depth_class": "subcortical",
       "hemisphere": "bilateral",

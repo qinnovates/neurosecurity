@@ -24,7 +24,7 @@ describe('buildTechniqueRegions', () => {
       rationale: 'Each link quotes this technique\'s own registrar text; nothing is added from outside it.',
       links: [{
         term: 'prefrontal cortex',
-        valid_for_addressing: [1],
+        valid_for_addressing: [1, 2],
         evidence: {
           claim_basis: 'catalog_text',
           source_ref: { file: 'datalake/qtara-registrar.json', pointer: '/techniques/QIF-T9001/notes', quote: 'Targets the prefrontal cortex' },

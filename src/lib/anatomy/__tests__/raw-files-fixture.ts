@@ -45,6 +45,8 @@ const ENGINE_DATA: EngineData = {
 };
 
 const ATLAS = {
+  /** The fixture keeps membership version 1 (stn in N5); the one test that needs version 2 overrides this. */
+  _metadata: { addressing_version: 1 },
   brain_regions: REGIONS.map(([id, name, band]) => ({ id, name, qif_band: band, highlight_hue: FIXTURE_HIGHLIGHT_HUES[id] ?? null })),
   region_aliases: { subthalamic_nucleus: 'stn', motor_strip: 'm1' },
   region_alias_relations: { synonym: ['subthalamic_nucleus'], whole_to_part: ['motor_strip'], part_to_whole: [] },

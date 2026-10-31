@@ -32,8 +32,12 @@ export const REGISTRAR_PATH = path.join(DATALAKE_DIR, 'qtara-registrar.json');
 const SCHEMA_VERSION = 2;
 /** Must equal TECHNIQUE_REGIONS_STATUS in src/lib/anatomy/status-sentences.ts; the parser stops the build if it differs. */
 const STATUS_SENTENCE = 'AI-drafted. Links are a reading of the catalog\'s own words, not new evidence.';
-/** The atlas file declares no addressing version yet, which the anatomy library reads as version 1. */
-const DRAFTED_FOR_ADDRESSING = Object.freeze([1]);
+/**
+ * A link reads the catalog's text for a structure; the band that structure sits in is not part of
+ * the link, so a link drafted under membership version 1 holds under version 2 (2026-10-31), where
+ * four regions changed band and no structure changed identity.
+ */
+const DRAFTED_FOR_ADDRESSING = Object.freeze([1, 2]);
 const DRAFTER = 'ai';
 const UNCHECKED = 'unchecked';
 const SCOPE = Object.freeze({ REGIONS: 'regions', BAND_LEVEL: 'band_level' });
