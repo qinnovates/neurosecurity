@@ -616,7 +616,7 @@ Full derivations: QIF-DERIVATION-LOG.md Entry 35
 ## 10. TARA Registry (Current State)
 
 <<<<<<< HEAD
-> **Last computed: 2026-10-26 from `datalake/qtara-registrar.json`** by `npm run truth:registry`. Sections 10.1-10.4 are generated; do not edit them by hand. 10.5 and 10.6 are editorial.
+> **Last computed: 2026-10-31 from `datalake/qtara-registrar.json`** by `npm run truth:registry`. Sections 10.1-10.4 are generated; do not edit them by hand. 10.5 and 10.6 are editorial.
 
 ### 10.1 Technique Count & Taxonomy
 
