@@ -2,7 +2,7 @@
 title: "Introducing the Unified BCI Device Explorer"
 subtitle: "24 devices, 38 brain regions, 13 physics constraints, 103 threat techniques. One searchable interface, one open API."
 date: "2026-02-21"
-author: "Kevin L. Qi"
+author: "Qinnovate"
 tags: ["qif", "bci", "tara", "api", "open-data", "bci-explorer", "research-tools", "niss", "brain-atlas", "physics"]
 ---
 

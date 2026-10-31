@@ -44,7 +44,7 @@ Update these as research progresses. The derivation log captures the discovery s
 
 | Document | Purpose |
 |----------|---------|
-| `QIF-DERIVATION-LOG.md` | Raw discovery sessions (Kevin's voice, timestamped) |
+| `QIF-DERIVATION-LOG.md` | Raw discovery sessions (Qinnovate's voice, timestamped) |
 | `QIF-RESEARCH-SOURCES.md` | Bibliography of all cited sources |
 | `qif-sec-guardrails.md` | Physics-derived defense architecture |
 | `research/*.md` | Refined analysis per topic, rendered on website |

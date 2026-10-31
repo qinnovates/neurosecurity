@@ -15,7 +15,7 @@ Blog posts and field journal entries published on [qinnovate.com](https://qinnov
 Posts are markdown files named `YYYY-MM-DD-slug.md`. Two categories:
 
 - **Blog posts:** Technical/security articles (e.g., `2026-02-18-the-invisible-flicker-attack-...md`)
-- **Field journal entries:** Raw personal observations from Kevin's research journal, prefixed with `field-journal-NNN` (e.g., `2026-02-21-field-journal-018-...md`)
+- **Field journal entries:** Raw personal observations from Qinnovate's research journal, prefixed with `field-journal-NNN` (e.g., `2026-02-21-field-journal-018-...md`)
 
 Currently 71 posts.
 
@@ -42,7 +42,7 @@ Fields `fact_checked`, `fact_check_date`, and `fact_check_notes` are optional wi
 
 Field journal entries originate in `model/QIF-FIELD-JOURNAL.md` and are automatically converted to blog posts via CI:
 
-1. Kevin writes a raw entry in `QIF-FIELD-JOURNAL.md`
+1. Qinnovate writes a raw entry in `QIF-FIELD-JOURNAL.md`
 2. Push to `main` triggers the `field-journal-blog.yml` workflow
 3. `src/scripts/field-journal-to-blog.mjs` generates the blog markdown with frontmatter
 4. The fact-check gate runs before committing (see below)

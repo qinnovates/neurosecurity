@@ -135,7 +135,7 @@ Come build with us. The specs are open. The [TARA registry](https://qinnovate.co
 
 · · ·
 
-*Written by Kevin L. Qi. Written with AI assistance (Claude). All claims verified by the author.*
+*Written by Qinnovate. Written with AI assistance (Claude). All claims verified by the author.*
 
 *Qinnovate develops open standards for brain-computer interface security. For updates on NSP development, MIND Act progress, and BCI security intelligence, subscribe to our [newsletter](/news/) or follow our [RSS feed](/rss.xml).*
 

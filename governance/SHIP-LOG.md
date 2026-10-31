@@ -21,7 +21,7 @@ Updated each session. Source of truth for "what's the status of X?"
 | Disclosure-channel audit | 🚧 In Progress | security.txt and disclosure-page check of all 68 tracked companies, recorded in `datalake/intake/2026-10-20/` | Companies are invited to correct their records |
 | Intel index | 🚧 In Progress | Annual edition listed first; Q1 marked corrected; Q2/Q3 placeholders marked superseded | |
 
-## 2026-10-13: Purpose and limits statement (draft, pending Kevin's acceptance)
+## 2026-10-13: Purpose and limits statement (draft, pending Qinnovate's acceptance)
 
 | Feature | Status | What Was Done | Notes |
 |---------|--------|--------------|-------|

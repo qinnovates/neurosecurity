@@ -3,7 +3,7 @@
 **Document Type:** Research Technical Specification
 **Version:** 1.1 DRAFT (reviewed, corrections applied)
 **Date:** 2026-03-13
-**Author:** Kevin L. Qi, Qinnovate
+**Author:** Qinnovate
 **Status:** Pre-implementation — seeking clinical collaborator feedback
 **Classification:** PUBLIC — Qinnovate Research
 

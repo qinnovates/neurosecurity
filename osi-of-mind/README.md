@@ -84,7 +84,7 @@ These files stay at root because every build script depends on them:
 | File | What |
 |------|------|
 | [QIF-DERIVATION-LOG.md](QIF-DERIVATION-LOG.md) | 113 entries — every decision, insight, correction |
-| [QIF-FIELD-JOURNAL.md](QIF-FIELD-JOURNAL.md) | First-person research observations (Kevin's voice) |
+| [QIF-FIELD-JOURNAL.md](QIF-FIELD-JOURNAL.md) | First-person research observations (Qinnovate's voice) |
 | [QIF-RESEARCH-SOURCES.md](QIF-RESEARCH-SOURCES.md) | 340+ verified citations |
 | [GUARDRAILS.md](GUARDRAILS.md) | 8 neuroethics constraints (G1-G8) |
 | [VALIDATION.md](VALIDATION.md) | What has been tested, what has not |

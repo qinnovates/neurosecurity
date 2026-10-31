@@ -250,7 +250,7 @@ Based on all the research above, here is the evidence-based voice profile for me
 | **Pitch (F0)** | Lower third of range | Klofstad et al. (2012): lower pitch = trust + competence |
 | **Timbre** | Dark, warm, low sibilance | Zoghaib (2019): dull + smooth = persuasion; Hozaki et al. (2025): dark timbre enhances relaxation |
 | **Breathiness** | Slight (not whisper) | ASMR literature: breathy = parasympathetic "safety" signal |
-| **Gender** | Female preferred (Kevin's philosophy) | Menhart & Cummings (2022): human female voices most effective for meditation; Kevin: "nurturing female voice" = philosophical weight |
+| **Gender** | Female preferred (Qinnovate's philosophy) | Menhart & Cummings (2022): human female voices most effective for meditation; Qinnovate: "nurturing female voice" = philosophical weight |
 | **Accent** | Neutral/soft (non-distracting) | No specific research; avoid strong regional accents that trigger social categorization |
 
 #### ElevenLabs Settings: Three Phases

@@ -9,7 +9,7 @@ type: research
 > **Purpose:** Novel hypotheses derived during the Feb 21 derivation session (Entries 74-78). Foundation for a future standalone paper on the determinism gradient and neurorights-as-dynamical-operations. Raw notes preserved as the derivation record.
 >
 > **Date:** 2026-02-21
-> **Source:** Live derivation session, Kevin's verbatim words
+> **Source:** Live derivation session, Qinnovate's verbatim words
 
 ---
 
@@ -120,4 +120,4 @@ Ions (Na+, K+, Ca2+) -> Ion channels (Nav, Kv, ~10nm) -> Neurotransmitters (dopa
 
 ---
 
-*This file is a working draft. Kevin's words are preserved exactly as typed. Use for whitepaper refinement, blog posts, application essays, and future derivation sessions.*
+*This file is a working draft. Qinnovate's words are preserved exactly as typed. Use for whitepaper refinement, blog posts, application essays, and future derivation sessions.*

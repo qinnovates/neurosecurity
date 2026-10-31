@@ -326,4 +326,4 @@ The neckband sits comfortably within all physical constraints. Unlike invasive B
 
 ---
 
-*Concept by Kevin L. Qi. See [Field Journal Entry 018](../osi-of-mind/QIF-FIELD-JOURNAL.md#entry-018) for the origin story.*
+*Concept by Qinnovate. See [Field Journal Entry 018](../osi-of-mind/QIF-FIELD-JOURNAL.md#entry-018) for the origin story.*

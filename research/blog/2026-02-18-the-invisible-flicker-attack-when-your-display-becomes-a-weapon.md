@@ -2,7 +2,7 @@
 title: "Neural Steganography Weaponization: How Invisible Display Flicker Controls Your Subconscious"
 subtitle: "A full threat model for SSVEP frequency hijack via imperceptible display flicker, chained with sensory-channel attacks from SAIL Lab, mapped through the Neural Impact Chain"
 date: "2026-02-18"
-author: "Kevin L. Qi"
+author: "Qinnovate"
 tags: ["qif", "bci", "tara", "ssvep", "neurosecurity", "neural-impact-chain", "attack-chains", "neural-steganography", "sail-lab", "subconscious"]
 ---
 

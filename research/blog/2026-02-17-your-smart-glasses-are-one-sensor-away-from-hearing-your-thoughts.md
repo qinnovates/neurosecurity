@@ -2,7 +2,7 @@
 title: "Your Smart Glasses Are One Sensor Away From Hearing Your Thoughts"
 subtitle: "How a $38 muscle sensor turns consumer smart glasses into a subvocal surveillance device — and why no security framework models the threat"
 date_posted: "2026-02-17"
-author: "Kevin L. Qi"
+author: "Qinnovate"
 source: "https://qinnovate.com"
 tags: ["#TARA", "#NeurosecurityEngineering", "#QIF", "#BCI", "#Subvocalization", "#SmartGlasses", "#SmartGlasses", "#SilentSpeech", "#ConsumerSensors", "#SDomain"]
 ---

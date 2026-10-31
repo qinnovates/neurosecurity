@@ -4,7 +4,7 @@ subtitle: "A shared static-key library is only as secure as the config most labs
 date_posted: "2026-10-26"
 source: "https://eeglab.org/secureLSL/getting-started/quickstart/"
 tags: ["#Neurosecurity", "#BCI", "#LSL", "#EEG", "#Neuroauthentication"]
-author: "Kevin L. Qi"
+author: "Qinnovate"
 fact_checked: true
 ---
 

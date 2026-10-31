@@ -38,7 +38,7 @@ In a supply chain attack on generic earbuds, the attacker controls firmware. The
 
 ## 3. The Escalation: From Acoustic to Neural Eavesdropping
 
-This is Kevin's core insight. The attack chain does not stop at acoustic eavesdropping.
+This is Qinnovate's core insight. The attack chain does not stop at acoustic eavesdropping.
 
 ### 3a. The Physics of Transducer Inversion (Maxwell's Equations)
 
@@ -148,7 +148,7 @@ NSP's multi-band architecture is designed for exactly this: security at every la
 
 ## 5. Physical Confirmation Paths
 
-Kevin's notes for future investigation:
+Qinnovate's notes for future investigation:
 
 - [ ] **Magnets:** Confirm that permanent magnet + coil transducer responds to external magnetic fields (not just mechanical vibration). This is straightforward Faraday's law but needs quantification at neural-signal field strengths.
 - [ ] **Radio waves:** RF coupling as an alternative inversion mechanism. An earbud antenna (Bluetooth) could theoretically be repurposed as an RF sensor for electromagnetic emissions from neural activity. Extremely weak signal, but worth bounding.
@@ -185,6 +185,6 @@ Kevin's notes for future investigation:
 
 ---
 
-*Status: WIP. Kevin to revisit with Maxwell's derivation and physical test design.*
+*Status: WIP. Qinnovate to revisit with Maxwell's derivation and physical test design.*
 *Created: 2026-02-10*
 *Location: qinnovates/qinnovate/osi-of-mind/tara-threat/*

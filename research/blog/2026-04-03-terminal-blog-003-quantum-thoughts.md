@@ -31,7 +31,7 @@ Or can electrons move forward in time? Or back? Or side to side?
 
 ---
 
-## Claude's notes on Kevin's questions (for digging into later)
+## Claude's notes on the author's questions (for digging into later)
 
 **"Can electrons go back in time?"**
 
@@ -39,11 +39,11 @@ Actually... maybe. John Wheeler suggested to Feynman in 1940 that a positron (an
 
 **"Side to side?"**
 
-Quantum tunneling is movement *through* a barrier that classically can't be crossed — not over, not around, and not sideways. The particle's wavefunction decays exponentially inside the barrier but has nonzero amplitude on the far side. It passes through in the same direction of travel. The "forbidden" part is that its kinetic energy would be negative in classical terms. Kevin's "side to side" intuition captures the weirdness even if the physics is "straight through the wall."
+Quantum tunneling is movement *through* a barrier that classically can't be crossed — not over, not around, and not sideways. The particle's wavefunction decays exponentially inside the barrier but has nonzero amplitude on the far side. It passes through in the same direction of travel. The "forbidden" part is that its kinetic energy would be negative in classical terms. The author's "side to side" intuition captures the weirdness even if the physics is "straight through the wall."
 
 **"The largest particle measured with quantum properties - size of a fist?"**
 
-Kevin's thinking of the 2019 experiment (Fein et al., University of Vienna) that demonstrated quantum interference with molecules of 2000+ atoms - oligoporphyrin molecules, about 25,000 times the mass of a hydrogen atom. Won attention but not the Nobel. The Nobel Kevin might be thinking of is the 2022 Physics Nobel (Aspect, Clauser, Zeilinger) for proving quantum entanglement is real via Bell inequality violations. Zeilinger's group has been pushing macroscopic quantum effects. The "fist-sized" claim — Kevin's close. The 2025 Nobel Prize in Physics went to John Clarke, Michel Devoret, and John Martinis for demonstrating macroscopic quantum tunneling in electrical circuits (work from 1984-1985 at UC Berkeley). Their system was about a centimeter wide — not fist-sized, but a macroscopic object you can hold, containing billions of electrons behaving as a single quantum entity. They showed quantum superposition, tunneling, and energy quantization at a scale where the quantum-to-classical boundary is not fundamental but an engineering constraint. This is the paper Kevin needs to re-read — it won the Nobel in 2025.
+The author is thinking of the 2019 experiment (Fein et al., University of Vienna) that demonstrated quantum interference with molecules of 2000+ atoms - oligoporphyrin molecules, about 25,000 times the mass of a hydrogen atom. Won attention but not the Nobel. The Nobel the author might be thinking of is the 2022 Physics Nobel (Aspect, Clauser, Zeilinger) for proving quantum entanglement is real via Bell inequality violations. Zeilinger's group has been pushing macroscopic quantum effects. The "fist-sized" claim — that is close. The 2025 Nobel Prize in Physics went to John Clarke, Michel Devoret, and John Martinis for demonstrating macroscopic quantum tunneling in electrical circuits (work from 1984-1985 at UC Berkeley). Their system was about a centimeter wide — not fist-sized, but a macroscopic object you can hold, containing billions of electrons behaving as a single quantum entity. They showed quantum superposition, tunneling, and energy quantization at a scale where the quantum-to-classical boundary is not fundamental but an engineering constraint. This is the paper to re-read — it won the Nobel in 2025.
 
 **"What makes the delay in tunneling? What's in the way?"**
 
@@ -51,15 +51,15 @@ Traversal time (Buttiker-Landauer time, sometimes called tunneling time) is one 
 
 **"Quantum is just when something moves to a frequency we can't observe?"**
 
-This is actually a deep insight dressed in casual language. The measurement problem in quantum mechanics IS about observation thresholds. Decoherence theory says quantum behavior doesn't "stop" at some size - it gets overwhelmed by environmental interaction (thermal noise, photon bombardment, gravitational effects). So Kevin's intuition that there's a frequency or scale where quantum behavior becomes invisible to us is essentially what decoherence describes - it's not that large things aren't quantum, it's that we can't isolate them from the noise long enough to see it.
+This is actually a deep insight dressed in casual language. The measurement problem in quantum mechanics IS about observation thresholds. Decoherence theory says quantum behavior doesn't "stop" at some size - it gets overwhelmed by environmental interaction (thermal noise, photon bombardment, gravitational effects). So the author's intuition that there's a frequency or scale where quantum behavior becomes invisible to us is essentially what decoherence describes - it's not that large things aren't quantum, it's that we can't isolate them from the noise long enough to see it.
 
 **"If everything is a wave or a string"**
 
-Wave-particle duality (everything is both) is established physics. String theory (everything is a vibrating string at Planck scale ~10^-35m) is unproven but mathematically elegant. Kevin's connecting these: if quantum behavior is about resonant frequencies, and strings vibrate at frequencies, then the "quantum threshold" might be a resonance condition. When something vibrates at a frequency that couples to our observable universe, we see classical behavior. When it doesn't, we see quantum weirdness. This is speculative but it's a real direction of inquiry in quantum gravity research.
+Wave-particle duality (everything is both) is established physics. String theory (everything is a vibrating string at Planck scale ~10^-35m) is unproven but mathematically elegant. The author is connecting these: if quantum behavior is about resonant frequencies, and strings vibrate at frequencies, then the "quantum threshold" might be a resonance condition. When something vibrates at a frequency that couples to our observable universe, we see classical behavior. When it doesn't, we see quantum weirdness. This is speculative but it's a real direction of inquiry in quantum gravity research.
 
 **"Can electric signals in the brain go quantum?"**
 
-This is the Penrose-Hameroff Orchestrated Objective Reduction (Orch-OR) theory - consciousness arises from quantum computations in microtubules inside neurons. Controversial, but not debunked. The Fisher/Posner molecule hypothesis (Matthew Fisher, UCSB, 2015) proposes that phosphorus nuclear spins in Posner molecules could maintain quantum coherence for hours at brain temperature. If proven, neural signaling has a quantum channel. This connects directly to Kevin's BCI/subvocalization work — thought experiment: IF the brain has quantum channels, THEN BCI security would need to account for quantum information, not just classical electrical signals. Both Orch-OR and Fisher remain unconfirmed experimentally. This is a speculative but scientifically serious thread.
+This is the Penrose-Hameroff Orchestrated Objective Reduction (Orch-OR) theory - consciousness arises from quantum computations in microtubules inside neurons. Controversial, but not debunked. The Fisher/Posner molecule hypothesis (Matthew Fisher, UCSB, 2015) proposes that phosphorus nuclear spins in Posner molecules could maintain quantum coherence for hours at brain temperature. If proven, neural signaling has a quantum channel. This connects directly to Qinnovate's BCI/subvocalization work — thought experiment: IF the brain has quantum channels, THEN BCI security would need to account for quantum information, not just classical electrical signals. Both Orch-OR and Fisher remain unconfirmed experimentally. This is a speculative but scientifically serious thread.
 
 ---
 

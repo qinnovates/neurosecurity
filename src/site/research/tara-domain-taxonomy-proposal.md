@@ -3,7 +3,7 @@
 **Document Type:** Architecture Proposal
 **Version:** 0.1 DRAFT
 **Date:** 2026-03-14
-**Author:** Kevin L. Qi, Qinnovate
+**Author:** Qinnovate
 **Status:** Pending cross-AI review
 **Classification:** ADOPTED — implemented 2026-03-17. Option C (Hybrid): QIF-Txxxx canonical + TARA-{DOMAIN}-{MODE}-{NNN} alias
 **Connected:** Derivation Log Entry 92 (sensor hierarchy)

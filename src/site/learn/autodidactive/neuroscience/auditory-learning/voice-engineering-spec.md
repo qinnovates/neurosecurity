@@ -364,7 +364,7 @@ Each clause fits one inhale. Each pause spans one exhale. The listener's breathi
 - Voice ID: `pFZP5JQG7iQjIQuC4Bku`
 - Model: `eleven_multilingual_v2`
 - Character: Warm, mid-low British female. "Velvety Actress."
-- Kevin's approval: "BEAUTIFUL" at stability=0.30, style=0.65, speed=0.92 (conversational)
+- Qinnovate's approval: "BEAUTIFUL" at stability=0.30, style=0.65, speed=0.92 (conversational)
 
 **For meditation, Lily needs different settings than conversational.** The approved Vox baseline (0.30/0.65/0.65) is for dialogue energy. Meditation needs:
 - Higher stability (more predictable for entrainment)
@@ -379,8 +379,8 @@ Each clause fits one inhale. Each pause spans one exhale. The listener's breathi
 | Lower-third pitch for trust (Klofstad) | Mid-low female register (~170-200 Hz estimated F0) |
 | Dark, warm timbre (Zoghaib) | "Velvety" character. Natural warmth. |
 | Slight breathiness (ASMR research) | At stability 0.40-0.50, Lily produces natural breathiness |
-| Human-sounding (Menhart & Cummings) | Kevin rejected all voices that sounded "commercial" or "scripted" |
-| Philosophical weight (Kevin's philosophy) | "Nurturing female voice = philosophical weight" |
+| Human-sounding (Menhart & Cummings) | Qinnovate rejected all voices that sounded "commercial" or "scripted" |
+| Philosophical weight (Qinnovate's philosophy) | "Nurturing female voice = philosophical weight" |
 
 ### When to Consider v3
 

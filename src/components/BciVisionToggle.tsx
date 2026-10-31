@@ -230,7 +230,7 @@ export default function BciVisionToggle() {
                   But the curiosity that built ONI is the same curiosity that brought you here. That&apos;s what matters.
                 </p>
                 <p className="my-4" style={{ opacity: 0.7 }}>
-                  Kevin said he&apos;d plug the piano back in at 100 likes.
+                  Qinnovate said it would plug the piano back in at 100 likes.
                 </p>
                 <a
                   href="https://soundcloud.com/search?q=keviano%20kulhi"

@@ -1,7 +1,7 @@
 ---
 title: "The Fragility Tax Meets Neural Prosthetics: Why the Most Vulnerable Patients Will Inherit AI's Cheapest Layer"
 date: "2026-02-16"
-author: "Kevin L. Qi"
+author: "Qinnovate"
 tags: ["qif", "bci", "neural-prosthetics", "fragility-tax", "spinal-cord", "security", "embodied-ai"]
 ---
 

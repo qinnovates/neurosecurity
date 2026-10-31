@@ -181,6 +181,6 @@ The full derivation, including the verbatim back-and-forth that produced this sy
 
 . . .
 
-*Written by Kevin L. Qi. Written with AI assistance (Claude). All claims verified by the author.*
+*Written by Qinnovate. Written with AI assistance (Claude). All claims verified by the author.*
 
 *Qinnovate develops open standards for brain-computer interface security. Follow the research on [GitHub](https://github.com/qinnovates/qinnovate) or subscribe to our [RSS feed](/rss.xml).*

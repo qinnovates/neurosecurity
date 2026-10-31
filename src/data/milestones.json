@@ -44,7 +44,7 @@
       "id": "niss-first",
       "title": "NISS v1.0",
       "body": "FIRST.org CVSS SIG",
-      "summary": "Formally reviewed by the FIRST.org CVSS SIG in a SIG meeting. The SIG acknowledged the proposal but currently lacks subject-matter experts in neurotechnology to evaluate implementation. FIRST.org offered to add NISS as a resource in their GitHub repo sources. Kevin was accepted as a member of the CVSS SIG committee and is actively looking for SMEs who can help implement the extension correctly across international standards.",
+      "summary": "Formally reviewed by the FIRST.org CVSS SIG in a SIG meeting. The SIG acknowledged the proposal but currently lacks subject-matter experts in neurotechnology to evaluate implementation. FIRST.org offered to add NISS as a resource in their GitHub repo sources. A Qinnovate researcher was accepted as a member of the CVSS SIG committee and Qinnovate is actively looking for SMEs who can help implement the extension correctly across international standards.",
       "status": "submitted",
       "date": "2026-02-11",
       "href": "/atlas/scoring/"
