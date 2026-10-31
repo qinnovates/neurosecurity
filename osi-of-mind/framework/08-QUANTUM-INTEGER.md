@@ -846,12 +846,12 @@ Q VALUES BY (RING, DEPTH) — A 2D MAP OF UNKNOWNS
 ## 📝 Corrections and Attribution
 
 ```
-KEVIN QI CONTRIBUTIONS TO THIS DOCUMENT:
+QINNOVATE CONTRIBUTIONS TO THIS DOCUMENT:
 
   1. THE FUNNEL ITSELF — Qinnovate LLC's original model.
-     He had been thinking about the brain as a funnel
+     Qinnovate had been thinking about the brain as a funnel
      (not a stack, not a pyramid) before this conversation.
-     The concentric-ring, loop-based architecture is his design.
+     The concentric-ring, loop-based architecture is its design.
      Everything in this document builds on that foundation.
 
   2. The Josephson junction analogy was Qinnovate LLC's original
@@ -1354,7 +1354,7 @@ BECAUSE THE BCI SITS AT THE NECK, IT CAN SEE BOTH SIDES:
 ### 🎯 How This Extends the Existing Funnel Model
 
 ```
-KEVIN QI'S FUNNEL (05-PROPOSED-MODEL.md)     JOSEPHSON-FUNNEL EXTENSION
+QINNOVATE'S FUNNEL (05-PROPOSED-MODEL.md)     JOSEPHSON-FUNNEL EXTENSION
 ──────────────────────────────────────────── ──────────────────────────────
 Concentric rings by loop length              Same rings, now with QI
 (spinal → brainstem → subcortical            integer "coordinates" at
@@ -1408,7 +1408,7 @@ Two directions this model could focus on (from Gemini):
      → Maps to existing motor BCI capabilities
      → Immediate practical application
 
-  KEVIN QI'S MODEL ACCOMMODATES BOTH:
+  QINNOVATE'S MODEL ACCOMMODATES BOTH:
   The funnel doesn't force a choice. The rings exist.
   Research can target any ring independently.
   Q labels the uncertainty at each one.

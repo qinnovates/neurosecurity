@@ -12,7 +12,7 @@
 export const ETHICS_VERSION = '0.0.1';
 export const ETHICS_STATUS = 'Draft';
 export const ETHICS_DATE = 'February 2026';
-export const ETHICS_AUTHOR = 'Kevin L. Qi';
+export const ETHICS_AUTHOR = 'Qinnovate';
 export const ETHICS_LICENSE = 'CC-BY 4.0';
 export const ETHICS_LICENSE_URL = 'https://creativecommons.org/licenses/by/4.0/';
 

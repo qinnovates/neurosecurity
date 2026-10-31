@@ -473,7 +473,7 @@ const neurorightsFold = foldNeurorights(
 
   <script>
     document.getElementById('copy-bibtex-btn')?.addEventListener('click', function() {
-      const bibtex = '@misc{qi2026qif,\n  author = {Qi, Kevin L.},\n  title = {QIF: Quantified Interconnection Framework for Brain-Computer Interface Security},\n  year = {2026},\n  doi = {10.5281/zenodo.18640105},\n  url = {https://qinnovate.com},\n  note = {Proposed framework, not yet peer-reviewed}\n}';
+      const bibtex = '@misc{qinnovate2026qif,\n  author = {{Qinnovate}},\n  title = {QIF: Quantified Interconnection Framework for Brain-Computer Interface Security},\n  year = {2026},\n  doi = {10.5281/zenodo.18640105},\n  url = {https://qinnovate.com},\n  note = {Proposed framework, not yet peer-reviewed}\n}';
       navigator.clipboard.writeText(bibtex).then(() => { this.textContent = 'Copied!'; });
     });
   </script>

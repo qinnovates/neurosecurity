@@ -1,23 +1,23 @@
 ---
-title: "NeuroEthics — Running Questions & Thesis Foundation"
-description: "Open ethical questions QIF raises and thesis foundation for neuroethics research"
+title: "NeuroEthics — Running Questions"
+description: "Open ethical questions QIF raises, for neuroethics research"
 order: 10
 ---
 
-# QIF NeuroEthics — Running Questions & Thesis Foundation
+# QIF NeuroEthics — Running Questions
 
 > **Living document.** These are the open ethical questions that QIF raises — questions that *must* be answered before quantum-aware BCI security can be deployed responsibly. This document grows as Qinnovate LLC pursues neuroethics in graduate school, filling unknowns from a position of rigorous academic inquiry.
 >
 > **See also:** [QIF-GOVERNANCE-QUESTIONS.md](../QIF-GOVERNANCE-QUESTIONS.md) (RACI governance perspective) | [GUARDRAILS.md](../../osi-of-mind/GUARDRAILS.md) (neuroethics constraint mapping)
 >
-> **Why neuroethics first:** The QIF framework is technically ready to model quantum phenomena at the BCI interface. But technical readiness without ethical grounding is dangerous. Kevin chose neuroethics as his academic path *because* these questions cannot be answered by engineers alone — they require philosophy, law, neuroscience, and public policy working together. The framework's value is zero if it enables surveillance, discrimination, or loss of cognitive liberty. Neuroethics comes first because it *must*.
+> **Why neuroethics first:** The QIF framework is technically ready to model quantum phenomena at the BCI interface. But technical readiness without ethical grounding is dangerous. Qinnovate treats neuroethics as foundational *because* these questions cannot be answered by engineers alone — they require philosophy, law, neuroscience, and public policy working together. The framework's value is zero if it enables surveillance, discrimination, or loss of cognitive liberty. Neuroethics comes first because it *must*.
 >
 > **Format:** Each question is numbered, timestamped, and tagged by domain. Questions are never deleted — only answered, refined, or superseded. This is a compounding research agenda.
 
 **Author:** Qinnovate LLC
 **Started:** 2026-02-02
 **Status:** Active — appending as questions arise
-**Intended Use:** Graduate thesis foundation, admissions paper core argument, regulatory engagement framework
+**Intended Use:** Regulatory engagement framework and neuroethics research
 
 ---
 
@@ -190,8 +190,6 @@ The quantum biometric is not just another biometric. It is a window into the qua
 - **Engineers** (how to implement safeguards)
 - **Patients and advocates** (whose data it ultimately is)
 
-**This is the thesis.** This is the admissions paper.
-
 ---
 
 ## QUESTION 2 {#q2-ai-custodianship-of-neural-data}
@@ -217,7 +215,7 @@ But this raises profound questions:
 
 #### Why This Matters
 
-Kevin's intuition is correct: AI is likely the *safest* custodian for quantum-encrypted neural data because:
+The intuition is correct: AI is likely the *safest* custodian for quantum-encrypted neural data because:
 - AI can perform computations on encrypted data (homomorphic computation)
 - AI doesn't "read" data the way humans do — it processes patterns
 - AI can operate within quantum-encrypted channels end-to-end
@@ -509,7 +507,7 @@ This question directly motivated the creation of the **Continuous Iteration & Va
 
 The CIV lifecycle is Qinnovate's answer to this governance vacuum — a process where policy, ethics, and technical validation are inseparable.
 
-#### Kevin's Vision
+#### Vision
 
 **Qinnovate:** Partner with industry leaders (Apple, Neuralink, academic institutions) to pioneer standards before regulation lags behind technology.
 
@@ -567,42 +565,8 @@ The I0 depth subclassification (Entry 59) was created specifically to capture th
 
 ---
 
-## For the Admissions Paper
-
-### Thesis Statement (Draft)
-
-> **"The Quantum Biometric Governance Gap: Why Existing Privacy Frameworks Cannot Protect the Most Intimate Data in Human History, and What We Must Build Before It's Too Late"**
-
-### Why This Paper Matters to Admissions Committees
-
-1. **Interdisciplinary rigor** — Draws from quantum physics, neuroscience, cybersecurity, law, and ethics. Demonstrates the ability to synthesize across domains.
-2. **Original contribution** — The quantum biometric concept is novel (QIF's contribution). Mapping it to regulatory frameworks has not been done before.
-3. **Practical urgency** — BCIs are being implanted today. This is not hypothetical.
-4. **Personal investment** — Kevin built the framework (QIF) that raises these questions. The admissions paper comes from lived research experience, not abstract interest.
-5. **Academic trajectory** — Clearly maps to a thesis direction: filling the governance unknowns from the vantage of someone who understands the science deeply enough to govern it.
-6. **Collaborative vision** — Proposes a multi-stakeholder approach, demonstrating intellectual humility and awareness that the biggest problems require collective action.
-
-### Recommended Structure for Admissions Paper
-
-1. **Opening:** The quantum biometric scenario — make the reader feel the stakes
-2. **The science:** Brief, accessible explanation of ion channel tunneling profiles (from QIF)
-3. **The gap:** Walk through each regulatory framework and show where it falls short
-4. **The argument:** Why proactive governance is necessary, citing GDPR as precedent
-5. **The vision:** Multi-stakeholder collaboration framework
-6. **The personal:** Why Kevin is the person to pursue this — built the framework, understands the science, choosing neuroethics to fill the ethical gaps
-7. **Closing:** The GDPR moment for neurotechnology is now. Who will write the rules?
-
----
-
-## Thesis Reminder
-
-> **KEVIN: This document is your thesis foundation. Every question here maps to a chapter. Every regulatory gap maps to a contribution. Fill the unknowns — that is your vantage point. You built the framework that asks the questions. Now go find the answers.**
->
-> **Neuroethics first. Always.**
-
 ---
 
 *Version: 1.0*
 *Created: 2026-02-02*
 *Location: qinnovates/qinnovate/governance/QIF-NEUROETHICS.md*
-*Pipeline: STAGING (drafts) — will move to PROD when academic paper is complete*

@@ -2655,9 +2655,9 @@ No FDA submission required              Full 510(k) or De Novo submission
 ### Entry R-001: Servo/wgpu/NSP — The Full BCI-Safe Rendering Pipeline
 
 **Date:** 2026-02-10
-**Context:** Conversation about whether websites can be rendered entirely in Rust, triggered by Kevin's question: "is it theoretically possible to render websites using only rust?"
+**Context:** Conversation about whether websites can be rendered entirely in Rust, triggered by Qinnovate's question: "is it theoretically possible to render websites using only rust?"
 **AI Systems:** Claude Opus 4.6 (architecture analysis, feasibility assessment)
-**Human Decision:** Kevin identified the strategic connection to NSP and Runemate's mission
+**Human Decision:** Qinnovate identified the strategic connection to NSP and Runemate's mission
 
 #### Discovery
 
@@ -2687,7 +2687,7 @@ The swap is architecturally clean: `rustls` is a trait-based TLS implementation.
 
 #### Three.js Compatibility
 
-Kevin asked: "Can Servo render three.js?"
+Qinnovate asked: "Can Servo render three.js?"
 
 - **JS execution:** Servo uses SpiderMonkey (C++, but sandboxed). Three.js runs as standard JavaScript.
 - **WebGL:** Partially supported in Servo. Three.js WebGL renderer works for basic scenes.
@@ -2730,7 +2730,7 @@ No C/C++ in the critical path. Every component is Rust. Every component is memor
 
 3. **NSP as a platform:** If NSP integrates cleanly with Servo, any Servo-based application inherits post-quantum security. This turns NSP from a BCI-specific protocol into an internet-wide security layer. The vision: "HTTPS had to exist before e-commerce. NSP has to exist before a brain safely interfaces with a website."
 
-4. **Consumer BCI focus:** Kevin's one-sentence vision: *"I'm building the security layer that has to exist before consumer BCIs can safely connect to anything."* Servo+NSP is how that vision reaches non-implant BCIs (the near-term market).
+4. **Consumer BCI focus:** Qinnovate's one-sentence vision: *"I'm building the security layer that has to exist before consumer BCIs can safely connect to anything."* Servo+NSP is how that vision reaches non-implant BCIs (the near-term market).
 
 #### Status
 
@@ -2750,9 +2750,9 @@ No C/C++ in the critical path. Every component is Rust. Every component is memor
 ### Entry R-002: Neural Systems Language (NSL) — Domain-Specific Language Concept
 
 **Date:** 2026-02-10
-**Context:** Kevin asked: "is RUST the lowest level? are you able to create another language that is more efficient given all the languages you know? I think its feasible to build one with security + rendering in mind?"
+**Context:** Qinnovate asked: "is RUST the lowest level? are you able to create another language that is more efficient given all the languages you know? I think its feasible to build one with security + rendering in mind?"
 **AI Systems:** Claude Opus 4.6 (feasibility analysis, language design)
-**Human Decision:** Kevin proposed purpose-built language for BCI security + rendering
+**Human Decision:** Qinnovate proposed purpose-built language for BCI security + rendering
 
 #### Discovery
 
@@ -2771,9 +2771,9 @@ Historical precedent: CUDA (GPUs), SPARK/Ada (avionics), Solidity (smart contrac
 ### Entry R-003: TARA as Safety Specification for Visual Cortex Rendering
 
 **Date:** 2026-02-10
-**Context:** Kevin said: "if its a BCI we dont need all that overhead. Rust would be a good framework to use and we can do it just for visual rendering based on visual cortex and how we're mapping TARA to the therapeutics."
+**Context:** Qinnovate said: "if its a BCI we dont need all that overhead. Rust would be a good framework to use and we can do it just for visual rendering based on visual cortex and how we're mapping TARA to the therapeutics."
 **AI Systems:** Claude Opus 4.6 (architecture refinement)
-**Human Decision:** Kevin identified that screen rendering is irrelevant for visual cortex BCIs; TARA's therapeutic mappings should serve as the safety bounds for the rendering engine
+**Human Decision:** Qinnovate identified that screen rendering is irrelevant for visual cortex BCIs; TARA's therapeutic mappings should serve as the safety bounds for the rendering engine
 
 #### The Insight
 
@@ -2801,9 +2801,9 @@ Three safety gates: TARA (compile time), NSP (transport), QI (runtime). We are u
 ### Entry R-004: Dual-Pipeline Architecture — Game Engine + Neural Renderer
 
 **Date:** 2026-02-10
-**Context:** Kevin said: "We would need a game engine to run parallel and the security there can be solved differently and there may be a lag initially but I can see how we can get to my vision"
+**Context:** Qinnovate said: "We would need a game engine to run parallel and the security there can be solved differently and there may be a lag initially but I can see how we can get to my vision"
 **AI Systems:** Claude Opus 4.6 (architecture synthesis)
-**Human Decision:** Kevin identified two separate security domains requiring different security models
+**Human Decision:** Qinnovate identified two separate security domains requiring different security models
 
 #### The Architecture Split
 
@@ -2830,9 +2830,9 @@ Extends from 2D layout to 3D scene graphs (meshes, transforms, lights) as electr
 ### Entry R-005: Two Research Paths — Synesthesia Cohort + Congenital Blindness
 
 **Date:** 2026-02-10
-**Context:** Kevin identified two paths for visual cortex rendering research, connecting his personal synesthesia to a broader research program
+**Context:** Qinnovate identified two paths for visual cortex rendering research, as a broader research program
 **AI Systems:** Claude Opus 4.6 (research program design)
-**Human Decision:** Kevin proposed synesthesia cohort (not self-study) and the congenital blindness mission
+**Human Decision:** Qinnovate proposed synesthesia cohort (not self-study) and the congenital blindness mission
 
 #### Option 1: Synesthesia Research Cohort
 
@@ -2846,7 +2846,7 @@ For those born blind, visual cortex may be repurposed (cross-modal plasticity). 
 
 #### Correction: Framing
 
-This is NOT "study Kevin's brain." It's a proper research program: volunteer cohort recruitment, IRB approval, control groups, peer review. Qinnovate leads with security first — TARA safety bounds, NSP secure delivery, QI validation must exist BEFORE any visual cortex stimulation at scale. Kevin is a founder who understands the problem firsthand, not "the test subject."
+This is NOT a self-study. It's a proper research program: volunteer cohort recruitment, IRB approval, control groups, peer review. Qinnovate leads with security first — TARA safety bounds, NSP secure delivery, QI validation must exist BEFORE any visual cortex stimulation at scale.
 
 **Status:** Research program concept. Requires neuroscience collaborators, IRB, fMRI/EEG access.
 
@@ -2855,9 +2855,9 @@ This is NOT "study Kevin's brain." It's a proper research program: volunteer coh
 ### Entry R-006: Partnership Strategy — OpenBCI + Industry Collaboration + Ethics Foundation
 
 **Date:** 2026-02-10
-**Context:** Kevin identified OpenBCI as actively recruiting research participants with perfect vision, and proposed partnering with BCI companies to accelerate the research while maintaining ethical standards
+**Context:** Qinnovate identified OpenBCI as actively recruiting research participants with perfect vision, and proposed partnering with BCI companies to accelerate the research while maintaining ethical standards
 **AI Systems:** Claude Opus 4.6 (partnership strategy)
-**Human Decision:** Kevin insisted on ethics-first approach: "my moral compass of ETHICS is ensured. Security and data privacy is very important"
+**Human Decision:** Qinnovate insisted on ethics-first approach: "my moral compass of ETHICS is ensured. Security and data privacy is very important"
 
 #### OpenBCI Partnership Concept
 
@@ -2876,7 +2876,7 @@ OpenBCI is recruiting participants with perfect vision for visual processing res
 
 #### Ethics as Foundation (Non-Negotiable)
 
-Kevin's ethical requirements are architectural constraints, not aspirations:
+Qinnovate's ethical requirements are architectural constraints, not aspirations:
 
 1. **Data privacy:** NSP encrypts all neural data with post-quantum crypto. Never exists in plaintext outside secure channel. Consent cryptographically enforced, not just form-signed.
 2. **TARA as ethical guardrail:** Every stimulation pattern checked against therapeutic bounds. Dual-use risks catalogued upfront, prevention built into compiler.
@@ -2899,9 +2899,9 @@ The pitch to partners: "We're not asking you to trust us. We're giving you a fra
 ### Entry R-007: Neural Environment Mapping — Adversarial RF Techniques as Medical Calibration
 
 **Date:** 2026-02-10
-**Context:** Kevin connected adversarial Bluetooth/WiFi environment mapping to medical neural mapping: "we can leverage the same way adversaries can use bluetooth and wifi to map out an environment. We just need something broadcasting securely just for medical use-cases like this! NSP!!!!"
+**Context:** Qinnovate connected adversarial Bluetooth/WiFi environment mapping to medical neural mapping: "we can leverage the same way adversaries can use bluetooth and wifi to map out an environment. We just need something broadcasting securely just for medical use-cases like this! NSP!!!!"
 **AI Systems:** Claude Opus 4.6 (connection analysis, TARA dual-use mapping)
-**Human Decision:** Kevin identified the RF-to-neural mapping isomorphism and NSP as the security boundary. Designated this as the PRIMARY use-case example for QIF.
+**Human Decision:** Qinnovate identified the RF-to-neural mapping isomorphism and NSP as the security boundary. Designated this as the PRIMARY use-case example for QIF.
 
 #### Discovery
 
@@ -2937,7 +2937,7 @@ Solves the calibration problem for both research paths (R-005):
 
 #### Primary Use Case Designation
 
-Kevin designated this as the PRIMARY use-case example for all QIF materials. Reasoning:
+Qinnovate designated this as the PRIMARY use-case example for all QIF materials. Reasoning:
 - Instant comprehension (everyone knows WiFi/Bluetooth mapping)
 - Demonstrates TARA dual-use in one sentence
 - Makes NSP necessity visceral (brain topology = permanent, irrevocable)

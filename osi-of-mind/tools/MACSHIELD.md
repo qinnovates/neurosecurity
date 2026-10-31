@@ -10,7 +10,7 @@ macshield is for **students, independent researchers, and individuals** who want
 
 macshield automatically hardens your Mac when you connect to untrusted WiFi and relaxes protections when you're on a network you've marked as trusted (home, office). Three things happen on untrusted networks:
 
-1. **Hostname randomization** — replaces your real name (e.g., "Kevin's MacBook Pro") with a generic device name so you're not identifiable on the local network
+1. **Hostname randomization** — replaces your real name (e.g., "Alex's MacBook Pro") with a generic device name so you're not identifiable on the local network
 2. **Stealth mode** — silently drops ICMP pings, ARP probes, and port scans from other devices
 3. **NetBIOS disabled** — stops broadcasting your device name on ports 137/138
 
