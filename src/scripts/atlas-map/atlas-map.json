@@ -1658,6 +1658,14 @@
       "owner": "engineering",
       "status": "open",
       "from": "palette re-step, 2026-10-16"
+    },
+    {
+      "id": "ATLAS-F66",
+      "what": "Rebuild the atlas assets and delete registry/rebuild-pending.json. Needs the cit168_rl input files, hash-checked and scanned, plus the registration transform restored or recomputed with owner review.",
+      "ref": "#216",
+      "owner": "engineering",
+      "status": "open",
+      "from": "code hash drift, 2026-10-31"
     }
   ]
 }

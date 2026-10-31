@@ -83,6 +83,10 @@ Computed per structure on the thresholded mask, in voxels of the coarser of the 
 | coarse | between the other two | mesh; the scene draws it in the approximate style |
 | unresolved | under 2 voxels across, or under 20 voxels | a marker (centroid and nominal radius in the build report); never a mesh |
 
+## Rebuild pending
+
+`registry/rebuild-pending.json` records that the pipeline changed after the shipped assets were built. The manifest keeps the hash they were really built under. The test accepts only the exact pair in that file, so any further change fails until reviewed. Delete the file after a rebuild.
+
 ## Ingest checks
 
 Third-party files are checked before the pipeline uses them.
