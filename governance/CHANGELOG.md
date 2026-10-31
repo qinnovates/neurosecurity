@@ -117,7 +117,6 @@ Auto-maintained by `scripts/changelog-update.mjs`.
 ## 2026-03-14
 
 ### Added
-- Add Tools section to README — link Conductor, NeuroSIM, macshield ([ee7c67f](https://github.com/qinnovates/qinnovate/commit/ee7c67f))
 - TARA domain taxonomy, dual lens system, UI component library, and site overhaul ([d988ead](https://github.com/qinnovates/qinnovate/commit/d988ead))
 
 
@@ -487,9 +486,7 @@ Auto-maintained by `scripts/changelog-update.mjs`.
 - Add BrainFlow validation results (Entry 011) to README and derivation log ([0879ed6](https://github.com/qinnovates/qinnovate/commit/0879ed6))
 - Add Project Firefly to neurorights map ([5a762c1](https://github.com/qinnovates/qinnovate/commit/5a762c1))
 - Add neurorights map to root README ([651eec2](https://github.com/qinnovates/qinnovate/commit/651eec2))
-- Add all five neurorights to macshield pointer ([0477be8](https://github.com/qinnovates/qinnovate/commit/0477be8))
 - Add Fair Access to Mental Augmentation neuroright context ([d84d868](https://github.com/qinnovates/qinnovate/commit/d84d868))
-- Expand macshield pointer with audience disclaimer and overview ([f453de5](https://github.com/qinnovates/qinnovate/commit/f453de5))
 - Add TOCs and READMEs across 11 directories ([2ac65fa](https://github.com/qinnovates/qinnovate/commit/2ac65fa))
 - Add enterprise disclaimer, TOC, student VPN guide, QIF mapping ([729ae56](https://github.com/qinnovates/qinnovate/commit/729ae56))
 

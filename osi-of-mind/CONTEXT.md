@@ -10,7 +10,7 @@
 - `framework/` -- 9-document architecture series
 - `nsp/`, `runemate/` -- Rust implementations
 - `tara-threat/` -- TARA threat catalog
-- `tools/` -- Security tools (neurowall, neurosim, macshield)
+- `tools/` -- Security tools (neurowall, neurosim)
 
 ## Conventions
 - All changes must align with the 11-band hourglass model

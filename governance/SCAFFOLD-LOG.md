@@ -124,7 +124,7 @@ qinnovate/
 ├── datalake/CLAUDE.md                     # 26 lines -- source of truth, pipeline, SDK
 ├── osi-of-mind/CLAUDE.md                # 19 lines -- hourglass model, derivation log
 ├── paper/CLAUDE.md                        # 20 lines -- LaTeX, BibTeX, make deploy
-├── tools/CLAUDE.md                        # 11 lines -- neurowall, neurosim, macshield
+├── tools/CLAUDE.md                        # 11 lines -- neurowall, neurosim
 ├── scripts/CLAUDE.md                      # 15 lines -- prebuild pipeline
 └── governance/CLAUDE.md                   # 14 lines -- generated files warning
 ```

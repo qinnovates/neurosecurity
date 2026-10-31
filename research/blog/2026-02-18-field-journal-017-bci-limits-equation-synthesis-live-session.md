@@ -133,7 +133,7 @@ Also: robotic surgery is already happening. Neuralink's R1 robot does human impl
 
 ---
 
-*This entry is part of the [QIF Field Journal](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md), a living, append-only research journal documenting first-person observations at the intersection of neurosecurity, BCI engineering, and neurorights. The journal exists because neural privacy is a right, not a feature. Tools like macshield protect digital identity on networks; this research works toward protecting cognitive identity at the neural interface.*
+*This entry is part of the [QIF Field Journal](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md), a living, append-only research journal documenting first-person observations at the intersection of neurosecurity, BCI engineering, and neurorights. The journal exists because neural privacy is a right, not a feature. This research works toward protecting cognitive identity at the neural interface.*
 
 [Read this entry in context](https://github.com/qinnovates/neurosecurity/blob/main/osi-of-mind/QIF-FIELD-JOURNAL.md#entry-017)
 
