@@ -14,6 +14,7 @@ import InspectorShapes from './InspectorShapes';
 import InspectorTechniques, { InspectorBandOnly } from './InspectorTechniques';
 import LimitNote from './LimitNote';
 import { buildRegionCoverage, type AtlasCoverage } from './region-coverage';
+import RegionDossier from './RegionDossier';
 
 interface Props {
   model: ExplorerModel;
@@ -81,6 +82,7 @@ export default function RegionInspector(props: Props) {
         <button type="button" className="atlas-link-button" onClick={props.onBackToList}>Back to the list</button>
         <button type="button" className="atlas-link-button" onClick={props.onBackToView}>Back to the 3D view</button>
       </p>
+      <RegionDossier model={props.model} regionId={region.id} onChooseTechnique={props.onChooseTechnique} onChooseDevice={props.onChooseDevice} />
       <InspectorCoverage coverage={coverage} model={props.model} regionId={region.id} />
       {detail.description !== null && (
         <section className="atlas-section" aria-labelledby="atlas-inspector-what">

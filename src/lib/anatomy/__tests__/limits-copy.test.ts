@@ -7,6 +7,11 @@ const MAX_SENTENCES = 3;
 /** Words that would say a signal moves or that one place acts on another. No limit sentence may use them. */
 const DIRECTION_WORDS = /\b(flows?|travels?|propagates?|spreads?|upstream|downstream|projects? to|sends?|drives?)\b|[→←↔]/i;
 const SPECIALIST_WORDS = /\b(parcellation|tractography|delineation|ontology|homolog|voxel)\b/i;
+/** The sentences written for the region dossier, which stand beside every block of it and so are held shorter. */
+const DOSSIER_LIMIT_IDS: readonly LimitId[] = [
+  'count_mark', 'count_excludes_band_level', 'tier_mark', 'niss_badge_region', 'silicon_absent', 'pathway_unreviewed', 'nothing_live', 'controls_pair', 'scene_review_state', 'hazards_by_layer', 'company_is_context',
+];
+const DOSSIER_LIMIT_MAX_WORDS = 25;
 
 describe('limit sentences', () => {
   it('are held word for word, so any change of wording is a visible diff', () => {
@@ -28,6 +33,10 @@ describe('limit sentences', () => {
       if (id !== 'band_order') expect(template, id).not.toMatch(DIRECTION_WORDS);
       expect(template, id).not.toMatch(SPECIALIST_WORDS);
     }
+  });
+
+  it('keep the dossier\'s sentences to twenty-five words or fewer', () => {
+    for (const id of DOSSIER_LIMIT_IDS) expect(LIMIT_TEMPLATES[id].split(/\s+/).length, id).toBeLessThanOrEqual(DOSSIER_LIMIT_MAX_WORDS);
   });
 
   it('never call unlinked regions safe or low', () => {

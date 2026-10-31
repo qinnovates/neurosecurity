@@ -4,7 +4,7 @@ import type { DetailTechnique } from '../region-detail';
 import { HERO_RISK_CAP, rankRegionRisks, techniquePagePath } from '../hero-risks';
 
 function technique(id: string, name: string, nissSeverity: string | null): DetailTechnique {
-  return { id, name, bandNames: 'N1', nissSeverity, dsmCluster: null, term: name.toLowerCase(), evidenceKey: `${id}:${name}`, reviewState: { ...UNREVIEWED, mark: 'AI-drafted' }, uncountedReason: null };
+  return { id, name, bandNames: 'N1', nissSeverity, dsmCluster: null, term: name.toLowerCase(), evidenceKey: `${id}:${name}`, reviewState: { ...UNREVIEWED, mark: 'AI-drafted' }, uncountedReason: null, facts: null };
 }
 
 describe('rankRegionRisks', () => {
