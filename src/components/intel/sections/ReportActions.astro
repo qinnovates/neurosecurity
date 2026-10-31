@@ -46,12 +46,13 @@ const DILIGENCE_QUESTIONS = [
     <div class="flex flex-col rounded-xl border border-[var(--color-border)] bg-[var(--color-glass-bg)] p-5">
       <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-faint)]">Everyone</p>
       <h3 class="mt-1 text-base font-semibold">Get the next edition</h3>
-      <form action="https://buttondown.com/api/emails/embed-subscribe/qinnovate" method="post" target="_blank" class="mt-3 space-y-2">
+      <form action="https://buttondown.com/api/emails/embed-subscribe/qinnovate" method="post" target="_blank" rel="noopener noreferrer" class="mt-3 space-y-2">
         <label for="report-subscribe-email" class="block text-xs text-[var(--color-text-muted)]">Email address</label>
         <input id="report-subscribe-email" type="email" name="email" autocomplete="email" required
           class="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-secondary)] px-3 py-2 text-sm text-[var(--color-text-primary)] focus:border-[var(--color-accent-primary)] focus:outline-none" />
         <button type="submit" class="min-h-11 w-full cursor-pointer rounded-lg bg-[var(--color-accent-fill)] px-4 py-2 text-sm font-semibold text-white hover:opacity-90">Subscribe</button>
       </form>
+      <p class="mt-2 text-xs text-[var(--color-text-faint)]">By subscribing you agree that Buttondown sends you this newsletter using your email address. Unsubscribe in any email. <a href="/privacy/#newsletter" class="underline">Privacy policy</a></p>
       <a href="/rss.xml" class="mt-2 text-xs text-[var(--color-text-faint)] hover:text-[var(--color-accent-primary)]">Or follow the RSS feed</a>
     </div>
   </div>

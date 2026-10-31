@@ -348,7 +348,7 @@ function fmtDate(d: string) {
         <div class="rounded-2xl p-5" style="background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(139,92,246,0.04) 100%); backdrop-filter: blur(16px); border: 1px solid rgba(59,130,246,0.1);">
           <h3 class="text-sm font-semibold mb-2">Stay Informed</h3>
           <p class="text-xs text-[var(--color-text-muted)] mb-3">Neural security intel, delivered when it matters.</p>
-          <form action="https://buttondown.com/api/emails/embed-subscribe/qinnovate" method="post" target="_blank" class="space-y-2">
+          <form action="https://buttondown.com/api/emails/embed-subscribe/qinnovate" method="post" target="_blank" rel="noopener noreferrer" class="space-y-2">
             <input type="email" name="email" placeholder="your@email.com" required
               class="w-full px-3 py-2 rounded-lg text-sm bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-[var(--color-text-primary)] placeholder:text-[var(--color-text-faint)] focus:outline-none focus:border-[var(--color-accent-primary)] transition-colors" />
             <button type="submit"
@@ -356,6 +356,7 @@ function fmtDate(d: string) {
               Subscribe
             </button>
           </form>
+          <p class="mt-2 text-[11px] leading-snug text-[var(--color-text-faint)]">By subscribing you agree that Buttondown sends you this newsletter using your email address. Unsubscribe in any email. <a href="/privacy/#newsletter" class="underline">Privacy policy</a></p>
           <a href="/rss.xml" class="inline-flex items-center gap-1 text-xs text-[var(--color-text-faint)] hover:text-[var(--color-accent-primary)] mt-2 transition-colors">
             <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"/></svg>
             RSS

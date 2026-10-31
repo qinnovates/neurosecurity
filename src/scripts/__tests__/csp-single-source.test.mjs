@@ -56,7 +56,7 @@ describe('csp-policy.ts is the only source of a policy', () => {
     const dist = fs.mkdtempSync(path.join(os.tmpdir(), 'headers-check-'));
     fs.writeFileSync(path.join(dist, '_headers'), renderHeaders());
     expect(findHeaderPolicyFailures(dist)).toEqual([]);
-    fs.writeFileSync(path.join(dist, '_headers'), renderHeaders().replace("connect-src 'self'; media-src 'self'; worker-src 'self'; object-src", "connect-src *; media-src 'self'; worker-src 'self'; object-src"));
+    fs.writeFileSync(path.join(dist, '_headers'), renderHeaders().replace("form-action 'self'", 'form-action *'));
     expect(findHeaderPolicyFailures(dist)).toEqual(['_headers: the policy under /* differs from csp-policy.ts']);
     fs.rmSync(path.join(dist, '_headers'));
     expect(findHeaderPolicyFailures(dist)[0]).toMatch(/_headers was not emitted/);

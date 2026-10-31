@@ -15,6 +15,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { findAssetCoherenceFailures, findAttributionFailures } from './check-atlas-assets.mjs';
 import { findHeaderPolicyFailures } from './check-headers.mjs';
+import { findThirdPartyLoadFailures } from './check-third-party-loads.mjs';
 import { findDeadInternalLinkFailures } from './check-internal-links.mjs';
 import { findToolPageFailures } from './check-model-page.mjs';
 import { findAnatomyPayload, findAnatomyPayloadInScript } from './find-anatomy-payload.mjs';
@@ -102,9 +103,10 @@ export const HEADER_CHECKS = [
   { name: 'emitted _headers policies equal csp-policy.ts', findFailures: (distDirectory) => findHeaderPolicyFailures(distDirectory) },
 ];
 
-/** Every built page except the frozen whitepaper archives; it takes no page list. */
+/** Whole-build link and origin checks; they take no page list. The link check skips the frozen whitepaper archives, the origin check does not. */
 export const LINK_CHECKS = [
   { name: 'same-site links in built pages point at something in the build', findFailures: (distDirectory) => findDeadInternalLinkFailures(distDirectory) },
+  { name: 'no built page loads a script, stylesheet, font or frame from another origin', findFailures: (distDirectory) => findThirdPartyLoadFailures(distDirectory) },
 ];
 
 /** @type {readonly PostBuildCheck[]} */

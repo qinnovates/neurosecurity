@@ -104,6 +104,9 @@ const DEFAULT_THEME = 'dark';
     }).replace(/<\//g, '<\\/')} />
   )}
 
+  <!-- Consent for optional analytics: loads nothing from a third party until the visitor accepts -->
+  <script is:inline type="module" src="/js/consent.js"></script>
+
   <!-- RSS autodiscovery -->
   <link rel="alternate" type="application/rss+xml" title="Qinnovate Intel" href="/rss.xml" />
 
