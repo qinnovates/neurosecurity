@@ -50,15 +50,6 @@
         ]
       }
     },
-    "cit168_rl": {
-      "allowed_hosts": [
-        "osf.io",
-        "files.osf.io",
-        "files.de-1.osf.io",
-        "files.us.osf.io"
-      ],
-      "members": {}
-    },
     "neudorfer_hypothalamus": {
       "allowed_hosts": [
         "zenodo.org"
@@ -117,78 +108,6 @@
       "probability_meaning": "not applicable: binary brain mask of the template",
       "acquisition_voxel_mm": null,
       "size_rule_voxel_mm": null
-    },
-    {
-      "id": "deep-cit168",
-      "layer": "deep",
-      "source": "cit168_rl",
-      "kind": "probability_maps",
-      "file": "CIT168toMNI152-2009c_prob.nii.gz",
-      "threshold": 0.5,
-      "hemispheres": "unknown",
-      "probability_meaning": "not stated by the publisher",
-      "name_source": "Acronyms from the publisher's labels.txt; names from the publisher's OSF wiki.",
-      "labels": [
-        {
-          "id": "0",
-          "acronym": "Pu",
-          "name": "Putamen"
-        },
-        {
-          "id": "1",
-          "acronym": "Ca",
-          "name": "Caudate Nucleus"
-        },
-        {
-          "id": "2",
-          "acronym": "NAC",
-          "name": "Nucleus Accumbens"
-        },
-        {
-          "id": "4",
-          "acronym": "GPe",
-          "name": "Globus Pallidus External"
-        },
-        {
-          "id": "5",
-          "acronym": "GPi",
-          "name": "Globus Pallidus Internal"
-        },
-        {
-          "id": "6",
-          "acronym": "SNc",
-          "name": "Substantia Nigra Pars Compacta"
-        },
-        {
-          "id": "7",
-          "acronym": "RN",
-          "name": "Red Nucleus"
-        },
-        {
-          "id": "8",
-          "acronym": "SNr",
-          "name": "Substantia Nigra Pars Reticulata"
-        },
-        {
-          "id": "10",
-          "acronym": "VTA",
-          "name": "Ventral Tegmental Area"
-        },
-        {
-          "id": "15",
-          "acronym": "STH",
-          "name": "Subthalamic Nucleus"
-        }
-      ],
-      "acquisition_voxel_mm": 0.7,
-      "size_rule_voxel_mm": 1.0,
-      "mesh_upsample": 2,
-      "grid_voxel_mm": 1.0,
-      "mesh_note": "The 1 mm probability field is resampled linearly to 0.5 mm before the 0.5 cut, so that the mesh and the mask it is checked against describe the same surface. Size class is judged in the publisher's 1 mm voxels.",
-      "context_label_ids": [
-        "7"
-      ],
-      "context_note": "The red nucleus is drawn as context: no QIF region maps to it."
     },
     {
       "id": "hypothalamus-neudorfer",
