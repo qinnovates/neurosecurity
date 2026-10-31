@@ -4,8 +4,8 @@
   "framework": "Quantified Interconnection Framework (QIF) for Neural Security",
   "statistics": {
     "generator": "src/scripts/generate-registrar-statistics.mjs",
-    "generated": "2026-10-26",
-    "content_sha256": "e4779e1e78a1ffe09dd2aa71dd08445739859a76a7420a0b11bc4907e930e8ec",
+    "generated": "2026-10-31",
+    "content_sha256": "f0251a6cb09a253d880771c2059c559bc1f5dbe03ce66c5a58467faf8b60f243",
     "total_techniques": 178,
     "total_variants": 0,
     "total_tactics": 17,
@@ -25922,8 +25922,9 @@
       "id": "QIF-T0116",
       "attack": "Progressive reward pathway desensitization",
       "tactic": "QIF-N.MD",
-      "bands": "N5-N6",
+      "bands": "N2,N5-N6",
       "band_ids": [
+        "N2",
         "N5",
         "N6"
       ],
@@ -33596,7 +33597,7 @@
   ],
   "taxonomy": "QIF Locus Taxonomy v1.0",
   "scoring": "NISS v1.1 (Neural Impact Scoring System)",
-  "generated": "2026-10-26T13:52:45Z",
+  "generated": "2026-10-31T15:45:47Z",
   "legacy_mitre_compatibility": {
     "id_range": "T2001-T2899 (avoids collision with MITRE ATT&CK T1001-T1659)",
     "tactic_ids": "Standard MITRE TA#### where applicable, TA0050-TA0053 for BCI-specific",

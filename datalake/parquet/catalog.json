@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-31T08:15:49.268779+00:00",
+    "generated": "2026-10-31T15:46:11.446773+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
     "total_datasets": 39,
-    "total_rows": 24192
+    "total_rows": 24281
   },
   "datasets": {
     "techniques": {
@@ -48,8 +48,8 @@
         "consent_tier",
         "notes"
       ],
-      "size_bytes": 51721,
-      "sha256": "f67102f292e3fd05b1281cbcb9d0c1f6b1e6db62c60238827799e8233ccda2c8",
+      "size_bytes": 51724,
+      "sha256": "21043b1143a262df1e25cbfbdf93ea759c533a517fd1ba5a45a2338611495927",
       "compression": "zstd",
       "source": "datalake/parquet/techniques.parquet"
     },
@@ -81,7 +81,7 @@
       "source": "datalake/parquet/technique_neurorights.parquet"
     },
     "impact_chains": {
-      "rows": 19798,
+      "rows": 19887,
       "columns": 15,
       "column_names": [
         "technique_id",
@@ -100,8 +100,8 @@
         "dsm_name",
         "dsm_cluster"
       ],
-      "size_bytes": 23233,
-      "sha256": "53da9ae37b54c656553427754aabf9ea1ef14c544d698d7475304830cbddd761",
+      "size_bytes": 23211,
+      "sha256": "2c8570cd7ca7fa599a16ea50019967c7f58fe5da0f638d44545bdfe1dce6ae27",
       "compression": "zstd",
       "source": "datalake/parquet/impact_chains.parquet"
     },
@@ -755,7 +755,7 @@
         "milestones"
       ],
       "size_bytes": 13619,
-      "sha256": "192a88aa2ae3f0f6e9aef9182908992f2ed5e66d0eefe3efa8097fad4bee82db",
+      "sha256": "48e3fd5434560b606c3406310f716295fd680fc381e0b0ec4d806a7de60b1c15",
       "compression": "zstd",
       "source": "datalake/parquet/timeline.parquet"
     },
@@ -915,8 +915,8 @@
         "valid_for_current_addressing",
         "review_key"
       ],
-      "size_bytes": 16157,
-      "sha256": "ff5aca775c4a627e927a4e0f50b64459de6d9c20bccaf2d6458d905a37a10e2d",
+      "size_bytes": 16153,
+      "sha256": "3b5ab7eee05b2b5fa523010f3673c2bfb445329b4887589e7b5894d6ba0f22c2",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_technique_terms.parquet"
     },
@@ -944,8 +944,8 @@
         "no_region_term_count",
         "reviewed_term_count"
       ],
-      "size_bytes": 11194,
-      "sha256": "8f3420df3c96d7e3629f1180ad8ef4c7b47fa614c001a803e4df40f08df4b926",
+      "size_bytes": 11201,
+      "sha256": "7d76e7d769b80adccb36e7f4b439da48bf955d8ef1b895e799bdb727bcf9acf4",
       "compression": "zstd",
       "source": "datalake/parquet/anatomy_technique_term_summary.parquet"
     }

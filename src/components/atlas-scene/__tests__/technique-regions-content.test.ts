@@ -34,10 +34,10 @@ const EXPECTED_BAND_LEVEL_BY_REASON: Record<string, string[]> = {
   text_contradicts_band_tags: ['QIF-T0104', 'QIF-T0105', 'QIF-T0106', 'QIF-T0107'],
 };
 const EXPECTED_BAND_LEVEL_TECHNIQUES = Object.values(EXPECTED_BAND_LEVEL_BY_REASON).flat().length;
-/** Re-pinned 2026-10-31 for addressing version 2: the VTA moved from N5 to N2, so three N2-tagged techniques light their VTA link and one N5-tagged technique (QIF-T0116) stops agreeing. Re-pinned again the same day: `motor cortex` became a whole_to_part alias of m1, so QIF-T0030 and QIF-T0131 move from unresolved to alias scope. */
+/** Re-pinned 2026-10-31 for addressing version 2: the VTA moved from N5 to N2, so three N2-tagged techniques light their VTA link and one N5-tagged technique (QIF-T0116) stops agreeing. Re-pinned again the same day: `motor cortex` became a whole_to_part alias of m1, so QIF-T0030 and QIF-T0131 move from unresolved to alias scope. Re-pinned again for Entry 118: QIF-T0116 now carries N2, so it lights its VTA link too. */
 const EXPECTED_OUTCOMES = {
-  [TECHNIQUE_OUTCOME.LIT]: 14,
-  [TECHNIQUE_OUTCOME.BAND_DISAGREES]: 7,
+  [TECHNIQUE_OUTCOME.LIT]: 15,
+  [TECHNIQUE_OUTCOME.BAND_DISAGREES]: 6,
   [TECHNIQUE_OUTCOME.ALIAS_SCOPE]: 6,
   [TECHNIQUE_OUTCOME.UNRESOLVED]: 21,
 };
@@ -88,13 +88,13 @@ const EXPECTED_LINK_RESOLUTIONS = { id: 20, synonym: 3, whole_to_part: 12, part_
  */
 const EXPECTED_LIGHTING_LINKS = [
   'QIF-T0034:PFC->pfc', 'QIF-T0037:PFC->pfc', 'QIF-T0039:insula->insula', 'QIF-T0039:PFC->pfc', 'QIF-T0065:prefrontal cortex->pfc',
-  'QIF-T0103:V1->v1', 'QIF-T0117:hippocampus->hippocampus', 'QIF-T0122:hippocampus->hippocampus',
+  'QIF-T0103:V1->v1', 'QIF-T0116:VTA->vta', 'QIF-T0117:hippocampus->hippocampus', 'QIF-T0122:hippocampus->hippocampus',
   'QIF-T0123:primary_motor_cortex->m1', 'QIF-T0124:PFC->pfc', 'QIF-T0129:insula->insula', 'QIF-T0129:ACC->acc', 'QIF-T0133:primary visual cortex->v1',
   'QIF-T0137:VTA->vta', 'QIF-T0138:VTA->vta', 'QIF-T0141:VTA->vta',
 ];
 /** Links to a region whose band is not among the technique's band tags: `technique:term`. Kept and listed, never enforced. */
 const EXPECTED_BAND_DISAGREEMENTS = [
-  'QIF-T0116:VTA', 'QIF-T0119:PFC', 'QIF-T0127:hypothalamus', 'QIF-T0127:PAG',
+  'QIF-T0119:PFC', 'QIF-T0127:hypothalamus', 'QIF-T0127:PAG',
   'QIF-T0144:M1', 'QIF-T0145:M1', 'QIF-T0147:thalamus', 'QIF-T0151:SMA', 'QIF-T0161:cortex',
 ];
 const NEURAL_BAND_PREFIX = 'N';

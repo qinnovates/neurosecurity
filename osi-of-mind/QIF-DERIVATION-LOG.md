@@ -15,6 +15,7 @@
 ### October 2026 (Entries 106+) — Data Refresh, Citation Audit, Claim Corrections
 | Entry | Topic | Link |
 |-------|-------|------|
+| 118 | QIF-T0116 tagged N2 so its VTA link agrees with addressing version 2 | [Entry 118](#entry-118-t0116-n2) |
 | 117 | Whitepaper band counts and hourglass chart derived from data; proposed layers rendered; I0 concentration claims corrected | [Entry 117](#entry-117-whitepaper-derived-counts) |
 | 116 | Addressing version 2 and eight public layers: band codes declared unordered addresses by the territory of their principal neurons (the cord-to-cortex indeterminacy ordering withdrawn); STN to N4, substantia nigra and VTA to N2, posterior cingulate to N7; a `layers` grouping (seven neural + classical stack, I0 as the seam) added to the atlas with `layerOf()`; pathway bands, technique links and impact chains re-derived | [Entry 116](#entry-116-addressing-v2-eight-layers) |
 | 115 | Status taxonomy: CONFIRMED retired and 27 techniques reclassified; colliding QIF-T0172/T0173 renumbered to T0177/T0178; Professor X source corrected; registry figures in the paper generated from the registrar; CI leak, staleness and paper-build checks | [Entry 115](#entry-115-status-taxonomy-renumbering-derived-figures) |
@@ -363,6 +364,24 @@ Each entry follows this structure:
 | 3 | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
 | 2 | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded by Entry 7 |
 | 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
+---
+
+## Entry 118: QIF-T0116 Tagged N2 Under Addressing Version 2 {#entry-118-t0116-n2}
+
+**Date:** 2026-10-31
+**Classification:** CORRECTION
+**AI Systems:** Claude Opus 5.5
+**Connected entries:** Entry 116 (addressing version 2 and eight public layers), Entry 117 (whitepaper counts)
+**AI Contribution Level:** AI-generated, human-approved
+
+Correction to one technique's band tags.
+
+- `QIF-T0116` names the VTA, which addressing version 2 places in N2. It was tagged N5 and N6, so its VTA link did not agree with the region's band and did not light in the atlas.
+- `datalake/qtara-registrar.json` and the SDK copy: `band_ids` N2, N5, N6 and `bands` "N2,N5-N6". N5 and N6 are kept. This is the change `datalake/scripts/migrate-peer-review-status.py` specified, which was not in the current registrar.
+- Tag total 519 to 520. N2 gains one technique. I0 stays 63 of 178 and S2 stays 78.
+- `datalake/impact-chains.json` recomputed: 19,798 to 19,887 rows, still 111 of 178 techniques and 34 of 38 regions.
+- Scope check: a name search of the registrar for STN, substantia nigra, VTA and posterior cingulate found no other technique missing the new band. It is a text search, not the review of the 27 techniques tagged N5 and the 18 tagged exactly I0 and N1, which stays open under Entry 116.
 
 ---
 
