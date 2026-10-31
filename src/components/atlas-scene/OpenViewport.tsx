@@ -67,6 +67,8 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, ch
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const [directions, setDirections] = useState<AxisDirections | null>(null);
   const [activeView, setActiveView] = useState<CameraViewId | null>(DEFAULT_CAMERA_VIEW);
+  /** The region the last pick selected, so its own arrival back through the props is not taken for another selection. */
+  const pickedRegionId = useRef<string | null>(selectedRegionId);
   const commands = useRef<CanvasCommands>(NO_COMMANDS);
   const scene = useViewportScene(model, lens, layers, chain);
   const Canvas = useMemo(() => lazy(loadCanvas), [loadCanvas]);
@@ -88,8 +90,11 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, ch
   const pick = (structureKey: string | null): void => {
     setPickedKey(structureKey);
     const regionId = structureKey === null ? null : resolvePick(model, structureKey)?.selectedRegionId ?? null;
+    pickedRegionId.current = regionId;
     if (regionId !== null) onSelectRegion(regionId);
   };
+  // A region chosen anywhere but here takes over from the picked shape, or two things stay marked and the legend names the old one.
+  useEffect(() => { if (selectedRegionId !== pickedRegionId.current) setPickedKey(null); }, [selectedRegionId]);
   const turnView = (viewId: CameraViewId): void => { commands.current.setView(viewId); setActiveView(viewId); };
   const byHand: CanvasCommands = { setView: turnView, zoom: (direction) => commands.current.zoom(direction), turn: (direction) => { commands.current.turn(direction); setActiveView(null); }, tilt: (direction) => { commands.current.tilt(direction); setActiveView(null); } };
   const cutNames = slice === null ? [] : [...new Set(listShapesCutAt(slice, [...scene.nodesByShapeId.values()]).map((node) => resolvePick(model, `${node.atlas}:${node.labelId}`)?.label ?? node.labelId))];

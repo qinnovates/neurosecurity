@@ -263,6 +263,39 @@ describe('AtlasViewport: open', () => {
     expect(container.querySelector('button[name="See its details"]')).toBeNull();
   });
 
+  describe('a selection made outside the picture', () => {
+    const viewportFor = (selectedRegionId: string | null) => (
+      <AtlasViewport model={model} lens={{ kind: 'band' }} layers={INITIAL_EXPLORER_STATE.layers} selectedRegionId={selectedRegionId} isIndexPinned isAsked onSelectRegion={onSelectRegion} probe={() => true} loadOpenView={loadOpenView} />
+    );
+    const open = async (selectedRegionId: string | null) => {
+      const view = render(viewportFor(selectedRegionId));
+      await waitFor(() => expect(view.container.querySelector('[data-asset-status]')).not.toBeNull());
+      await waitFor(() => expect(view.container.querySelectorAll('[data-asset-status="loading"]')).toHaveLength(0));
+      return view;
+    };
+    const ownRegionId = resolvePick(model, ownShapeKey)?.selectedRegionId ?? '';
+
+    it('drops the picked shape when the list selects another region, so one thing is marked and the legend names it', async () => {
+      const view = await open(null);
+      canvasProps?.onPick(sharedShapeKey);
+      await waitFor(() => expect(canvasProps?.selectedKeys.has(sharedShapeKey)).toBe(true));
+      expect(view.container.querySelector('[data-picked-key]')).not.toBeNull();
+      view.rerender(viewportFor(ownRegionId));
+      await waitFor(() => expect(canvasProps?.selectedKeys.has(sharedShapeKey)).toBe(false));
+      expect(view.container.querySelector('[data-picked-key]')).toBeNull();
+      expect(model.regionsById.get(ownRegionId)?.structure_keys.every((key) => canvasProps?.selectedKeys.has(key))).toBe(true);
+    });
+
+    it('keeps the picked shape when the region it selected comes back as the page\'s selection', async () => {
+      const view = await open(null);
+      canvasProps?.onPick(ownShapeKey);
+      await waitFor(() => expect(view.container.querySelector('[data-picked-key]')).not.toBeNull());
+      view.rerender(viewportFor(ownRegionId));
+      await waitFor(() => expect(canvasProps?.selectedKeys.has(ownShapeKey)).toBe(true));
+      expect(view.container.querySelector('[data-picked-key]')?.getAttribute('data-picked-key')).toBe(ownShapeKey);
+    });
+  });
+
   it('offers the ways out of the lens under the picture, as real buttons, and nothing when there is none', async () => {
     const onChoose = vi.fn();
     const onBack = vi.fn();
