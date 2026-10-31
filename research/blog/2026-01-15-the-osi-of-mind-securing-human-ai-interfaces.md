@@ -9,7 +9,6 @@ tags: [neuroscience, technology, cybersecurity, ai, science]
 
 #### What happens when we apply cybersecurity thinking to the brain?
 
-![](https://cdn-images-1.medium.com/max/1024/1*a4EhbrQZAx4FBds3IE9WJw.png)
 
 “The OSI of Mind”
 
@@ -33,7 +32,6 @@ We have no shared vocabulary for these questions.
 
 ### **A Proposed Starting Point**
 
-![](https://cdn-images-1.medium.com/max/1024/1*EjTbAqn5VItv1FyS0yHoIA.png)
 
 I'm publishing an open framework called **QIF** a 14-layer model that extends the OSI stack into biological territory. Each layer has characteristic frequencies, spatial scales, and critically — attack surfaces.
 

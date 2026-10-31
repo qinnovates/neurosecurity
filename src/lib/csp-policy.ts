@@ -43,14 +43,14 @@ const ANALYTICS_CONNECT_SOURCES = ['https://*.google-analytics.com', 'https://*.
 
 /**
  * A page under BaseLayout. `'wasm-unsafe-eval'` is for pagefind and DuckDB-wasm, both self-hosted.
- * `img-src https:` stays only while blog posts embed external images; it leaves when the dist
- * check lists none (the images are localised first, or those posts break).
+ * Images load from this origin and from data: URIs only; the post-build origin check holds every
+ * built page to it, so a post cannot embed an image from another host.
  */
 export const SITE_PAGE_CSP = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' ${ANALYTICS_SCRIPT_SOURCES.join(' ')}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: https:",
+  "img-src 'self' data:",
   "font-src 'self'",
   `connect-src 'self' ${ANALYTICS_CONNECT_SOURCES.join(' ')}`,
   "media-src 'self'",

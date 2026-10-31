@@ -7,7 +7,6 @@ tags: [cybersecurity, quantum-security, quantum-computing, cryptography, nobel-p
 
 *Inspired by Martinis, Clarke, and Devoret’s Nobel-winning work on Macroscopic Quantum Tunneling, a deep dive into where physics meets network security.*
 
-![](https://cdn-images-1.medium.com/max/1024/1*cD9KjMTjNUh3uMIOvER89g.png)
 
 Each time you save a file to flash memory, ***quantum tunneling*** happens. Electrons pass through an insulating barrier they shouldn’t have the energy to cross — not by going over, but by existing as *probability waves* that extend through. The barrier is real. The electron crosses anyway.
 

@@ -7,7 +7,6 @@ tags: [cybersecurity, neuroscience, ai, mathematics, oni]
 
 *From millisecond spikes to lifetime memories, one relationship holds:* ***f x S ~ k.***
 
-![](https://cdn-images-1.medium.com/max/1024/1*CpNI4CKM03s1ZYKq2kfoSw.png)
 
 Here's something fascinating I came across while exploring the wonders of the mind -- A single neuron fires in about one millisecond. The electrical spike travels a few micrometers. A thought forms over a few hundred milliseconds. It involves millions of neurons across centimeters of cortex. A memory consolidates over hours to days. It rewires circuits spanning your entire brain. Your sense of identity persists for decades. It encompasses everything you are.
 

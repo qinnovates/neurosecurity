@@ -7,8 +7,7 @@
  * deliberate exception, Google Analytics, is not in any page's HTML: src/site/js/consent.js
  * adds it only after a visitor accepts, so it cannot appear here.
  *
- * Images are not checked: some republished posts still embed images from another host, and the
- * privacy policy says so.
+ * Images are held to the same rule, matching the policy's img-src of this origin and data: only.
  */
 
 import fs from 'node:fs';
@@ -16,7 +15,7 @@ import { listBuiltPages } from './check-internal-links.mjs';
 import { resolveBuiltFile } from './tool-pages.mjs';
 
 const OWN_HOSTS = new Set(['qinnovate.com', 'www.qinnovate.com']);
-const TAG_PATTERN = /<(script|link|iframe)\b[^>]*>/gi;
+const TAG_PATTERN = /<(script|link|iframe|img|source|video|audio)\b[^>]*>/gi;
 const LOADING_RELATIONS = new Set(['stylesheet', 'preload', 'modulepreload', 'preconnect', 'dns-prefetch', 'icon', 'manifest', 'prefetch']);
 
 function attributeOf(tag, name) {
@@ -44,6 +43,12 @@ export function findThirdPartyLoads(html) {
     }
     const host = foreignHost(attributeOf(tag, kind === 'link' ? 'href' : 'src'));
     if (host !== null) loads.push({ kind, host });
+    const posterHost = kind === 'video' ? foreignHost(attributeOf(tag, 'poster')) : null;
+    if (posterHost !== null) loads.push({ kind: 'video poster', host: posterHost });
+    for (const candidate of attributeOf(tag, 'srcset')?.split(',') ?? []) {
+      const srcsetHost = foreignHost(candidate.trim().split(/\s+/)[0]);
+      if (srcsetHost !== null) loads.push({ kind, host: srcsetHost });
+    }
   }
   return loads;
 }

@@ -9,7 +9,6 @@ tags: [bci, ai, cybersecurity, mitre-attack]
 
 ***The technical threat model for holding a brain implant hostage — and why we need to talk about it now.***
 
-![](https://cdn-images-1.medium.com/max/1024/1*ejk36PcPemEf58upaGOn1Q.png)
 
 *Picture this*— You wake up and something is wrong.
 
@@ -35,7 +34,6 @@ And there's no standard. No BCI equivalent of automotive cybersecurity regulatio
 
 Let's walk through exactly how it would work.
 
-![](https://cdn-images-1.medium.com/max/1024/1*UA8C33RfvLobXfxZZy7tag.png)
 
 Neural Ransomware Kill Chain
 
@@ -211,7 +209,6 @@ The attack fails **before the brain is affected**.
 
 **"Is this signal biologically plausible?"**
 
-![](https://cdn-images-1.medium.com/max/1024/1*R0-pWeuWFU-aQIbHZNAlOw.png)
 
 - **Phase variance** → timing jitter
 - **Transport variance** → pathway reliability

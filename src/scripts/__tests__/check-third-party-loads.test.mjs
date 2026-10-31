@@ -20,6 +20,15 @@ describe('findThirdPartyLoads', () => {
     ]);
   });
 
+  it('finds images, media sources, posters and srcset candidates on other origins', () => {
+    const html = '<img src="https://img.example.net/a.png" alt=""><source srcset="/a.webp 1x, https://img.example.org/b.webp 2x"><video poster="https://img.example.com/p.jpg"></video>';
+    expect(findThirdPartyLoads(html)).toEqual([
+      { kind: 'img', host: 'img.example.net' },
+      { kind: 'source', host: 'img.example.org' },
+      { kind: 'video poster', host: 'img.example.com' },
+    ]);
+  });
+
   it('leaves own-origin loads, relative loads, plain links and inline scripts alone', () => {
     const html = [
       '<script src="/js/consent.js"></script>', '<script src="https://qinnovate.com/_astro/a.js"></script>', '<script>var a = 1;</script>',

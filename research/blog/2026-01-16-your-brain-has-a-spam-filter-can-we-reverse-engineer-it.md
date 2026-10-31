@@ -57,7 +57,6 @@ The exponential decay isn’t arbitrary. Neural systems exhibit threshold behavi
 
 Let’s try to use some shared vocabulary to help us better understand this equation.
 
-![](https://cdn-images-1.medium.com/max/1024/1*bH6k3W7rKW2qIPw2srG4YQ.png)
 
 *tl;dr —*
 
@@ -205,11 +204,9 @@ print("Action:", action)
 
 Now, let’s break each input down even further…
 
-![](https://cdn-images-1.medium.com/max/1024/1*R0-pWeuWFU-aQIbHZNAlOw.png)
 
 #### 1. Phase **(σ²φ)**
 
-![](https://cdn-images-1.medium.com/max/518/1*po5y2ZBRZpyU37T2-TVc5Q.png)
 
 Phase Variance (Timing Jitter)
 
@@ -218,7 +215,6 @@ Phase Variance (Timing Jitter)
 
 #### 2. Transport (σ²τ)
 
-![](https://cdn-images-1.medium.com/max/532/1*AzFtnjc3mAF6NWXIANNrug.png)
 
 Transport Variance (Pathway Integrity/Reliability)
 
@@ -227,7 +223,6 @@ Transport Variance (Pathway Integrity/Reliability)
 
 #### 3. Gain (σ²γ)
 
-![](https://cdn-images-1.medium.com/max/486/1*Vi0ntmN2rDw9qwWxNZ1CBg.png)
 
 Gain Variance (Aplitude Stability)
 

@@ -7,7 +7,6 @@ tags: [market, economics, statistics, books, ikea]
 
 ### The IKEA Paradigm: What a $79 Bookcase Tells Us About Our World.
 
-![](https://cdn-images-1.medium.com/max/318/1*Rzm5eP1A6rLqCyz9J2sEpg.jpeg)
 
 **The BILLY Bookcase Index. The Historic Indicator For Life.**
 

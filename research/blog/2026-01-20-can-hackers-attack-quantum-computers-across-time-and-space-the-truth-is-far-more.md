@@ -7,7 +7,6 @@ tags: [security-risk-management, quantum-computing, hacking, infosec, informatio
 
 *A deep dive into quantum cybersecurity, where the actual vulnerabilities are stranger than science fiction*
 
-![](https://cdn-images-1.medium.com/max/1024/1*gDww97H5J4vDE0WtiyP1XQ.png)
 
 ### The Seductive Idea
 

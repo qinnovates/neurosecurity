@@ -5,7 +5,6 @@ source: https://medium.com/@qikevinl/my-moms-heart-attack-went-undetected-for-20
 tags: [technology, women, health, cardiology, womens-health]
 ---
 
-![Concept Art](https://cdn-images-1.medium.com/max/1024/1*vkUW2Oe9f2LDqlTF6DAqUA.png)
 
 ### The Day That Changed Everything
 
@@ -100,13 +99,11 @@ The thing is, every component exists today — maybe just not in the form an
 
 #### V1 Concept Render:
 
-![](https://cdn-images-1.medium.com/max/1024/1*RmY65sjdzgTrRufG6B-K4g.png)
 
 #### V2 Prototype Mockup:
 
 Conceptualizing a conductive (and warm) backplate for stability… Since MRIs today require really cold temperatures and of course a faraday cage. I challenge you to ask yourself whether fundamental physics constraint, or just a generational limitation.
 
-![](https://cdn-images-1.medium.com/max/1024/1*tVp_97ikASCFiASGzkmGUA.jpeg)
 
 ### The Future Is Bright
 
