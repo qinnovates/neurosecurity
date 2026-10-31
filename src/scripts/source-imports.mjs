@@ -17,7 +17,7 @@
  * every top-level statement of a module, in one spelling whatever its layout.
  */
 
-import ts from 'typescript';
+import ts from 'typescript-api-5';
 
 const FRONTMATTER_PATTERN = /^﻿?---\r?\n([\s\S]*?)\r?\n---/;
 const SCRIPT_BLOCK_PATTERN = /<script\b([^>]*)>([\s\S]*?)<\/script\b[^>]*>/gi;
