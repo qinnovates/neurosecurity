@@ -5,7 +5,7 @@ import { EVENT_LEAD_SECONDS, REPLAY_SOURCE_OFFSET_SECONDS, type SignalEventKind 
 const WIDTH = 1200;
 const HEIGHT = 240;
 const CHANNEL_COUNT = 6;
-const PALETTE = { trace: 'trace', adversarial: 'adversarial', grid: 'grid', background: 'background' };
+const PALETTE = { trace: 'trace', adversarial: 'adversarial', background: 'background' };
 
 function createContext() {
   const alphaValues: number[] = [];
@@ -48,7 +48,7 @@ function draw(kinds: readonly SignalEventKind[], time: number) {
     channelCount: CHANNEL_COUNT,
     eventKinds: kinds,
     eventLabels: kinds.map((kind) => `label-${kind}`),
-    labelFont: '500 11px monospace',
+    labelFont: '500 11px sans-serif',
     palette: PALETTE,
   };
   drawSignalBench(frame);

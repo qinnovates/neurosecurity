@@ -37,6 +37,7 @@ export const EVENT_LEAD_SECONDS = 1.2;
 export const EVENT_DURATION_SECONDS = 2.4;
 export const EVENT_EDGE_SECONDS = 0.25;
 /** A replayed segment is a copy of the signal this many seconds earlier. */
+const FINAL_FRAME_TAIL_SECONDS = 0.5;
 export const REPLAY_SOURCE_OFFSET_SECONDS = EVENT_DURATION_SECONDS + 0.6;
 
 const TAU = Math.PI * 2;
@@ -108,6 +109,11 @@ export function getEventIndexAt(time: number): number {
 /** Index of the newest event that has already begun at `time`. */
 export function getStartedEventIndexAt(time: number): number {
   return getEventIndexAt(time - EVENT_LEAD_SECONDS);
+}
+
+/** The time at which a stopped strip rests: one full cycle written, with the last event complete and on screen. */
+export function getFinalFrameTime(slotCount: number): number {
+  return (slotCount - 1) * EVENT_PERIOD_SECONDS + EVENT_LEAD_SECONDS + EVENT_DURATION_SECONDS + FINAL_FRAME_TAIL_SECONDS;
 }
 
 export function getScheduleSlot(index: number, slotCount: number): number {

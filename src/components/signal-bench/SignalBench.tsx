@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState, type RefObject } from 'react';
+import { useCallback, useEffect, useRef, useState, type RefObject } from 'react';
 import { useReducedMotion } from '../../lib/useReducedMotion';
 import type { SignalBenchEvent } from './signal-bench-events';
 import { drawSignalBench, type SignalBenchPalette } from './signal-bench-renderer';
-import { getScheduleSlot, getStartedEventIndexAt } from './signal-model';
+import SignalBenchSelection from './SignalBenchSelection';
+import { getFinalFrameTime, getScheduleSlot, getStartedEventIndexAt } from './signal-model';
 
 interface SignalBenchProps {
   events: SignalBenchEvent[];
@@ -17,12 +18,12 @@ const COMPACT_CHANNEL_COUNT = 4;
 const FULL_CHANNEL_COUNT = 6;
 const TECHNIQUE_PATH = '/atlas/tara/';
 const LABEL_FONT_SIZE_PX = 11;
-const LABEL_FONT_TOKEN = '--font-mono';
+const LABEL_FONT_TOKEN = '--font-heading';
+const HIGHLIGHT_PARAM = 'highlight';
 
 const PALETTE_TOKENS: Record<keyof SignalBenchPalette, string> = {
-  trace: '--color-accent-primary',
-  adversarial: '--color-accent-tertiary',
-  grid: '--color-border',
+  trace: '--signal-trace',
+  adversarial: '--signal-event',
   background: '--color-bg-deep',
 };
 
@@ -31,13 +32,12 @@ function readPalette(element: Element): SignalBenchPalette {
   return {
     trace: styles.getPropertyValue(PALETTE_TOKENS.trace).trim(),
     adversarial: styles.getPropertyValue(PALETTE_TOKENS.adversarial).trim(),
-    grid: styles.getPropertyValue(PALETTE_TOKENS.grid).trim(),
     background: styles.getPropertyValue(PALETTE_TOKENS.background).trim(),
   };
 }
 
 function readLabelFont(element: Element): string {
-  return `500 ${LABEL_FONT_SIZE_PX}px ${getComputedStyle(element).getPropertyValue(LABEL_FONT_TOKEN).trim() || 'monospace'}`;
+  return `500 ${LABEL_FONT_SIZE_PX}px ${getComputedStyle(element).getPropertyValue(LABEL_FONT_TOKEN).trim() || 'sans-serif'}`;
 }
 
 function fitCanvasToElement(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D): { width: number; height: number } {
@@ -90,6 +90,7 @@ function useThemeRevision(): number {
 function useSignalBenchCanvas(
   events: SignalBenchEvent[],
   isAnimationAllowed: boolean,
+  isStaticFinalFrame: boolean,
   onEventIndexChange: (index: number) => void,
 ): RefObject<HTMLCanvasElement | null> {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -103,6 +104,10 @@ function useSignalBenchCanvas(
     // Without a 2D context the readout below the strip stands in as static content.
     if (!canvas || !context || events.length === 0) return;
 
+    if (isStaticFinalFrame) {
+      timeRef.current = getFinalFrameTime(events.length);
+      onEventIndexChange(getStartedEventIndexAt(timeRef.current));
+    }
     const palette = readPalette(canvas);
     const labelFont = readLabelFont(canvas);
     const eventKinds = events.map((event) => event.kind);
@@ -131,7 +136,7 @@ function useSignalBenchCanvas(
       stopFrameLoop?.();
       resizeObserver.disconnect();
     };
-  }, [events, isAnimationAllowed, isOnScreen, themeRevision, onEventIndexChange]);
+  }, [events, isAnimationAllowed, isStaticFinalFrame, isOnScreen, themeRevision, onEventIndexChange]);
 
   return canvasRef;
 }
@@ -139,17 +144,55 @@ function useSignalBenchCanvas(
 function SignalBenchReadout({ event }: { event: SignalBenchEvent }) {
   return (
     <p className="signal-bench-readout flex flex-wrap items-baseline gap-x-4 gap-y-1 text-sm">
-      <a href={`${TECHNIQUE_PATH}${event.id}/`} className="inline-flex items-baseline gap-2 font-mono text-[var(--color-text-primary)] hover:underline">
-        <span aria-hidden="true" className="inline-block w-2 h-2 bg-[var(--color-accent-tertiary)]" />
+      <a href={`${TECHNIQUE_PATH}${event.id}/`} className="inline-flex items-baseline gap-2 text-[var(--color-text-primary)] hover:underline">
+        <span aria-hidden="true" className="inline-block w-2 h-2 bg-[var(--signal-event)]" />
         {event.id}
       </a>
       <span className="text-[var(--color-text-primary)]">{event.name}</span>
-      <span className="font-mono text-[var(--color-text-muted)]">
+      <span className="tabular-nums text-[var(--color-text-muted)]">
         NISS {event.nissScore.toFixed(1)} {event.severity}
       </span>
       <span className="text-[var(--color-text-muted)]">{event.status.toLowerCase()}</span>
     </p>
   );
+}
+
+function SignalBenchEventButtons({ events, activeId, selectedId, onSelect }: {
+  events: SignalBenchEvent[];
+  activeId: string;
+  selectedId: string | null;
+  onSelect: (event: SignalBenchEvent) => void;
+}) {
+  return (
+    <ul className="flex flex-wrap gap-2 mt-3" aria-label="Catalogued events on this strip">
+      {events.map((event) => (
+        <li key={event.id}>
+          <button
+            type="button"
+            aria-pressed={event.id === selectedId}
+            data-playing={event.id === activeId}
+            onClick={() => onSelect(event)}
+            className="signal-bench-event min-h-[44px] rounded-lg px-3 text-left text-sm"
+          >
+            {event.id} {event.name}
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/** Keeps the choice in the address bar without a history entry; other parameters stay. */
+function writeHighlightParam(techniqueId: string): void {
+  const url = new URL(window.location.href);
+  url.searchParams.set(HIGHLIGHT_PARAM, techniqueId);
+  window.history.replaceState(window.history.state, '', url);
+}
+
+/** The event named by the address, if any. The parameter is visitor-controlled, so only a listed id counts. */
+function readHighlightedEvent(events: SignalBenchEvent[]): SignalBenchEvent | null {
+  const techniqueId = new URLSearchParams(window.location.search).get(HIGHLIGHT_PARAM);
+  return events.find((event) => event.id === techniqueId) ?? null;
 }
 
 /**
@@ -162,7 +205,14 @@ export default function SignalBench({ events }: SignalBenchProps) {
   // Held while the readout is hovered or focused so its link cannot change under the pointer.
   const [isReadoutInUse, setIsReadoutInUse] = useState(false);
   const hasReducedMotion = useReducedMotion();
-  const canvasRef = useSignalBenchCanvas(events, !hasReducedMotion && !isPaused && !isReadoutInUse, setEventIndex);
+  const [selectedEvent, setSelectedEvent] = useState<SignalBenchEvent | null>(null);
+  const canvasRef = useSignalBenchCanvas(events, !hasReducedMotion && !isPaused && !isReadoutInUse, hasReducedMotion, setEventIndex);
+  // Read after hydration: the server has no address, and first paint must match its markup.
+  useEffect(() => setSelectedEvent(readHighlightedEvent(events)), [events]);
+  const selectEvent = useCallback((event: SignalBenchEvent) => {
+    setSelectedEvent(event);
+    writeHighlightParam(event.id);
+  }, []);
   if (events.length === 0) return null;
   const activeEvent = events[getScheduleSlot(eventIndex, events.length)];
 
@@ -194,7 +244,9 @@ export default function SignalBench({ events }: SignalBenchProps) {
             </button>
           )}
         </div>
-        <p className="text-xs text-[var(--color-text-faint)] mt-1">
+        <SignalBenchEventButtons events={events} activeId={activeEvent.id} selectedId={selectedEvent?.id ?? null} onSelect={selectEvent} />
+        {selectedEvent && <SignalBenchSelection event={selectedEvent} />}
+        <p className="text-xs text-[var(--color-text-faint)] mt-2">
           Synthetic illustration of signal-level interference. These traces are generated, not recorded neural data.
         </p>
       </div>
