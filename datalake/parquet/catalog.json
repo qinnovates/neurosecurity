@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generated": "2026-10-27T19:37:25.366063+00:00",
+    "generated": "2026-10-31T02:54:56.147252+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
-    "total_datasets": 40,
-    "total_rows": 24074
+    "total_datasets": 39,
+    "total_rows": 24052
   },
   "datasets": {
     "techniques": {
@@ -136,7 +136,7 @@
     },
     "brain_regions": {
       "rows": 38,
-      "columns": 19,
+      "columns": 20,
       "column_names": [
         "id",
         "name",
@@ -156,10 +156,11 @@
         "processing_pipeline",
         "signal_type",
         "bci_relevance_detail",
-        "clinical_notes"
+        "clinical_notes",
+        "highlight_hue"
       ],
-      "size_bytes": 63925,
-      "sha256": "9d8c8949eae409fd20bcc50ab443ce076caf28e8799c672fcb44c06d66952b3d",
+      "size_bytes": 64373,
+      "sha256": "9f4fbf3c993ecc9fb96e6be982adebc77cc394e57c82e49efa1fdc4f81ca8025",
       "compression": "zstd",
       "source": "datalake/parquet/brain_regions.parquet"
     },
