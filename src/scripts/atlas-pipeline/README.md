@@ -83,6 +83,17 @@ Computed per structure on the thresholded mask, in voxels of the coarser of the 
 | coarse | between the other two | mesh; the scene draws it in the approximate style |
 | unresolved | under 2 voxels across, or under 20 voxels | a marker (centroid and nominal radius in the build report); never a mesh |
 
+## Ingest checks
+
+Third-party files are checked before the pipeline uses them.
+
+- Every download is verified against a SHA-256 value recorded in advance, and its size is capped.
+- Files are screened for known malware in an isolated container that has no network access. `npm run ingest:scan` runs the screen over the ingested files and the built assets.
+- `datalake/source-hashes.json` publishes the SHA-256 of every file we have ingested, so anyone can compare their own copy. A match shows the same bytes we ingested. It does not show that the publisher's copy is safe or authentic.
+- `npm run datalake:hashes:verify` compares local copies with those values and makes no network request. `npm run datalake:hashes:check` fails if the published file is stale.
+
+A malware screen matches known signatures only, so a clean result is not proof that a file is safe.
+
 ## What no check here can detect
 
 An error the publisher made before distribution; two same-side labels swapped in a publisher's table unless a second source has both; boundary differences that are a matter of definition; anything below one source voxel; whether a crosswalk row names the right structure. Left-right correctness for the Allen atlas rests on its header and on it having no side ids: one hemisphere was drawn and the right side is its mirror.
