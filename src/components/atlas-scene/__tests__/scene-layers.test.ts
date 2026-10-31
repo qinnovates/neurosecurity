@@ -3,9 +3,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { DecodedNode } from '@/lib/anatomy/decode-glb';
 import type { DeviceDrawing } from '@/lib/atlas-explorer/device-drawing';
 import {
-  DRAW_ORDER, FILL_OPACITY, HOVER_EMISSIVE_INTENSITY, HOVER_OPACITY, INSIDE_COLOUR, OWN_COLOUR_HOVER_EMISSIVE_INTENSITY, OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY,
-  SELECTED_EMISSIVE_INTENSITY, SELECTION_COLOUR, STEP_EASE_MS, SURFACE_INK, ringParamsFor, stepEaseDuration,
+  DRAW_ORDER, FILL_OPACITY, HOVER_EMISSIVE_INTENSITY, HOVER_OPACITY, INSIDE_COLOUR, OWN_COLOUR_HOVER_EMISSIVE_INTENSITY, SELECTION_COLOUR, STEP_EASE_MS, SURFACE_INK, ringParamsFor, stepEaseDuration,
 } from '@/lib/atlas-explorer/scene-drawing';
+import { BRACKET_ENTRANCE_MS, DIMMED_OPACITY, DIM_MS, LENS_RECOLOUR_MS } from '@/lib/atlas-explorer/selection-marks';
 import { NEUTRAL_COLOUR, NISS_COLOURS, NISS_COLOURS_DARK, type SceneShape } from '@/lib/atlas-explorer/scene-shapes';
 import { toIndexReviewState, UNREVIEWED } from '@/lib/anatomy/review-state';
 import { listSceneObjects, resetStandIn, standIn, type StandInLitMaterial, type StandInObject } from './three-stand-in';
@@ -95,10 +95,11 @@ const NO_GLOW = '000000';
 
 describe('the selection', () => {
   /**
-   * The selection used to be corner brackets around the shapes' box and a name
-   * plate above it, both drawn over everything. Both are gone: they read as a
-   * box the data does not hold, and the plate as a patch over the brain. A
-   * selected shape is now lit from within, and nothing is drawn around it.
+   * The selection is one mark everywhere: corner brackets in screen space around
+   * the shapes' box, and the filled shapes that are not selected dimmed. The
+   * selected shape itself is drawn exactly as the lens draws it, because a lens
+   * decides every fill: it was once lit in its own hue, which under the band
+   * lens read as a band and under every see-through fill changed nothing at all.
    */
   /**
    * The twin region filled, as under a lens that holds a value for it, with a colour of its own; the left region
@@ -115,27 +116,28 @@ describe('the selection', () => {
     return shape.structureKey === 'a:left' ? { ...shape, highlightColour: LEFT_OWN } : shape;
   });
 
-  it('shows a selected region in its own colour, lit from within where it is filled, draws nothing around it, and puts it back when it is unselected', () => {
+  it('leaves a selected region in its lens colour with no light added, draws no line, and gives the dimmed shapes back when it is unselected', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(LIT_SHAPES, NODES, new Set(REGION_KEYS.twin));
     expect(kindsOf('lines')).toHaveLength(0);
     expect(kindsOf('sprite')).toHaveLength(0);
     for (const key of REGION_KEYS.twin) {
       const material = litMaterialOf(key);
-      expect(material.color.getHexString(), key).toBe(TWIN_OWN.slice(1));
-      // Lit in its own colour, not in white: white light at this level on a lit material washed the hue out.
-      expect(material.emissive.getHexString(), key).toBe(TWIN_OWN.slice(1));
-      expect(material.emissiveIntensity, key).toBe(OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY);
+      expect(material.color.getHexString(), key).toBe(LENS_COLOUR);
+      expect(material.emissive.getHexString(), key).toBe(NO_GLOW);
       expect(material.opacity, key).toBe(FILL_OPACITY.solid);
     }
     const front = litMaterialOf('a:front');
     expect(front.color.getHexString()).toBe(PALE_COLOUR);
     expect(front.emissive.getHexString()).toBe(NO_GLOW);
     expect(front.opacity).toBe(FILL_OPACITY.translucent);
+    renderer.setShapes(LIT_SHAPES, NODES, new Set(REGION_KEYS.left));
+    for (const key of REGION_KEYS.twin) expect(litMaterialOf(key).opacity, key).toBe(DIMMED_OPACITY);
     renderer.setShapes(LIT_SHAPES, NODES, new Set());
     for (const key of REGION_KEYS.twin) {
       expect(litMaterialOf(key).color.getHexString(), key).toBe(LENS_COLOUR);
       expect(litMaterialOf(key).emissive.getHexString(), key).toBe(NO_GLOW);
+      expect(litMaterialOf(key).opacity, key).toBe(FILL_OPACITY.solid);
     }
   });
 
@@ -167,44 +169,32 @@ describe('the selection', () => {
     expect(litMaterialOf('a:front').opacity).toBe(HOVER_OPACITY.translucent);
   });
 
-  it('draws a selected see-through shape denser and adds no light to it, by the same rule as hover, so it never reads as holding a value', () => {
+  it('draws a selected see-through shape as the lens draws it, neither denser nor lit, so it never reads as holding a value', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(SHAPES, NODES, new Set(REGION_KEYS.front));
     const front = litMaterialOf('a:front');
-    expect(front.opacity).toBe(HOVER_OPACITY.translucent);
+    expect(front.opacity).toBe(FILL_OPACITY.translucent);
     expect(front.emissive.getHexString()).toBe(NO_GLOW);
     expect(litMaterialOf('a:back').opacity).toBe(FILL_OPACITY.translucent);
   });
 
-  it('lifts the shape under the pointer over its own glow, and puts the glow back, not darkness, when the pointer leaves', () => {
+  it('gives the selected shape under the pointer no lift at all, and still reports it', () => {
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
     renderer.setShapes(LIT_SHAPES, NODES, new Set(REGION_KEYS.twin));
     const twinA = kindsOf('mesh').find((mesh) => mesh.userData.structureKey === 'a:twinA') as StandInObject;
     standIn.hits = [{ object: twinA, distance: 1, point: {} }];
     canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 5, clientY: 5 }));
     runFrame(1016);
-    expect(litMaterialOf('a:twinA').emissive.getHexString()).toBe(TWIN_OWN.slice(1));
-    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(OWN_COLOUR_HOVER_EMISSIVE_INTENSITY);
     expect(callbacks.onHover).toHaveBeenLastCalledWith('a:twinA');
-    standIn.hits = [];
-    canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 300, clientY: 300 }));
-    runFrame(1032);
-    expect(callbacks.onHover).toHaveBeenLastCalledWith(null);
-    // Back to the selection's own state: its colour, its glow, its opacity.
-    expect(litMaterialOf('a:twinA').color.getHexString()).toBe(TWIN_OWN.slice(1));
-    expect(litMaterialOf('a:twinA').emissive.getHexString()).toBe(TWIN_OWN.slice(1));
-    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY);
+    expect(litMaterialOf('a:twinA').color.getHexString()).toBe(LENS_COLOUR);
+    expect(litMaterialOf('a:twinA').emissive.getHexString()).toBe(NO_GLOW);
     expect(litMaterialOf('a:twinA').opacity).toBe(FILL_OPACITY.solid);
   });
 
-  it('lights a filled shape with no colour of its own in white, under the pointer and when selected, and puts the darkness back', () => {
-    // The back region filled under a lens, but shared or unowned, so with no region colour: white is the only lift left to it.
+  it('lifts a filled shape under the pointer in its own colour, or in white where it has none, and puts the darkness back', () => {
     const sharedFilled = SHAPES.map((shape) => (REGION_KEYS.back.includes(shape.structureKey) ? { ...shape, fill: 'solid' as const } : shape));
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
-    renderer.setShapes(sharedFilled, NODES, new Set(REGION_KEYS.back));
-    expect(litMaterialOf('a:back').color.getHexString()).toBe(LENS_COLOUR);
-    expect(litMaterialOf('a:back').emissive.getHexString()).toBe(WHITE);
-    expect(litMaterialOf('a:back').emissiveIntensity).toBe(SELECTED_EMISSIVE_INTENSITY);
+    renderer.setShapes(sharedFilled, NODES, new Set());
     const back = kindsOf('mesh').find((mesh) => mesh.userData.structureKey === 'a:back') as StandInObject;
     standIn.hits = [{ object: back, distance: 1, point: {} }];
     canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 5, clientY: 5 }));
@@ -212,33 +202,38 @@ describe('the selection', () => {
     expect(litMaterialOf('a:back').color.getHexString()).toBe(LENS_COLOUR);
     expect(litMaterialOf('a:back').emissive.getHexString()).toBe(WHITE);
     expect(litMaterialOf('a:back').emissiveIntensity).toBe(HOVER_EMISSIVE_INTENSITY);
-    renderer.setShapes(sharedFilled, NODES, new Set());
     standIn.hits = [];
     canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 300, clientY: 300 }));
     runFrame(1032);
     expect(litMaterialOf('a:back').emissive.getHexString()).toBe(NO_GLOW);
+    renderer.setShapes(LIT_SHAPES, NODES, new Set());
+    const twinA = kindsOf('mesh').find((mesh) => mesh.userData.structureKey === 'a:twinA') as StandInObject;
+    standIn.hits = [{ object: twinA, distance: 1, point: {} }];
+    canvas.dispatchEvent(new MouseEvent('pointermove', { clientX: 5, clientY: 5 }));
+    runFrame(1048);
+    expect(litMaterialOf('a:twinA').emissive.getHexString()).toBe(TWIN_OWN.slice(1));
+    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(OWN_COLOUR_HOVER_EMISSIVE_INTENSITY);
   });
 
   /**
    * The pale fill is the one ink the drawing layer chooses itself, so it is the
    * one that can be drawn for the wrong surface. It was: it had no dark step at
    * all and so was fainter there than the shapes with no record. It is checked
-   * at the renderer, because that is where the surface arrives; the selection's
-   * glow is the shape's own colour, which arrives already resolved for the surface
-   * (highlight-colour.ts), or white, so the renderer owes the surface nothing for it.
+   * at the renderer, because that is where the surface arrives. The brackets'
+   * inks are the other pair the surface decides, and change with it.
    */
-  it('inks the pale fills for the surface it was given, redraws them when the surface changes, and keeps the glow through it', () => {
+  it('inks the pale fills and the brackets for the surface it was given, and redraws both when the surface changes', () => {
     const inkOfPaleFill = (): unknown => kindsOf('mesh').find((mesh) => mesh.userData.structureKey === 'a:front')?.material?.params.color;
     const renderer = createSceneRenderer(canvas, callbacks, true, 'light');
-    // The pale front and the filled twin selected together: the one shows the surface ink, the other the glow.
+    const bracketInks = (): string[] => (listSceneObjects().find((object) => object.userData.selectionBrackets === true)?.children ?? []).map((mesh) => `#${mesh.material?.color.getHexString()}`);
     renderer.setShapes(LIT_SHAPES, NODES, new Set([...REGION_KEYS.front, ...REGION_KEYS.twin]));
     expect(inkOfPaleFill()).toBe(SURFACE_INK.light.inside);
-    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY);
+    expect(bracketInks()).toEqual([SURFACE_INK.light.selectionHalo, SURFACE_INK.light.selection]);
 
     renderer.setTheme('dark');
     expect(inkOfPaleFill()).toBe(SURFACE_INK.dark.inside);
-    expect(litMaterialOf('a:twinA').emissiveIntensity).toBe(OWN_COLOUR_SELECTED_EMISSIVE_INTENSITY);
-    // The same shapes still, and nothing drawn around them: the surface changes the ink, never what is drawn.
+    expect(bracketInks()).toEqual([SURFACE_INK.dark.selectionHalo, SURFACE_INK.dark.selection]);
+    // The same shapes still: the surface changes the ink, never what is drawn.
     expect(kindsOf('lines')).toHaveLength(0);
 
     renderer.setTheme('light');
@@ -280,13 +275,9 @@ describe('no line joins two regions', () => {
       runFrame(1000);
       runFrame(1000 + STEP_EASE_MS);
       expect(listLinesJoiningRegions()).toEqual([]);
-      // The only lines ever in the scene are selection brackets: short pieces, each far shorter than the gap between two regions.
-      for (const lines of kindsOf('lines')) {
-        const positions = positionsOf(lines);
-        for (let at = 0; at < positions.length; at += 6) expect(Math.hypot(positions[at + 3] - positions[at], positions[at + 4] - positions[at + 1], positions[at + 5] - positions[at + 2])).toBeLessThan(30);
-      }
+      // The brackets are quads on the canvas, in pixels, not lines in the scene: no line of any kind is drawn.
+      expect(kindsOf('lines')).toEqual([]);
     }
-    expect(kindsOf('lines').every((lines) => Object.keys(lines.geometry?.attributes ?? {}).join() === 'position')).toBe(true);
   });
 });
 
@@ -323,7 +314,7 @@ describe('threat-model steps in the picture', () => {
     expect(meshOf('a:front').material?.transparent).toBe(false);
     expect([meshOf('a:front').position.x, meshOf('a:front').position.y, meshOf('a:front').position.z]).toEqual(before);
     // A redraw for another reason (a selection) does not fade the same step in again.
-    renderer.setShapes(marked([4]), NODES, new Set(['a:back']));
+    renderer.setShapes(marked([4]), NODES, new Set(['a:front']));
     expect(meshOf('a:front').material?.opacity).toBe(1);
   });
 
@@ -389,14 +380,14 @@ describe('the marker ring', () => {
     expect(kindsOf('mesh').some((mesh) => mesh.userData.structureKey === 'a:back')).toBe(true);
   });
 
-  it('draws over the shapes on purpose, with nothing drawn over it for a selection, and turns with the camera as one piece', () => {
+  it('draws over the shapes on purpose, stays itself when selected, and turns with the camera as one piece', () => {
     const renderer = createSceneRenderer(canvas, callbacks, false, 'light');
     renderer.setShapes(placeOnly(), new Map(), new Set(['a:front']));
     const ring = ringFor('place_only');
     // A mark that says the outline here is approximate, or absent, is worthless if the drawing can hide it.
     expect(ring?.children.every((part) => part.material?.params.depthTest === false)).toBe(true);
     expect(ring?.children.every((part) => part.renderOrder === DRAW_ORDER.marker)).toBe(true);
-    // The selection adds no line over the ring: a selected ring-only structure is not lifted, and nothing is drawn around it.
+    // A selected ring-only structure is not lifted: its brackets stand around the marker, on the canvas.
     expect(kindsOf('lines')).toHaveLength(0);
     // Nothing about the ring moves on its own: it is billboarded, which is a camera turn, not an animation.
     runFrame(1000);

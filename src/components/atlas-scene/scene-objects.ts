@@ -3,8 +3,8 @@
  * nothing: fill, colour, size mark and what is pickable all arrive already
  * chosen (scene-drawing.ts), and this turns them into objects. The marks stay
  * on their own channels: the fill is the mesh's material, the size mark is a
- * ring, and the selection is the renderer lighting the selected shapes from
- * within (scene-renderer.ts); nothing is drawn around a selection.
+ * ring, and the selection is corner brackets on the canvas (scene-brackets.ts),
+ * so nothing here changes for a selected shape but what a click prefers.
  */
 
 import {

@@ -240,22 +240,24 @@ describe('AtlasViewport: open', () => {
     const regionName = model.regionsById.get(regionId)?.name ?? '';
     const onShowDetails = vi.fn();
     const container = await openViewport({ selectedRegionId: regionId, onShowDetails });
-    // The picture is handed the selected shapes to light from within, and no label: nothing is drawn around a selection.
+    // The picture is handed the selected shapes to bracket as one, and no label: the name stands beside it.
     expect(model.regionsById.get(regionId)?.structure_keys.every((key) => canvasProps?.selectedKeys.has(key))).toBe(true);
+    expect(canvasProps?.bracketGroups).toEqual([model.regionsById.get(regionId)?.structure_keys]);
     expect(canvasProps).not.toHaveProperty('selectionLabel');
     const row = container.querySelector('[data-picture-selected]');
     expect(row?.getAttribute('data-picture-selected')).toBe(regionName);
     expect(container.querySelector('figure')?.contains(row)).toBe(true);
     fireEvent.click(within(row as HTMLElement).getByRole('button', { name: 'See its details' }));
     expect(onShowDetails).toHaveBeenCalledTimes(1);
-    expect(screen.getByText(/in a colour of its own: under the pointer, or selected/)).not.toBeNull();
+    expect(screen.getByText(/corner marks: selected/)).not.toBeNull();
   });
 
-  it('lights a picked shape that selects no region and names it in the legend, and says nothing beside the picture', async () => {
+  it('brackets a picked shape that selects no region and names it in the legend, and says nothing beside the picture', async () => {
     const container = await openViewport();
     expect(container.querySelector('[data-picture-selected]')).toBeNull();
     canvasProps?.onPick(sharedShapeKey);
     await waitFor(() => expect(canvasProps?.selectedKeys.has(sharedShapeKey)).toBe(true));
+    expect(canvasProps?.bracketGroups).toEqual([[sharedShapeKey]]);
     const picked = container.querySelector('[data-picked-key]');
     expect(picked?.getAttribute('data-picked-key')).toBe(sharedShapeKey);
     expect(picked?.textContent).toContain(resolvePick(model, sharedShapeKey)?.label ?? '');

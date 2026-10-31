@@ -58,10 +58,10 @@ describe('the surface inks: the selection is findable and a pale shape is denser
 
   it('holds the pale ink for each surface, stepped apart, and the selection ink beside it as a role of its own', () => {
     expect(Object.keys(SURFACE_INK).sort()).toEqual(['dark', 'light']);
-    expect(SURFACE_INK.light).toEqual({ inside: INSIDE_COLOUR });
-    expect(SURFACE_INK.dark).toEqual({ inside: INSIDE_COLOUR_DARK });
+    expect(SURFACE_INK.light).toEqual({ inside: INSIDE_COLOUR, selection: SELECTION_COLOUR, selectionHalo: SELECTION_COLOUR_DARK });
+    expect(SURFACE_INK.dark).toEqual({ inside: INSIDE_COLOUR_DARK, selection: SELECTION_COLOUR_DARK, selectionHalo: SELECTION_COLOUR });
     expect(INSIDE_COLOUR).not.toBe(INSIDE_COLOUR_DARK);
-    // The selection no longer inks a shape (a selected shape is lit from within), but the role keeps a neutral ink per surface for the picked electrode dot and the palette guards.
+    // The selection never inks a shape: it inks the corner brackets and the picked electrode dot, each with the other surface's ink as its halo.
     expect(new Set([SELECTION_COLOUR, SELECTION_COLOUR_DARK, INSIDE_COLOUR, INSIDE_COLOUR_DARK]).size).toBe(4);
   });
 

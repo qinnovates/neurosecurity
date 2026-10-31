@@ -2,8 +2,8 @@
  * The marks drawn over the shapes: the number of a threat-model step on the
  * shapes its technique marks, as text labels. A label is text at one place.
  * Nothing here draws a line, an arrow or anything else from one shape to
- * another, and nothing is drawn around a selection: a selected shape is lit
- * from within by the renderer, and its name stands beside the picture.
+ * another. The selection's brackets are their own overlay (scene-brackets.ts),
+ * and its name stands beside the picture.
  */
 
 import { CanvasTexture, Sprite, SpriteMaterial, type Material, type Mesh, type Object3D } from 'three';
@@ -108,6 +108,8 @@ export interface Easer {
   begin: (materials: readonly Material[], now: number) => void;
   /** Advances the ease. Returns whether another frame is needed. */
   step: (now: number) => boolean;
+  /** Ends any ease under way with every material at its own opacity, so something else may change it. */
+  settle: () => void;
 }
 
 /**
@@ -131,6 +133,10 @@ export function createEaser(durationMs: number): Easer {
       for (const { material, wasTransparent } of running) Object.assign(material, { transparent: wasTransparent, needsUpdate: true });
       running = [];
       return false;
+    },
+    settle() {
+      for (const { material, opacity, wasTransparent } of running) Object.assign(material, { opacity, transparent: wasTransparent, needsUpdate: true });
+      running = [];
     },
   };
 }

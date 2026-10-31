@@ -11,7 +11,7 @@ Pure functions from the anatomy index and the explorer catalog to what a visitor
 - `region-view-notes.ts` -- the words beside a 3D view mounted on another page: the visitor's selection, the regions a technique's links name, what has no shape, the limits; and which of them the open picture's caption already says
 - `technique-colouring.ts` -- whether a technique's drafted links colour any shape, asked of the style function itself; read at build time for a technique page and by the view for its caption
 - `limit-selection.ts`, `viewport-caption.ts`, `announcements.ts` -- which limit sentence, caption and screen-reader text show; the sentences themselves live in `src/lib/anatomy/limits-copy.ts`
-- `scene-shapes.ts`, `scene-drawing.ts`, `camera-views.ts`, `slice-plane.ts`, `resolve-pick.ts` -- what the 3D view draws, as plain data: colours, opacities, camera, slice, picking
+- `scene-shapes.ts`, `scene-drawing.ts`, `selection-marks.ts`, `camera-views.ts`, `slice-plane.ts`, `resolve-pick.ts` -- what the 3D view draws, as plain data: colours, opacities, the selection's brackets and dim, camera, slice, picking
 - the surface the canvas is drawn on (`SceneTheme` in `scene-shapes.ts`) is a required argument of every function that chooses an ink, never a default: `scene-shapes.ts` resolves a lens step for it onto the shape, and `scene-drawing.ts` holds the two inks that belong to no shape -- the selection brackets and the pale fill -- in `SURFACE_INK`. Nothing here reads the document
 - `device-drawing.ts`, `devices-layer.ts`, `lead-figure.ts` -- electrode layouts and the lead figure
 

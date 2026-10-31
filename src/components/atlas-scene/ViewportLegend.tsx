@@ -89,7 +89,8 @@ export default function ViewportLegend({ caption, drawnShapes, assets, assetStat
         <li data-legend-row="mark"><MarkGlyph mark="no_data" /> lines only: no data</li>
         {hasCoarseRing && <li data-legend-row="mark"><span className="atlas-ring-swatch" data-ring="coarse_outline" aria-hidden="true" /> ring: the shape it sits on is outlined only roughly</li>}
         {hasPlaceOnlyRing && <li data-legend-row="mark"><span className="atlas-ring-swatch" data-ring="place_only" aria-hidden="true" /> ring with a centre: no outline at all, only a place</li>}
-        <li data-legend-row="mark"><span className="atlas-selection-swatch" aria-hidden="true" /> in a colour of its own: under the pointer, or selected. The colour identifies the shape and nothing else</li>
+        <li data-legend-row="mark"><span className="atlas-selection-swatch" aria-hidden="true" /> corner marks: selected. The other filled shapes dim while something is selected, and keep their colours</li>
+        <li data-legend-row="mark">in a colour of its own: under the pointer. The colour identifies the shape and nothing else</li>
         {steps.map((entry) => <li key={entry.step} data-legend-row="step"><span className="atlas-step-swatch" style={{ background: entry.colour }} aria-hidden="true" /> {entry.step.replaceAll('_', ' ')}</li>)}
       </ul>
       {/* How a ring reads under the lens is a limit sentence like the others now: it arrives in caption.markLimits, from limits-copy.ts, rather than being typed here. */}

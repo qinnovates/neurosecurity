@@ -109,9 +109,9 @@ describe('the brain hero: the way in', () => {
     await waitFor(() => expect(container.querySelector('[data-viewport-caption]')?.textContent).toContain('NISS severity lens.'));
     expect(lensButtons[1].getAttribute('aria-pressed')).toBe('true');
     expect(container.querySelector('[data-brain-hero]')?.getAttribute('data-hero-lens')).toBe('niss');
-    // The picture carries the three moves as a hint until the first touch, and nothing is drawn around a selection.
+    // The picture carries the three moves as a hint until the first touch, and with nothing selected nothing is bracketed.
     expect(container.querySelector('[data-picture-hint]')?.textContent).toContain('Drag to turn');
-    expect(canvasProps).not.toHaveProperty('bracketGroups');
+    expect(canvasProps?.bracketGroups).toEqual([]);
     // The view's heading is kept for assistive technology and the keyboard proxy still moves the camera.
     expect(screen.getByRole('heading', { name: '3D view' })).not.toBeNull();
     expect(container.querySelector('[data-viewport-proxy]')).not.toBeNull();
