@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generated": "2026-10-31T07:57:51.676380+00:00",
+    "generated": "2026-10-31T08:15:49.268779+00:00",
     "compression": "zstd",
     "compression_level": 3,
     "pyarrow_version": "18.1.0",
@@ -166,7 +166,7 @@
     },
     "hourglass_bands": {
       "rows": 11,
-      "columns": 7,
+      "columns": 8,
       "column_names": [
         "id",
         "name",
@@ -174,10 +174,11 @@
         "determinacy",
         "qi_range",
         "severity_if_compromised",
-        "description"
+        "description",
+        "legacy_name"
       ],
-      "size_bytes": 3965,
-      "sha256": "8148971623dde60e5c28ec128d75026689f369a54833bb9b0221240e1d668e8c",
+      "size_bytes": 4426,
+      "sha256": "69ff91d6ed92100103ed10b6035a19ac52a1314a8fea07bd7f25661e7db82ed4",
       "compression": "zstd",
       "source": "datalake/parquet/hourglass_bands.parquet"
     },

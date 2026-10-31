@@ -1,7 +1,20 @@
 import { describe, expect, it } from 'vitest';
+import atlas from '@shared/qif-brain-bci-atlas.json';
 import { HOURGLASS_BANDS, QIF_LAYERS, QIF_LAYER_SEAM, layerOf, type BandId } from '../qif-constants';
 
 const bandIds = HOURGLASS_BANDS.map((band) => band.id);
+
+describe('band names', () => {
+  it('reads the same in the atlas and the site constants, as Derivation Log Entry 88 decided for S1-S3', () => {
+    expect(atlas.qif_bands.map((band) => [band.id, band.name])).toEqual(HOURGLASS_BANDS.map((band) => [band.id, band.name]));
+  });
+
+  it('keeps the superseded S-band names so a search for one still finds its band', () => {
+    expect(atlas.qif_bands.filter((band) => band.legacy_name !== undefined).map((band) => [band.id, band.legacy_name])).toEqual([
+      ['S1', 'Analog Front-End'], ['S2', 'Digital Processing'], ['S3', 'Application'],
+    ]);
+  });
+});
 
 describe('public layers over the QIF bands', () => {
   it('has eight layers: seven neural and one classical stack', () => {

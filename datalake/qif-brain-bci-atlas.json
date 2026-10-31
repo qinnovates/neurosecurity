@@ -170,7 +170,8 @@
     },
     {
       "id": "S1",
-      "name": "Analog Front-End",
+      "name": "Near-Field / On-Device",
+      "legacy_name": "Analog Front-End",
       "zone": "silicon",
       "determinacy": "Stochastic (analog noise)",
       "qi_range": [
@@ -178,11 +179,12 @@
         0.01
       ],
       "severity_if_compromised": "MEDIUM (signal integrity)",
-      "description": "Amplification, filtering, ADC/DAC conversion. Analog noise introduces residual stochasticity."
+      "description": "Amplification, ADC, near-field EM coupling (0-10 kHz, on-device). Analog noise introduces residual stochasticity."
     },
     {
       "id": "S2",
-      "name": "Digital Processing",
+      "name": "Guided-Wave / Host-Local",
+      "legacy_name": "Digital Processing",
       "zone": "silicon",
       "determinacy": "Deterministic",
       "qi_range": [
@@ -190,11 +192,12 @@
         0
       ],
       "severity_if_compromised": "MEDIUM (algorithm integrity)",
-      "description": "Decoding algorithms, classification, digital signal processing. Fully deterministic."
+      "description": "Firmware, drivers, host compute, USB, decoding, BLE/WiFi baseband (10 kHz - 1 GHz, device-local). Fully deterministic."
     },
     {
       "id": "S3",
-      "name": "Application",
+      "name": "Far-Field / Wide-Area",
+      "legacy_name": "Application",
       "zone": "silicon",
       "determinacy": "Deterministic",
       "qi_range": [
@@ -202,7 +205,7 @@
         0
       ],
       "severity_if_compromised": "LOW-MEDIUM (software)",
-      "description": "Clinical software, user interface, data storage, network. Classical IT security domain."
+      "description": "RF transmission, directed energy, application layer (1 GHz+, off-device). Classical IT security domain."
     }
   ],
   "layers": {

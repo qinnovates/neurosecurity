@@ -92,7 +92,7 @@ export const QIF_BANDS = [
     oscillations: ['Impedance spectrum (1 Hz - 100 kHz)']
   },
   {
-    id: 'S1', name: 'Analog Front-End', zone: 'silicon', color: '#93c5fd',
+    id: 'S1', name: 'Near-Field / On-Device', zone: 'silicon', color: '#93c5fd',
     emoji: '📡',
     structures: ['Analog Amplifiers', 'Bandpass Filters', 'ADC/DAC Converters'],
     determinacy: 'Stochastic (analog noise)',
@@ -103,7 +103,7 @@ export const QIF_BANDS = [
     oscillations: ['Sampling rate (250 Hz - 30 kHz depending on device)']
   },
   {
-    id: 'S2', name: 'Digital Processing', zone: 'silicon', color: '#60a5fa',
+    id: 'S2', name: 'Guided-Wave / Host-Local', zone: 'silicon', color: '#60a5fa',
     emoji: '💻',
     structures: ['Decoding Algorithms', 'Signal Classification', 'Digital Filters', 'On-Device Firmware'],
     determinacy: 'Deterministic',
@@ -114,7 +114,7 @@ export const QIF_BANDS = [
     oscillations: []
   },
   {
-    id: 'S3', name: 'Application Layer', zone: 'silicon', color: '#3b82f6',
+    id: 'S3', name: 'Far-Field / Wide-Area', zone: 'silicon', color: '#3b82f6',
     emoji: '🌐',
     structures: ['Clinical Software', 'User Interface', 'Data Storage', 'Network / Cloud'],
     determinacy: 'Deterministic',
