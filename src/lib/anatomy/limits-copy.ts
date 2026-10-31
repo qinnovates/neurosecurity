@@ -110,6 +110,7 @@ export const LIMIT_TEMPLATES = {
   position_not_checked: 'The position of the {layer} has not been independently checked.',
   position_not_checked_with_range: 'The position of the {layer} has not been independently checked. Where two atlases draw the same deep structure, their surfaces differ by about {range} mm.',
   position_failed: 'A position check failed for the {layer}. Treat that position as unreliable.',
+  picked_shape_not_region: 'This shape is not one QIF region.',
   picked_shape_shared: 'This shape holds more than one QIF region. Picking it selects the shape, not any one of them.',
   picked_shape_larger: 'This shape is larger than the QIF region it holds. Picking it selects the shape, not the region.',
   picked_shape_unowned: 'No QIF record maps to this shape. It is drawn for context and no lens colours it.',

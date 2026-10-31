@@ -1,10 +1,11 @@
 import { lazy, useEffect, useMemo, useRef, useState, type ComponentType } from 'react';
+import { limitSentence } from '@/lib/anatomy/limits-copy';
 import type { LayerId } from '@/lib/anatomy/source-types';
 import { CAMERA_VIEW_LABELS, DEFAULT_CAMERA_VIEW, type CameraViewId } from '@/lib/atlas-explorer/camera-views';
 import type { ChainFrame } from '@/lib/atlas-explorer/chain-steps';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import type { Lens } from '@/lib/atlas-explorer/lens-state';
-import { resolvePick } from '@/lib/atlas-explorer/resolve-pick';
+import { nameShape, resolvePick } from '@/lib/atlas-explorer/resolve-pick';
 import type { ViewportCaption } from '@/lib/atlas-explorer/viewport-caption';
 import { clampSlice, listShapesCutAt, middleOf, stepSlice, type SliceState } from '@/lib/atlas-explorer/slice-plane';
 import type { AtlasCanvasProps, CanvasCommands } from './AtlasCanvas';
@@ -91,6 +92,8 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, ch
   }, [scene.caption, onCaption]);
   useEffect(() => { if (scene.bounds !== null && slice !== null) setSlice({ axis: slice.axis, positionMm: clampSlice(slice.axis, slice.positionMm, scene.bounds) }); }, [scene.bounds]);
 
+  const picked = pickedKey === null ? null : resolvePick(model, pickedKey);
+  const hovered = hoveredKey === null ? null : resolvePick(model, hoveredKey);
   const pick = (structureKey: string | null): void => {
     setPickedKey(structureKey);
     const regionId = structureKey === null ? null : resolvePick(model, structureKey)?.selectedRegionId ?? null;
@@ -117,7 +120,7 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, ch
         <ViewportStage
           Canvas={Canvas} canvasProps={canvasProps} commands={commands} caption={scene.caption} directions={directions} slice={slice}
           deviceCaption={scene.deviceCaption} isChainShown={chain !== null}
-          hoverLabel={hoveredKey === null ? null : resolvePick(model, hoveredKey)?.label ?? null}
+          hoverLabel={hovered === null ? null : nameShape(hovered)} shapeNote={picked === null || picked.selectedRegionId !== null ? null : limitSentence('picked_shape_not_region')}
           selection={selectedRegionName === null ? null : { name: selectedRegionName, onShowDetails }} lensWays={lensWays}
         />
         <div className="atlas-viewport-side">
@@ -130,7 +133,7 @@ export default function OpenViewport({ model, lens, layers, selectedRegionId, ch
           />
           <ViewportLegend
             caption={scene.caption} drawnShapes={scene.drawnShapes} assets={scene.assets} assetStates={scene.assetStates}
-            picked={pickedKey === null ? null : resolvePick(model, pickedKey)} onRetryAssets={scene.retryAssets} onSelectRegion={onSelectRegion} onClearPick={() => setPickedKey(null)}
+            picked={picked} onRetryAssets={scene.retryAssets} onSelectRegion={onSelectRegion} onClearPick={() => setPickedKey(null)}
           />
         </div>
       </div>

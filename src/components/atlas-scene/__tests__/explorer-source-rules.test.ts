@@ -96,7 +96,7 @@ describe('explorer source rules', () => {
     const viewportOnly = [...classesIn(viewport)].filter((name) => !earlier.has(name));
     expect(viewportOnly.length).toBeGreaterThan(15);
     expect([...classesIn(viewport)].filter((name) => earlier.has(name) && !SHARED.includes(name))).toEqual([]);
-    const VIEWPORT_FILES = ['AtlasViewport.tsx', 'OpenViewport.tsx', 'ViewportStage.tsx', 'ViewportControls.tsx', 'ViewportLegend.tsx', 'AtlasCanvas.tsx', 'AtlasRegionView.tsx'];
+    const VIEWPORT_FILES = ['AtlasViewport.tsx', 'OpenViewport.tsx', 'ViewportStage.tsx', 'ViewportControls.tsx', 'ViewportLegend.tsx', 'ShapeNames.tsx', 'AtlasCanvas.tsx', 'AtlasRegionView.tsx'];
     const others = files.filter((filePath) => filePath.endsWith('.tsx') && !VIEWPORT_FILES.includes(path.basename(filePath)));
     const collisions = others.flatMap((filePath) => viewportOnly.filter((name) => new RegExp(`["' ]${name}["' ]`).test(fs.readFileSync(filePath, 'utf-8'))).map((name) => `${path.basename(filePath)}: ${name}`));
     expect(collisions).toEqual([]);

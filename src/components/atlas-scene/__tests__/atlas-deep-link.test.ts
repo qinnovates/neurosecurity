@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { ATLAS_EXPLORER_PATH } from '@/components/brain/AtlasExplorerLink';
 import { loadRealModel } from '@/lib/atlas-explorer/__tests__/explorer-fixtures';
-import { LENS_KINDS, SUBJECT_FREE_LENS_KINDS, lensNeedsSubject } from '@/lib/atlas-explorer/lens-state';
+import { LENS_KINDS, SUBJECT_FREE_LENS_KINDS, lensNeedsSubject, type LensKind } from '@/lib/atlas-explorer/lens-state';
 import { HIGHLIGHT_QUERY_PARAM, LENS_QUERY_PARAM, REGION_QUERY_PARAM, buildExplorerSearch, buildRegionDeepLink, readHighlightDeepLink, readLensDeepLink, readRegionDeepLink } from '../atlas-deep-link';
 
 const model = loadRealModel();
@@ -63,7 +63,7 @@ describe('the explorer\'s lens deep link', () => {
 });
 
 describe('the explorer\'s highlight deep link', () => {
-  const kindById = new Map([['QIF-T0030', 'technique'], ['neuralink-n1', 'stated_targets']] as const);
+  const kindById = new Map<string, LensKind>([['QIF-T0030', 'technique'], ['neuralink-n1', 'stated_targets']]);
 
   it('reads a technique or a device the page holds, and gives it the lens that shows it', () => {
     expect(readHighlightDeepLink(`?${HIGHLIGHT_QUERY_PARAM}=QIF-T0030`, kindById)).toEqual({ kind: 'technique', techniqueId: 'QIF-T0030' });

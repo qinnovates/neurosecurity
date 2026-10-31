@@ -84,6 +84,7 @@ exports[`limit sentences > are held word for word, so any change of wording is a
   "niss_meaning": "NISS is a proposed, unreviewed severity score for attack techniques, in steps from none to critical. A region shows the highest step among the techniques an AI has linked to it.",
   "outline_shape": "This is the outer shape of an average made from many people's brain scans, not anyone's real brain. Much of the brain's surface lies inside folds that averaging smooths away, so only the outside is shown.",
   "picked_shape_larger": "This shape is larger than the QIF region it holds. Picking it selects the shape, not the region.",
+  "picked_shape_not_region": "This shape is not one QIF region.",
   "picked_shape_shared": "This shape holds more than one QIF region. Picking it selects the shape, not any one of them.",
   "picked_shape_unowned": "No QIF record maps to this shape. It is drawn for context and no lens colours it.",
   "position_checked": "The position of the {layer} was independently checked.",

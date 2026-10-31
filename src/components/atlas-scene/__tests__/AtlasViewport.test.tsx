@@ -298,6 +298,39 @@ describe('AtlasViewport: open', () => {
     });
   });
 
+  it('names a shape by its QIF region first and the atlas\'s own name second, under the pointer and once picked', async () => {
+    const namedApart = model.index.structures.map((structure) => resolvePick(model, structure.key)).find((pick) => pick !== null && pick.selectedRegionId !== null && pick.regions[0].name !== pick.label && (model.structuresByKey.get(pick.structureKey)?.nodes.length ?? 0) > 0);
+    if (namedApart === undefined || namedApart === null) throw new Error('No shape whose atlas name differs from its region\'s.');
+    const container = await openViewport();
+    act(() => canvasProps?.onHover(namedApart.structureKey));
+    const label = container.querySelector('.atlas-hover-label') as HTMLElement;
+    expect(label.querySelector('[data-label-region]')?.textContent).toBe(namedApart.regions[0].name);
+    expect(label.querySelector('[data-label-atlas]')?.textContent).toBe(namedApart.label);
+    act(() => canvasProps?.onHover(unownedShapeKey));
+    expect(container.querySelector('.atlas-hover-label [data-label-atlas]')).toBeNull();
+    expect(container.querySelector('.atlas-hover-label [data-label-region]')?.textContent).toBe(resolvePick(model, unownedShapeKey)?.label);
+    act(() => canvasProps?.onPick(namedApart.structureKey));
+    const picked = container.querySelector('[data-picked-key]') as HTMLElement;
+    expect(picked.querySelector('[data-label-region]')?.textContent).toBe(namedApart.regions[0].name);
+    expect(picked.querySelector('[data-label-atlas]')?.textContent).toBe(namedApart.label);
+  });
+
+  it('says in the picture\'s footer when a click landed on a shape that is not one QIF region, and stops saying it when it no longer holds', async () => {
+    const container = await openViewport();
+    const note = (): Element | null => container.querySelector('[data-picture-shape-note] [data-limit-id="picked_shape_not_region"]');
+    expect(note()).toBeNull();
+    act(() => canvasProps?.onPick(sharedShapeKey));
+    expect(note()?.textContent).toBe('This shape is not one QIF region.');
+    expect(container.querySelector('figure')?.contains(note())).toBe(true);
+    act(() => canvasProps?.onPick(unownedShapeKey));
+    expect(note()?.textContent).toBe('This shape is not one QIF region.');
+    act(() => canvasProps?.onPick(ownShapeKey));
+    expect(note()).toBeNull();
+    act(() => canvasProps?.onPick(sharedShapeKey));
+    act(() => canvasProps?.onPick(null));
+    expect(note()).toBeNull();
+  });
+
   it('offers the ways out of the lens under the picture, as real buttons, and nothing when there is none', async () => {
     const onChoose = vi.fn();
     const onBack = vi.fn();

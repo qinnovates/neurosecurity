@@ -220,6 +220,9 @@
 /* What the picture has selected, under the canvas and above the caption, so a tap in the picture shows its result where the finger is. */
 .atlas-picture-selected { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.75rem; margin: 0; padding: 0.5rem 0.75rem; background: var(--atlas-panel); border-top: 1px solid var(--atlas-line-strong); border-left: 3px solid var(--atlas-selection); }
 .atlas-picture-selected .atlas-link-button, .atlas-picture-lens .atlas-link-button { min-height: var(--atlas-row); }
+/* A click that selected no region answers where it was made. */
+.atlas-picture-shape-note { padding: 0.375rem 0.75rem; background: var(--atlas-panel); border-top: 1px solid var(--atlas-line-strong); }
+.atlas-picture-shape-note > p { margin: 0; }
 .atlas-picture-lens { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; margin: 0; padding: 0 0.75rem; background: var(--atlas-panel); border-top: 1px solid var(--atlas-line-strong); }
 .atlas-caption { padding: 0.5rem 0.75rem; font-size: 0.75rem; background: var(--atlas-panel); border-top: 1px solid var(--atlas-line-strong); }
 .atlas-caption-line { margin: 0 0 0.25rem; }
@@ -234,6 +237,8 @@
 .atlas-orientation-label { position: absolute; transform: translate(-50%, -50%); font-size: 0.6875rem; font-weight: 700; line-height: 1; }
 .atlas-orientation-label[data-facing="far"] { font-weight: 400; color: var(--atlas-ink-soft); }
 .atlas-hover-label { position: absolute; top: 0.5rem; left: 0.5rem; max-width: 60%; margin: 0; padding: 0.25rem 0.5rem; font-weight: 600; background: var(--atlas-panel); border: 1px solid var(--atlas-line-strong); border-radius: 0.375rem; pointer-events: none; }
+.atlas-shape-atlas-name { font-size: 0.75rem; font-weight: 400; color: var(--atlas-ink-soft); }
+.atlas-hover-label .atlas-shape-atlas-name { display: block; }
 .atlas-controls, .atlas-legend, .atlas-slice { display: grid; gap: 0.5rem; }
 .atlas-legend { margin-top: 0.875rem; padding-top: 0.75rem; border-top: 1px solid var(--atlas-line); }
 .atlas-control-group { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; }
