@@ -18,6 +18,7 @@ import LimitsPanel from './LimitsPanel';
 import NetworkNames from './NetworkNames';
 import { buildAtlasCoverage, buildRegionCoverage, describeCoverage } from './region-coverage';
 import RegionInspector from './RegionInspector';
+import { InspectorLensContext } from './RegionLensNote';
 import SignalChainRail from './SignalChainRail';
 import StructureList from './StructureList';
 import type { LensWays } from './ViewportStage';
@@ -197,12 +198,14 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
           groups={groups} unfilteredGroups={allGroups} regionCount={model.regions.length} filter={state.filter} lensLabel={LENS_LABELS[state.lens.kind]} selectedRegionId={selectedRegionId}
           onFilter={(filter) => dispatch({ type: 'filter_changed', filter })} onClearFilter={() => dispatch({ type: 'filter_cleared' })} onSelect={(regionId, byKeyboard) => selectRegion(regionId, byKeyboard ? 'keyboard' : 'pointer')}
         />
-        <RegionInspector
-          model={model} detail={detail} atlasCoverage={atlasCoverage} headingRef={inspectorHeadingRef} anatomyEvidence={anatomyEvidence.state} regionEvidence={regionEvidence.state}
-          onRetryAnatomyEvidence={anatomyEvidence.retry} onRetryRegionEvidence={regionEvidence.retry}
-          onChooseTechnique={(techniqueId) => drillInto(TECHNIQUE_LENS, techniqueId)} onChooseDevice={(deviceId) => drillInto('stated_targets', deviceId)}
-          onSelectRegion={(regionId) => selectRegion(regionId, 'keyboard')} onBackToList={focusSelectedRow} onBackToView={showViewport}
-        />
+        <InspectorLensContext.Provider value={state.lens}>
+          <RegionInspector
+            model={model} detail={detail} atlasCoverage={atlasCoverage} headingRef={inspectorHeadingRef} anatomyEvidence={anatomyEvidence.state} regionEvidence={regionEvidence.state}
+            onRetryAnatomyEvidence={anatomyEvidence.retry} onRetryRegionEvidence={regionEvidence.retry}
+            onChooseTechnique={(techniqueId) => drillInto(TECHNIQUE_LENS, techniqueId)} onChooseDevice={(deviceId) => drillInto('stated_targets', deviceId)}
+            onSelectRegion={(regionId) => selectRegion(regionId, 'keyboard')} onBackToList={focusSelectedRow} onBackToView={showViewport}
+          />
+        </InspectorLensContext.Provider>
       </div>
       <LayerPanel layers={model.index.layers} sources={model.index.sources} requested={state.layers} onToggle={(layerId) => dispatch({ type: 'layer_toggled', layerId })} />
       <ChainView model={model} view={chainView} />

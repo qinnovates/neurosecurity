@@ -8,7 +8,8 @@ import type { GeometryState, IndexLayer, IndexSource, IndexSubject } from '@/lib
 import { limitSentence, type LimitSentence } from '@/lib/anatomy/limits-copy';
 import type { AnatomyMatch, RegionEvidenceRow } from '@/lib/anatomy/region-evidence-types';
 import { isNeuralBand, type ExplorerModel } from './explorer-model';
-import type { Lens } from './lens-state';
+import { LENS_LABELS, type Lens } from './lens-state';
+import type { RegionLensFact } from './region-lens';
 
 const ALLEN_SOURCE_IDS: readonly string[] = ['allen_hra_3d_2020'];
 const DEEP_AVERAGE_SOURCE_IDS: readonly string[] = ['cit168_rl', 'neudorfer_hypothalamus'];
@@ -67,6 +68,12 @@ export function limitsForLens(model: ExplorerModel, lens: Lens): LimitSentence[]
     case 'dsm': return lens.cluster === null ? [limitSentence('lens_dsm'), limitSentence('lens_needs_subject')] : [limitSentence('lens_dsm'), limitSentence('counts_are_entries')];
     case 'stated_targets': return lens.deviceId === null ? [limitSentence('lens_stated_targets'), limitSentence('lens_needs_subject')] : [limitSentence('lens_stated_targets')];
   }
+}
+
+/** The sentence for a region the lens holds no value for, or null when it holds one, or waits for a subject and so says nothing yet. */
+export function limitForRegionUnderLens(lens: Lens, fact: Pick<RegionLensFact, 'standing' | 'reason'>): LimitSentence | null {
+  if (fact.standing !== 'no_data' && fact.standing !== 'named_not_counted') return null;
+  return limitSentence('region_no_value', { lens: LENS_LABELS[lens.kind], reason: fact.reason });
 }
 
 const MATCH_LIMITS: Readonly<Record<Exclude<AnatomyMatch, 'equal'>, 'evidence_match_part' | 'evidence_match_larger_structure' | 'evidence_match_adjacent_or_overlapping' | 'evidence_match_uncertain' | 'evidence_match_outside_region'>> = {

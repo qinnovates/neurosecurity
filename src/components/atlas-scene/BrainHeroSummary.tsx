@@ -5,6 +5,7 @@ import { rankRegionRisks, techniquePagePath } from '@/lib/atlas-explorer/hero-ri
 import type { Lens } from '@/lib/atlas-explorer/lens-state';
 import { buildRegionDetail, type DetailTechnique, type RegionDetail } from '@/lib/atlas-explorer/region-detail';
 import { buildRegionDeepLink } from './atlas-deep-link';
+import RegionLensNote from './RegionLensNote';
 
 interface Props {
   model: ExplorerModel;
@@ -87,6 +88,7 @@ export default function BrainHeroSummary({ model, regionId, lens }: Props) {
         <div><dt>{HERO_COPY.selected_bands}</dt><dd>{nameBands(model, region.band_ids)}</dd></div>
         <div><dt>{HERO_COPY.selected_links}</dt><dd>{HERO_COPY.selected_links_value(detail.linked.length, drafted.length)}</dd></div>
       </dl>
+      <RegionLensNote model={model} regionId={region.id} lens={lens} />
       <Risks model={model} detail={detail} />
       <Devices detail={detail} />
       <a className="brain-hero-cta" href={buildRegionDeepLink(region.id, lens)} data-astro-reload>{HERO_COPY.see_details}</a>

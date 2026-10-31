@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import NeurorightsRadar from '@/components/radar/NeurorightsRadar';
 import NissVectorRadar, { type NissReading } from '@/components/radar/NissVectorRadar';
 import type { IndexTechnique } from '@/lib/anatomy/anatomy-index-types';
@@ -5,6 +6,7 @@ import { listLitLinks, type ExplorerModel, type RegionLink } from '@/lib/atlas-e
 import { foldNeurorights } from '@/lib/neurorights-fold';
 import { getSeverity } from '@/lib/niss-parser';
 import type { CoverageCount, RegionCoverage } from './region-coverage';
+import RegionLensNote, { InspectorLensContext } from './RegionLensNote';
 
 /*
  * Copy owned by `src/lib/anatomy/limits-copy.ts`, which this lane may not edit.
@@ -79,6 +81,7 @@ function scoredReadingOf(technique: IndexTechnique): { title: string; reading: N
  */
 export default function InspectorCoverage({ coverage, model, regionId }: { coverage: RegionCoverage; model: ExplorerModel; regionId: string }) {
   const { niss, dsm } = coverage;
+  const lens = useContext(InspectorLensContext);
   const linkedTechniques = uniqueLinkedTechniques(listLitLinks(model, regionId));
   const nissReadings = linkedTechniques.flatMap((technique) => scoredReadingOf(technique) ?? []);
   const neurorightsFold = foldNeurorights(
@@ -88,6 +91,7 @@ export default function InspectorCoverage({ coverage, model, regionId }: { cover
   return (
     <section className="atlas-section atlas-coverage" aria-labelledby="atlas-inspector-coverage" data-holds-nothing={coverage.holdsNothing}>
       <h3 className="atlas-subheading" id="atlas-inspector-coverage">What we hold for this region</h3>
+      {lens !== null && <RegionLensNote model={model} regionId={regionId} lens={lens} />}
       <ul className="atlas-coverage-rows">
         {coverage.counts.map((count) => <CountRow key={count.route} count={count} />)}
       </ul>

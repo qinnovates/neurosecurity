@@ -94,6 +94,7 @@ exports[`limit sentences > are held word for word, so any change of wording is a
   "qif_file_fact": "From QIF's own atlas file, which no expert has reviewed. QIF is a proposed framework.",
   "region_description": "Copied from QIF's own atlas file, which no expert has checked. It is a rough summary, not an established fact, and in places it differs from the papers under Evidence.",
   "region_matching": "Where a shape is shown it only roughly marks the QIF region: an AI drafted the matching, no expert has checked it, and real borders differ from person to person.",
+  "region_no_value": "No value under the {lens} lens: {reason}. This is not a low value.",
   "ring_under_lens": "A ring reads under the lens the way a fill does: it is closed and takes the step's colour where the lens holds a value for its shape, and broken and grey where it holds none. A broken ring is not a low value.",
   "shared_shape": "This atlas draws one shape here and does not divide it. The QIF regions listed sit somewhere inside it; the shape is not any one of them.",
   "slice_position": "Cut at {position} mm, {axis}. Everything beyond the cut is hidden.",

@@ -113,6 +113,31 @@ describe('AtlasExplorer: the inspector', () => {
   });
 });
 
+describe('AtlasExplorer: the inspector through a change of lens', () => {
+  const lensButton = (label: string): HTMLButtonElement => [...document.querySelectorAll<HTMLButtonElement>('button.atlas-lens')].find((button) => button.textContent === label) as HTMLButtonElement;
+  const regionName = (regionId: string): string => REAL_INDEX.subjects.find((subject) => subject.id === regionId)?.name ?? '';
+
+  it('stays on the region and says beside its name that this lens holds no value for it, which is not a low one', async () => {
+    const { container } = await openRegion(unlinkedRegionId);
+    expect(container.querySelector('[data-inspector-lens]')).toBeNull();
+    fireEvent.click(lensButton('NISS severity'));
+    await waitFor(() => expect(container.querySelector('.atlas-root')?.getAttribute('data-lens')).toBe('niss'));
+    const inspector = container.querySelector('.atlas-inspector') as HTMLElement;
+    expect(within(inspector).getByRole('heading', { level: 2 }).textContent).toBe(regionName(unlinkedRegionId));
+    expect(inspector.querySelector('[data-empty]')).toBeNull();
+    const note = inspector.querySelector('[data-inspector-lens="niss"] [data-limit-id="region_no_value"]');
+    expect(note?.textContent).toBe('No value under the NISS severity lens: no technique is linked to this region. This is not a low value.');
+  });
+
+  it('says nothing of the kind for a region the lens holds a value for', async () => {
+    const { container } = await openRegion(litRegionId);
+    fireEvent.click(lensButton('NISS severity'));
+    await waitFor(() => expect(container.querySelector('.atlas-root')?.getAttribute('data-lens')).toBe('niss'));
+    expect(within(container.querySelector('.atlas-inspector') as HTMLElement).getByRole('heading', { level: 2 }).textContent).toBe(regionName(litRegionId));
+    expect(container.querySelector('[data-inspector-lens]')).toBeNull();
+  });
+});
+
 describe('AtlasExplorer: literature statements', () => {
   it('gives every statement its "filed under; the paper says" line, a quote, a citation link, a scope note and the mark', async () => {
     const { inspector } = await openRegion('ppc');
