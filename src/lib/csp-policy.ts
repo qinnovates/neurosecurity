@@ -34,11 +34,12 @@ export const TOOL_PAGE_CSP = [
 ] as const;
 
 /**
- * The hosts Google Analytics needs once a visitor has accepted it (src/site/js/consent.js).
+ * The hosts Google Analytics and Cloudflare Web Analytics need once a visitor has accepted them
+ * (src/site/js/consent.js).
  * They are in the policy so the tag can run; the tag is never requested before consent.
  */
-const ANALYTICS_SCRIPT_SOURCE = 'https://www.googletagmanager.com';
-const ANALYTICS_CONNECT_SOURCES = ['https://*.google-analytics.com', 'https://*.analytics.google.com', 'https://*.googletagmanager.com'] as const;
+const ANALYTICS_SCRIPT_SOURCES = ['https://www.googletagmanager.com', 'https://static.cloudflareinsights.com'] as const;
+const ANALYTICS_CONNECT_SOURCES = ['https://*.google-analytics.com', 'https://*.analytics.google.com', 'https://*.googletagmanager.com', 'https://cloudflareinsights.com'] as const;
 
 /**
  * A page under BaseLayout. `'wasm-unsafe-eval'` is for pagefind and DuckDB-wasm, both self-hosted.
@@ -47,7 +48,7 @@ const ANALYTICS_CONNECT_SOURCES = ['https://*.google-analytics.com', 'https://*.
  */
 export const SITE_PAGE_CSP = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' ${ANALYTICS_SCRIPT_SOURCE}`,
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' ${ANALYTICS_SCRIPT_SOURCES.join(' ')}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https:",
   "font-src 'self'",

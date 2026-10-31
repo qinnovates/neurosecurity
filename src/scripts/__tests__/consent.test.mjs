@@ -70,7 +70,7 @@ describe('startConsent', () => {
   const analyticsScripts = () => [...document.head.querySelectorAll('script')].filter((script) => script.src.includes('googletagmanager'));
 
   it('requests nothing from Google until the visitor accepts, and shows both buttons alike', () => {
-    consent.startConsent(window, document, memoryStorage());
+    consent.startConsent(window, document, memoryStorage(), () => {});
     expect(analyticsScripts()).toHaveLength(0);
     const buttons = [...document.querySelectorAll('#qinnovate-consent-banner button')];
     expect(buttons.map((button) => button.textContent)).toEqual(['Reject analytics', 'Accept analytics']);
@@ -80,29 +80,42 @@ describe('startConsent', () => {
     expect(document.getElementById('qinnovate-consent-banner')).toBeNull();
   });
 
+  it('loads the Cloudflare beacon only after acceptance, and reloads the page on withdrawal', () => {
+    const beacons = () => [...document.head.querySelectorAll('script')].filter((script) => script.src.includes('cloudflareinsights'));
+    let reloads = 0;
+    consent.startConsent(window, document, memoryStorage(), () => { reloads += 1; });
+    expect(beacons()).toHaveLength(0);
+    [...document.querySelectorAll('#qinnovate-consent-banner button')][1].click();
+    expect(beacons()).toHaveLength(1);
+    expect(JSON.parse(beacons()[0].getAttribute('data-cf-beacon')).token).toMatch(/^[0-9a-f]{32}$/);
+    document.querySelector('[data-consent-open]').click();
+    [...document.querySelectorAll('#qinnovate-consent-banner button')][0].click();
+    expect(reloads).toBe(1);
+  });
+
   it('keeps analytics off after a rejection and remembers it', () => {
     const storage = memoryStorage();
-    consent.startConsent(window, document, storage);
+    consent.startConsent(window, document, storage, () => {});
     [...document.querySelectorAll('#qinnovate-consent-banner button')][0].click();
     expect(analyticsScripts()).toHaveLength(0);
     expect(JSON.parse(storage.peek(consent.CONSENT_KEY)).analytics).toBe(false);
   });
 
   it('does not ask again, and loads analytics at once, for a visitor who accepted earlier', () => {
-    consent.startConsent(window, document, memoryStorage({ [consent.CONSENT_KEY]: stored(true, Date.now()) }));
+    consent.startConsent(window, document, memoryStorage({ [consent.CONSENT_KEY]: stored(true, Date.now()) }), () => { window.__reloaded = true; });
     expect(document.getElementById('qinnovate-consent-banner')).toBeNull();
     expect(analyticsScripts()).toHaveLength(1);
   });
 
   it('does not ask a browser that sends Global Privacy Control, and sends nothing', () => {
     window.navigator.globalPrivacyControl = true;
-    consent.startConsent(window, document, memoryStorage());
+    consent.startConsent(window, document, memoryStorage(), () => {});
     expect(document.getElementById('qinnovate-consent-banner')).toBeNull();
     expect(analyticsScripts()).toHaveLength(0);
   });
 
   it('lets a visitor reopen the choice and withdraw, which stops measurement and clears the cookies', () => {
-    consent.startConsent(window, document, memoryStorage({ [consent.CONSENT_KEY]: stored(true, Date.now()) }));
+    consent.startConsent(window, document, memoryStorage({ [consent.CONSENT_KEY]: stored(true, Date.now()) }), () => { window.__reloaded = true; });
     document.cookie = '_ga=GA1.1.1; path=/';
     document.cookie = '_ga_ABC=GS1; path=/';
     document.querySelector('[data-consent-open]').click();
@@ -114,7 +127,7 @@ describe('startConsent', () => {
   });
 
   it('builds the banner from text nodes only', () => {
-    consent.startConsent(window, document, memoryStorage());
+    consent.startConsent(window, document, memoryStorage(), () => {});
     const banner = document.getElementById('qinnovate-consent-banner');
     expect(banner.querySelector('a').getAttribute('href')).toBe('/privacy/');
     expect(banner.querySelectorAll('script, img, iframe')).toHaveLength(0);

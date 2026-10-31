@@ -1,7 +1,8 @@
 /**
- * Consent for the one optional thing this site can do: count page views with Google Analytics.
+ * Consent for the one optional thing this site can do: count page views, with Google Analytics
+ * and Cloudflare Web Analytics.
  *
- * Nothing is sent to Google, and the Google script is not even requested, until a visitor
+ * Nothing is sent to either service, and neither script is even requested, until a visitor
  * presses "Accept analytics". "Reject analytics" and "Accept analytics" are the same size and
  * weight. A browser that sends Global Privacy Control is treated as a rejection and is not
  * asked. The choice is kept in localStorage for 180 days, then asked again, and can be changed
@@ -12,12 +13,16 @@
  */
 
 export const CONSENT_KEY = 'qinnovate-consent';
-export const CONSENT_VERSION = 1;
+/** Raised when the services a choice covers change, so earlier choices are asked again. */
+export const CONSENT_VERSION = 2;
 export const CONSENT_MAX_AGE_MS = 180 * 24 * 60 * 60 * 1000;
 export const ANALYTICS_ID = 'G-DKB9RWW0C2';
 
 const ANALYTICS_COOKIE_SECONDS = CONSENT_MAX_AGE_MS / 1000;
 const GTAG_URL = 'https://www.googletagmanager.com/gtag/js?id=';
+const CLOUDFLARE_BEACON_URL = 'https://static.cloudflareinsights.com/beacon.min.js';
+/** The site token Cloudflare already sends every visitor in its injected tag. It identifies the site and is not a secret. */
+const CLOUDFLARE_BEACON_TOKEN = '7e92b0e996474c9e9502b816aa36beed';
 const PRIVACY_PATH = '/privacy/';
 const BANNER_ID = 'qinnovate-consent-banner';
 const STYLE_ID = 'qinnovate-consent-style';
@@ -88,6 +93,16 @@ export function loadAnalytics(win, doc) {
   script.async = true;
   script.src = `${GTAG_URL}${encodeURIComponent(ANALYTICS_ID)}`;
   doc.head.appendChild(script);
+  loadCloudflareBeacon(doc);
+}
+
+/** Cloudflare Web Analytics, which sets no cookie. With spa set it follows the client router's page changes itself. */
+function loadCloudflareBeacon(doc) {
+  const beacon = doc.createElement('script');
+  beacon.defer = true;
+  beacon.src = CLOUDFLARE_BEACON_URL;
+  beacon.setAttribute('data-cf-beacon', JSON.stringify({ token: CLOUDFLARE_BEACON_TOKEN, spa: true }));
+  doc.head.appendChild(beacon);
 }
 
 function hostCandidates(hostname) {
@@ -154,7 +169,7 @@ export function renderBanner(doc, consent, onChoose) {
   ensureStyle(doc);
   const banner = element(doc, 'section', undefined, { id: BANNER_ID, role: 'region', 'aria-labelledby': 'qc-title' });
   banner.append(element(doc, 'h2', 'Privacy choices', { id: 'qc-title' }));
-  banner.append(element(doc, 'p', 'We would like to use Google Analytics to count which pages are read. If you accept, it sets two cookies and sends usage data to Google. If you reject or do not choose, nothing is sent and no analytics cookie is set.'));
+  banner.append(element(doc, 'p', 'We would like to count which pages are read, using Google Analytics and Cloudflare Web Analytics. If you accept, Google Analytics sets two cookies and sends usage data to Google, and Cloudflare Web Analytics sends usage data to Cloudflare without setting a cookie. If you reject or do not choose, nothing is sent to either and no analytics cookie is set.'));
   const current = describeCurrentChoice(consent);
   if (current !== null) banner.append(element(doc, 'p', current));
   const policy = element(doc, 'p');
@@ -175,14 +190,18 @@ function ensureReopenControl(doc) {
   footer.append(element(doc, 'button', 'Privacy choices', { type: 'button', class: 'qc-reopen', 'data-consent-open': '' }));
 }
 
-export function startConsent(win, doc, storage) {
+export function startConsent(win, doc, storage, reload = () => win.location.reload()) {
   const globalPrivacyControl = win.navigator.globalPrivacyControl === true;
   let consent = readConsent(storage);
   let isFirstPage = true;
 
   const apply = () => {
     if (isAnalyticsAllowed(consent)) loadAnalytics(win, doc);
-    else if (win.__qinnovateAnalyticsLoaded === true) withdrawAnalytics(win, doc);
+    else if (win.__qinnovateAnalyticsLoaded === true) {
+      withdrawAnalytics(win, doc);
+      // A script that is already running cannot be unloaded; a fresh page load is what stops Cloudflare's.
+      reload();
+    }
   };
   const choose = (analytics) => {
     consent = writeConsent(storage, analytics);

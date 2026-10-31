@@ -12,7 +12,7 @@ const LAYOUTS = ['src/layouts/BaseLayout.astro', 'src/layouts/ToolLayout.astro']
 const POLICY_META_PATTERN = /http-equiv="Content-Security-Policy"/g;
 const MODULE_IMPORT_PATTERN = /from '\.\.\/lib\/csp-policy'/;
 /** Hosts that left with the browser tutor and the analytics beacon; none may come back through any policy. */
-const RETIRED_HOSTS = ['api.openai.com', 'api.anthropic.com', 'cloudflareinsights.com'];
+const RETIRED_HOSTS = ['api.openai.com', 'api.anthropic.com'];
 /** Metas a static host cannot enforce; their presence would claim a control that does not exist. */
 const NO_OP_METAS = ['http-equiv="Permissions-Policy"', 'http-equiv="Cross-Origin-Opener-Policy"', 'http-equiv="X-Content-Type-Options"', 'http-equiv="Referrer-Policy"'];
 
