@@ -3,7 +3,7 @@
  * Generate governance documents from QIF-DERIVATION-LOG.md.
  *
  * Single source of truth: the derivation log.
- * Generated views: DECISION-LOG.md (RACI tables) and TRANSPARENCY.md (AI disclosure).
+ * Generated views: DECISION-LOG.md (RACI tables) and TRANSPARENCY.md (deprecation notice for the retired AI-contribution metrics).
  *
  * Usage:
  *   node scripts/generate-governance.mjs decisions     — regenerate DECISION-LOG.md
@@ -37,9 +37,7 @@ function parseDerivationLog() {
     // Extract metadata from header lines
     const dateMatch = body.match(/\*\*Date:\*\*\s*(.+)/);
     const classMatch = body.match(/\*\*Classification:\*\*\s*(.+)/);
-    const aiMatch = body.match(/\*\*AI Systems:\*\*\s*(.+)/);
     const raciMatch = body.match(/\*\*RACI:\*\*\s*(.+)/);
-    const contribMatch = body.match(/\*\*AI Contribution Level:\*\*\s*(.+)/);
     const decisionMatch = body.match(/\*\*Decision:\*\*\s*(.+)/);
     const connectedMatch = body.match(/\*\*Connected entries:\*\*\s*(.+)/);
 
@@ -64,9 +62,7 @@ function parseDerivationLog() {
       title,
       date: dateMatch ? dateMatch[1].trim() : '',
       classification: classMatch ? classMatch[1].trim() : '',
-      aiSystems: aiMatch ? aiMatch[1].trim() : '',
       raci: raciMatch ? raciMatch[1].trim() : '',
-      contributionLevel: contribMatch ? contribMatch[1].trim() : '',
       isDecision: decisionMatch ? /yes/i.test(decisionMatch[1]) : hasHumanDecision || !!raciTableMatch,
       connected: connectedMatch ? connectedMatch[1].trim() : '',
       hasRaciTable: !!raciTableMatch,
@@ -145,12 +141,11 @@ function generateDecisionLog(entries) {
     const monthName = new Date(month + '-01').toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
     lines.push(`## ${monthName}`);
     lines.push('');
-    lines.push('| Status | # | Date | Decision | Classification | RACI | AI Level |');
-    lines.push('|--------|---|------|----------|---------------|------|----------|');
+    lines.push('| Status | # | Date | Decision | Classification | RACI |');
+    lines.push('|--------|---|------|----------|---------------|------|');
 
     for (const d of byMonth[month].sort((a, b) => b.num - a.num)) {
       const raci = d.raci || 'See entry';
-      const level = d.contributionLevel || '—';
       const dateShort = d.date.match(/\d{4}-\d{2}-\d{2}/)?.[0] || d.date;
       // Ship status based on classification
       const cls = (d.classification || '').toLowerCase();
@@ -160,7 +155,7 @@ function generateDecisionLog(entries) {
         : cls.includes('inferred') ? '🟠'
         : cls.includes('process') ? '✅'
         : '⚪';
-      lines.push(`| ${status} | [${d.num}](../osi-of-mind/QIF-DERIVATION-LOG.md#entry-${d.num}-${d.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40)}) | ${dateShort} | ${d.title.slice(0, 80)} | ${d.classification} | ${raci} | ${level} |`);
+      lines.push(`| ${status} | [${d.num}](../osi-of-mind/QIF-DERIVATION-LOG.md#entry-${d.num}-${d.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40)}) | ${dateShort} | ${d.title.slice(0, 80)} | ${d.classification} | ${raci} |`);
     }
     lines.push('');
   }
@@ -176,84 +171,32 @@ function generateDecisionLog(entries) {
 
 // ── Generate TRANSPARENCY.md ──────────────────────────────────────────
 
-function generateTransparency(entries) {
-  const total = entries.length;
-  const decisions = entries.filter(e => e.isDecision).length;
-  const withAI = entries.filter(e => e.aiSystems && e.aiSystems !== '').length;
-  const corrections = entries.filter(e => /CORRECTION/i.test(e.classification)).length;
-  const quorumReviewed = entries.filter(e => /quorum/i.test(e.aiSystems)).length;
-  const humanOnly = entries.filter(e => /human-only/i.test(e.contributionLevel)).length;
-
-  // Count AI contribution levels
-  const levels = { 'AI-assisted': 0, 'AI-generated': 0, 'Human-only': 0, 'Quorum-reviewed': 0, 'unspecified': 0 };
-  for (const e of entries) {
-    const lvl = e.contributionLevel?.toLowerCase() || '';
-    if (lvl.includes('quorum')) levels['Quorum-reviewed']++;
-    else if (lvl.includes('generated')) levels['AI-generated']++;
-    else if (lvl.includes('assisted')) levels['AI-assisted']++;
-    else if (lvl.includes('human')) levels['Human-only']++;
-    else levels['unspecified']++;
-  }
-
+/**
+ * The AI-versus-human contribution figures this page used to publish are retired: they were counted
+ * from per-entry labels in the derivation log, which cannot capture the context in which work was
+ * produced. The page stays so existing links work, and states that plainly.
+ */
+function generateTransparency() {
+  const today = new Date().toISOString().split('T')[0];
   const lines = [
     '---',
     'title: "Transparency Statement"',
-    'description: "Auditable record of Human-AI collaboration in QIF Framework development"',
+    'description: "AI-versus-human contribution metrics are deprecated. This page explains why."',
     'order: 4',
-    `audit:`,
-    `  decisionsLogged: ${decisions}`,
-    `  independentReviews: ${quorumReviewed}`,
-    `  humanDecisionRate: "100%"`,
-    `  verificationPasses: ${total}`,
-    `  automatedTests: 0`,
     '---',
     '',
-    `<!-- AUTO-GENERATED from QIF-DERIVATION-LOG.md — do not edit directly -->`,
-    `<!-- Regenerate: npm run transparency | Last generated: ${new Date().toISOString().split('T')[0]} -->`,
+    `<!-- AUTO-GENERATED by src/scripts/generate-governance.mjs — do not edit directly -->`,
+    `<!-- Regenerate: npm run transparency | Last generated: ${today} -->`,
     '',
-    '# Transparency Statement: Human-AI Collaboration in QIF Framework',
+    '# Transparency Statement',
     '',
-    '> This document is auto-generated from the [QIF Derivation Log](../osi-of-mind/QIF-DERIVATION-LOG.md),',
-    '> which is the single source of truth for all framework decisions and AI collaboration records.',
+    '> **Deprecated: AI-versus-human contribution metrics.** This page used to publish figures for how much of the work was AI-assisted and how much was human-only. Those figures are retired and should not be cited. They were counted from per-entry labels in a working log, and a label cannot capture the context in which a piece of work was produced: who set the direction, who checked it, what was corrected and why. The numbers were inaccurate, so they are no longer published.',
     '',
-    `**Last generated:** ${new Date().toISOString().split('T')[0]} at ${new Date().toTimeString().split(' ')[0]}`,
+    '## What this page still states',
     '',
-    '## Table of Contents',
-    '',
-    '- [AI Collaboration Summary](#ai-collaboration-summary)',
-    '- [AI Contribution Breakdown](#ai-contribution-breakdown)',
-    '- [Core Principle](#core-principle)',
-    '- [Tools Used](#tools-used)',
-    '- [Documented Corrections](#documented-corrections)',
-    '',
-    '---',
-    '',
-    '## AI Collaboration Summary',
-    '',
-    `| Metric | Value |`,
-    `|--------|-------|`,
-    `| Total derivation entries | **${total}** |`,
-    `| Entries involving AI | ${withAI} (${Math.round(withAI / total * 100)}%) |`,
-    `| Corrections / retractions | ${corrections > 0 ? '🔴' : '🟢'} ${corrections} |`,
-    `| Quorum swarm reviews | ${quorumReviewed > 0 ? '🟢' : '🟡'} ${quorumReviewed} |`,
-    `| Human-only entries | ${humanOnly} |`,
-    `| Human decision rate | 🟢 100% (Qinnovate LLC is Accountable on every entry) |`,
-    '',
-    '## AI Contribution Breakdown',
-    '',
-    '| Level | Count | Description |',
-    '|-------|-------|-------------|',
-    `| AI-assisted | ${levels['AI-assisted']} | Human directed; AI implemented or researched |`,
-    `| AI-generated | ${levels['AI-generated']} | AI produced first draft; human reviewed and approved |`,
-    `| Human-only | ${levels['Human-only']} | No AI involvement |`,
-    `| Quorum-reviewed | ${levels['Quorum-reviewed']} | Multi-agent swarm validation |`,
-    `| Unspecified | ${levels['unspecified']} | Legacy entries without AI Contribution Level metadata |`,
-    '',
-    '## Core Principle',
-    '',
-    'Every contribution is categorized by its cognitive origin. AI assistance is treated as a tool subject',
-    'to human oversight, not a collaborator with independent judgment on ethical or novel technical matters.',
-    'All final decisions are made by Qinnovate LLC (A = Accountable in every RACI entry).',
+    '- QIF, TARA and NISS are proposed research frameworks. They are not validated and not adopted by any standards body.',
+    '- Posts and papers that involved AI assistance are meant to carry their own disclosure note.',
+    '- Qinnovate is accountable for what it publishes.',
     '',
     '## Tools Used',
     '',
@@ -262,19 +205,9 @@ function generateTransparency(entries) {
     '| Claude Opus 4.6 | Primary AI assistant — co-derivation, implementation, literature synthesis |',
     '| Quorum (Claude plugin) | Multi-agent swarm review — structured dissent, fact-checking, security audit |',
     '',
-    '## Documented Corrections',
-    '',
-    'The derivation log contains explicit correction entries (Classification: CORRECTION) where',
-    'previous claims were retracted or revised. This is by design — corrections are the most',
-    'valuable entries because they demonstrate active oversight.',
-    '',
-    `Total corrections: ${corrections}`,
-    '',
     '---',
     '',
-    `*Generated from ${total} derivation log entries. Source: [QIF-DERIVATION-LOG.md](../osi-of-mind/QIF-DERIVATION-LOG.md)*`,
-    '',
-    '*Generated by [Quorum](https://qinnovate.com) governance pipeline*',
+    '*Why this page is still here: so that existing links keep working.*',
   ];
 
   return lines.join('\n');
@@ -288,7 +221,6 @@ function main() {
 
   console.log(`[governance] Parsed ${entries.length} derivation log entries`);
   console.log(`[governance] Decisions: ${entries.filter(e => e.isDecision).length}`);
-  console.log(`[governance] With AI: ${entries.filter(e => e.aiSystems).length}`);
 
   if (cmd === 'decisions' || cmd === 'both') {
     const content = generateDecisionLog(entries);
@@ -297,7 +229,7 @@ function main() {
   }
 
   if (cmd === 'transparency' || cmd === 'both') {
-    const content = generateTransparency(entries);
+    const content = generateTransparency();
     writeFileSync(TRANSPARENCY_PATH, content);
     console.log(`[governance] Wrote ${TRANSPARENCY_PATH}`);
   }

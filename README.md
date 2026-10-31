@@ -373,9 +373,9 @@ This project uses a **single-source-of-truth model** for decision tracking. One 
 
 | Document | Purpose | Audience | Maintained |
 |----------|---------|----------|------------|
-| **[QIF-DERIVATION-LOG.md](osi-of-mind/QIF-DERIVATION-LOG.md)** | Lab notebook — every framework insight, decision, correction. RACI attribution, AI contribution level per entry. | Future maintainers, peer reviewers, collaborators | Per session (max 1 entry) |
+| **[QIF-DERIVATION-LOG.md](osi-of-mind/QIF-DERIVATION-LOG.md)** | Lab notebook — every framework insight, decision, correction. RACI attribution per entry. | Future maintainers, peer reviewers, collaborators | Per session (max 1 entry) |
 | **[DECISION-LOG.md](governance/DECISION-LOG.md)** | RACI tables — who decided, who built, who reviewed. | Governance auditors, future collaborators | Auto-generated: `npm run decisions` |
-| **[TRANSPARENCY.md](governance/TRANSPARENCY.md)** | AI collaboration disclosure — contribution matrix, correction count, tool versions. | Peer reviewers, venues (arXiv, ACM, IEEE) | Auto-generated: `npm run transparency` |
+| **[TRANSPARENCY.md](governance/TRANSPARENCY.md)** | Deprecated: the AI-versus-human contribution metrics were retired because they were inaccurate; labels cannot capture the context of how work was produced. Kept so existing links work. | Peer reviewers, venues (arXiv, ACM, IEEE) | Auto-generated: `npm run transparency` |
 | **[QIF-FIELD-JOURNAL.md](osi-of-mind/QIF-FIELD-JOURNAL.md)** | Personal/experiential observations. The maintainer's raw voice. AI cannot write this. | Maintainer only | When something surprises them |
 | **[CHANGELOG.md](governance/CHANGELOG.md)** | Auto-generated from git commits. What changed, not why. | Developers, contributors | Auto: `npm run changelog` |
 
