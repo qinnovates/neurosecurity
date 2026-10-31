@@ -5,7 +5,7 @@
   "totals": {
     "datalake_files": 42,
     "datasets_inventoried": 27,
-    "records": 21075,
+    "records": 21164,
     "unique_dois": 268,
     "techniques_with_cve_evidence": 27,
     "cve_coverage_ratio": 0.1517
@@ -14,7 +14,7 @@
     {
       "key": "impact_chains",
       "label": "Neural impact chains",
-      "count": 19798,
+      "count": 19887,
       "file": "datalake/impact-chains.json",
       "path": "",
       "group": "threat",

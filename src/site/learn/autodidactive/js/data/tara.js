@@ -6,8 +6,8 @@
 
 export const TARA_STATS = {
   "generator": "src/scripts/generate-registrar-statistics.mjs",
-  "generated": "2026-10-26",
-  "content_sha256": "e4779e1e78a1ffe09dd2aa71dd08445739859a76a7420a0b11bc4907e930e8ec",
+  "generated": "2026-10-31",
+  "content_sha256": "f0251a6cb09a253d880771c2059c559bc1f5dbe03ce66c5a58467faf8b60f243",
   "total_techniques": 178,
   "total_variants": 0,
   "total_tactics": 17,
@@ -349,7 +349,7 @@ export const TARA_TECHNIQUES = [
   {"id":"QIF-T0113","name":"Cochlear-vestibular crosstalk exploitation","tactic":"QIF-N.IJ","description":"","status":"DEMONSTRATED","severity":"medium","bands":["I0","N1"],"dualUse":"confirmed","clinicalAnalog":"Bone-conducted vibration vestibular rehabilitation","niss_severity":"medium"},
   {"id":"QIF-T0114","name":"Vestibular overload (vertigo induction)","tactic":"QIF-P.DS","description":"","status":"THEORETICAL","severity":"medium","bands":["I0","N1","N2","N3","N4"],"dualUse":"confirmed","clinicalAnalog":"Canalith repositioning (Epley maneuver) / vestibular habituation therapy","niss_severity":null},
   {"id":"QIF-T0115","name":"Cumulative tissue excitability shift","tactic":"QIF-N.IJ","description":"","status":"THEORETICAL","severity":"medium","bands":["I0","N1"],"dualUse":"confirmed","clinicalAnalog":"Transcranial direct current stimulation (tDCS) long-term protocols","niss_severity":"medium"},
-  {"id":"QIF-T0116","name":"Progressive reward pathway desensitization","tactic":"QIF-N.MD","description":"","status":"THEORETICAL","severity":"medium","bands":["N5","N6"],"dualUse":"confirmed","clinicalAnalog":"Deep brain stimulation of nucleus accumbens / ventral capsule","niss_severity":null},
+  {"id":"QIF-T0116","name":"Progressive reward pathway desensitization","tactic":"QIF-N.MD","description":"","status":"THEORETICAL","severity":"medium","bands":["N2","N5","N6"],"dualUse":"confirmed","clinicalAnalog":"Deep brain stimulation of nucleus accumbens / ventral capsule","niss_severity":null},
   {"id":"QIF-T0117","name":"Incremental memory consolidation interference","tactic":"QIF-C.EX","description":"","status":"THEORETICAL","severity":"medium","bands":["N6"],"dualUse":"confirmed","clinicalAnalog":"Targeted memory reactivation (TMR) / sleep-dependent memory consolidation research","niss_severity":"medium"},
   {"id":"QIF-T0118","name":"Cumulative speech degradation","tactic":"QIF-P.DS","description":"","status":"THEORETICAL","severity":"medium","bands":["N7"],"dualUse":"confirmed","clinicalAnalog":"rTMS of Broca's area for post-stroke aphasia rehabilitation","niss_severity":"medium"},
   {"id":"QIF-T0119","name":"Delayed emotional baseline shift","tactic":"QIF-C.IM","description":"","status":"THEORETICAL","severity":"medium","bands":["N6"],"dualUse":"confirmed","clinicalAnalog":"Neurofeedback training for emotional regulation","niss_severity":"medium"},

@@ -27,7 +27,7 @@ QIF, TARA and NISS help builders and defenders start a neural-device threat mode
 
 ![Open datalake inventory](src/site/images/datalake-corpus.svg)
 
-**21,075 records inventoried below, from 27 of the 42 datasets in [`datalake/`](datalake/).** 19,798 neural impact chains · 178 proposed techniques · 24 BCI devices specced · 68 companies tracked · 108 CVEs mapped · 268 unique DOIs cited.
+**21,164 records inventoried below, from 27 of the 42 datasets in [`datalake/`](datalake/).** 19,887 neural impact chains · 178 proposed techniques · 24 BCI devices specced · 68 companies tracked · 108 CVEs mapped · 268 unique DOIs cited.
 
 Counted from the files themselves on 2026-10-31. Re-run `npm run datalake:inventory` and every figure on this page moves with the data; `npm run datalake:inventory:check` fails the build if it has drifted.
 
@@ -35,7 +35,7 @@ Counted from the files themselves on 2026-10-31. Re-run `npm run datalake:invent
 
 | Inventory | Count | Derived from |
 |---|---:|---|
-| Neural impact chains <sub>technique x brain region x QIF band permutations</sub> | **19,798** | [`datalake/impact-chains.json`](datalake/impact-chains.json) |
+| Neural impact chains <sub>technique x brain region x QIF band permutations</sub> | **19,887** | [`datalake/impact-chains.json`](datalake/impact-chains.json) |
 | TARA techniques | **178** | [`datalake/qtara-registrar.json`](datalake/qtara-registrar.json) |
 | CVE to technique mappings | **108** | [`datalake/cve-technique-mapping.json`](datalake/cve-technique-mapping.json) |
 | QIF hazards | **33** | [`datalake/qif-hazards.json`](datalake/qif-hazards.json) |
