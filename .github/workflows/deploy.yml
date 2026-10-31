@@ -51,10 +51,10 @@ jobs:
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: dist
-          # Publishes dist/.well-known (security.txt); the action still excludes .git and .github.
+          # Publishes dist/.well-known (security.txt). Needs upload-pages-artifact v5 or later; v4 ignores this input.
           include-hidden-files: true
 
       - name: Deploy to GitHub Pages
