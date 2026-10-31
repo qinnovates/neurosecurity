@@ -23,6 +23,8 @@ beforeEach(() => {
 afterEach(() => {
   cleanup();
   vi.unstubAllGlobals();
+  // The explorer writes its state to the address, and the next test reads the address it opens on.
+  window.history.replaceState(null, '', '/atlas/anatomy/');
   const warnings = reactWarnings.mock.calls.map((call: unknown[]) => String(call[0]));
   reactWarnings.mockRestore();
   expect(warnings).toEqual([]);

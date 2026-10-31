@@ -7,6 +7,7 @@ import { isDevicesLayerShown, layersAtStart } from '@/lib/atlas-explorer/devices
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { LENS_LABELS, LENS_SUBJECT_NOUNS, type Lens, type LensKind } from '@/lib/atlas-explorer/lens-state';
 import { INITIAL_EXPLORER_STATE, explorerReducer, type Target } from './atlas-state';
+import { writeExplorerAddress } from './atlas-deep-link';
 import AtlasViewport, { VIEWPORT_HEADING_ID } from './AtlasViewport';
 import ChainView from './ChainView';
 import ColourModePicker from './ColourModePicker';
@@ -35,7 +36,7 @@ interface Props {
   isIndexPinned: boolean;
   /** The page is pinned to an index the site no longer serves. */
   isOutOfStep?: boolean;
-  /** The selection the page's address asked for (atlas-deep-link.ts), already checked against the model. The state starts with it, so nothing is selected after the fact. */
+  /** The selection the page's address asked for (atlas-deep-link.ts), already checked against the model. The state starts with it, so nothing is selected after the fact, and the 3D view opens: following a link to a region is asking to see it. */
   initialSelection?: Target | null;
   /** The lens the page's address asked to open on (atlas-deep-link.ts), already checked. The state starts on it, so no lens change is announced. */
   initialLens?: Lens | null;
@@ -98,6 +99,8 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
   const inspectorHeadingRef = useRef<HTMLHeadingElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
   const selectedRegionId = state.selection?.kind === 'region' ? state.selection.id : null;
+
+  useEffect(() => writeExplorerAddress({ regionId: selectedRegionId, lens: state.lens }), [selectedRegionId, state.lens]);
 
   const { groups, allGroups, tally, detail, rail } = useExplorerViews(model, state);
   // Counted once over the whole index: the pane states it before a region is chosen, and scales its bars by it.
@@ -183,7 +186,7 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
           <AtlasViewport
             model={model} lens={state.lens} layers={state.layers} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep}
             chain={chainView.frame} electrodeId={electrodeId} onPickElectrode={setElectrodeId} onSelectRegion={(regionId) => selectRegion(regionId, 'picture')} onShowDetails={showDetails} lensWays={lensWays}
-            onCaptionChange={noteCaption}
+            onCaptionChange={noteCaption} isAsked={initialSelection !== null}
             headerControls={(
               <>
                 <ColourModePicker activeKind={state.lens.kind} onChoose={(kind) => dispatch({ type: 'lens_kind_chosen', kind })} />

@@ -16,6 +16,7 @@ beforeEach(() => { reactWarnings = vi.spyOn(console, 'error').mockImplementation
 afterEach(() => {
   cleanup();
   vi.unstubAllGlobals();
+  window.history.replaceState(null, '', '/atlas/anatomy/');
   const warnings = reactWarnings.mock.calls.map((call: unknown[]) => String(call[0]));
   reactWarnings.mockRestore();
   expect(warnings).toEqual([]);
