@@ -40,6 +40,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 import { DockerError, ScanOutputError, ScanTargetError, UpdateError, UsageError } from './scan-sources/errors.mjs';
+import { acquireRuntime } from './scan-sources/runtime.mjs';
 import {
   CLAMSCAN_EXIT_CLEAN, CLAMSCAN_EXIT_ERROR, CLAMSCAN_EXIT_INFECTED, buildReport, formatReport, parseScanOutput, parseVersionLine, redactHostPaths,
 } from './scan-sources/report.mjs';
@@ -88,7 +89,7 @@ async function dockerExec(args) {
 async function requireRuntime({ needsVolume }) {
   const daemon = await dockerExec(['info', '--format', '{{.ServerVersion}}']);
   if (daemon.exitCode !== 0) {
-    throw new DockerError('The Docker daemon is not reachable. Start it with "colima start --cpu 2 --memory 4", then rerun.');
+    throw new DockerError('The Docker daemon is not reachable. Start your Docker runtime, then rerun.');
   }
   const image = await dockerExec(['image', 'inspect', CLAMAV_IMAGE, '--format', '{{.Id}}']);
   if (image.exitCode !== 0) {
@@ -230,13 +231,25 @@ export function parseArguments(argv) {
   return { name, directories, jsonPath };
 }
 
+async function isDaemonUp() {
+  return (await dockerExec(['info', '--format', '{{.ServerVersion}}'])).exitCode === 0;
+}
+
 async function main(argv) {
+  let runtime = null;
   try {
     const command = parseArguments(argv);
+    runtime = await acquireRuntime({
+      isDaemonUp,
+      keepRuntime: process.env.SCAN_KEEP_RUNTIME === '1',
+      log: (message) => process.stderr.write(`${message}\n`),
+    });
     process.exitCode = command.name === 'update' ? await runUpdate() : await runScan(command);
   } catch (error) {
     process.stderr.write(`scan-sources: ${error.name}: ${redactHostPaths(error.message)}\n`);
     process.exitCode = EXIT_UNABLE_TO_RUN;
+  } finally {
+    if (runtime) await runtime.release();
   }
 }
 
