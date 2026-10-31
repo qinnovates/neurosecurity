@@ -19,6 +19,7 @@ import { H01_CARD_PATH } from '@/lib/anatomy/parse-h01-card';
 import { REGION_EVIDENCE_PATH } from '@/lib/anatomy/region-evidence-types';
 import { LICENCE_IDS } from '@/lib/anatomy/source-types';
 import { ATLAS_CHAINS_PATH } from '@/lib/atlas-explorer/chain-file';
+import { REGION_DOSSIER_PATH } from '@/lib/atlas-explorer/dossier-file';
 import { EXPLORER_CATALOG_PATH } from '@/lib/atlas-explorer/explorer-catalog';
 import { SHIPPING_LICENSE_NAMES } from '../../../scripts/check-atlas-assets.mjs';
 
@@ -141,7 +142,7 @@ const PIPELINE_POSITION_CHECK = /^(?:NOT_INDEPENDENTLY_CHECKED|CHECKED_IN_AGGREG
 const LICENCES_WITH_FOLDER_BUT_NO_NOTICE_NAME: readonly string[] = [
   'mit', // no shipped asset carries it today (manifest: cc-by-4.0, cc-by-sa-4.0, mni-icbm-notice); notices.py would KeyError on the first one
 ];
-const PUBLISHED_PATHS = [ANATOMY_INDEX_PATH, ANATOMY_EVIDENCE_PATH, EXPLORER_CATALOG_PATH, ATLAS_CHAINS_PATH, H01_CARD_PATH, REGION_EVIDENCE_PATH];
+const PUBLISHED_PATHS = [ANATOMY_INDEX_PATH, ANATOMY_EVIDENCE_PATH, EXPLORER_CATALOG_PATH, ATLAS_CHAINS_PATH, REGION_DOSSIER_PATH, H01_CARD_PATH, REGION_EVIDENCE_PATH];
 
 const readSource = (file: string): string => fs.readFileSync(file, 'utf-8');
 

@@ -60,7 +60,7 @@ const ENDPOINT_PATHS = [
   'src/components/atlas-scene/build-index-pin.ts',
   // Build time only: the sentence for a technique whose links colour no shape, for a technique page's button, and nothing else.
   'src/components/atlas-scene/build-technique-colouring.ts',
-  'src/pages/atlas/anatomy-catalog.json.ts', 'src/pages/atlas/anatomy-chains.json.ts', 'src/pages/atlas/anatomy-evidence.json.ts', 'src/pages/atlas/anatomy-h01-card.json.ts',
+  'src/pages/atlas/anatomy-catalog.json.ts', 'src/pages/atlas/anatomy-chains.json.ts', 'src/pages/atlas/anatomy-dossier.json.ts', 'src/pages/atlas/anatomy-evidence.json.ts', 'src/pages/atlas/anatomy-h01-card.json.ts',
   'src/pages/atlas/anatomy-index.json.ts', 'src/pages/atlas/anatomy-region-evidence.json.ts', 'src/pages/atlas/anatomy.astro',
   'src/pages/atlas/attribution.astro',
 ];
