@@ -20,3 +20,6 @@ jobs:
 
       - name: Compare live headers with the repository policy
         run: node src/scripts/check-live-headers.mjs
+
+      - name: Confirm no analytics tag is injected before consent
+        run: node src/scripts/check-live-injection.mjs
