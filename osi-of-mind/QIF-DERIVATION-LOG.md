@@ -15,6 +15,7 @@
 ### October 2026 (Entries 106+) — Data Refresh, Citation Audit, Claim Corrections
 | Entry | Topic | Link |
 |-------|-------|------|
+| 117 | Whitepaper band counts and hourglass chart derived from data; proposed layers rendered; I0 concentration claims corrected | [Entry 117](#entry-117-whitepaper-derived-counts) |
 | 116 | Addressing version 2 and eight public layers: band codes declared unordered addresses by the territory of their principal neurons (the cord-to-cortex indeterminacy ordering withdrawn); STN to N4, substantia nigra and VTA to N2, posterior cingulate to N7; a `layers` grouping (seven neural + classical stack, I0 as the seam) added to the atlas with `layerOf()`; pathway bands, technique links and impact chains re-derived | [Entry 116](#entry-116-addressing-v2-eight-layers) |
 | 115 | Status taxonomy: CONFIRMED retired and 27 techniques reclassified; colliding QIF-T0172/T0173 renumbered to T0177/T0178; Professor X source corrected; registry figures in the paper generated from the registrar; CI leak, staleness and paper-build checks | [Entry 115](#entry-115-status-taxonomy-renumbering-derived-figures) |
 | 114 | Descriptive technique notes and three renames (framing decision M2/M3, pending owner acceptance): 31 notes (the decision's 26 plus 5 "Extract..." openings found in verification) no longer read as instructions and end with the entry's detection text; T0011, T0046, T0099 renamed with `legacy_names` aliases (T0065 rename held for owner check 12); no technique removed | [Entry 113](#entry-114-describing-techniques-not-instructing) |
@@ -362,6 +363,36 @@ Each entry follows this structure:
 | 3 | 2026-02-02 | Layer Consolidation: 14 Is Too Many | Validated |
 | 2 | 2026-02-02 | Circular Topology: L8 Touches L1 | Superseded by Entry 7 |
 | 1 | 2026-02-02 | OSI Layers Are Meaningless for BCI | Validated |
+
+---
+
+## Entry 117: Whitepaper Counts Derived From Data; I0 Claims Corrected {#entry-117-whitepaper-derived-counts}
+
+**Date:** 2026-10-31
+**Classification:** CORRECTION
+**AI Systems:** Claude Opus 5.5
+**Connected entries:** Entry 116 (addressing version 2 and eight public layers), Entry 7 (hourglass)
+**AI Contribution Level:** AI-generated, human-approved
+
+Correction to published claims, and a build change to the live whitepaper.
+
+### Correction: I0 concentration
+
+- The claim that over half of catalogued techniques target I0 is withdrawn. Counted from `datalake/qtara-registrar.json`, 63 of 178 techniques (about 35%) carry the I0 band id.
+- The label "highest attack surface" for I0 is withdrawn. S2 has the most tagged techniques (78). Tags total 519, because a technique can tag several bands.
+- I0 is now described by its structural position: every signal crosses it. That is an architectural argument, not a count.
+
+### Build: derived values
+
+- `src/lib/qif-constants.ts` adds `QIF_MODEL_COUNTS` (from `HOURGLASS_BANDS` and `QIF_LAYERS`) and `countTechniquesByBand()` (from the registrar).
+- `src/pages/research/whitepaper/index.astro` and `src/components/whitepaper/HourglassChart.astro` read those values. The chart's hand-typed per-band counts, previously totalling 353, are removed.
+- The whitepaper renders the eight layers and the I0 seam from `datalake/qif-brain-bci-atlas.json`, labelled proposed and unvalidated.
+- Archived whitepaper versions are unchanged by design.
+
+### Verification
+
+- `src/lib/__tests__/whitepaper-layers.test.ts` fails if those band counts are typed by hand in either file, and checks that derived counts agree with the bands.
+- The production site build completes and the layer section renders.
 
 ---
 
