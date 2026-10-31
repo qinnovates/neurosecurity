@@ -8,6 +8,8 @@ import type { ColourMode } from '@/lib/anatomy/colour-modes';
 
 export const LENS_KINDS = ['band', 'technique', 'niss', 'dsm', 'stated_targets'] as const;
 export type LensKind = typeof LENS_KINDS[number];
+/** The kinds a highlight drives: each is a thing picked out, and not a fact about every region, so none has a button on the lens bar. */
+export const HIGHLIGHT_LENS_KINDS: readonly LensKind[] = ['technique', 'stated_targets'];
 
 export type Lens =
   | { kind: 'band' }

@@ -77,6 +77,25 @@ async function chooseTechnique(container: HTMLElement, query: string): Promise<v
   await waitFor(() => expect(container.querySelector('.atlas-subject')).not.toBeNull());
 }
 
+describe('AtlasExplorer: the highlight chip', () => {
+  it.each([
+    ['technique', 'QIF-T0030', 'Technique QIF-T0030'],
+    ['device', 'neuralink-n1', 'Device neuralink-n1'],
+  ])('shows a chosen %s as a chip beside the lens bar, and its cross restores the lens it replaced', async (_kind, subjectId, words) => {
+    const container = await renderExplorer();
+    const lensOf = (): string | null | undefined => container.querySelector('.atlas-root')?.getAttribute('data-lens');
+    fireEvent.click(lensButton('NISS severity'));
+    expect(container.querySelector('[data-highlight-chip]')).toBeNull();
+    highlight(subjectId);
+    await waitFor(() => expect(lensOf()).not.toBe('niss'));
+    const chip = container.querySelector('[data-viewport-header] [data-highlight-chip]') as HTMLElement;
+    expect(chip.textContent).toBe(`${words}×`);
+    fireEvent.click(within(chip).getByRole('button', { name: `Clear ${words}, back to the NISS severity lens` }));
+    await waitFor(() => expect(lensOf()).toBe('niss'));
+    expect(container.querySelector('[data-highlight-chip]')).toBeNull();
+  });
+});
+
 describe('AtlasExplorer: the list', () => {
   it('fetches the index and the catalog only, and nothing lazy, before the visitor asks', async () => {
     await renderExplorer();

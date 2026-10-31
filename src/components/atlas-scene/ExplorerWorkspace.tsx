@@ -12,6 +12,7 @@ import ChainView from './ChainView';
 import ColourModePicker from './ColourModePicker';
 import { loadAnatomyEvidence, loadRegionEvidence } from './explorer-companions';
 import H01Card from './H01Card';
+import HighlightChip from './HighlightChip';
 import LayerPanel from './LayerPanel';
 import LensPanel, { LENS_HEADING_ID, restoreLensLabel } from './LensPanel';
 import LimitsPanel from './LimitsPanel';
@@ -182,7 +183,13 @@ export default function ExplorerWorkspace({ model, isIndexPinned, isOutOfStep = 
           <AtlasViewport
             model={model} lens={state.lens} layers={state.layers} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep}
             chain={chainView.frame} electrodeId={electrodeId} onPickElectrode={setElectrodeId} onSelectRegion={(regionId) => selectRegion(regionId, 'picture')} onShowDetails={showDetails} lensWays={lensWays}
-            onCaptionChange={noteCaption} headerControls={<ColourModePicker activeKind={state.lens.kind} onChoose={(kind) => dispatch({ type: 'lens_kind_chosen', kind })} />}
+            onCaptionChange={noteCaption}
+            headerControls={(
+              <>
+                <ColourModePicker activeKind={state.lens.kind} onChoose={(kind) => dispatch({ type: 'lens_kind_chosen', kind })} />
+                <HighlightChip lens={state.lens} previousLens={state.previousLens} onClear={() => dispatch({ type: 'highlight_cleared' })} />
+              </>
+            )}
           />
           {isDevicesLayerShown(model.index, state.layers) && (
             <Suspense fallback={<p className="atlas-loading" role="status">Loading the electrode layout…</p>}>

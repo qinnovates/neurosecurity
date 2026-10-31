@@ -1,5 +1,5 @@
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
-import { LENS_DESCRIPTIONS, LENS_LABELS, LENS_SUBJECT_NOUNS, lensNeedsSubject, lensSubjectId, type Lens, type LensKind } from '@/lib/atlas-explorer/lens-state';
+import { HIGHLIGHT_LENS_KINDS, LENS_DESCRIPTIONS, LENS_LABELS, LENS_SUBJECT_NOUNS, lensNeedsSubject, lensSubjectId, type Lens, type LensKind } from '@/lib/atlas-explorer/lens-state';
 import { limitSentence } from '@/lib/anatomy/limits-copy';
 import { limitsForLens } from '@/lib/atlas-explorer/limit-selection';
 import type { LensTally } from '@/lib/atlas-explorer/region-rows';
@@ -28,9 +28,6 @@ export const LENS_HEADING_ID = 'atlas-lens-heading';
 export function restoreLensLabel(previousLens: Lens): string {
   return `Back to the ${LENS_LABELS[previousLens.kind]} lens`;
 }
-
-/** The lens kinds a highlight drives, so the picker can show which one is carrying the colour, and so a fact lens's own `SubjectPicker` is never shown beside it for the same subject. */
-const HIGHLIGHT_KINDS: readonly LensKind[] = ['technique', 'stated_targets'];
 
 function RegionButtons({ regions, onSelectRegion }: { regions: ReadonlyArray<{ id: string; name: string }>; onSelectRegion: (regionId: string) => void }) {
   return (
@@ -92,10 +89,10 @@ function LensSummary({ lens, tally }: Pick<Props, 'lens' | 'tally'>) {
  */
 export default function LensPanel({ model, lens, previousLens, tally, onRestoreLens, onChooseSubject, onSelectRegion }: Props) {
   // A highlight kind's noun is used elsewhere (the way back from a drill-down names it), but its own picker here is the HighlightPicker below, not a SubjectPicker.
-  const noun = HIGHLIGHT_KINDS.includes(lens.kind) ? undefined : LENS_SUBJECT_NOUNS[lens.kind];
+  const noun = HIGHLIGHT_LENS_KINDS.includes(lens.kind) ? undefined : LENS_SUBJECT_NOUNS[lens.kind];
   const subjectId = lensSubjectId(lens);
   const summary = lens.kind === 'technique' && subjectId !== null ? summariseTechnique(model, subjectId) : null;
-  const highlightId = HIGHLIGHT_KINDS.includes(lens.kind) ? subjectId : null;
+  const highlightId = HIGHLIGHT_LENS_KINDS.includes(lens.kind) ? subjectId : null;
   return (
     <section className="atlas-panel atlas-lens-panel" aria-labelledby="atlas-lens-heading" data-lens={lens.kind}>
       <h2 className="atlas-heading" id={LENS_HEADING_ID} tabIndex={-1}>Lens</h2>
