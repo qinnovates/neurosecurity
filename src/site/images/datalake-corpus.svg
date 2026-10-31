@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" aria-label="Open datalake inventory: 21,075 records across 27 datasets, including 19,798 neural impact chains, 178 proposed techniques, 24 BCI devices and 268 cited DOIs.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" aria-label="Open datalake inventory: 21,069 records across 27 datasets, including 19,798 neural impact chains, 178 proposed techniques, 24 BCI devices and 268 cited DOIs.">
 <rect width="1200" height="460" rx="18" fill="#0b1120"/>
 <text x="36" y="52" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="30" font-weight="700" fill="#e6ebf5">Open datalake inventory</text>
-<text x="36" y="82" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" fill="#93a1bd">21,075 records inventoried from 27 of the 42 open datasets. Every figure is counted from the file that owns it, not hand-typed.</text>
+<text x="36" y="82" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" fill="#93a1bd">21,069 records inventoried from 27 of the 42 open datasets. Every figure is counted from the file that owns it, not hand-typed.</text>
 <rect x="36" y="118" width="365.3333333333333" height="132" rx="12" fill="#111a2e"/>
 <rect x="36" y="118" width="365.3333333333333" height="4" rx="2" fill="#06b6d4"/>
 <text x="60" y="192" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="54" font-weight="700" fill="#e6ebf5">19,798</text>

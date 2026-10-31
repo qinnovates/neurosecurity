@@ -981,7 +981,7 @@
     },
     {
       "id": "ATLAS-F04",
-      "what": "Decide what deep Allen shapes say on screen about placement (measured 0.7 to 2.5 mm against CIT168).",
+      "what": "Decide what deep Allen shapes say on screen about placement (0.7 to 2.5 mm against CIT168, recorded on Allen labels that do not ship; CIT168 does not ship either).",
       "ref": "#169, `src/lib/anatomy/limits-copy.ts`",
       "owner": "kevin",
       "status": "open",
@@ -1205,10 +1205,10 @@
     },
     {
       "id": "ATLAS-F32",
-      "what": "Decide whether to ship CIT168 label 9 (parabrachial pigmented nucleus) so vta covers the usual definition.",
+      "what": "Moot: CIT168 was removed from the shipped site, so label 9 cannot ship. vta now sits, with no boundary, inside the Allen midbrain tegmentum label. Closed by the change that removed the CIT168 asset.",
       "ref": "#180",
       "owner": "domain-review",
-      "status": "open",
+      "status": "done",
       "from": "PR #180 body"
     },
     {
@@ -1658,6 +1658,14 @@
       "owner": "engineering",
       "status": "open",
       "from": "palette re-step, 2026-10-16"
+    },
+    {
+      "id": "ATLAS-F66",
+      "what": "Decide whether to rebuild `deep-allen` with CaH, CaB, CaT, Pu, PuPV, NAC, GPe, GPi, STH, SN and RN. Removing CIT168 left striatum, gpi, gpe, stn and substantia_nigra with no shape and vta with no boundary; the Allen source annotates all but VTA.",
+      "ref": "`src/scripts/atlas-pipeline/registry/pipeline-inputs.json`, `datalake/qif-anatomy-crosswalk.json`",
+      "owner": "kevin",
+      "status": "open",
+      "from": "CIT168 removal"
     }
   ]
 }

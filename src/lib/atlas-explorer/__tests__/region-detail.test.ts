@@ -36,10 +36,11 @@ describe('buildRegionDetail', () => {
 
   it('never calls a location marker a shape on the real data (guard)', () => {
     const real = loadRealModel();
-    const vta = buildRegionDetail(real, 'vta');
-    expect(vta?.region.geometry.state).toBe('marker_only');
-    expect(vta?.shapes.map((shape) => shape.shipped)).toEqual(vta?.shapes.map(() => 'marker'));
-    expect(vta?.shapes.length).toBeGreaterThan(0);
+    const hypothalamus = buildRegionDetail(real, 'hypothalamus');
+    const markers = hypothalamus?.shapes.filter((shape) => shape.shipped === 'marker') ?? [];
+    expect(markers.length).toBeGreaterThan(0);
+    const nodesOf = (structureKey: string) => real.index.structures.find((structure) => structure.key === structureKey)?.nodes ?? [];
+    expect(markers.flatMap((shape) => nodesOf(shape.structureKey)).filter((node) => node.vertex_count > 0)).toEqual([]);
     expect(buildRegionDetail(real, 'hippocampus')?.shapes.some((shape) => shape.shipped === 'shape')).toBe(true);
   });
 

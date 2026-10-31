@@ -47,6 +47,41 @@
       "reason": "No openly licensed source with geometry for this structure was found.",
       "reason_source": "datalake/qif-anatomy-sources.json: no source in its sources or considered_and_refused lists has spinal nerve root geometry; the search behind those lists was made by AI.",
       "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "striatum",
+      "reason": "Its shape came from CIT168, which no longer ships. The Allen atlas annotates the caudate, putamen and nucleus accumbens, but the shipped deep-allen asset leaves those labels out; drawing them needs a rebuild.",
+      "reason_source": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json has no such label; src/scripts/atlas-pipeline/registry/pipeline-inputs.json, deep-allen select list, omits CaH, CaB, CaT, Pu, PuPV, NAC; the source's voxel_count.csv marks them annotated.",
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "gpi",
+      "reason": "Its shape came from CIT168, which no longer ships. The Allen atlas annotates the internal globus pallidus, but the shipped deep-allen asset leaves that label out; drawing it needs a rebuild.",
+      "reason_source": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json has no such label; src/scripts/atlas-pipeline/registry/pipeline-inputs.json, deep-allen select list, omits GPi; the source's voxel_count.csv marks them annotated.",
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "gpe",
+      "reason": "Its shape came from CIT168, which no longer ships. The Allen atlas annotates the external globus pallidus, but the shipped deep-allen asset leaves that label out; drawing it needs a rebuild.",
+      "reason_source": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json has no such label; src/scripts/atlas-pipeline/registry/pipeline-inputs.json, deep-allen select list, omits GPe; the source's voxel_count.csv marks them annotated.",
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "stn",
+      "reason": "Its shape came from CIT168, which no longer ships. The Allen atlas annotates the subthalamic nucleus, but the shipped deep-allen asset leaves that label out; drawing it needs a rebuild.",
+      "reason_source": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json has no such label; src/scripts/atlas-pipeline/registry/pipeline-inputs.json, deep-allen select list, omits STH; the source's voxel_count.csv marks them annotated.",
+      "drafted_by": "ai"
+    },
+    {
+      "subject_kind": "region",
+      "subject_id": "substantia_nigra",
+      "reason": "Its shape came from CIT168, which no longer ships. The Allen atlas annotates it, but the shipped deep-allen asset leaves that label out, and the shipped midbrain tegmentum label excludes it by name; drawing it needs a rebuild.",
+      "reason_source": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json has no such label; src/scripts/atlas-pipeline/registry/pipeline-inputs.json, deep-allen select list, omits SN; the source's voxel_count.csv marks them annotated.",
+      "drafted_by": "ai"
     }
   ],
   "rows": [
@@ -538,159 +573,6 @@
     },
     {
       "subject_kind": "region",
-      "subject_id": "striatum",
-      "subject_name_at_draft": "Striatum (Caudate + Putamen)",
-      "valid_for_addressing": [
-        1,
-        2
-      ],
-      "part": null,
-      "atlas": "cit168_rl",
-      "atlas_ids": [
-        "0",
-        "1",
-        "2"
-      ],
-      "name_match": "same",
-      "extent_match": "approximate",
-      "definition_contested": false,
-      "draws": true,
-      "delineation_basis": "manual_mri",
-      "evidence": {
-        "claim_basis": "atlas_label",
-        "source_ref": {
-          "file": "src/site/atlas-assets/by-sa/labels-cit168_rl.json",
-          "pointer": "/labels/0/name",
-          "quote": "Putamen"
-        },
-        "check_status": "unchecked",
-        "rationale": "Putamen, caudate nucleus and nucleus accumbens, each a population probability map cut at 0.5."
-      },
-      "drafted_by": "ai"
-    },
-    {
-      "subject_kind": "region",
-      "subject_id": "gpi",
-      "subject_name_at_draft": "Globus Pallidus Internus",
-      "valid_for_addressing": [
-        1,
-        2
-      ],
-      "part": null,
-      "atlas": "cit168_rl",
-      "atlas_ids": [
-        "5"
-      ],
-      "name_match": "same",
-      "extent_match": "approximate",
-      "definition_contested": false,
-      "draws": true,
-      "delineation_basis": "manual_mri",
-      "evidence": {
-        "claim_basis": "atlas_label",
-        "source_ref": {
-          "file": "src/site/atlas-assets/by-sa/labels-cit168_rl.json",
-          "pointer": "/labels/5/name",
-          "quote": "Globus Pallidus Internal"
-        },
-        "check_status": "unchecked",
-        "rationale": "The label is the internal segment of the globus pallidus, a population probability map cut at 0.5."
-      },
-      "drafted_by": "ai"
-    },
-    {
-      "subject_kind": "region",
-      "subject_id": "gpe",
-      "subject_name_at_draft": "Globus Pallidus Externus",
-      "valid_for_addressing": [
-        1,
-        2
-      ],
-      "part": null,
-      "atlas": "cit168_rl",
-      "atlas_ids": [
-        "4"
-      ],
-      "name_match": "same",
-      "extent_match": "approximate",
-      "definition_contested": false,
-      "draws": true,
-      "delineation_basis": "manual_mri",
-      "evidence": {
-        "claim_basis": "atlas_label",
-        "source_ref": {
-          "file": "src/site/atlas-assets/by-sa/labels-cit168_rl.json",
-          "pointer": "/labels/4/name",
-          "quote": "Globus Pallidus External"
-        },
-        "check_status": "unchecked",
-        "rationale": "The label is the external segment of the globus pallidus, a population probability map cut at 0.5."
-      },
-      "drafted_by": "ai"
-    },
-    {
-      "subject_kind": "region",
-      "subject_id": "stn",
-      "subject_name_at_draft": "Subthalamic Nucleus",
-      "valid_for_addressing": [
-        1,
-        2
-      ],
-      "part": null,
-      "atlas": "cit168_rl",
-      "atlas_ids": [
-        "15"
-      ],
-      "name_match": "same",
-      "extent_match": "approximate",
-      "definition_contested": false,
-      "draws": true,
-      "delineation_basis": "manual_mri",
-      "evidence": {
-        "claim_basis": "atlas_label",
-        "source_ref": {
-          "file": "src/site/atlas-assets/by-sa/labels-cit168_rl.json",
-          "pointer": "/labels/15/name",
-          "quote": "Subthalamic Nucleus"
-        },
-        "check_status": "unchecked",
-        "rationale": "The label is the subthalamic nucleus, a population probability map cut at 0.5."
-      },
-      "drafted_by": "ai"
-    },
-    {
-      "subject_kind": "region",
-      "subject_id": "substantia_nigra",
-      "subject_name_at_draft": "Substantia Nigra",
-      "valid_for_addressing": [
-        1,
-        2
-      ],
-      "part": null,
-      "atlas": "cit168_rl",
-      "atlas_ids": [
-        "6",
-        "8"
-      ],
-      "name_match": "same",
-      "extent_match": "approximate",
-      "definition_contested": false,
-      "draws": true,
-      "delineation_basis": "manual_mri",
-      "evidence": {
-        "claim_basis": "atlas_label",
-        "source_ref": {
-          "file": "src/site/atlas-assets/by-sa/labels-cit168_rl.json",
-          "pointer": "/labels/6/name",
-          "quote": "Substantia Nigra Pars Compacta"
-        },
-        "check_status": "unchecked",
-        "rationale": "Pars compacta and pars reticulata, the two QIF sub-structures, are separate maps. Both lie inside the midbrain, which draws from another atlas."
-      },
-      "drafted_by": "ai"
-    },
-    {
-      "subject_kind": "region",
       "subject_id": "vta",
       "subject_name_at_draft": "Ventral Tegmental Area",
       "valid_for_addressing": [
@@ -698,24 +580,25 @@
         2
       ],
       "part": null,
-      "atlas": "cit168_rl",
+      "atlas": "allen_hra_3d_2020",
       "atlas_ids": [
-        "10"
+        "12195"
       ],
-      "name_match": "same",
-      "extent_match": "atlas_covers_part",
+      "name_match": "none",
+      "extent_match": "contained",
+      "contained_kind": "no_boundary",
       "definition_contested": false,
       "draws": true,
-      "delineation_basis": "manual_mri",
+      "delineation_basis": "expert_drawing_on_template",
       "evidence": {
-        "claim_basis": "atlas_label",
+        "claim_basis": "analyst_inference",
         "source_ref": {
-          "file": "src/site/atlas-assets/by-sa/labels-cit168_rl.json",
-          "pointer": "/labels/10/name",
-          "quote": "Ventral Tegmental Area"
+          "file": "src/site/atlas-assets/open/labels-allen_hra_3d_2020.json",
+          "pointer": "/labels/12195/name",
+          "quote": "midbrain tegmentum (remainder, excluding red nucleus and substantia nigra)"
         },
         "check_status": "unchecked",
-        "rationale": "Lies inside the midbrain. CIT168 maps the parabrachial pigmented nucleus apart (label 9, not shipped); the usual area includes it (PMID 33580320). Too small to outline; ships as a marker."
+        "rationale": "No such label; the publisher's table files the area, unannotated, under the midbrain tegmentum. Shares 12195 with midbrain and reticular_formation."
       },
       "drafted_by": "ai"
     },
@@ -1064,37 +947,7 @@
           "quote": "midbrain tegmentum (remainder, excluding red nucleus and substantia nigra)"
         },
         "check_status": "unchecked",
-        "rationale": "Union of tegmentum, pretectal region, colliculi and cerebral peduncle. Red nucleus (second row), nigra and vta lie inside the midbrain as CIT168 shapes. Shares 12195 with reticular_formation."
-      },
-      "drafted_by": "ai"
-    },
-    {
-      "subject_kind": "region",
-      "subject_id": "midbrain",
-      "subject_name_at_draft": "Midbrain (Mesencephalon)",
-      "valid_for_addressing": [
-        1,
-        2
-      ],
-      "part": null,
-      "atlas": "cit168_rl",
-      "atlas_ids": [
-        "7"
-      ],
-      "name_match": "none",
-      "extent_match": "atlas_covers_part",
-      "definition_contested": false,
-      "draws": false,
-      "delineation_basis": "manual_mri",
-      "evidence": {
-        "claim_basis": "atlas_label",
-        "source_ref": {
-          "file": "src/site/atlas-assets/by-sa/labels-cit168_rl.json",
-          "pointer": "/labels/7/name",
-          "quote": "Red Nucleus"
-        },
-        "check_status": "unchecked",
-        "rationale": "QIF lists the red nucleus as a midbrain part. Midbrain owns this CIT168 shape (a probability map cut at 0.5) and lends it its colour; its drawing rows are on the Allen atlas."
+        "rationale": "Union of tegmentum, pretectal region, colliculi and cerebral peduncle. Red nucleus and nigra have no shipped shape; vta is inside the tegmentum. Shares 12195 with reticular_formation and vta."
       },
       "drafted_by": "ai"
     },
@@ -1157,7 +1010,7 @@
           "quote": "pontine tegmentum"
         },
         "check_status": "unchecked",
-        "rationale": "The brainstem tegmentum includes the reticular formation (PMID 12805123); the publisher's table files its three parts, unannotated, under these labels. Shared with midbrain, pons and medulla."
+        "rationale": "The brainstem tegmentum includes the reticular formation (PMID 12805123); the publisher's table files its three parts, unannotated, under these labels. Shared with midbrain, pons, medulla and vta."
       },
       "drafted_by": "ai"
     }

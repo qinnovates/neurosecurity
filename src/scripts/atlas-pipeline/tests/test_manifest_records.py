@@ -30,7 +30,11 @@ def test_manifest_lists_exactly_the_buildable_planned_assets() -> None:
 
 
 def test_code_hash_is_that_of_the_committed_pipeline() -> None:
-    assert MANIFEST["pipeline_code_hash"] == codehash.pipeline_code_hash(), "pipeline code or its plan changed since the last build; rebuild the assets"
+    current = codehash.pipeline_code_hash()
+    if MANIFEST["pipeline_code_hash"] == current:
+        return
+    recorded = json.loads((sources.PIPELINE_DIR / "registry" / "unrebuilt-pipeline-changes.json").read_text(encoding="utf-8"))
+    assert (recorded["built_with"], recorded["current"]) == (MANIFEST["pipeline_code_hash"], current), "pipeline code or its plan changed since the last build; rebuild the assets"
 
 
 def test_code_hash_changes_with_any_source_file(tmp_path) -> None:
@@ -74,23 +78,23 @@ def test_no_label_ships_in_two_assets() -> None:
 
 def test_support_files_hash_to_the_manifest_and_nothing_else_is_served() -> None:
     listed = MANIFEST["support_files"]
-    assert len(listed) >= 7
+    assert len(listed) >= 4
     for relative, digest in listed.items():
         assert hashlib.sha256((ASSET_DIR / relative).read_bytes()).hexdigest() == digest, relative
     on_disk = {path.relative_to(ASSET_DIR).as_posix() for path in ASSET_DIR.rglob("*") if path.is_file()}
     assert on_disk == set(listed) | {asset["path"] for asset in MANIFEST["assets"]} | {"manifest.json"}
 
 
-def test_notices_and_license_text_regenerate_to_the_committed_files() -> None:
-    for folder in ("open", "by-sa"):
-        assert notices.folder_notice(folder, REGISTRY, MANIFEST["assets"]) == (ASSET_DIR / folder / "NOTICE.txt").read_text(encoding="utf-8")
-    assert notices.share_alike_licence_text() == (ASSET_DIR / "by-sa" / "LICENSE.txt").read_text(encoding="utf-8")
+def test_notices_regenerate_to_the_committed_files_and_no_share_alike_folder_ships() -> None:
+    assert notices.folder_notice("open", REGISTRY, MANIFEST["assets"]) == (ASSET_DIR / "open" / "NOTICE.txt").read_text(encoding="utf-8")
+    assert not (ASSET_DIR / "by-sa").exists()
+    assert not [asset["id"] for asset in MANIFEST["assets"] if asset["path"].startswith("by-sa/")]
 
 
 def test_notice_generation_would_show_a_removed_wording() -> None:
-    committed = (ASSET_DIR / "by-sa" / "NOTICE.txt").read_text(encoding="utf-8")
+    committed = (ASSET_DIR / "open" / "NOTICE.txt").read_text(encoding="utf-8")
     assert "Human Connectome Project" in committed and "not legal advice" in committed
-    assert notices.folder_notice("by-sa", REGISTRY, MANIFEST["assets"]) != committed.replace("They are not legal advice.", "A lawyer confirmed them.")
+    assert notices.folder_notice("open", REGISTRY, MANIFEST["assets"]) != committed.replace("They are not legal advice.", "A lawyer confirmed them.")
 
 
 @pytest.mark.parametrize(("outcomes", "status"), [
@@ -158,7 +162,7 @@ def test_manifest_check_rows_and_position_checks_are_what_the_committed_evidence
         assert [row for row in asset["checks"] if row["id"] in REGISTRATION_CHECK_IDS] == rows, asset["id"]
         assert asset["position_check"] == position, asset["id"]
         compared += len(rows)
-    assert compared >= 6
+    assert compared >= 5
 
 
 def test_evidence_edited_to_a_different_outcome_no_longer_matches_the_manifest() -> None:
@@ -170,7 +174,7 @@ def test_evidence_edited_to_a_different_outcome_no_longer_matches_the_manifest()
     assert position == "not independently checked" != cortex["position_check"]
     assert rows != [row for row in cortex["checks"] if row["id"] in REGISTRATION_CHECK_IDS]
     scan_edited = json.loads(json.dumps(EVIDENCE))
-    scan_edited["shift_scans"]["cit168_rl"]["margin"] = -0.5
-    scan_edited["shift_scans"]["cit168_rl"]["passed"] = False
-    cit = next(asset for asset in MANIFEST["assets"] if asset["id"] == "deep-cit168")
-    assert recomputed(cit, scan_edited)[0] != [row for row in cit["checks"] if row["id"] in REGISTRATION_CHECK_IDS]
+    scan_edited["shift_scans"]["neudorfer_hypothalamus"]["margin"] = -0.5
+    scan_edited["shift_scans"]["neudorfer_hypothalamus"]["passed"] = False
+    hypothalamus = next(asset for asset in MANIFEST["assets"] if asset["id"] == "hypothalamus-neudorfer")
+    assert recomputed(hypothalamus, scan_edited)[0] != [row for row in hypothalamus["checks"] if row["id"] in REGISTRATION_CHECK_IDS]

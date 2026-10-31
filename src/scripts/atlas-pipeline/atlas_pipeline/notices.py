@@ -36,7 +36,8 @@ def measured_facts(evidence: dict[str, Any] | None) -> dict[str, str]:
     """Figures a note may quote, computed from the evidence file so that none is typed by hand.
 
     `deep_disagreement_mm`: the range, over structures and sides, of the 95th-percentile surface distance
-    between the shipped Allen deep shapes and the same structures from CIT168.
+    between Allen deep structures and the same structures from CIT168. It is a recorded measurement: neither
+    those Allen labels nor anything from CIT168 ships.
     """
     registration = (evidence or {}).get("registration")
     if registration is None:

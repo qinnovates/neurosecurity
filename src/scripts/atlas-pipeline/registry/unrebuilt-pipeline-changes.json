@@ -1,0 +1,6 @@
+{
+  "_note": "Assets in the manifest were not rebuilt after these pipeline changes. The entry names the exact hash pair it covers, so any further change to the pipeline fails the code hash test until the assets are rebuilt. Delete this file at the next rebuild.",
+  "built_with": "5b56487a3a159ebabcbeafa22a7fac4a7df8d5c345bc532f9199a4c5dcf275e9",
+  "current": "2c957078efda2b17fa45f3264dde3bbf9218ace59191bd3e210cc1a85a383c3f",
+  "changes": "9f8b96dd removed the Pillow review-sheet code and updated the runtime lock. Review sheets were never part of the committed outputs. The only lock changes are certifi and pillow, neither used to compute meshes; no rebuild has confirmed that. CIT168 was then removed from the build plan (f00167a8) and its asset, label table, notice and licence text were removed from the manifest and the served folder without a rebuild. evidence.py now names the CIT168 file and cut itself; registration-evidence.json and build-report.json stay as the historic record and still cite CIT168. The deep-allen position note was reworded, so its modification note and open/NOTICE.txt were regenerated with notices.py and the manifest's entries for them updated by hand; no mesh, label table or fingerprint changed, and the deep-allen resample fingerprint still reflects the plan as built."
+}

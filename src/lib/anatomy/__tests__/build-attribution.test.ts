@@ -9,6 +9,14 @@ const data = loadAnatomyData();
 const entries = buildAttributionEntries(data.sources, data.effectiveLicenceBySource, data.manifest);
 const HCP_ACKNOWLEDGEMENT_START = 'Data were provided [in part] by the Human Connectome Project';
 
+/** No share-alike asset ships today. These entries add one, from a source handled that way, to hold what such a file would say. */
+function withShareAlikeAsset(): ReturnType<typeof buildAttributionEntries> {
+  const manifest = data.manifest;
+  if (manifest === null) throw new Error('the manifest is missing');
+  const shareAlikeAsset = { ...manifest.assets[0], id: 'deep-cit168', path: 'by-sa/deep-cit168.abc.glb', source_ids: ['cit168_rl'], computed_with_source_ids: [], license_id: 'cc-by-sa-4.0' as const };
+  return buildAttributionEntries(data.sources, data.effectiveLicenceBySource, { ...manifest, assets: [...manifest.assets, shareAlikeAsset] });
+}
+
 describe('buildAttributionEntries', () => {
   it('returns nothing when nothing ships', () => {
     expect(buildAttributionEntries(data.sources, data.effectiveLicenceBySource, null)).toEqual([]);
@@ -17,9 +25,9 @@ describe('buildAttributionEntries', () => {
   it('drops a source once no asset names it, and its wording with it', () => {
     const manifest = data.manifest;
     if (manifest === null) throw new Error('the manifest is missing');
-    const withoutCit168 = { ...manifest, assets: manifest.assets.filter((asset) => !asset.source_ids.includes('cit168_rl')) };
-    const remaining = buildAttributionEntries(data.sources, data.effectiveLicenceBySource, withoutCit168);
-    expect(remaining.map((entry) => entry.source_id)).not.toContain('cit168_rl');
+    const withoutHypothalamusAtlas = { ...manifest, assets: manifest.assets.filter((asset) => !asset.source_ids.includes('neudorfer_hypothalamus')) };
+    const remaining = buildAttributionEntries(data.sources, data.effectiveLicenceBySource, withoutHypothalamusAtlas);
+    expect(remaining.map((entry) => entry.source_id)).not.toContain('neudorfer_hypothalamus');
     expect(remaining.length).toBe(entries.length - 1);
   });
 
@@ -28,7 +36,7 @@ describe('buildAttributionEntries', () => {
     const pageText = wordings.join(' ');
     const missing = (text: string): string[] => wordings.filter((wording) => !text.includes(wording));
     expect(missing(pageText)).toEqual([]);
-    expect(missing(pageText.replaceAll(HCP_ACKNOWLEDGEMENT_START, ''))).toHaveLength(2);
+    expect(missing(pageText.replaceAll(HCP_ACKNOWLEDGEMENT_START, ''))).toHaveLength(1);
   });
 });
 
@@ -38,17 +46,15 @@ describe('attribution for the committed assets (guard)', () => {
     expect(named.size).toBeGreaterThan(0);
     expect(new Set(entries.map((entry) => entry.source_id))).toEqual(named);
     expect(entries.filter((entry) => entry.redistributed).map((entry) => entry.source_id)).toEqual(
-      ['mni_icbm152_2009c_asym', 'allen_hra_3d_2020', 'cit168_rl', 'neudorfer_hypothalamus']);
+      ['mni_icbm152_2009c_asym', 'allen_hra_3d_2020', 'neudorfer_hypothalamus']);
     expect(entries.filter((entry) => !entry.redistributed).map((entry) => entry.source_id)).toEqual(['mni_icbm152_2009b_sym']);
     expect(entries.filter((entry) => !entry.redistributed && entry.assets.length > 0)).toEqual([]);
   });
 
-  it('carries the template copyright line, the HCP acknowledgement beside both HCP-derived sources, and each file\'s changes', () => {
+  it('carries the template copyright line, the HCP acknowledgement beside the HCP-derived source, and each file\'s changes', () => {
     const wordings = listRequiredWordings(entries);
     expect(wordings.some((wording) => wording.includes('Louis Collins, McConnell Brain Imaging Centre'))).toBe(true);
-    for (const sourceId of ['cit168_rl', 'neudorfer_hypothalamus']) {
-      expect(entries.find((entry) => entry.source_id === sourceId)?.required_text.some((wording) => wording.startsWith(HCP_ACKNOWLEDGEMENT_START))).toBe(true);
-    }
+    expect(entries.find((entry) => entry.source_id === 'neudorfer_hypothalamus')?.required_text.some((wording) => wording.startsWith(HCP_ACKNOWLEDGEMENT_START))).toBe(true);
     expect(Object.values(ATTRIBUTION_STATEMENTS).every((statement) => wordings.includes(statement))).toBe(true);
     const assets = entries.flatMap((entry) => entry.assets);
     expect(assets.length).toBe(data.manifest?.assets.length);
@@ -56,18 +62,18 @@ describe('attribution for the committed assets (guard)', () => {
   });
 
   it('shows share-alike handling where the publisher states something looser', () => {
-    const cit168 = entries.find((entry) => entry.source_id === 'cit168_rl');
-    expect(cit168?.license.id).toBe('cc-by-sa-4.0');
-    expect(cit168?.stated_license?.id).toBe('cc-by-4.0');
-    expect(entries.filter((entry) => entry.source_id !== 'cit168_rl' && entry.stated_license !== null)).toEqual([]);
+    expect(entries.filter((entry) => entry.stated_license !== null)).toEqual([]);
+    const shareAlike = withShareAlikeAsset().find((entry) => entry.source_id === 'cit168_rl');
+    expect(shareAlike?.license.id).toBe('cc-by-sa-4.0');
+    expect(shareAlike?.stated_license?.id).toBe('cc-by-4.0');
   });
 
   it('says what each position check showed, and gives share-alike files their sentence', () => {
     const assets = entries.flatMap((entry) => entry.assets);
     expect(assets.find((asset) => asset.path.includes('cortex-allen'))?.position_sentence).toBe(POSITION_CHECK_SENTENCES['checked in aggregate']);
     expect(assets.filter((asset) => !asset.path.includes('cortex-allen')).every((asset) => asset.position_sentence === POSITION_CHECK_SENTENCES['not independently checked'])).toBe(true);
-    expect(entries.filter((entry) => entry.share_alike_statement !== null).map((entry) => entry.source_id)).toEqual(['cit168_rl']);
-    expect(entries.find((entry) => entry.source_id === 'cit168_rl')?.attribution_text.endsWith('https://doi.org/10.1038/sdata.2018.63')).toBe(true);
+    expect(entries.filter((entry) => entry.share_alike_statement !== null)).toEqual([]);
+    expect(withShareAlikeAsset().filter((entry) => entry.share_alike_statement !== null).map((entry) => entry.source_id)).toEqual(['cit168_rl']);
     expect(entries.find((entry) => entry.source_id === 'mni_icbm152_2009c_asym')?.attribution_text).toContain('10.1016/S1053-8119(09)70884-5');
   });
 

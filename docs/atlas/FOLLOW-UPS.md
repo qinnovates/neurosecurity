@@ -3,12 +3,12 @@
 
 Generated from the `followups` section of `src/scripts/atlas-map/atlas-map.json`. To add, close or re-own an item, edit the map and run `npm run atlas:docs`. Ids are never reused or renumbered; close an item by setting its status to done and naming the PR in its text.
 
-## Kevin (43 open)
+## Kevin (44 open)
 
 - [ ] **ATLAS-F01**: Merge the draft PRs in the order in the epic; merging to main publishes the site. Ref: #164 to #180. From: epic.
 - [ ] **ATLAS-F02**: Acknowledge the KR3 shortfall: the 31-of-38 target is not reachable with cleanly licensed sources; the outcome is 23 own shape / 10 contained / 5 none, each gap with a written reason. Ref: #180, `src/lib/anatomy/__tests__/region-outcome.guard.test.ts`. From: PR #180 body; epic.
 - [ ] **ATLAS-F03**: Rule on deep Allen shapes: shipped warped by an agent's ruling; the alternative is a header-only resample. Ref: #169. From: PR #169 body; epic.
-- [ ] **ATLAS-F04**: Decide what deep Allen shapes say on screen about placement (measured 0.7 to 2.5 mm against CIT168). Ref: #169, `src/lib/anatomy/limits-copy.ts`. From: PR #169 body.
+- [ ] **ATLAS-F04**: Decide what deep Allen shapes say on screen about placement (0.7 to 2.5 mm against CIT168, recorded on Allen labels that do not ship; CIT168 does not ship either). Ref: #169, `src/lib/anatomy/limits-copy.ts`. From: PR #169 body.
 - [ ] **ATLAS-F05**: Rule on the VTA band: `vta.qif_band` is N5 while its parent `midbrain` is N2; #164 makes three pathway origin bands follow N5 (visible on the data-lake page, clinical band views and a KQL preset). Then rerun `npm run derive:pathway-bands`. Ref: #164. From: PR #164 body; epic.
 - [ ] **ATLAS-F06**: Accept that #164 raises the public Data Studio row count from 7,982 to 23,736 (a band-level cross product, not technique-specific anatomy). Ref: #164. From: PR #164 body; epic.
 - [ ] **ATLAS-F07**: Read the AI-written visitor copy nobody has reviewed: the limit sentences (69 listed in #171, more added in #172, #175, #179) and the ten "what this card does not say" sentences on the H01 card. Ref: `src/lib/anatomy/limits-copy.ts`, `datalake/qif-anatomy-h01-card.json`. From: PR #171, #172, #175, #179 body; epic.
@@ -48,6 +48,7 @@ Generated from the `followups` section of `src/scripts/atlas-map/atlas-map.json`
 - [ ] **FRAME-F17**: Apply the decided text outside this repository: H1 repository description, H6 org profile, M12 epic-security-toolbox. Ref: GitHub settings, other repositories. From: framing decision.
 - [ ] **FRAME-F18**: Older copy noticed and not changed: the About page origin story ("catalogued every known way…", "{n} neurorights operationalized"); the homepage dual-use line about Parkinson's. Ref: #181. From: PR #181 body.
 - [ ] **FRAME-F19**: Older clinical copy: the Clinical page "For Clinicians" diagnostic scenario and approved-therapies sentence; `/atlas/scoring/` "clinical outcome mapping"; the "Direct Risk" description. Ref: #177. From: PR #177 body.
+- [ ] **ATLAS-F66**: Decide whether to rebuild `deep-allen` with CaH, CaB, CaT, Pu, PuPV, NAC, GPe, GPi, STH, SN and RN. Removing CIT168 left striatum, gpi, gpe, stn and substantia_nigra with no shape and vta with no boundary; the Allen source annotates all but VTA. Ref: `src/scripts/atlas-pipeline/registry/pipeline-inputs.json`, `datalake/qif-anatomy-crosswalk.json`. From: CIT168 removal.
 
 ## Data (10 open)
 
@@ -88,7 +89,7 @@ Generated from the `followups` section of `src/scripts/atlas-map/atlas-map.json`
 - [ ] **ATLAS-F64**: Dark mode renders light-surface band colours. BAND_COLOURS_DARK holds validated dark steps but nothing threads a theme flag through describeFill to the scene renderer. Ref: #171. From: palette re-step, 2026-10-16.
 - [ ] **ATLAS-F65**: Within a hue family only lightness separates adjacent bands, so a band mark must always carry its label. Legend presence is not yet asserted by a test. Ref: #171. From: palette re-step, 2026-10-16.
 
-## Domain review (12 open)
+## Domain review (11 open)
 
 - [ ] **ATLAS-F25**: Review the AI-drafted crosswalk rows and technique region links, or commission a neuroanatomist; a review counts only as the owner's entry in the ledger. Ref: `datalake/qif-anatomy-review-ledger.json`. From: epic.
 - [ ] **ATLAS-F26**: acc and the paracingulate gyrus (146034872): not added; the abstract gives area 32 but the publisher files the label under the frontal lobe. Ref: #180. From: PR #180 body.
@@ -96,7 +97,7 @@ Generated from the `followups` section of `src/scripts/atlas-map/atlas-map.json`
 - [ ] **ATLAS-F28**: Check acc + 12160 and a1 + 12145 against the atlas plates; each rests on one abstract-level statement. Ref: #180. From: PR #180 body.
 - [ ] **ATLAS-F29**: Locate a1's belt and parabelt; the row stays "contained" with that caveat. Ref: #180. From: PR #180 body.
 - [ ] **ATLAS-F30**: Check where the atlas draws 12115 against 12126, and whether areas 29 and 30 fall in 12158 or 12159. Ref: #180. From: PR #180 body.
-- [ ] **ATLAS-F32**: Decide whether to ship CIT168 label 9 (parabrachial pigmented nucleus) so vta covers the usual definition. Ref: #180. From: PR #180 body.
+- [x] **ATLAS-F32**: Moot: CIT168 was removed from the shipped site, so label 9 cannot ship. vta now sits, with no boundary, inside the Allen midbrain tegmentum label. Closed by the change that removed the CIT168 asset. Ref: #180. From: PR #180 body.
 - [ ] **ATLAS-F33**: Check whether the Allen cerebellar-cortex shapes include folial white matter (the whole 22 to 23 own-shape change rests on it). Ref: #180. From: PR #180 body.
 - [ ] **ATLAS-F34**: Aliases for unresolved region words, an anatomy judgment (only 12 of 111 neural-band techniques light a region; 89 of 123 link words resolve to nothing): Broca's and Wernicke's area display names; sub-structures (locus coeruleus, NTS, DLPFC, mPFC, orbitofrontal cortex, anterior insula, ventral premotor cortex, SNc); wider terms (motor, visual, auditory, somatosensory cortex); anterior versus posterior cingulate; adjectives. Ref: #168, `datalake/scripts/technique-region-curation.json`. From: PR #168 body; epic.
 - [ ] **ATLAS-F35**: Settle the device landmarks: inion and both preauricular points judged about 1 cm low on the average head; look at the review sheets. Review-sheet generation (overlays.py, device_sheets.py) was removed 2026-10-27 to drop the Pillow dependency; the sheets already archived at the ref below are the only ones that exist. If the landmark rule changes and needs re-verifying, add an absolute-height check to layout_checks.py (standard library only) instead of regenerating images. Ref: #173, `<staging>/2026-10-atlas-geometry/pr-sheets/devices/`. From: PR #173 body; epic.

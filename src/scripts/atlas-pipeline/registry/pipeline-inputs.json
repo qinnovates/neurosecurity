@@ -230,7 +230,7 @@
       },
       "acquisition_voxel_mm": null,
       "size_rule_voxel_mm": null,
-      "position_note": "The registration was not shown to improve these deep shapes' placement; those CIT168 also has differ from it by {deep_disagreement_mm} mm (95th-percentile surface distance)."
+      "position_note": "The registration was not shown to improve deep placement: unshipped Allen labels differ from CIT168, also unshipped, by {deep_disagreement_mm} mm (95th-percentile surface distance)."
     },
     {
       "id": "scalp",

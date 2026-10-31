@@ -14,7 +14,7 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = join(__dirname, '..');
+const ROOT = join(__dirname, '..', '..');
 const JOURNAL_PATH = join(ROOT, 'osi-of-mind', 'QIF-FIELD-JOURNAL.md');
 const BLOGS_DIR = join(ROOT, 'research/blog');
 const DRY_RUN = process.argv.includes('--dry-run');
@@ -68,7 +68,7 @@ function parseEntries(content) {
   }
 
   // Regex for entry headers
-  const newFormatRegex = /^## Entry (\d+)\s*[—–-]\s*"(.+?)"\s*\{#entry-\d+\}/;
+  const newFormatRegex = /^## Entry (\d+)\s*[—–-]\s*"?(.+?)"?\s*\{#entry-\d+\}/;
   const oldFormatRegex = /^###\s+(\d+)\s*[—–-]\s*(\d{4}-\d{2}-\d{2})/;
 
   let currentEntry = null;

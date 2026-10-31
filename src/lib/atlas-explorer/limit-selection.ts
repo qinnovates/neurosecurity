@@ -12,7 +12,7 @@ import { LENS_LABELS, type Lens } from './lens-state';
 import type { RegionLensFact } from './region-lens';
 
 const ALLEN_SOURCE_IDS: readonly string[] = ['allen_hra_3d_2020'];
-const DEEP_AVERAGE_SOURCE_IDS: readonly string[] = ['cit168_rl', 'neudorfer_hypothalamus'];
+const DEEP_AVERAGE_SOURCE_IDS: readonly string[] = ['neudorfer_hypothalamus'];
 const AROUSAL_SOURCE_IDS: readonly string[] = ['harvard_aan_v2'];
 const UNRECORDED_REASON = 'none is recorded.';
 

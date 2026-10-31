@@ -148,7 +148,7 @@
       "route": {
         "kind": "publisher_registered",
         "status": "settled",
-        "note": "The publisher's file is on the declared template's 193 x 229 x 193 grid at 1 mm, and the publisher's log names the fixed image as mni_icbm152_t1_tal_nlin_asym_09c.nii. Shift scan K5 of the publisher's own T1 against the declared template is recorded in the pipeline's evidence file. Both sides share one probability map with no side ids; the pipeline assigns sides at x = 0.",
+        "note": "The publisher's file is on the declared template's 193 x 229 x 193 grid at 1 mm, and the publisher's log names the fixed image as mni_icbm152_t1_tal_nlin_asym_09c.nii. Shift scan K5 of the publisher's own T1 against the declared template is recorded in the pipeline's evidence file. Both sides share one probability map with no side ids; the pipeline assigned sides at x = 0. No asset from this source ships: it has no build plan and its shapes were removed from the site. The record stays for the licence reading, the file pins and the committed V2 and K5 evidence, which read these files.",
         "publisher_registration": {
           "target": "MNI152NLin2009cAsym",
           "method": "ANTs rigid, affine and BSplineSyN on T1w and T2w images, per the publisher's log cit2mni_Warp.log"
@@ -305,7 +305,7 @@
       "route": {
         "kind": "unknown",
         "status": "open",
-        "note": "Builds nothing: it adds no region that CIT168 and the hypothalamus atlas do not already give. A one-off measurement found its files on the asymmetric 2009b grid with the y axis stored reversed, but that is not reproduced by the pipeline, so the route stays open."
+        "note": "Builds nothing: it was judged to add no region that CIT168, since removed from the site, and the hypothalamus atlas did not already give. A one-off measurement found its files on the asymmetric 2009b grid with the y axis stored reversed, but that is not reproduced by the pipeline, so the route stays open."
       },
       "delineation": {
         "basis": null,

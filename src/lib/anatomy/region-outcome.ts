@@ -19,7 +19,7 @@ export interface RegionOutcome {
   containedWithNoBoundary: string[];
   /** Of the contained: a row that does not say which of the two it is. */
   containedUnexplained: string[];
-  /** A record says no buildable atlas has geometry for it. */
+  /** A record says no shipped asset has geometry for it, with the reason. */
   none: string[];
   /** Neither a drawing row nor a no-geometry record: a hole in the crosswalk. */
   unaccounted: string[];

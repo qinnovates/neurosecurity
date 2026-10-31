@@ -27,7 +27,7 @@ QIF, TARA and NISS help builders and defenders start a neural-device threat mode
 
 ![Open datalake inventory](src/site/images/datalake-corpus.svg)
 
-**21,075 records inventoried below, from 27 of the 42 datasets in [`datalake/`](datalake/).** 19,798 neural impact chains · 178 proposed techniques · 24 BCI devices specced · 68 companies tracked · 108 CVEs mapped · 268 unique DOIs cited.
+**21,069 records inventoried below, from 27 of the 42 datasets in [`datalake/`](datalake/).** 19,798 neural impact chains · 178 proposed techniques · 24 BCI devices specced · 68 companies tracked · 108 CVEs mapped · 268 unique DOIs cited.
 
 Counted from the files themselves on 2026-10-31. Re-run `npm run datalake:inventory` and every figure on this page moves with the data; `npm run datalake:inventory:check` fails the build if it has drifted.
 
@@ -53,7 +53,7 @@ Counted from the files themselves on 2026-10-31. Re-run `npm run datalake:invent
 | Neurological condition mappings | **50** | [`datalake/qif-neurological-mappings.json`](datalake/qif-neurological-mappings.json) |
 | Neural pathways | **45** | [`datalake/qif-neural-pathways.json`](datalake/qif-neural-pathways.json) |
 | Brain regions | **38** | [`datalake/qif-brain-bci-atlas.json`](datalake/qif-brain-bci-atlas.json) |
-| Anatomy atlas crosswalk rows | **34** | [`datalake/qif-anatomy-crosswalk.json`](datalake/qif-anatomy-crosswalk.json) |
+| Anatomy atlas crosswalk rows | **28** | [`datalake/qif-anatomy-crosswalk.json`](datalake/qif-anatomy-crosswalk.json) |
 | Device to region mappings | **24** | [`datalake/qif-brain-bci-atlas.json`](datalake/qif-brain-bci-atlas.json) |
 | Receptor families | **20** | [`datalake/qif-receptors.json`](datalake/qif-receptors.json) |
 | EEG electrode positions | **20** | [`datalake/qif-neurosim.json`](datalake/qif-neurosim.json) |

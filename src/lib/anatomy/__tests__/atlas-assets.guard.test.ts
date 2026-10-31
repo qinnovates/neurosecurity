@@ -113,7 +113,7 @@ describe('asset guards on bad fixtures', () => {
     expect(findListingProblems(manifest, [...complete, 'open/volume.nii.gz'])).toEqual(['open/volume.nii.gz: on disk but not in the manifest']);
     expect(findListingProblems(manifest, [...complete, 'open/labels-some_other_atlas.json'])).toEqual(['open/labels-some_other_atlas.json: on disk but not in the manifest']);
     expect(findListingProblems(manifest, complete.filter((item) => item !== asset.path))).toEqual([`${asset.path}: in the manifest but not on disk`]);
-    expect(findListingProblems(manifest, complete.filter((item) => item !== 'by-sa/NOTICE.txt'))).toEqual(['by-sa/NOTICE.txt: in the manifest but not on disk']);
+    expect(findListingProblems(manifest, complete.filter((item) => item !== 'open/NOTICE.txt'))).toEqual(['open/NOTICE.txt: in the manifest but not on disk']);
   });
 
   it('fails a notice, licence text or label table that was edited by hand, removed, or never listed', () => {
@@ -126,19 +126,18 @@ describe('asset guards on bad fixtures', () => {
     };
     expect(findSupportFileProblems(manifest, readAsset)).toEqual([]);
     for (const [target, from, to] of [
-      ['by-sa/NOTICE.txt', 'They are not legal advice.', 'A lawyer confirmed them.'],
-      ['by-sa/NOTICE.txt', 'Data were provided [in part] by the Human Connectome Project', ''],
-      ['by-sa/LICENSE.txt', 'under the same licence', 'under any licence'],
+      ['open/NOTICE.txt', 'They are not legal advice.', 'A lawyer confirmed them.'],
+      ['open/NOTICE.txt', 'Data were provided [in part] by the Human Connectome Project', ''],
       ['open/labels-allen_hra_3d_2020.json', 'precentral gyrus', 'postcentral gyrus'],
       ['open/labels-neudorfer_hypothalamus.json', '"hemisphere": "left"', '"hemisphere": "right"'],
     ]) {
       expect(findSupportFileProblems(manifest, edited(target, from, to))).toEqual([`${target}: differs from what the pipeline wrote; regenerate it with the pipeline, do not edit it`]);
     }
     expect(findSupportFileProblems(manifest, (filePath) => (filePath === 'open/NOTICE.txt' ? null : readAsset(filePath)))).toEqual(['open/NOTICE.txt: listed in the manifest but not on disk']);
-    const unlisted = { ...manifest, support_files: Object.fromEntries(Object.entries(manifest.support_files ?? {}).filter(([filePath]) => filePath !== 'by-sa/NOTICE.txt' && filePath !== 'by-sa/labels-cit168_rl.json')) };
+    const unlisted = { ...manifest, assets: manifest.assets.filter((item) => item.id === 'hypothalamus-neudorfer'), support_files: Object.fromEntries(Object.entries(manifest.support_files ?? {}).filter(([filePath]) => filePath !== 'open/NOTICE.txt' && filePath !== 'open/labels-neudorfer_hypothalamus.json')) };
     expect(findSupportFileProblems(unlisted, readAsset).sort()).toEqual([
-      'by-sa/NOTICE.txt: not listed in the manifest although deep-cit168 ships from that folder',
-      'by-sa/labels-cit168_rl.json: not listed in the manifest although deep-cit168 carries its labels',
+      'open/NOTICE.txt: not listed in the manifest although hypothalamus-neudorfer ships from that folder',
+      'open/labels-neudorfer_hypothalamus.json: not listed in the manifest although hypothalamus-neudorfer carries its labels',
     ]);
   });
 
@@ -206,7 +205,7 @@ describe('the committed atlas assets (guards)', () => {
     const listing = listServedFiles(ASSET_DIRECTORY);
     expect(listing.length).toBeGreaterThan(manifest.assets.length);
     expect(findHashProblems(manifest, readAsset)).toEqual([]);
-    expect(Object.keys(manifest.support_files ?? {}).length).toBeGreaterThanOrEqual(7);
+    expect(Object.keys(manifest.support_files ?? {}).length).toBeGreaterThanOrEqual(4);
     expect(findSupportFileProblems(manifest, readAsset)).toEqual([]);
     expect(findRepeatedNodeProblems(manifest)).toEqual([]);
     expect(findListingProblems(manifest, listing)).toEqual([]);
@@ -218,7 +217,6 @@ describe('the committed atlas assets (guards)', () => {
     expect(sourceIds.length).toBeGreaterThan(0);
     expect(sourceIds.filter((sourceId) => data.buildabilityBySource.get(sourceId)?.buildable !== true)).toEqual([]);
     const shareAlike = manifest.assets.filter((asset) => asset.license_id === 'cc-by-sa-4.0');
-    expect(shareAlike.length).toBeGreaterThan(0);
     expect(shareAlike.filter((asset) => !asset.path.startsWith('by-sa/'))).toEqual([]);
     expect(manifest.assets.filter((asset) => asset.license_id !== 'cc-by-sa-4.0' && !asset.path.startsWith('open/'))).toEqual([]);
   });
@@ -232,7 +230,7 @@ describe('the committed atlas assets (guards)', () => {
       meshCount += nodes.length;
       expect(findNodeProblems(asset, nodes, data.labelTables)).toEqual([]);
     }
-    expect(meshCount).toBeGreaterThan(200);
+    expect(meshCount).toBeGreaterThan(199);
     expect(findUnknownLabelProblems(manifest, data.labelTables)).toEqual([]);
   });
 

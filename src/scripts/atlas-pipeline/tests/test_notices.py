@@ -23,7 +23,7 @@ def test_mirroring_and_the_warp_are_said_in_words_for_the_allen_assets() -> None
     notes = {plan["id"]: notices.changes_for(plan, FACTS) for plan in registry.inputs["assets"]}
     for asset_id in ("cortex-allen", "deep-allen"):
         assert "mirror" in notes[asset_id] and "registration" in notes[asset_id]
-    assert "was not shown to improve" in notes["deep-allen"] and f"differ from it by {FACTS['deep_disagreement_mm']} mm" in notes["deep-allen"]
+    assert "was not shown to improve" in notes["deep-allen"] and f"differ from CIT168, also unshipped, by {FACTS['deep_disagreement_mm']} mm" in notes["deep-allen"]
     assert "as a whole" in notes["cortex-allen"] and "not for each fold" in notes["cortex-allen"]
 
 
@@ -34,7 +34,7 @@ def test_a_note_longer_than_the_manifest_allows_is_refused() -> None:
 
 def test_notice_carries_required_wording_and_the_stricter_license() -> None:
     registry = sources.load_registry()
-    plan = next(p for p in registry.inputs["assets"] if p["source"] == "cit168_rl")
+    plan = {"id": "deep-cit168", "kind": "probability_maps", "source": "cit168_rl"}
     asset = {"id": plan["id"], "path": "by-sa/deep-cit168.abc.glb", "source_ids": ["cit168_rl"], "computed_with_source_ids": [],
              "modification_note": notices.changes_for(plan, FACTS)}
     text = notices.folder_notice("by-sa", registry, [asset])

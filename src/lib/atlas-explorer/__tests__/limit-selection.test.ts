@@ -21,7 +21,7 @@ describe('limit selection', () => {
 
   it('says how a source\'s shapes were made, and only names a source it has no sentence for', () => {
     expect(limitForSource('allen_hra_3d_2020', 'Allen').text).toContain('An anatomist drew these shapes onto an average brain');
-    expect(limitForSource('cit168_rl', 'CIT168').id).toBe('source_deep_average');
+    expect(limitForSource('neudorfer_hypothalamus', 'Hypothalamus atlas').id).toBe('source_deep_average');
     expect(limitForSource('harvard_aan_v2', 'AAN').id).toBe('source_arousal_nuclei');
     expect(limitForSource('fixture_atlas', 'Fixture atlas').text).toBe('This shape comes from Fixture atlas. How it was drawn is not described here yet.');
   });

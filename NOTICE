@@ -7,10 +7,8 @@ keep their sources' licenses, not the root LICENSE.
 
   src/site/atlas-assets/open/    sources under attribution licenses
                                  (see open/NOTICE.txt)
-  src/site/atlas-assets/by-sa/   sources handled as share-alike, CC BY-SA 4.0
-                                 (see by-sa/NOTICE.txt and by-sa/LICENSE.txt)
 
-Each folder's NOTICE.txt lists, per file, the source, its attribution, its
+The folder's NOTICE.txt lists, per file, the source, its attribution, its
 license, the wording the source requires, and the changes made. The same record
 is published at /atlas/attribution/.
 

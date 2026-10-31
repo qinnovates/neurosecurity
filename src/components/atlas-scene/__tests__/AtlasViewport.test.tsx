@@ -22,7 +22,7 @@ vi.setConfig({ testTimeout: TEST_TIMEOUT_MS });
 const model = loadRealModel();
 const ASSET_ROOT = 'src/site/atlas-assets';
 /** The geometry files the view fetches when opened with the layers that are on at the start. */
-const DEFAULT_FILE_COUNT = 5;
+const DEFAULT_FILE_COUNT = 4;
 const assetUrl = (assetPath: string): string => `/atlas-assets/${assetPath}`;
 const realBytes = new Map(model.index.assets.map((asset) => [assetUrl(asset.path), new Uint8Array(fs.readFileSync(path.join(ASSET_ROOT, asset.path)))]));
 const assetOf = (layer: string) => model.index.assets.find((asset) => asset.layer === layer) ?? model.index.assets[0];

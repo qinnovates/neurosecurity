@@ -19,7 +19,7 @@ MESHES = {asset["id"]: read_glb_triangles((ASSET_DIR / asset["path"]).read_bytes
 def test_every_committed_mesh_has_a_positive_signed_volume() -> None:
     inward = [f"{asset_id} {key}" for asset_id, meshes in MESHES.items() for key, triangles in meshes.items() if signed_volume_mm3(triangles) <= 0.0]
     assert inward == []
-    assert sum(len(meshes) for meshes in MESHES.values()) >= 217
+    assert sum(len(meshes) for meshes in MESHES.values()) >= 200
 
 
 def test_left_and_right_sides_are_both_outward_and_every_listed_mesh_was_measured() -> None:

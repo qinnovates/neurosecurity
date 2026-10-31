@@ -136,7 +136,7 @@ export interface IndexStructure {
  * - `contained`: it lies somewhere inside a shipped mesh that has no boundary for it.
  * - `marker_only`: its only shipped node is too small to outline; a location marker, no mesh.
  * - `not_built`: a drawing row is drafted, but no shape ships for it.
- * - `no_geometry`: a record says no buildable atlas has geometry, with the reason.
+ * - `no_geometry`: a record says no shipped asset has geometry, with the reason.
  * - `predates_addressing`: its rows are not valid for the current addressing.
  * - `not_mapped`: nothing has been drafted.
  */

@@ -30,7 +30,7 @@ The pull-request workflow runs the tests that need only the standard library and
 
 ## What it writes
 
-- `src/site/atlas-assets/open/` and `by-sa/`: content-hashed `.glb` files, one label table per atlas, `NOTICE.txt` per folder, `LICENSE.txt` in `by-sa/`.
+- `src/site/atlas-assets/open/`: content-hashed `.glb` files, one label table per atlas, `NOTICE.txt`. A share-alike source would write the same files to `by-sa/`, plus `LICENSE.txt`; none ships now, so that folder does not exist.
 - `src/site/atlas-assets/manifest.json`, which also lists the sha256 of every notice, license text and label table, so none can be edited by hand unnoticed.
 - `evidence/build-report.json`: per-structure measurements the manifest has no field for (triangle counts, decimation, volume drift, surface distance, markers, overlaps between atlases).
 - `$ATLAS_CACHE_DIR/review/`: one sheet per shape, its outline on the template T1 in three planes. Not committed. A person should look at each before an asset merges.
@@ -39,7 +39,7 @@ The pull-request workflow runs the tests that need only the standard library and
 
 1. **Fetch.** HTTPS only, hosts from the inputs file, sha256 pinned in the registry, size capped. Archives are never unpacked wholesale: only named members are read, each written under a plain file name and checked against its own pin.
 2. **Headers.** Every volume is read through its affine and reoriented to RAS. A file with neither sform nor qform is refused.
-3. **Route to MNI152NLin2009cAsym.** CIT168 arrives there. The hypothalamus atlas is on the same anatomy at 0.5 mm and is placed through its affine. The Allen atlas is drawn on the symmetric template and goes through one computed registration.
+3. **Route to MNI152NLin2009cAsym.** The hypothalamus atlas is on the same anatomy at 0.5 mm and is placed through its affine. The Allen atlas is drawn on the symmetric template and goes through one computed registration.
 4. **Mesh.** Marching cubes on the probability field, or on a lightly smoothed mask; Taubin smoothing; quadric decimation. Shapes are meshed on their native grid and then decimated, because a coarser meshing grid shrinks thin shapes and decimation does not.
 5. **Write.** Geometry-only GLB with normalised int16 positions (`KHR_mesh_quantization`), no normals, materials or textures; ids in node `extras`. Coordinates are RAS millimetres in the declared space.
 
@@ -50,7 +50,7 @@ Moving image: the MNI 2009b symmetric T1, the Allen atlas's own template. Fixed 
 Evidence is independent of what the registration optimises (`evidence/registration-evidence.json`):
 
 - **V1.** Share of Allen gyral-label voxels in the declared template's grey matter, per hemisphere: the intended transform under three parameter settings, the header-only placement, and seeded faults applied in output space (2 mm shift on each axis, mirror after the transform, the inverse applied the wrong way).
-- **V2.** 95th-percentile surface distance between warped Allen deep structures and the same structures from CIT168, per side, for the same variants.
+- **V2.** 95th-percentile surface distance between warped Allen deep structures and the same structures from CIT168, per side, for the same variants. CIT168 no longer ships and has no build plan, and the eight Allen structures measured are not in `deep-allen` either, so V2 is a recorded result about the registration, not a measure of any shipped shape. Re-running it needs the CIT168 files placed in the cache by hand: the fetch step no longer downloads them.
 - **Spread** is the range of each measure across the three parameter settings. It measures how sensitive the result is to those settings; it is not sampling noise. The transform counts as better only when its gain over the header-only placement exceeds that spread.
 - The grey-matter map used by V1 is the declared template's own, the same template the registration targets. V1 is pooled over all gyral labels per hemisphere; the evidence file also records it per label and side, and lists the label-sides that score lower after the registration.
 - A mirror applied before the transform is not run: the moving image is symmetric and its labels are a mirrored pair with shared ids, so it changes nothing.

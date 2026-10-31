@@ -22,11 +22,11 @@ const PINNED_ANATOMY_STATE = {
   /** Changes when a source is CLEARED, or its route SETTLED, in the verdict or registry file. Every id here may ship assets. */
   buildableSourceIds: ['mni_icbm152_2009c_asym', 'allen_hra_3d_2020', 'cit168_rl', 'neudorfer_hypothalamus', 'eeg_positions'],
   /** Changes when GEOMETRY IS ADDED: crosswalk rows land, or the pipeline ships shapes no record maps to. */
-  structureCount: 126,
+  structureCount: 116,
   /** Changes when a region GAINS GEOMETRY (its no_geometry record is removed) or a new one is recorded as having none. */
-  noGeometryRegionIds: ['cervical_cord', 'thoracic_cord', 'lumbar_cord', 'sacral_cord', 'cauda_equina'],
+  noGeometryRegionIds: ['cervical_cord', 'thoracic_cord', 'lumbar_cord', 'sacral_cord', 'cauda_equina', 'striatum', 'gpi', 'gpe', 'stn', 'substantia_nigra'],
   /** Changes when REGIONS ARE MAPPED: every region not listed above reads not_mapped until a row is drafted for it. */
-  regionGeometryStates: ['contained', 'drawn', 'marker_only', 'no_geometry'],
+  regionGeometryStates: ['contained', 'drawn', 'no_geometry'],
   /** Changes when TECHNIQUE LINKS ARE RE-DRAFTED: how many neural-band techniques hold links and how many stay at band level. */
   techniqueScopes: { regions: 48, band_level: 63, not_drafted: 0 },
   /** Changes when a LAYER GAINS ITS FIRST SHIPPED ASSET. Every other layer stays unavailable and says why. */

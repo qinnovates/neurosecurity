@@ -27,6 +27,11 @@ ALLEN_VS_CIT168 = {"STN": (["STH"], [15]), "RN": (["RN"], [7]), "SN": (["SN"], [
                    "Putamen": (["Pu", "PuPV"], [0]), "Caudate": (["CaH", "CaB", "CaT"], [1]), "Accumbens": (["NAC"], [2])}
 CIT168_VS_NEUDORFER = {"STN": ([15], {"left": 14, "right": 13}), "SN": ([6, 8], {"left": 16, "right": 15}),
                        "RN": ([7], {"left": 18, "right": 17}), "Mammillary": ([14], {"left": 10, "right": 9})}
+# CIT168 ships nothing and has no build plan, and the fetch step no longer downloads it. These name what the committed
+# V2 and cross-source measures read, so re-running them needs these files placed in the cache by hand.
+CIT168_SOURCE_ID = "cit168_rl"
+CIT168_PROBABILITY_FILE = "CIT168toMNI152-2009c_prob.nii.gz"
+CIT168_PROBABILITY_CUT = 0.5
 
 
 def _box(shape: tuple[int, ...], affine: np.ndarray) -> tuple[slice, ...]:
@@ -94,9 +99,8 @@ def _measurer(cache_dir: pathlib.Path, registry: Registry, shape: tuple[int, ...
     sides = side_selectors(shape, affine)
     box = _box(shape, affine)
     box_sides = side_selectors(tuple(s.stop - s.start for s in box), crop_affine(affine, np.array([s.start for s in box])))
-    cit_plan = next(plan for plan in registry.inputs["assets"] if plan["source"] == "cit168_rl")
-    cit, cit_affine = load_canonical(source_file(cache_dir, "cit168_rl", cit_plan["file"]))
-    cit_masks = {name: sum(resample_like(cit[..., k], cit_affine, shape, affine, 1) for k in indices)[box] >= cit_plan["threshold"]
+    cit, cit_affine = load_canonical(source_file(cache_dir, CIT168_SOURCE_ID, CIT168_PROBABILITY_FILE))
+    cit_masks = {name: sum(resample_like(cit[..., k], cit_affine, shape, affine, 1) for k in indices)[box] >= CIT168_PROBABILITY_CUT
                  for name, (_, indices) in ALLEN_VS_CIT168.items()}
     compact_of, gyri = allen["compact_of"], allen["gyri"]
     gyri_ids = np.array([compact_of[acronym] for acronym in gyri])
@@ -187,11 +191,10 @@ def shift_scan_evidence(cache_dir: pathlib.Path, registry: Registry, pairs: dict
 def cross_source_evidence(cache_dir: pathlib.Path, registry: Registry) -> dict[str, Any]:
     """Agreement between CIT168 and the hypothalamus atlas, neither of which this pipeline transforms."""
     neudorfer_plan = next(plan for plan in registry.inputs["assets"] if plan["source"] == "neudorfer_hypothalamus")
-    cit_plan = next(plan for plan in registry.inputs["assets"] if plan["source"] == "cit168_rl")
     labels, affine = load_canonical(source_file(cache_dir, "neudorfer_hypothalamus", neudorfer_plan["file"]))
     labels = np.rint(labels).astype(np.int32)
     box = _box(labels.shape, affine)
-    cit, cit_affine = load_canonical(source_file(cache_dir, "cit168_rl", cit_plan["file"]))
+    cit, cit_affine = load_canonical(source_file(cache_dir, CIT168_SOURCE_ID, CIT168_PROBABILITY_FILE))
     cropped_affine = crop_affine(affine, np.array([s.start for s in box]))
     crop_shape = tuple(s.stop - s.start for s in box)
     sides = side_selectors(crop_shape, cropped_affine)
@@ -199,7 +202,7 @@ def cross_source_evidence(cache_dir: pathlib.Path, registry: Registry) -> dict[s
     for name, (cit_indices, neudorfer_ids) in CIT168_VS_NEUDORFER.items():
         probability = sum(resample_like(cit[..., k], cit_affine, crop_shape, cropped_affine, 1) for k in cit_indices)
         for side in ("left", "right"):
-            out[f"{name}|{side}"] = checks.compare_masks((probability >= cit_plan["threshold"]) & sides[side], labels[box] == neudorfer_ids[side],
+            out[f"{name}|{side}"] = checks.compare_masks((probability >= CIT168_PROBABILITY_CUT) & sides[side], labels[box] == neudorfer_ids[side],
                                                          float(abs(affine[0, 0])))
     return out
 

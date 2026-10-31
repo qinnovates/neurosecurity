@@ -9,15 +9,15 @@ import { SOURCE_REF_STATES, checkSourceRef } from '../source-ref';
  * and no neuroanatomist has checked them.
  */
 const REGION_COUNT = 38;
-const OWN_SHAPE_COUNT = 23;
-const CONTAINED_REGION_IDS = ['a1', 'm1', 'pfc', 'pmc', 'reticular_formation', 's1_cortex', 'sma', 'v1', 'vim', 'wernicke'];
+const OWN_SHAPE_COUNT = 17;
+const CONTAINED_REGION_IDS = ['a1', 'm1', 'pfc', 'pmc', 'reticular_formation', 's1_cortex', 'sma', 'v1', 'vim', 'vta', 'wernicke'];
 /** Of the contained: a larger named structure stands in for the region. */
 const NAMED_STAND_IN_REGION_IDS = ['a1', 'm1', 'pfc', 's1_cortex', 'wernicke'];
 /** Of the contained: no boundary for the region inside any shape. */
-const NO_BOUNDARY_REGION_IDS = ['pmc', 'reticular_formation', 'sma', 'v1', 'vim'];
-const NO_GEOMETRY_REGION_IDS = ['cauda_equina', 'cervical_cord', 'lumbar_cord', 'sacral_cord', 'thoracic_cord'];
+const NO_BOUNDARY_REGION_IDS = ['pmc', 'reticular_formation', 'sma', 'v1', 'vim', 'vta'];
+const NO_GEOMETRY_REGION_IDS = ['cauda_equina', 'cervical_cord', 'gpe', 'gpi', 'lumbar_cord', 'sacral_cord', 'stn', 'striatum', 'substantia_nigra', 'thoracic_cord'];
 /** Has a row of its own but is too small on its source grid to outline, so it ships as a marker. */
-const MARKER_ONLY_REGION_IDS = ['vta'];
+const MARKER_ONLY_REGION_IDS: string[] = [];
 
 const data = loadAnatomyData();
 const regionIds = data.engineData.regions.map((region) => region.id);
@@ -25,21 +25,21 @@ const outcome = summariseRegionOutcome(regionIds, data.crosswalk, data.manifest)
 
 describe('summariseRegionOutcome on bad fixtures', () => {
   it('reports a region with neither a drawing row nor a no-geometry record', () => {
-    const withHole = { ...data.crosswalk, rows: data.crosswalk.rows.filter((row) => row.subject_id !== 'stn') };
-    expect(summariseRegionOutcome(regionIds, withHole, data.manifest).unaccounted).toEqual(['stn']);
+    const withHole = { ...data.crosswalk, rows: data.crosswalk.rows.filter((row) => row.subject_id !== 'hippocampus') };
+    expect(summariseRegionOutcome(regionIds, withHole, data.manifest).unaccounted).toEqual(['hippocampus']);
   });
 
   it('reports a drawing row whose labels are in no shipped asset', () => {
     expect(summariseRegionOutcome(regionIds, data.crosswalk, null).withoutShippedNode).toHaveLength(OWN_SHAPE_COUNT + CONTAINED_REGION_IDS.length);
     const manifest = data.manifest;
     if (manifest === null) throw new Error('the manifest is missing');
-    const withoutCit168 = { ...manifest, assets: manifest.assets.filter((asset) => !asset.source_ids.includes('cit168_rl')) };
-    expect(summariseRegionOutcome(regionIds, data.crosswalk, withoutCit168).withoutShippedNode.sort()).toEqual(['gpe', 'gpi', 'stn', 'striatum', 'substantia_nigra', 'vta']);
+    const withoutHypothalamusAtlas = { ...manifest, assets: manifest.assets.filter((asset) => !asset.source_ids.includes('neudorfer_hypothalamus')) };
+    expect(summariseRegionOutcome(regionIds, data.crosswalk, withoutHypothalamusAtlas).withoutShippedNode.sort()).toEqual(['hypothalamus']);
   });
 
   it('counts a region as contained only when every drawing row for it is', () => {
-    const regraded = { ...data.crosswalk, rows: data.crosswalk.rows.map((row) => (row.subject_id === 'stn' ? { ...row, extent_match: 'contained' as const } : row)) };
-    expect(summariseRegionOutcome(regionIds, regraded, data.manifest).contained).toContain('stn');
+    const regraded = { ...data.crosswalk, rows: data.crosswalk.rows.map((row) => (row.subject_id === 'hippocampus' ? { ...row, extent_match: 'contained' as const } : row)) };
+    expect(summariseRegionOutcome(regionIds, regraded, data.manifest).contained).toContain('hippocampus');
   });
 });
 
@@ -51,13 +51,13 @@ describe('the region outcome (guard)', () => {
     expect(outcome.own.length + outcome.contained.length + outcome.none.length).toBe(REGION_COUNT);
   });
 
-  it('is 23 with a shape of their own, 10 contained and 5 with none', () => {
+  it('is 17 with a shape of their own, 11 contained and 10 with none', () => {
     expect(outcome.own).toHaveLength(OWN_SHAPE_COUNT);
     expect([...outcome.contained].sort()).toEqual(CONTAINED_REGION_IDS);
     expect([...outcome.none].sort()).toEqual(NO_GEOMETRY_REGION_IDS);
   });
 
-  it('says for every contained region whether a named structure stands in or there is no boundary at all: 5 and 5', () => {
+  it('says for every contained region whether a named structure stands in or there is no boundary at all: 5 and 6', () => {
     expect([...outcome.containedWithNamedStandIn].sort()).toEqual(NAMED_STAND_IN_REGION_IDS);
     expect([...outcome.containedWithNoBoundary].sort()).toEqual(NO_BOUNDARY_REGION_IDS);
     expect(outcome.containedUnexplained).toEqual([]);
@@ -94,19 +94,22 @@ describe('the region outcome (guard)', () => {
   it('holds every grade to the two rules: a stand-in is not a synonym, and a probability-map shape is not the structure', () => {
     expect(findGradeRuleProblems(data.crosswalk, data.manifest)).toEqual([]);
     const standIns = data.crosswalk.rows.filter((row) => row.contained_kind === 'named_stand_in');
-    const onProbabilityMaps = data.crosswalk.rows.filter((row) => row.atlas === 'cit168_rl');
     expect(standIns.length).toBeGreaterThan(0);
-    expect(onProbabilityMaps.length).toBeGreaterThan(0);
     const regraded = (subjectId: string, change: Record<string, string>) => ({ ...data.crosswalk, rows: data.crosswalk.rows.map((row) => (row.subject_id === subjectId ? { ...row, ...change } : row)) });
     for (const row of standIns) {
       expect(findGradeRuleProblems(regraded(row.subject_id, { name_match: 'synonym' }) as never, data.manifest)).toHaveLength(1);
     }
-    for (const row of onProbabilityMaps) {
-      expect(findGradeRuleProblems(regraded(row.subject_id, { extent_match: 'same' }) as never, data.manifest)).toHaveLength(1);
-    }
     const onDiscreteAtlas = data.crosswalk.rows.find((row) => row.atlas === 'neudorfer_hypothalamus');
     expect(onDiscreteAtlas).toBeDefined();
-    expect(findGradeRuleProblems(regraded(String(onDiscreteAtlas?.subject_id), { extent_match: 'same' }) as never, data.manifest)).toEqual([]);
+    const graded = regraded(String(onDiscreteAtlas?.subject_id), { extent_match: 'same' }) as never;
+    expect(findGradeRuleProblems(graded, data.manifest)).toEqual([]);
+    const manifest = data.manifest;
+    if (manifest === null) throw new Error('the manifest is missing');
+    // No probability-cut atlas ships today, so the rule is held on one whose volumes are made to vary with the cut.
+    const cutAssets = manifest.assets.map((asset) => (asset.source_ids.includes('neudorfer_hypothalamus')
+      ? { ...asset, nodes: asset.nodes.map((node) => ({ ...node, volume_mm3_at: { ...node.volume_mm3_at, '0.25': node.volume_mm3_at['0.75'] + 1 } })) }
+      : asset));
+    expect(findGradeRuleProblems(graded, { ...manifest, assets: cutAssets })).toHaveLength(1);
     expect(findGradeRuleProblems(regraded('pmc', { name_match: 'synonym' }) as never, data.manifest)).toEqual([]);
   });
 });

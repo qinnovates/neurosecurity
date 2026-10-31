@@ -5,7 +5,7 @@
   "totals": {
     "datalake_files": 42,
     "datasets_inventoried": 27,
-    "records": 21075,
+    "records": 21069,
     "unique_dois": 268,
     "techniques_with_cve_evidence": 27,
     "cve_coverage_ratio": 0.1517
@@ -204,7 +204,7 @@
     {
       "key": "anatomy_crosswalk",
       "label": "Anatomy atlas crosswalk rows",
-      "count": 34,
+      "count": 28,
       "file": "datalake/qif-anatomy-crosswalk.json",
       "path": "rows",
       "group": "anatomy",
