@@ -89,6 +89,8 @@ export interface AtlasDsmCluster {
 export interface AtlasData {
   bands: AtlasBand[];
   devices: AtlasDevice[];
+  /** Distinct devices in the atlas's device_region_mappings. */
+  mappedDeviceCount: number;
   neurorights: AtlasNeuroright[];
   dsmClusters: AtlasDsmCluster[];
 }
@@ -218,7 +220,9 @@ export function getAtlasData(): AtlasData {
     })
   );
 
-  return { bands, devices, neurorights, dsmClusters };
+  const mappedDeviceCount = new Set(deviceMappings.map((m: any) => m.device_id)).size;
+
+  return { bands, devices, mappedDeviceCount, neurorights, dsmClusters };
 }
 
 /** Get a single band by ID */
