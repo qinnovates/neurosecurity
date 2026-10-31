@@ -38,6 +38,15 @@ describe('extractSameSiteLinkTargets', () => {
   });
 });
 
+describe('isInBuild letter case', () => {
+  it('rejects a link whose case differs from the built page, as the case-sensitive host does', () => {
+    writePage('/governance/transparency/', '<html></html>');
+    expect(isInBuild(distDirectory, '/governance/transparency/')).toBe(true);
+    expect(isInBuild(distDirectory, '/governance/TRANSPARENCY/')).toBe(false);
+    expect(isInBuild(distDirectory, '/Governance/transparency/')).toBe(false);
+  });
+});
+
 describe('isInBuild', () => {
   it('accepts a directory with an index page, the same page without its slash, a page file, and a plain file', () => {
     writePage('/about/', '<p>about</p>');

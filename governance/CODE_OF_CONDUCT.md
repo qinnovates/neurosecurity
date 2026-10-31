@@ -130,7 +130,7 @@ This project uses artificial intelligence in research and development. The same 
 
 - Disclose AI involvement using `Co-Authored-By` tags in commits
 - Never present AI-generated content as independently verified without human validation
-- Document the human-AI decision boundary in significant contributions via the project's [Transparency](/governance/TRANSPARENCY/) audit trail
+- Document the human-AI decision boundary in significant contributions via the project's [Transparency](/governance/transparency/) audit trail
 - Apply the same verification rigor to AI-generated claims as to any other source
 
 ## Enforcement

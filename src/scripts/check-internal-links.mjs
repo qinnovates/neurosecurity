@@ -56,6 +56,21 @@ export function extractSameSiteLinkTargets(html) {
   return [...targets];
 }
 
+/**
+ * Whether `filePath` exists with exactly the letter case of `urlPath`. GitHub Pages is
+ * case-sensitive, but a macOS or Windows disk is not, so a plain existence test passes a link
+ * such as /governance/TRANSPARENCY/ on a developer machine and fails it in the deploy.
+ */
+function existsWithExactCase(rootDirectory, filePath) {
+  const root = path.resolve(rootDirectory);
+  let current = root;
+  for (const segment of path.relative(root, filePath).split(path.sep).filter(Boolean)) {
+    if (!fs.readdirSync(current).includes(segment)) return false;
+    current = path.join(current, segment);
+  }
+  return true;
+}
+
 /** Whether a same-site path is a file, a directory with an index page, or a page without its slash. */
 export function isInBuild(distDirectory, target) {
   const candidates = target.endsWith('/')
@@ -63,9 +78,9 @@ export function isInBuild(distDirectory, target) {
     : [target, `${target}/`, `${target}.html`];
   return candidates.some((candidate) => {
     try {
-      return fs.existsSync(resolveBuiltFile(distDirectory, candidate));
+      return existsWithExactCase(distDirectory, resolveBuiltFile(distDirectory, candidate));
     } catch {
-      return false; // a path that resolves outside the build is not in it
+      return false; // a path that resolves outside the build, or through a file, is not in it
     }
   });
 }
