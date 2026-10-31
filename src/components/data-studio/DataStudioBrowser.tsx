@@ -13,6 +13,7 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import type { TableData, Row } from '../../lib/kql-engine';
 import type { DatasetDescription } from '../../lib/anatomy/describe-tables';
+import { fillEditorWhenReady } from './prefilled-kql';
 
 interface DatasetMeta {
   id: string;
@@ -518,6 +519,7 @@ function LazyKql() {
 
   useEffect(() => {
     import('../bci/BciKql').then(mod => {
+      fillEditorWhenReady(window.location.search, mod);
       setComponent(() => mod.default);
     });
   }, []);

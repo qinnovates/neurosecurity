@@ -19,6 +19,10 @@ import deviceGeometry from '@shared/qif-anatomy-device-geometry.json';
 import regionEvidence from '@shared/qif-anatomy-region-evidence.json';
 import h01Card from '@shared/qif-anatomy-h01-card.json';
 import taraChains from '@shared/tara-chains.json';
+import landscape from '@shared/bci-landscape.json';
+import securityControls from '@shared/qif-security-controls.json';
+import hazards from '@shared/qif-hazards.json';
+import neurological from '@shared/qif-neurological-mappings.json';
 import { parseAnatomyFiles, type AnatomyData } from '@/lib/anatomy/anatomy-inputs';
 import { buildAnatomyBundle, type AnatomyBundle } from '@/lib/anatomy/build-anatomy-index';
 import { AnatomyDataError } from '@/lib/anatomy/errors';
@@ -27,8 +31,11 @@ import { MANIFEST_FILE } from '@/lib/anatomy/parse-manifest';
 import { parseRegionEvidence } from '@/lib/anatomy/parse-region-evidence';
 import { REGION_EVIDENCE_PATH } from '@/lib/anatomy/region-evidence-types';
 import { assertLedgerRatchet } from '@/lib/anatomy/review-state';
-import { ATLAS_CHAINS_PATH, buildAtlasChains } from '@/lib/atlas-explorer/chain-file';
+import { ATLAS_CHAINS_PATH, buildAtlasChains, type AtlasChains } from '@/lib/atlas-explorer/chain-file';
+import { buildRegionDossierFile } from '@/lib/atlas-explorer/build-dossier-file';
+import { REGION_DOSSIER_PATH } from '@/lib/atlas-explorer/dossier-file';
 import { EXPLORER_CATALOG_PATH, buildExplorerCatalog } from '@/lib/atlas-explorer/explorer-catalog';
+import { layerOf, type BandId } from '@/lib/qif-constants';
 import { buildEngineData } from '@/lib/threat-model/build-engine-data';
 
 const ROOT_PREFIX = '/';
@@ -68,15 +75,24 @@ export function loadAnatomyData(): AnatomyData {
   return data;
 }
 
-/** The index, its evidence file and the four files the explorer reads beside them, each pinned by the index. */
+/** The dossier's file: the datalake's records for every region, restricted to the techniques with a drafted link. */
+function buildDossierJson(data: AnatomyData, chains: AtlasChains): string {
+  const linkedTechniqueIds = new Set(Object.entries(data.techniqueRegions.techniques).filter(([, entry]) => entry.links.length > 0).map(([techniqueId]) => techniqueId));
+  const sources = { atlas, landscape, controls: securityControls, hazards, pathways, neurological, chains };
+  return JSON.stringify(buildRegionDossierFile(data.engineData, sources, (bandId) => layerOf(bandId as BandId), linkedTechniqueIds));
+}
+
+/** The index, its evidence file and the five files the explorer reads beside them, each pinned by the index. */
 export function loadAnatomyBundle(): AnatomyBundle {
   const data = loadAnatomyData();
   const regionIds = new Set(data.engineData.regions.map((region) => region.id));
+  const chains = buildAtlasChains(taraChains, new Set(data.engineData.techniques.map((technique) => technique.id)));
   return buildAnatomyBundle(data, [
     { path: EXPLORER_CATALOG_PATH, json: JSON.stringify(buildExplorerCatalog(data.engineData, atlas, { registrar, pathways })) },
     { path: REGION_EVIDENCE_PATH, json: JSON.stringify(parseRegionEvidence(regionEvidence, regionIds)) },
     { path: H01_CARD_PATH, json: JSON.stringify(parseH01Card(h01Card)) },
-    { path: ATLAS_CHAINS_PATH, json: JSON.stringify(buildAtlasChains(taraChains, new Set(data.engineData.techniques.map((technique) => technique.id)))) },
+    { path: ATLAS_CHAINS_PATH, json: JSON.stringify(chains) },
+    { path: REGION_DOSSIER_PATH, json: buildDossierJson(data, chains) },
   ]);
 }
 

@@ -16,7 +16,7 @@ datalake/qif-anatomy-*.json + src/site/atlas-assets/   data (untrusted input, pa
   -> src/lib/anatomy/            parse, cross-check, build the index and the query tables
   -> src/lib/atlas-explorer/     what the explorer shows, as pure functions of the index
   -> src/components/atlas-scene/ React, three.js, and the page's loader of the data files
-  -> src/pages/atlas/anatomy.astro, src/pages/atlas/attribution.astro, six JSON endpoints,
+  -> src/pages/atlas/anatomy.astro, src/pages/atlas/attribution.astro, seven JSON endpoints,
      and the pages that mount the 3D view under a list (recipe 8)
 src/scripts/atlas-pipeline/      offline Python: writes src/site/atlas-assets/, never runs in CI
 ```
@@ -54,7 +54,7 @@ Imports point down this list only. Known exceptions, all harmless: tests in the 
 | `datalake/qif-anatomy-device-geometry.json` (landmark and electrode rows only) | `npm run atlas:devices` |
 | `src/scripts/atlas-pipeline/registry/buildability.json` | `bash src/scripts/atlas-pipeline/atlas.sh buildability` |
 | query tables (git-ignored) and `datalake/parquet/anatomy_*.parquet` | `npm run prebuild` |
-| the six `/atlas/anatomy-*.json` files (never committed) | `npm run build` |
+| the seven `/atlas/anatomy-*.json` files (never committed) | `npm run build` |
 
 ## Checks that guard this directory
 - `npm test` -- parsers, cross-checks and the guards over committed files: `__tests__/atlas-assets.guard.test.ts`, `__tests__/device-geometry.guard.test.ts`, `__tests__/region-outcome.guard.test.ts`, `__tests__/anatomy-tables-content.test.ts`
@@ -136,7 +136,7 @@ Regenerate in this order; each step reads what the one before wrote.
 2. `npm run compute:chains` -- `datalake/impact-chains.json`.
 3. Recipe 5 -- technique links. Recipe 2 for any new region. Recipe 6 only if sources, the build plan or pipeline code changed.
 4. `npm run prebuild` -- query tables, then parquet from them. `npm run health` reports what is out of sync.
-5. `npm run build` -- index, evidence, catalog, chains, region evidence and H01 card, each pinned by the index; then `git checkout --` the five files of rule 5 (keeping the catalog's anatomy entries if step 4 changed an anatomy parquet file).
+5. `npm run build` -- index, evidence, catalog, chains, dossier, region evidence and H01 card, each pinned by the index; then `git checkout --` the five files of rule 5 (keeping the catalog's anatomy entries if step 4 changed an anatomy parquet file).
 6. `npm run check:post-build`.
 
 Pins that a refresh can move. Nothing else in the atlas stack is a typed count or hash.

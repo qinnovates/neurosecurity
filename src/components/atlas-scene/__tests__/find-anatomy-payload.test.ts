@@ -90,7 +90,7 @@ const PROJECTIONS: Array<[string, unknown]> = [
 describe('findAnatomyPayload', () => {
   it('uses only markers that occur in a built index or evidence file', () => {
     const companions = Object.values(seed.companionJsonByPath).join('');
-    expect(Object.keys(seed.companionJsonByPath)).toHaveLength(4);
+    expect(Object.keys(seed.companionJsonByPath)).toHaveLength(5);
     const served = seed.indexJson + seed.evidenceJson + companions + populated.indexJson + populated.evidenceJson + 'datalake/qif-anatomy-sources.json';
     expect(ANATOMY_PAYLOAD_MARKERS.length).toBeGreaterThan(10);
     expect(ANATOMY_PAYLOAD_MARKERS.filter((marker: string) => !served.includes(marker))).toEqual([]);
@@ -102,6 +102,7 @@ describe('findAnatomyPayload', () => {
     expect(findAnatomyPayload(asIslandProp({ caveats: JSON.parse(cardJson).must_not_imply, numbers_that_differ_by_source: [] })).length).toBeGreaterThan(0);
     expect(findAnatomyPayload(asScript(JSON.parse(catalogJson)))).toEqual(expect.arrayContaining(['device_stage_techniques']));
     expect(findAnatomyPayload(asScript(JSON.parse(literatureJson).rows.slice(0, 1)))).toEqual(expect.arrayContaining(['anatomy_as_stated', 'verifier_verdict']));
+    expect(findAnatomyPayload(asScript(JSON.parse(seed.companionJsonByPath['/atlas/anatomy-dossier.json'])))).toEqual(expect.arrayContaining(['pathway_ends', 'protection_layers', 'has_listed_name']));
   });
 
   it('puts every column of the exported tables in exactly one list: a key marker, or a name left unmarked on purpose', () => {

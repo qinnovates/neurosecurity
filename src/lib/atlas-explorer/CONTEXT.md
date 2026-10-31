@@ -4,9 +4,11 @@ Pure functions from the anatomy index and the explorer catalog to what a visitor
 
 ## What lives here
 - `explorer-catalog.ts`, `catalog-dsm.ts`, `chain-file.ts` -- build-time builders of two published files (`/atlas/anatomy-catalog.json`, `/atlas/anatomy-chains.json`) and the parsers the page runs on them after fetching
+- `build-dossier-file.ts`, `build-dossier-devices.ts` -- build time only: the third published file, `/atlas/anatomy-dossier.json`. `dossier-file.ts` holds its shape and the parser the page runs on it; apart so the builders never reach the browser
 - `explorer-model.ts` -- the index and catalog joined into the one model every view reads
 - `lens-state.ts`, `region-lens.ts`, `subject-options.ts`, `technique-summary.ts` -- lenses: the kinds, their subjects, each region's value under one
 - `region-rows.ts`, `region-detail.ts`, `region-dsm.ts`, `region-evidence-view.ts`, `rail-stages.ts` -- the list, the inspector and the signal-chain rail
+- `region-dossier.ts`, `region-kql.ts` -- the dossier's joins for one region, each naming what it goes through, and its prefilled data studio query
 - `chain-steps.ts`, `chain-playback.ts` -- a curated threat model as steps over regions and device stages
 - `region-view-notes.ts` -- the words beside a 3D view mounted on another page: the visitor's selection, the regions a technique's links name, what has no shape, the limits; and which of them the open picture's caption already says
 - `technique-colouring.ts` -- whether a technique's drafted links colour any shape, asked of the style function itself; read at build time for a technique page and by the view for its caption
@@ -21,7 +23,7 @@ Pure functions from the anatomy index and the explorer catalog to what a visitor
 - Tests here import `src/components/atlas-scene/load-anatomy-data.ts` (the loader), `src/components/atlas-scene/atlas-state.ts` (`INITIAL_EXPLORER_STATE`) and `src/components/atlas-scene/LayerPanel.tsx` (`LAYER_LABELS`); nothing else does.
 
 ## Derived files
-None are committed. The two published files above are built by `npm run build` through `src/components/atlas-scene/load-anatomy-data.ts`.
+None are committed. The three published files above are built by `npm run build` through `src/components/atlas-scene/load-anatomy-data.ts`.
 
 ## Checks
 - `npm test` -- `__tests__/mapping-coverage.test.ts` (every catalog link is accounted for), `__tests__/chain-steps.test.ts` (pins the curated models), most modules have a test file of the same name

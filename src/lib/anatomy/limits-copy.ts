@@ -93,6 +93,24 @@ export const LIMIT_TEMPLATES = {
   stated_devices_none: 'No device record in QIF\'s atlas file lists this region.',
   qif_file_fact: 'From QIF\'s own atlas file, which no expert has reviewed. QIF is a proposed framework.',
 
+  // The region dossier.
+  count_mark: 'A count here is of catalog entries, not a score, and nothing is ranked by it.',
+  count_excludes_band_level: 'Linked counts leave out techniques tagged with the band alone: such a tag names a band, not this structure.',
+  dossier_band_count: '{techniques_tagged} {band}; none names this structure.',
+  dossier_no_technique: 'No technique names this structure yet. {tagged} with its layer.',
+  tier_mark: 'The outline on a technique\'s id shows its evidence tier: solid for demonstrated, dashed for theoretical, dotted for speculative.',
+  niss_badge_region: 'A NISS step belongs to one technique. It is never a score for this region, and steps are not added up.',
+  silicon_absent: '{count} catalog techniques carry classical stack tags only, so they name no brain structure and appear on no region.',
+  controls_pair: 'Controls are paired with a technique through its band. Nothing here says a control has been tested against that technique.',
+  cve_precedent: 'A CVE here is a precedent for the mechanism, not an exploit of this structure.',
+  hazards_by_layer: 'Hazards are listed by layer, not by this structure.',
+  company_is_context: 'Companies are listed because a device of theirs is mapped here; nothing is said about their products.',
+  pathway_unreviewed: 'An AI matched these pathways to this region and no expert has checked them. Each says how the pathway file names this end.',
+  dossier_no_pathway: 'No pathway record lists this region as a start or an end. That is a gap in the data, not a finding about the region.',
+  neurological_references: 'These are neurological category references that QIF files with pathways for threat modelling, not diagnostic claims. They say nothing about any person.',
+  nothing_live: 'Nothing here is live: no device is connected and nothing is being measured. Every entry is a catalog record.',
+  scene_review_state: 'Every link and mapping here is AI-drafted and unreviewed unless this page says an expert has reviewed it.',
+
   // The 3D view.
   whole_scene: 'The layers come from different studies and were lined up to one average brain by computer. Do not read meaning into shapes that only just touch or miss.',
   outline_shape: 'This is the outer shape of an average made from many people\'s brain scans, not anyone\'s real brain. Much of the brain\'s surface lies inside folds that averaging smooths away, so only the outside is shown.',

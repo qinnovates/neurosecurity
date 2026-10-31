@@ -39,8 +39,9 @@ export const ANATOMY_PAYLOAD_MARKERS = Object.freeze([
   'not_drafted', 'not_mapped', 'owner_contains_row_subject', 'row_subject_contains_owner', 'route_not_settled',
   'mni_icbm152_2009c_asym', 'qif-anatomy-',
   '"state":"ai_drafted_unreviewed"',
-  // The files served beside the index: the explorer's catalog, the literature statements and the H01 card.
+  // The files served beside the index: the explorer's catalog, the literature statements, the H01 card and the dossier's records.
   'device_stage_techniques', 'registrar_version', 'anatomy_as_stated', 'verifier_verdict', 'must_not_imply', 'numbers_that_differ_by_source',
+  'pathway_ends', 'protection_layers', 'has_listed_name',
 ]);
 
 /**

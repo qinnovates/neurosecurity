@@ -396,7 +396,7 @@ describe('AtlasExplorer: what each statement and section says', () => {
    * mixed into the region's own claims. The band holds up to every region in the atlas, so it is last
    * and fenced off.
    */
-  it('orders the pane by what a reader needs first: coverage, the region\'s own words, the techniques, then the mappings', async () => {
+  it('orders the pane by what a reader needs first: the dossier, coverage, the region\'s own words, the techniques, then the mappings', async () => {
     const { inspector } = await openRegion(litRegionId);
     const headings = [...inspector.querySelectorAll('h3')].map((heading) => heading.textContent ?? '');
     const at = (text: string): number => {
@@ -404,7 +404,9 @@ describe('AtlasExplorer: what each statement and section says', () => {
       expect(index, text).toBeGreaterThan(-1);
       return index;
     };
-    expect(at('What we hold for this region')).toBe(0);
+    expect(at('Layer and function')).toBe(0);
+    expect(['Techniques', 'Devices', 'Hazards for this layer', 'Connections', 'Conditions referenced'].map(at)).toEqual([1, 2, 3, 4, 5]);
+    expect(at('Conditions referenced')).toBeLessThan(at('What we hold for this region'));
     expect(at('What we hold for this region')).toBeLessThan(at('What the QIF atlas file says it does'));
     expect(at('What the QIF atlas file says it does')).toBeLessThan(at('Techniques linked to this region'));
     expect(at('Techniques linked to this region')).toBeLessThan(at('DSM-5-TR category references'));
