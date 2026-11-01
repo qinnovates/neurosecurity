@@ -110,7 +110,7 @@ const navSections: NavSection[] = [
 ];
 ---
 
-<nav class="glass fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border)]" id="main-nav" transition:persist>
+<nav class="glass nav-pill fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[min(1200px,calc(100%-2rem))] rounded-full" id="main-nav" transition:persist>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
@@ -183,10 +183,8 @@ const navSections: NavSection[] = [
         <a
           href="/atlas/tara/"
           class:list={[
-            "hidden md:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium transition-colors text-white",
-            currentPath.startsWith('/atlas/tara')
-              ? "bg-[var(--color-accent-fill)]"
-              : "bg-[var(--color-accent-fill)] hover:opacity-90"
+            "nav-cta hidden md:inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium transition-colors text-[var(--color-text-primary)]",
+            currentPath.startsWith('/atlas/tara') ? "nav-cta-active" : ""
           ]}
         >
           Explore TARA
@@ -476,3 +474,11 @@ const navSections: NavSection[] = [
   initNav();
   document.addEventListener('astro:after-swap', initNav);
 </script>
+
+<style>
+  .nav-pill { background: rgba(18, 18, 24, 0.55); border-color: rgba(255, 255, 255, 0.14); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12); }
+  .nav-cta { background: rgba(255, 255, 255, 0.10); border: 1px solid rgba(255, 255, 255, 0.18); }
+  .nav-cta:hover { background: rgba(255, 255, 255, 0.18); }
+  .nav-cta-active { background: rgba(61, 134, 255, 0.22); border-color: rgba(61, 134, 255, 0.45); }
+  @media (prefers-reduced-transparency: reduce) { .nav-pill { background: #0b0b10; } }
+</style>
