@@ -182,12 +182,7 @@ const navSections: NavSection[] = [
         <!-- Explore TARA CTA -->
         <a
           href="/atlas/tara/"
-          class:list={[
-            "hidden md:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium transition-colors text-white",
-            currentPath.startsWith('/atlas/tara')
-              ? "bg-[var(--color-accent-fill)]"
-              : "bg-[var(--color-accent-fill)] hover:opacity-90"
-          ]}
+          class="cta-pill nav-tara-desktop gap-2"
         >
           Explore TARA
         </a>
@@ -221,7 +216,7 @@ const navSections: NavSection[] = [
         <!-- Search button -->
         <button
           id="search-btn"
-          class="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors"
+          class="cta-pill"
           aria-label="Search"
         >
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -251,7 +246,7 @@ const navSections: NavSection[] = [
       <div class="pb-2 mb-2 border-b border-[var(--color-border)] space-y-2">
         <a
           href="/atlas/tara/"
-          class="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-[var(--color-accent-fill)] text-white text-sm font-medium text-center hover:opacity-90 transition-opacity"
+          class="cta-pill cta-menu gap-2 w-full"
         >
           Explore TARA
         </a>

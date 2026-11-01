@@ -70,10 +70,10 @@ describe('startConsent', () => {
   const buttons = () => [...document.querySelectorAll('#qinnovate-consent-banner button')];
   const noReload = () => {};
 
-  it('requests nothing until the visitor accepts all, offers three equal first-layer choices, then adds only Cloudflare', () => {
+  it('requests nothing until the visitor accepts all, offers equal accept/reject choices and Customize, then adds only Cloudflare', () => {
     consent.startConsent(window, document, memoryStorage(), noReload);
     expect(beacons()).toHaveLength(0);
-    expect(buttons().map((button) => button.textContent)).toEqual(['Necessary only', 'Customize', 'Accept all']);
+    expect(buttons().map((button) => button.textContent)).toEqual(['Reject all', 'Customize', 'Accept all']);
     buttons()[2].click();
     expect(beacons()).toHaveLength(1);
     expect(JSON.parse(beacons()[0].getAttribute('data-cf-beacon')).token).toMatch(/^[0-9a-f]{32}$/);
@@ -81,7 +81,7 @@ describe('startConsent', () => {
     expect(document.getElementById('qinnovate-consent-banner')).toBeNull();
   });
 
-  it('keeps analytics off after "Necessary only" and remembers it', () => {
+  it('keeps analytics off after "Reject all" and remembers it', () => {
     const storage = memoryStorage();
     consent.startConsent(window, document, storage, noReload);
     buttons()[0].click();
@@ -145,9 +145,9 @@ describe('startConsent', () => {
     consent.startConsent(window, document, memoryStorage({ [consent.CONSENT_KEY]: stored(true, Date.now()) }), noReload);
     document.querySelector('[data-consent-open]').click();
     buttons()[1].click();
-    expect(analyticsBox().checked).toBe(true);
+    expect(analyticsBox().checked).toBe(false);
     buttons()[1].click();
-    expect(labelled()).toEqual(['Necessary only', 'Customize', 'Accept all']);
+    expect(labelled()).toEqual(['Reject all', 'Customize', 'Accept all']);
   });
 
   it('gives the switch an accessible name and moves focus to the new heading', () => {
@@ -156,6 +156,51 @@ describe('startConsent', () => {
     expect(analyticsBox().getAttribute('aria-labelledby')).toBe('qc-analytics-name');
     expect(document.getElementById('qc-analytics-name').textContent).toBe('Analytics');
     expect(document.activeElement.id).toBe('qc-title');
+  });
+
+  it('makes rejection and acceptance equally prominent and one click away', () => {
+    consent.startConsent(window, document, memoryStorage(), noReload);
+    const [reject, customize, accept] = buttons();
+    expect(reject.textContent).toBe('Reject all');
+    expect(accept.textContent).toBe('Accept all');
+    expect(customize.className).toBe('qc-secondary');
+    const rejection = getComputedStyle(reject);
+    const acceptance = getComputedStyle(accept);
+    for (const property of ['flex', 'min-height', 'padding', 'font-weight', 'background', 'border', 'color']) {
+      expect(rejection.getPropertyValue(property)).toBe(acceptance.getPropertyValue(property));
+    }
+    expect(rejection.minHeight).toBe('44px');
+    reject.click();
+    expect(beacons()).toHaveLength(0);
+    expect(document.getElementById('qinnovate-consent-banner')).toBeNull();
+  });
+
+  it('operates the switch with Space, Enter and clicks without loading analytics before Save', () => {
+    const storage = memoryStorage();
+    consent.startConsent(window, document, storage, noReload);
+    buttons()[1].click();
+    const toggle = analyticsBox();
+    const necessary = document.querySelector('[role="switch"][disabled]');
+    expect(necessary.checked).toBe(true);
+    expect(necessary.getAttribute('aria-checked')).toBe('true');
+    expect(toggle.getAttribute('role')).toBe('switch');
+    expect(toggle.getAttribute('aria-checked')).toBe('false');
+    toggle.focus();
+    for (const [key, checked] of [[' ', true], ['Enter', false]]) {
+      const event = new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true });
+      toggle.dispatchEvent(event);
+      expect(event.defaultPrevented).toBe(true);
+      expect(toggle.checked).toBe(checked);
+      expect(toggle.getAttribute('aria-checked')).toBe(String(checked));
+      expect(document.activeElement).toBe(toggle);
+    }
+    toggle.click();
+    expect(toggle.getAttribute('aria-checked')).toBe('true');
+    expect(beacons()).toHaveLength(0);
+    expect(storage.peek(consent.CONSENT_KEY)).toBeUndefined();
+    buttons()[0].click();
+    expect(beacons()).toHaveLength(1);
+    expect(JSON.parse(storage.peek(consent.CONSENT_KEY)).analytics).toBe(true);
   });
 
   it('builds the banner from text nodes only', () => {
