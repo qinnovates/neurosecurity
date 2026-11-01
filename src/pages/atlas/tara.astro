@@ -9,6 +9,11 @@ import Wordmark from '@/components/Wordmark.astro';
 import { THREAT_VECTORS } from '@/lib/threat-data';
 import '@/components/tara/tara.css';
 
+const techniques = THREAT_VECTORS.map((t) => ({
+  id: t.id, name: t.name, therapeuticAnalog: t.tara?.clinical?.therapeutic_analog ?? null,
+  evidenceTier: t.evidence?.tier ?? null, sources: t.sources,
+  clinicalSources: t.tara?.clinical?.sources ?? [],
+}));
 const regions = atlas.brain_regions.map(({ id, name }) => ({ id, name }));
 const index = buildSearchIndex(THREAT_VECTORS, regions, HOURGLASS_BANDS);
 const cards = [
@@ -21,7 +26,7 @@ const cards = [
 <PageLayout title="TARA Glia by Qinnovate" description="Threat Analysis Risk Atlas for the neural frontier." wide>
   <article class="tara-page">
     <AtlasIndexPin />
-    <TaraExplorer client:load index={index}><Wordmark slot="wordmark" /></TaraExplorer>
+    <TaraExplorer client:load index={index} techniques={techniques}><Wordmark slot="wordmark" /></TaraExplorer>
     <noscript><p>Explore region names and mappings in the <a href="/atlas/explorer/">full atlas</a>. The interactive brain and search require JavaScript.</p></noscript>
     <section class="tara-features" id="features" aria-label="Explore Glia">
       <div class="tara-section-heading"><h2>FOLLOW THE CONNECTIONS</h2><span>From region to risk</span></div>

@@ -26,3 +26,10 @@ it('opens by shortcut, debounces and selects a region with arrow keys and Enter'
   expect(select).toHaveBeenCalledWith('r1');
   expect(screen.getByText('Search ⌘K')).toBe(document.activeElement);
 });
+it('selects a technique without leaving the shared panel', () => {
+  const technique = vi.fn();
+  render(<TaraSearch index={buildSearchIndex([{ id: 'QIF-T0009', name: 'Public technique' }], [], [])} onSelectRegion={vi.fn()} onSelectTechnique={technique} />);
+  fireEvent.click(screen.getByRole('button', { name: /Search/ }));
+  fireEvent.keyDown(screen.getByRole('combobox'), { key: 'Enter' });
+  expect(technique).toHaveBeenCalledWith('QIF-T0009');
+});

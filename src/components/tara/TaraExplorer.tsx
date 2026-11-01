@@ -1,19 +1,15 @@
-import { useState, type ReactNode } from 'react';
+import { useReducer, type ReactNode } from 'react';
 import BrainHeroMount from '../atlas-scene/BrainHeroMount';
 import TaraRegionPanel from './TaraRegionPanel';
 import TaraSearch from './TaraSearch';
 import type { SearchHit } from './search-index';
 import './tara.css';
+import LensToggle from '../LensToggle';
+import { INITIAL_TARA_STATE, taraReducer, taraBrainLens, filterTtpList, type TaraTechnique, type TaraLens } from './tara-state';
 
-export default function TaraExplorer({ index, wordmark }: { index: SearchHit[]; wordmark?: ReactNode }) {
-  const [regionId, setRegionId] = useState<string | null>('pfc');
-  const [evidenceRequest, setEvidenceRequest] = useState(0);
+export default function TaraExplorer({ index, wordmark, techniques = [] }: { index: SearchHit[]; wordmark?: ReactNode; techniques?: TaraTechnique[] }) {
+  const [state, dispatch] = useReducer(taraReducer, INITIAL_TARA_STATE);
   return <div className="tara-explorer">
-    <nav className="tara-nav" aria-label="TARA Glia navigation">
-      <a className="tara-brand" href="/atlas/tara/" aria-label="TARA Glia home"><svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" strokeWidth="1.6"><path d="m16 3 11 6v14l-11 6-11-6V9L16 3ZM16 3v26M5 9l22 14M27 9 5 23" /></g><circle cx="16" cy="16" r="3" fill="#3d86ff" /></svg>TARA <span>Glia</span></a>
-      <div className="tara-nav-links"><a href="#atlas">Atlas</a><a href="#features">Library</a><a href="/atlas/scoring/">Evidence</a><a href="#about">About</a></div>
-      <div className="tara-nav-actions"><TaraSearch index={index} onSelectRegion={setRegionId} /><a className="tara-ink" href="/atlas/explorer/">Explore <span aria-hidden="true">↗</span></a></div>
-    </nav>
     <header className="tara-title" id="about">
       <div className="tara-title-copy">
         <p className="tara-eyebrow">OPEN NEURAL ATLAS</p>
@@ -21,9 +17,17 @@ export default function TaraExplorer({ index, wordmark }: { index: SearchHit[]; 
         <p className="tara-subtitle">Threat Analysis Risk Atlas for the neural frontier.</p>
         <p className="tara-legal">Trademark status pending. Confirm wording with counsel before publishing.</p>
       </div>
-      <span className="tara-preview"><i />Research preview</span>
+      <div className="tara-title-actions"><span className="tara-preview"><i />Research preview</span><TaraSearch index={index} onSelectRegion={(id) => dispatch({ type: 'region', id })} onSelectTechnique={(id) => dispatch({ type: 'technique', id, regionId: null })} /></div>
     </header>
-    <div id="atlas"><BrainHeroMount onShowEvidence={() => setEvidenceRequest((count) => count + 1)} selectedRegionId={regionId} onSelectRegion={setRegionId}
-      renderRegionPanel={(model, id) => <TaraRegionPanel model={model} regionId={id} evidenceRequest={evidenceRequest} />} /></div>
+    <div className="tara-controls" aria-label="Atlas controls">
+      <div className="brain-hero-lenses" role="group" aria-label="Colour the brain and panel by">
+        {(['band', 'niss', 'evidence'] as TaraLens[]).map((lens) => <button type="button" className="brain-hero-lens" key={lens} aria-pressed={state.lens === lens} onClick={() => dispatch({ type: 'lens', lens })}>{lens === 'niss' ? 'NISS' : lens === 'band' ? 'Band' : 'Evidence'}</button>)}
+      </div>
+      <LensToggle value={state.perspective} onChange={(perspective) => dispatch({ type: 'perspective', perspective })} />
+    </div>
+    <p className="tara-context" role="status">{state.perspective === 'both' ? 'Security and clinical' : state.perspective === 'security' ? 'Security' : 'Clinical'} perspective · {state.lens === 'niss' ? 'Draft NISS' : state.lens === 'evidence' ? 'Evidence tiers' : 'QIF bands'}. Proposed research frameworks for defensive threat modelling; not a clinical assessment.</p>
+    <div id="atlas"><BrainHeroMount selectedRegionId={state.selectedRegionId} onSelectRegion={(id) => dispatch({ type: 'region', id })}
+      lens={taraBrainLens(state, techniques)} hideLensControl keyboardRegions techniqueIds={filterTtpList(techniques, state.perspective).map((t) => t.id)}
+      renderRegionPanel={(model) => <TaraRegionPanel model={model} state={state} dispatch={dispatch} techniques={techniques} />} /></div>
   </div>;
 }

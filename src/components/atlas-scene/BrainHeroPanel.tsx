@@ -15,6 +15,10 @@ const STYLESHEET_URLS: readonly string[] = [sceneStylesUrl, heroStylesUrl];
 
 export interface BrainHeroPanelProps {
   onShowEvidence?: () => void;
+  lens?: import('@/lib/atlas-explorer/lens-state').Lens;
+  hideLensControl?: boolean;
+  keyboardRegions?: boolean;
+  techniqueIds?: readonly string[];
   selectedRegionId?: string | null;
   onSelectRegion?: (id: string | null) => void;
   renderRegionPanel?: (model: import('@/lib/atlas-explorer/explorer-model').ExplorerModel, id: string | null) => ReactNode;

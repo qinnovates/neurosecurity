@@ -212,3 +212,35 @@ main:has(.tara-page) { max-width: 1600px; padding-inline: 56px; }
 .tara-page .tara-brand { color: var(--color-text-primary); }
 .tara-page .tara-nav a { color: var(--color-text-muted); }
 .tara-page .tara-nav a:hover, .tara-page .tara-nav a:focus-visible { color: var(--color-text-primary); }
+
+/* One control row above the stage leaves the orientation cube its own space. */
+.tara-controls, .tara-title-actions { display:flex; flex-wrap:wrap; align-items:center; gap:1rem; }
+.tara-controls { margin-bottom:.75rem; }
+.tara-controls button { min-width:44px; min-height:44px; }
+.tara-controls [role="radio"][aria-checked="true"] { color:#fff !important; }
+.tara-context { color:var(--color-text-muted); font-size:.8125rem; line-height:1.6; margin:0 0 1rem; }
+.tara-explorer .brain-hero[data-brain-hero="open"] .atlas-viewport-header { width:auto; max-width:calc(55% - 2rem); }
+.tara-panel p.tara-region-meta { display:block; overflow:visible; font-size:.875rem; line-height:1.6; }
+.tara-row[data-emphasis="true"], .tara-band[data-emphasis="true"] { border-left:2px solid #7DD3FC; padding-left:.75rem; }
+.tara-ttp-list > li { border-top:1px solid var(--color-border); padding:.5rem; }
+.tara-ttp-list small { display:block; color:var(--color-text-muted); }
+.tara-ttp-list [data-highlighted="true"], .tara-technique-selection { border:1px solid #7DD3FC; border-radius:8px; padding:.75rem; }
+.tara-technique-selection a { display:flex; min-height:44px; }
+.tara-explorer .brain-hero[data-brain-hero="open"] .brain-hero-regions { grid-column:1; grid-row:4; }
+.tara-page a, .tara-dialog button { min-width:44px; }
+@media (max-width:1023px) {
+  .tara-explorer .brain-hero[data-brain-hero="open"] .atlas-viewport-header { max-width:calc(100% - 2rem); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .tara-controls *, .tara-technique-selection { transition:none !important; animation:none !important; }
+}
+.tara-title h1 { color:#fff; }
+@media (max-width:1023px) {
+  .tara-explorer .brain-hero[data-brain-hero="open"] .brain-hero-regions { grid-row:5; }
+}
+
+/* Interweave polish: give lens and perspective segments room so labels never touch the pill edge,
+   and show TTP technique links in the brand text colour instead of default link blue. */
+.tara-controls [role="radio"] { padding-inline: 0.875rem; min-width: 5rem; white-space: nowrap; }
+.tara-ttp-list a, .tara-technique-selection a { color: var(--color-text-primary); text-decoration-color: var(--color-text-faint); text-underline-offset: 3px; }
+.tara-ttp-list a:hover, .tara-technique-selection a:hover { color: var(--color-accent-primary); }

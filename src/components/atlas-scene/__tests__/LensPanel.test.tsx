@@ -36,8 +36,8 @@ describe('the lens panel explains itself', () => {
 });
 
 describe('the lens panel tally', () => {
-  const expectedWithoutSubject: Record<LensKind, boolean> = { band: false, technique: false, niss: true, dsm: false, stated_targets: false };
-  const expectedWithSubject: Record<LensKind, boolean> = { band: false, technique: true, niss: true, dsm: true, stated_targets: true };
+  const expectedWithoutSubject: Record<typeof LENS_KINDS[number], boolean> = { band: false, technique: false, niss: true, dsm: false, stated_targets: false };
+  const expectedWithSubject: Record<typeof LENS_KINDS[number], boolean> = { band: false, technique: true, niss: true, dsm: true, stated_targets: true };
 
   it.each(LENS_KINDS)('shows the tally for %s exactly as before', (kind) => {
     expect(hasTally(kind, false)).toBe(expectedWithoutSubject[kind]);

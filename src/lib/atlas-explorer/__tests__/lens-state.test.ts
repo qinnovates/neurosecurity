@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { LENS_KINDS, lensNeedsSubject, type LensKind } from '../lens-state';
 
 describe('lensNeedsSubject', () => {
-  const expected: Record<LensKind, boolean> = {
+  const expected: Record<typeof LENS_KINDS[number], boolean> = {
     band: false,
     niss: false,
     technique: true,

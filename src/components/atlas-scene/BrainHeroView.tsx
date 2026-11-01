@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import type { LayerId } from '@/lib/anatomy/source-types';
+import { createExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { LENS_LABELS, SUBJECT_FREE_LENS_KINDS, emptyLens, type Lens } from '@/lib/atlas-explorer/lens-state';
 import { INITIAL_EXPLORER_STATE } from './atlas-state';
@@ -52,11 +53,26 @@ function HeroLensSwitch({ lens, onChoose, onShowEvidence }: { lens: Lens; onChoo
  * own probe, so a browser that cannot draw gets the region list in the
  * picture's place and never waits on a view that would only say no.
  */
-export default function BrainHeroView({ model, isIndexPinned, isOutOfStep, probe = probeWebGL, loadOpenView, selectedRegionId: controlledId, onSelectRegion, renderRegionPanel, onShowEvidence }: Props) {
+export default function BrainHeroView(props: Props) {
+  if (props.selectedRegionId !== undefined && props.lens !== undefined) {
+    return <HeroView {...props} selectedRegionId={props.selectedRegionId} lens={props.lens} select={(id) => props.onSelectRegion?.(id)} chooseLens={() => {}} />;
+  }
+  return <UncontrolledHeroView {...props} />;
+}
+
+/** Homepage callers keep their own state; the TARA page takes only the controlled path. */
+function UncontrolledHeroView(props: Props) {
   const [localId, setSelectedRegionId] = useState<string | null>(null);
-  const selectedRegionId = controlledId === undefined ? localId : controlledId;
-  const select = (id: string | null) => { setSelectedRegionId(id); onSelectRegion?.(id); };
-  const [lens, setLens] = useState<Lens>(HERO_DEFAULT_LENS);
+  const [localLens, setLens] = useState<Lens>(HERO_DEFAULT_LENS);
+  const select = (id: string | null) => {
+    if (props.selectedRegionId === undefined) setSelectedRegionId(id);
+    props.onSelectRegion?.(id);
+  };
+  return <HeroView {...props} selectedRegionId={props.selectedRegionId === undefined ? localId : props.selectedRegionId} lens={props.lens ?? localLens} select={select} chooseLens={setLens} />;
+}
+
+function HeroView({ model, isIndexPinned, isOutOfStep, probe = probeWebGL, loadOpenView, selectedRegionId, lens, select, chooseLens, onSelectRegion, renderRegionPanel, onShowEvidence, hideLensControl = false, keyboardRegions = false, techniqueIds }: Props & { selectedRegionId: string | null; lens: Lens; select: (id: string | null) => void; chooseLens: (lens: Lens) => void }) {
+  const viewportModel = useMemo(() => techniqueIds === undefined ? model : createExplorerModel({ ...model.index, techniques: model.index.techniques.filter((t) => techniqueIds.includes(t.id)) }, model.catalog), [model, techniqueIds]);
   const gate = useMemo(() => decideGate(isIndexPinned, globalThis.crypto?.subtle !== undefined, probe, isOutOfStep), [isIndexPinned, isOutOfStep, probe]);
   if (gate !== 'open') {
     return (
@@ -70,9 +86,10 @@ export default function BrainHeroView({ model, isIndexPinned, isOutOfStep, probe
   return (
     <div className="atlas-root brain-hero" data-brain-hero="open" data-hero-lens={lens.kind}>
       <AtlasViewport
-        model={model} lens={lens} layers={HERO_LAYERS} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep} isAsked
-        onSelectRegion={select} probe={probe} loadOpenView={loadOpenView} headerControls={<HeroLensSwitch lens={lens} onChoose={setLens} onShowEvidence={onShowEvidence} />}
+        model={viewportModel} lens={lens} layers={HERO_LAYERS} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep} isAsked
+        onSelectRegion={select} probe={probe} loadOpenView={loadOpenView} headerControls={hideLensControl ? null : <HeroLensSwitch lens={lens} onChoose={chooseLens} onShowEvidence={onShowEvidence} />}
       />
+      {keyboardRegions && <BrainHeroRegionList model={model} onSelectRegion={select} />}
       {renderRegionPanel ? renderRegionPanel(model, selectedRegionId) : <BrainHeroSummary model={model} regionId={selectedRegionId} lens={lens} />}
     </div>
   );

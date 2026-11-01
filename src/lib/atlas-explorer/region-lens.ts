@@ -125,6 +125,11 @@ function describeDevice(model: ExplorerModel, region: IndexSubject, deviceId: st
 
 function describeFact(model: ExplorerModel, region: IndexSubject, mode: ColourMode): Fact {
   switch (mode.kind) {
+    case 'evidence': {
+      const links = listLitLinks(model, region.id);
+      const tiers = [...new Set(links.flatMap(({ technique }) => mode.tiersByTechnique?.[technique.id] ?? []))];
+      return tiers.length ? { standing: 'value', value: tiers.join(', '), reason: 'evidence tiers recorded for mapped techniques', reviewState: reviewOf(links), entryCount: links.length } : noData('no evidence tier recorded for mapped techniques');
+    }
     case 'band': return describeBand(model, region);
     case 'technique': return describeTechnique(model, region, mode.techniqueId);
     case 'niss': return describeNiss(model, region);
