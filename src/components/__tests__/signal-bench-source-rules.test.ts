@@ -21,6 +21,6 @@ describe('signal bench source rules', () => {
   });
 
   it('keeps the medicine line sourced from therapeuticCount', () => {
-    expect(read('src/pages/index.astro')).toContain('{therapeuticCount} of those same mechanisms are already used in medicine.');
+    expect(read('src/pages/atlas/tara.astro')).toContain('{therapeuticCount} of those same mechanisms are already used in medicine.');
   });
 });

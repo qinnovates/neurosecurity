@@ -6,8 +6,11 @@ import { getKqlTables } from '@/lib/kql-tables';
 import { HOURGLASS_BANDS } from '@/lib/qif-constants';
 import { CATALOG_VERSION, THREAT_CATEGORIES, THREAT_VECTORS, getStatusStats, getNeurorightStats } from '@/lib/threat-data';
 import TaraVisualization from '@/components/TaraVisualization';
+import BrainHeroMount from '@/components/atlas-scene/BrainHeroMount';
+import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';
 import { getCatalogCoverage } from '@/lib/purpose-and-limits';
 
+const therapeuticCount = THREAT_VECTORS.filter((vector) => vector.clinical?.therapeuticAnalog === true).length;
 const kqlTables = getKqlTables();
 const coverage = getCatalogCoverage();
 const statusStats = getStatusStats();
@@ -25,6 +28,11 @@ const categories = [...THREAT_CATEGORIES];
   <AtlasViewSwitcher current="/atlas/tara/" />
   <div id="tara-command-center" class="min-h-screen -mt-4 pt-4">
     <div class="max-w-[1400px] mx-auto">
+      <AtlasIndexPin />
+      <section class="mb-16" aria-label="The brain, by region">
+        <BrainHeroMount client:load />
+        <p class="text-sm text-slate-500 mt-4">{therapeuticCount} of those same mechanisms are already used in medicine.</p>
+      </section>
       <div class="mb-12">
         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-16">
           <div class="max-w-3xl">

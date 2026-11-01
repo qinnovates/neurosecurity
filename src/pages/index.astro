@@ -10,8 +10,6 @@ import { buildSignalBenchEvents } from '../components/signal-bench/signal-bench-
 import { THREAT_VECTORS } from '../lib/threat-data';
 import HourglassReveal from '../components/HourglassReveal';
 import AtlasExplorerLink from '../components/brain/AtlasExplorerLink';
-import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';
-import BrainHeroMount from '@/components/atlas-scene/BrainHeroMount';
 import DualUseSplit from '../components/DualUseSplit';
 import GliaTeaser from '../components/GliaTeaser.astro';
 import NeurorightsRadar from '@/components/radar/NeurorightsRadar';
@@ -71,344 +69,38 @@ const neurorightsFold = foldNeurorights(
 <BaseLayout title="TARA — Threat Modeling Catalog for Neural Devices · Qinnovate" description={`A proposed, unvalidated framework for threat modeling, severity scoring and impact assessment of neural devices: ${coverage.total} cataloged techniques, ${coverage.scored} with draft NISS scores, ${coverage.detected} with detection guidance.`}>
   <Nav />
 
-  <!-- ═══ HERO: the brain is the first thing on the screen ═══ -->
-  <!--
-    The 3D brain is this page's subject, so the words above it are a strip and not a column: title beside
-    the one-sentence framing, both small enough that the picture sits above the fold. Picking a region in
-    the picture shows a short summary beside it with one way on, into the full atlas with that region
-    selected; the plain link under the picture reaches the same atlas without the 3D view at all.
-  -->
-  <section class="relative overflow-hidden bg-[var(--color-bg-deep)]" aria-labelledby="hero-heading">
-    <AtlasIndexPin />
-    <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-10">
-      <header class="brain-hero-head">
-        <div>
-          <p class="text-sm mb-3 hero-byline">Brain-computer interface research by Qinnovate</p>
-          <h1 id="hero-heading" class="brain-hero-title font-[family-name:var(--font-heading)] text-balance">
-            Threat modeling for brain&#8209;computer interfaces
-          </h1>
-        </div>
-        <div class="brain-hero-lede">
-          <p class="text-base text-[var(--color-text-muted)] leading-relaxed">
-            A proposed research framework for modeling, scoring and prioritizing threats to neural devices.
-          </p>
-          <p class="text-sm text-[var(--color-text-faint)] mt-2">
-            {coverage.total} cataloged techniques, each with an evidence status. Pick a region to see the risks and devices linked to it.
-          </p>
-        </div>
-      </header>
-
-      <div class="brain-hero-stage mt-7">
-        <BrainHeroMount client:load />
-        <noscript><p class="text-sm text-[var(--color-text-muted)] mt-3">The 3D brain needs JavaScript. The full atlas, linked below, lists every region as text.</p></noscript>
-      </div>
-
-      <!-- The ways on. The atlas link is a plain link on purpose: it reaches every region without the 3D view. -->
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-7">
-        <a
-          href="/atlas/tara/"
-          class="px-6 py-3 rounded-lg bg-[var(--color-accent-fill)] text-white font-medium text-center hover:opacity-90 transition-opacity"
-        >
-          Explore the TARA Catalog
-        </a>
-        <AtlasExplorerLink className="px-6 py-3 rounded-lg glass text-[var(--color-text-primary)] font-medium text-center">Explore the full brain atlas</AtlasExplorerLink>
-        <a href="/framework/" class="px-2 py-3 text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors text-center">
-          How it's built &rarr;
-        </a>
-      </div>
-
-      <div class="mt-10 flex flex-col gap-4">
-        <TrustBar />
-        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-[var(--color-text-faint)]">
-          <p class="m-0">{demonstrated} demonstrated, {theoretical} theoretical, {confirmed} confirmed with full chain-of-custody.</p>
-          <div class="flex flex-wrap items-center gap-2">
-            <span class="mr-1">Explore by role:</span>
-            <a href="/atlas/tara/" class="glass px-3 py-1.5 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">Security Researcher</a>
-            <a href="/atlas/clinical/" class="glass px-3 py-1.5 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">Clinician</a>
-            <a href="/governance/" class="glass px-3 py-1.5 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">Policymaker</a>
-            <a href="/research/api/" class="glass px-3 py-1.5 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">Developer</a>
-          </div>
-        </div>
-      </div>
+  <!-- ═══ HERO: the render, then the goals as the reader scrolls ═══ -->
+  <section class="home-hero" aria-labelledby="hero-heading">
+    <img class="home-hero-image" src="/images/home-hero.png" alt="A silhouetted head in profile, lit by a blue rim light" width="1672" height="941" fetchpriority="high" />
+    <div class="home-hero-scrim" aria-hidden="true"></div>
+    <div class="home-hero-copy">
+      <h1 id="hero-heading" class="home-hero-title font-[family-name:var(--font-heading)]">Qinnovate</h1>
+      <p class="home-hero-sub">An open research effort on the security and governance of brain-computer interfaces.</p>
     </div>
+    <div class="home-hero-cue" aria-hidden="true"><span>SCROLL</span><span class="home-hero-cue-line"></span></div>
   </section>
 
-  <!-- ═══ WHAT THIS WORK IS / IS NOT ═══ -->
-  <section class="py-[var(--spacing-section)]" style="background: var(--color-bg-surface);">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-2 gap-6 reveal-stagger reveal">
-        <div class="glass rounded-xl p-6">
-          <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-4">What This Work Is</h3>
-          <ul class="space-y-2 text-sm text-[var(--color-text-muted)]">
-            <li>&#8250; Open-source research portfolio</li>
-            <li>&#8250; Proposed threat modeling methods</li>
-            <li>&#8250; Bridge between security and neurorights</li>
-          </ul>
-        </div>
-        <div class="glass rounded-xl p-6">
-          <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-4">What This Work Is Not</h3>
-          <ul class="space-y-2 text-sm text-[var(--color-text-muted)]">
-            <li>&times; Not a clinical or diagnostic tool</li>
-            <li>&times; Not an adopted standard</li>
-            <li>&times; Not independently validated</li>
-          </ul>
-        </div>
+  <section class="home-goals" aria-label="Our goals">
+    <div class="home-goal reveal">
+      <h2>Where Minds Meet Machines</h2>
+      <p>Brain-computer interfaces could change how people communicate, move and learn. We want that future to be safe to enter.</p>
+    </div>
+    <div class="home-cards">
+      <article class="home-card reveal"><span class="home-card-num">01</span><h3>Map the Full Path</h3><p>Trace every layer from silicon hardware to neural tissue.</p></article>
+      <article class="home-card reveal"><span class="home-card-num">02</span><h3>Proposed, Not Settled</h3><p>QIF, TARA and NISS are proposed frameworks, open to review and correction.</p></article>
+      <article class="home-card reveal"><span class="home-card-num">03</span><h3>Built for Everyone</h3><p>Plain-language explanations and open material so students, clinicians and engineers can all take part.</p></article>
+    </div>
+    <div class="home-goal reveal">
+      <h2>Defend the Person Wearing It</h2>
+      <p>Neural data is among the most personal information a person can produce, so its protection should start at design time.</p>
+    </div>
+    <div class="home-goal reveal">
+      <h2>From Silicon to Synapse</h2>
+      <p>We map the full path from chip to cortex in the open, so anyone can check our work and challenge it.</p>
+      <div class="home-goal-links">
+        <a href="/atlas/tara/" class="home-pill home-pill-solid">Explore TARA</a>
+        <a href="/framework/" class="home-pill home-pill-ghost">Read the framework</a>
       </div>
-      <p class="text-center mt-6 font-mono text-xs text-[var(--color-text-faint)] tracking-[0.1em] reveal">PROPOSED &middot; NOT VALIDATED &middot; OPEN TO CRITIQUE</p>
-    </div>
-  </section>
-
-  <!-- ═══ TARA SNAPSHOT — the flagship showcase ═══ -->
-  <section class="relative py-[var(--spacing-section)] px-4 overflow-hidden">
-    <div class="max-w-5xl mx-auto text-center">
-      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--color-accent-primary)] mb-3">The TARA Catalog</p>
-      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-4">
-        Every entry carries an evidence status, not just a name.
-      </h2>
-      <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto mb-12">
-        {coverage.total} techniques: {coverage.detected} include detection guidance, {coverage.scored} carry draft NISS scores. {PURPOSE_SUMMARY} <a href={STATEMENT_LINKS.purposeAndLimits} class="text-[var(--color-accent-primary)] hover:underline">Purpose and limits &rarr;</a>
-      </p>
-
-      <div class="grid md:grid-cols-2 gap-10 items-start mb-12 text-left">
-        <div class="text-center">
-          <span class="text-6xl sm:text-7xl font-bold font-[family-name:var(--font-heading)] bg-gradient-to-b from-[var(--color-accent-primary)] to-[var(--color-accent-tertiary)] bg-clip-text text-transparent">{totalThreats}</span>
-          <p class="text-sm text-[var(--color-text-muted)] mt-4">techniques in the TARA catalog.</p>
-          <p class="text-sm mt-2">
-            <AtlasExplorerLink className="text-[var(--color-accent-primary)] hover:underline">See the brain regions in the TARA Brain Atlas &rarr;</AtlasExplorerLink>
-          </p>
-        </div>
-        <div>
-          <DualUseSplit
-            client:visible
-            therapeutic={therapeuticCount}
-            siliconOnly={totalThreats - therapeuticCount}
-            total={totalThreats}
-          />
-          <p class="text-sm text-[var(--color-text-muted)] mt-4 text-center">{therapeuticCount} of those same mechanisms are already used in medicine.</p>
-        </div>
-      </div>
-
-      <!-- Signal bench: catalogued interference classes playing out on synthetic traces. Below the fold now, so it draws once seen. -->
-      <div class="flex flex-col min-h-[280px] mb-12 -mx-4 sm:mx-0">
-        <SignalBench client:visible events={signalBenchEvents} />
-      </div>
-
-      <!-- One concrete technique -->
-      <div class="glass rounded-xl p-6 max-w-2xl mx-auto text-left" style="border-left: 3px solid var(--color-accent-primary);">
-        <p class="text-[10px] font-mono tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-3">What a BCI attack actually looks like</p>
-        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3">
-          A brain-computer interface reads motor intent — "move right hand." An attacker intercepts that signal and replays it. The hand moves without the user's intent.
-        </p>
-        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3">
-          The same mechanism — electrical signal repetition — is used therapeutically in stroke recovery. Same physics. Different intent.
-        </p>
-        <p class="text-xs text-[var(--color-text-faint)]">
-          One of {totalThreats} catalogued techniques. <a href="/atlas/tara/" class="text-[var(--color-accent-primary)] hover:underline">Explore the full catalog &rarr;</a>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ VALIDATED, NOT JUST CLAIMED ═══ -->
-  <section class="py-[var(--spacing-section)]" style="background: var(--color-bg-surface);">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="reveal">
-      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-tertiary)] mb-4 text-center">Validated, Not Just Claimed</p>
-      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-3 text-center">Does the catalog hold up?</h2>
-      <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto mb-8 text-center">
-        A catalog that can't be tested is a claim. Here's how it validates against real hardware, real physics, and real neuroscience.
-      </p>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto reveal reveal-stagger">
-      <!-- Empirical validation -->
-      <a href="/atlas/analysis/t0079-anc-fingerprint/" class="glass rounded-xl p-5 card-hover group text-left">
-        <div class="flex items-center gap-2 mb-3">
-          <div class="w-8 h-8 rounded-full bg-[var(--color-accent-primary)]/10 flex items-center justify-center text-[var(--color-accent-primary)]">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
-          </div>
-          <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] group-hover:text-[var(--color-accent-primary)] transition-colors">
-            Hardware Validation
-          </h3>
-        </div>
-        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
-          28 consumer sensor exploitation techniques validated with real devices. ANC earbuds extract ear canal biometrics at &minus;47 dB below music. No firmware exploit. Just physics.
-        </p>
-      </a>
-
-      <!-- Endogenous case study -->
-      <a href="/atlas/analysis/" class="glass rounded-xl p-5 card-hover group text-left">
-        <div class="flex items-center gap-2 mb-3">
-          <div class="w-8 h-8 rounded-full bg-[var(--color-accent-secondary)]/10 flex items-center justify-center text-[var(--color-accent-secondary)]">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
-          </div>
-          <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] group-hover:text-[var(--color-accent-secondary)] transition-colors">
-            Endogenous Case Study
-          </h3>
-        </div>
-        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
-          The catalog's first test case: COVID + PTSD as a dual-vector endogenous attack chain. Same neural pathways, same failure modes, no device required.
-        </p>
-      </a>
-
-      <!-- Dual-use discovery -->
-      <a href="/atlas/clinical/#therapeutics" class="glass rounded-xl p-5 card-hover group text-left">
-        <div class="flex items-center gap-2 mb-3">
-          <div class="w-8 h-8 rounded-full bg-[var(--color-accent-tertiary)]/10 flex items-center justify-center text-[var(--color-accent-tertiary)]">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
-          </div>
-          <h3 class="text-base font-semibold font-[family-name:var(--font-heading)] group-hover:text-[var(--color-accent-tertiary)] transition-colors">
-            Dual-Use Discovery
-          </h3>
-        </div>
-        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
-          {therapeuticCount} of {totalThreats} attack techniques have direct therapeutic counterparts. The same mechanism that treats Parkinson's can, if misconfigured, cause psychiatric harm.
-        </p>
-      </a>
-    </div>
-    </div>
-  </section>
-
-  <!-- ═══ FILLS A REAL GAP ═══ -->
-  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-[var(--spacing-section)]">
-    <div class="reveal">
-      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-secondary)] mb-4 text-center">Context</p>
-      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-8 text-center">Where current device-security guidance stops</h2>
-      <div class="space-y-4 text-sm text-[var(--color-text-muted)] leading-relaxed">
-        <div class="grid sm:grid-cols-2 gap-3">
-          <div class="glass rounded-lg p-4">
-            <p class="font-semibold text-[var(--color-text-primary)] mb-1">FDA</p>
-            <p>FDA recommends threat modeling for connected medical devices in its premarket cybersecurity guidance (Feb 2026). It does not describe neural-specific threats.</p>
-          </div>
-          <div class="glass rounded-lg p-4">
-            <p class="font-semibold text-[var(--color-text-primary)] mb-1">MITRE</p>
-            <p>Published a medical device threat modeling playbook (2021), but it is methodology-generic.</p>
-          </div>
-          <div class="glass rounded-lg p-4">
-            <p class="font-semibold text-[var(--color-text-primary)] mb-1">CISA</p>
-            <p>Created a <a href="https://www.cisa.gov/resources-tools/resources/matrix-game-brain-computer-interfaces" class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener noreferrer">tabletop foresight game</a> for BCI futures planning.</p>
-          </div>
-          <div class="glass rounded-lg p-4">
-            <p class="font-semibold text-[var(--color-text-primary)] mb-1">BCI Manufacturers</p>
-            <p>Neuralink publishes a <a href="https://neuralink.com/vulnerability-disclosure" class="text-[var(--color-accent-primary)] hover:underline" target="_blank" rel="noopener noreferrer">vulnerability disclosure programme</a>. For Synchron, Blackrock Neurotech and Precision Neuroscience, our landscape dataset records <strong class="text-[var(--color-text-primary)]">no published security documentation, threat model or disclosure policy.</strong></p>
-          </div>
-        </div>
-        <div class="glass rounded-lg p-4" style="border-left: 3px solid var(--color-accent-primary);">
-          <p class="font-semibold text-[var(--color-text-primary)] mb-1">What TARA proposes</p>
-          <p>A catalog of {coverage.total} techniques, {coverage.dsm5Count} with DSM-5-TR category references for threat modeling (not diagnostic claims) — filling the gap the sources above leave open.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ BUILT ON: THE QIF STACK ═══ -->
-  <section class="relative py-[var(--spacing-section)] px-4 overflow-hidden" style="background: var(--color-bg-surface);">
-    <div class="max-w-3xl mx-auto text-center mb-8">
-      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--color-accent-primary)] mb-3">What TARA Is Built On</p>
-      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-4">
-        Every technique maps to one band of the hourglass.
-      </h2>
-      <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto">
-        QIF is a proposed 11-band architecture — biology above, silicon below, with the physical neural interface at the bottleneck where security either holds or fails. NISS scores a technique on {nissExampleMetrics.length} metrics; the example below shows them for one catalogued technique.
-      </p>
-    </div>
-
-    <HourglassReveal
-      client:visible
-      bands={HOURGLASS_BANDS as unknown as any[]}
-      widths={HOURGLASS_WIDTHS as unknown as number[]}
-    />
-
-    <div class="glass rounded-2xl p-8 max-w-lg mx-auto mt-12 reveal-scale">
-      <p class="font-mono text-xs text-[var(--color-text-faint)] mb-4">
-        Example: <a href={`/atlas/tara/${nissExample.id}/`} class="hover:underline">{nissExample.id}</a> {nissExample.name}
-      </p>
-      <dl class="space-y-2 text-xs">
-        {nissExampleMetrics.map((metric) => (
-          <div class="flex justify-between gap-4">
-            <dt class="text-[var(--color-text-muted)]">{metric.label}</dt>
-            <dd class="font-mono">{metric.value}</dd>
-          </div>
-        ))}
-      </dl>
-      <div class="pt-3 mt-4 border-t" style="border-color: var(--color-border);">
-        <div class="flex justify-between text-sm mb-1">
-          <span class="font-semibold">NISS score</span>
-          <span class="font-mono font-bold">{nissExample.niss.score.toFixed(1)} {nissExample.niss.severity}</span>
-        </div>
-        <div class="h-3 rounded-full" style="background: var(--color-bg-elevated);">
-          <div class="score-build-fill h-full rounded-full bg-[var(--color-accent-primary)]" style={`width: ${nissExample.niss.score * 10}%;`}></div>
-        </div>
-      </div>
-    </div>
-    <div class="flex flex-wrap items-center justify-center gap-2 mt-8 text-[10px] font-mono text-[var(--color-text-faint)] reveal">
-      <span class="chain-step glass rounded px-2 py-1" style="--chain-step: 0;">Technique</span><span>&rarr;</span><span class="chain-step glass rounded px-2 py-1" style="--chain-step: 1;">Band</span><span>&rarr;</span><span class="chain-step glass rounded px-2 py-1" style="--chain-step: 2;">Anatomy</span><span>&rarr;</span><span class="chain-step glass rounded px-2 py-1" style="--chain-step: 3;">Function</span><span>&rarr;</span><span class="chain-step glass rounded px-2 py-1" style="--chain-step: 4;">NISS</span><span>&rarr;</span><span class="chain-step glass rounded px-2 py-1" style="--chain-step: 5;">DSM-5-TR*</span>
-    </div>
-    <p class="text-center text-[10px] text-[var(--color-text-faint)] mt-2">*Diagnostic category references for threat modeling, not diagnostic claims</p>
-
-    <div class="text-center mt-8">
-      <a href="/framework/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
-        Full QIF specification &rarr;
-      </a>
-    </div>
-  </section>
-
-  <!-- ═══ WHAT CONSUMES TARA'S DATA ═══ -->
-  <section class="py-[var(--spacing-section)]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12 reveal">
-        <p class="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--color-accent-primary)] mb-4">Future Work</p>
-        <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] mb-4">Three specifications planned to build on the catalog</h2>
-        <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Each planned guardrail would read TARA's technique data and NISS scores to decide what to detect, encrypt, or block — positioned at specific hourglass layers. None of this is built yet.</p>
-      </div>
-      <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto reveal-stagger reveal">
-        <a href="/guardrails/" class="glass rounded-xl p-6 card-hover group">
-          <div class="flex items-center gap-2 mb-3"><span class="text-[var(--color-accent-primary)] text-lg">&#9632;</span><span class="font-mono text-[10px] text-[var(--color-text-faint)]">I0</span></div>
-          <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">Signal Boundary</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">Planned signal-layer firewall spec with chain-of-evidence logging at the neural interface boundary.</p>
-        </a>
-        <a href="/guardrails/nsp/" class="glass rounded-xl p-6 card-hover group">
-          <div class="flex items-center gap-2 mb-3"><span class="text-[var(--color-accent-secondary)] text-lg">&#9670;</span><span class="font-mono text-[10px] text-[var(--color-text-faint)]">S1-S2</span></div>
-          <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-secondary)] transition-colors">NSP</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">Post-quantum wire protocol planned to secure BCI data links with five defense layers.</p>
-        </a>
-        <a href="/guardrails/runemate/" class="glass rounded-xl p-6 card-hover group">
-          <div class="flex items-center gap-2 mb-3"><span class="text-[var(--color-accent-tertiary)] text-lg">&#9650;</span><span class="font-mono text-[10px] text-[var(--color-text-faint)]">S2</span></div>
-          <h3 class="text-lg font-bold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[var(--color-accent-tertiary)] transition-colors">Staves</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">Planned on-device policy compiler and content delivery spec for neural interfaces.</p>
-        </a>
-      </div>
-      <p class="text-center mt-6 font-mono text-[10px] text-[var(--color-text-faint)] tracking-[0.1em]">PLANNED SPECIFICATIONS &middot; NOT BUILT YET</p>
-      <p class="text-center mt-3 text-xs text-[var(--color-text-muted)] max-w-xl mx-auto">A future <strong>TARA PRO</strong> tier is planned to package the Signal Boundary spec into a deployable product.</p>
-    </div>
-  </section>
-
-  <!-- ═══ GOVERNANCE & NEURORIGHTS ═══ -->
-  <section class="relative py-[var(--spacing-section)] px-4 overflow-hidden" style="background: var(--color-bg-surface);">
-    <div class="max-w-4xl mx-auto text-center mb-10">
-      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--color-accent-tertiary)] mb-3">Governance & Neurorights</p>
-      <h2 class="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-text-primary)] mb-4">
-        {NEURORIGHT_COUNT} proposed neurorights, mapped. Governance spanning all {HOURGLASS_BANDS.length} bands.
-      </h2>
-      <p class="text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto">
-        Neuroethics scholarship proposed these rights (Ienca &amp; Andorno, 2017); TARA maps cataloged techniques to them for threat modeling. Equal access is treated as a governance commitment, not a separate right. The policy bridge connects those findings to accelerating regulation.
-      </p>
-    </div>
-
-    <div class="max-w-lg mx-auto px-4">
-      <NeurorightsRadar client:visible fold={neurorightsFold} size={300} />
-    </div>
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto mt-12 reveal-stagger reveal">
-      {[{ name: 'FDA', desc: 'Medical device cybersecurity' }, { name: 'EU AI Act', desc: 'High-risk AI compliance' }, { name: 'OECD', desc: 'Neurotechnology principles' }, { name: 'ISO', desc: 'Medical device standards' }].map((r) => (
-        <div class="glass rounded-xl p-5 card-hover"><p class="font-bold mb-1">{r.name}</p><p class="text-xs text-[var(--color-text-muted)]">{r.desc}</p></div>
-      ))}
-    </div>
-
-    <div class="text-center mt-8">
-      <a href="/governance/" class="text-sm text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] transition-colors">
-        Full governance framework, neurorights mapping, and neuroethics landscape &rarr;
-      </a>
     </div>
   </section>
 
@@ -459,8 +151,46 @@ const neurorightsFold = foldNeurorights(
     </div>
   </section>
 
+  <div class="home-fineprint">
+    <p>About this site: QIF, TARA and NISS are proposed research frameworks. They are not validated, not peer-reviewed and not adopted by any standards body. The brain and signal visuals are illustrative, and each pattern shown on the TARA page is labelled with its evidence. Source, data and mappings are public: <a href="https://github.com/qinnovates/neurosecurity">source on GitHub</a> and <a href="/atlas/tara/">the datalake mapping</a>. Privacy choices are in the footer.</p>
+  </div>
+
   <Footer />
 
+
+  <style>
+    .home-hero { position: relative; height: min(88vh, 720px); min-height: 520px; overflow: hidden; background: #000; }
+    .home-hero-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .home-hero-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,0) 40%, #000 100%); }
+    .home-hero-copy { position: absolute; left: 0; right: 0; bottom: 136px; padding: 0 48px; text-align: center; display: flex; flex-direction: column; gap: 14px; align-items: center; }
+    .home-hero-title { margin: 0; font-size: clamp(40px, 6vw, 72px); font-weight: 700; color: #fff; letter-spacing: .02em; }
+    .home-hero-sub { margin: 0; font-size: clamp(16px, 2vw, 20px); line-height: 1.5; color: #e8e8ee; max-width: 640px; }
+    .home-hero-cue { position: absolute; left: 0; right: 0; bottom: 40px; display: flex; flex-direction: column; align-items: center; gap: 10px; color: #c9cdd9; font-size: 12px; letter-spacing: .12em; }
+    .home-hero-cue-line { width: 1px; height: 36px; background: rgba(255,255,255,.35); }
+    .home-goals { background: #000; padding: 96px 48px; display: flex; flex-direction: column; align-items: center; gap: 56px; }
+    .home-goal { max-width: 880px; display: flex; flex-direction: column; gap: 14px; text-align: center; }
+    .home-goal h2 { margin: 0; font-size: clamp(32px, 4.5vw, 52px); line-height: 1.1; font-weight: 700; color: #fff; text-wrap: balance; }
+    .home-goal p { margin: 0; font-size: 19px; line-height: 1.6; color: #b8bccb; }
+    .home-goal-links { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+    .home-cards { display: flex; flex-wrap: wrap; gap: 20px; width: 100%; max-width: 1040px; }
+    .home-card { flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 12px; padding: 28px; border-radius: 20px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); }
+    .home-card-num { font-size: 12px; letter-spacing: .14em; color: #3d86ff; font-weight: 600; }
+    .home-card h3 { margin: 0; font-size: 22px; color: #fff; }
+    .home-card p { margin: 0; font-size: 15px; line-height: 1.6; color: #b8bccb; }
+    .home-pill { display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border-radius: 999px; font-weight: 600; font-size: 14px; }
+    .home-pill-solid { background: #1d5fe6; color: #fff; }
+    .home-pill-solid:hover { background: #2468f0; }
+    .home-pill-ghost { border: 1px solid rgba(255,255,255,.28); color: #e8e8ee; }
+    .home-pill-ghost:hover { background: rgba(255,255,255,.08); }
+    .home-fineprint { background: #000; padding: 32px 48px 8px; border-top: 1px solid rgba(255,255,255,.08); }
+    .home-fineprint p { margin: 0; max-width: 980px; font-size: 12px; line-height: 1.6; color: #82889e; }
+    .home-fineprint a { color: #82889e; text-decoration: underline; }
+    @supports (animation-timeline: view()) {
+      .home-goals .reveal { animation: home-rise linear both; animation-timeline: view(); animation-range: entry 0% cover 30%; }
+    }
+    @keyframes home-rise { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .home-goals .reveal { animation: none; } }
+  </style>
   <style>
     /* Title beside the framing sentence, as on the atlas page, so the picture under them is the first thing on the screen. */
     .brain-hero-head { display: grid; gap: 1rem 3rem; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: end; }

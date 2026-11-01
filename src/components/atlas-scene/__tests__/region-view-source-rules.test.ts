@@ -12,7 +12,6 @@ const MOUNTS = [
   { page: 'src/pages/atlas/tara/[id].astro', host: 'src/components/brain/BandViewPanel.tsx', builtPath: '/atlas/tara/QIF-T0001/' },
   { page: 'src/pages/atlas/clinical.astro', host: 'src/components/atlas/brainmap/RegionPicker.tsx', builtPath: '/atlas/clinical/' },
   { page: 'src/pages/atlas/index.astro', host: 'src/components/brain/BandViewPanel.tsx', builtPath: '/atlas/' },
-  { page: 'src/pages/index.astro', host: 'src/components/signal-bench/SignalBenchSelection.tsx', builtPath: '/' },
 ];
 const SOURCE_EXTENSIONS = ['.astro', '.ts', '.tsx'];
 /** three.js, the canvas chunk's modules, and the two lazy chunks that lead to them. A page or a host may name none of them in a static import. */
@@ -69,8 +68,8 @@ describe('the 3D view on other pages: what may import what', () => {
     expect(hero.match(/^import .*\.css.*$/gm)).toEqual(["import heroStylesUrl from './brain-hero.css?url';", "import sceneStylesUrl from './atlas-scene.css?url';"]);
   });
 
-  it('lets the homepage reach the brain hero only through its mount, which reaches the rest through import(), and gives the page the pin', () => {
-    const page = read('src/pages/index.astro');
+  it('lets the TARA page reach the brain only through its mount, which reaches the rest through import(), and gives the page the pin', () => {
+    const page = read('src/pages/atlas/tara.astro');
     expect(STATIC_HEAVY_IMPORT.test(page)).toBe(false);
     expect(page).toContain("import BrainHeroMount from '@/components/atlas-scene/BrainHeroMount';");
     expect(page).toContain("import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';");
@@ -149,13 +148,14 @@ describe('the declarations the post-build check reads', () => {
   });
 
   it('lists every other page that mounts the view, each with the same one gate', () => {
-    const listed = [...REGION_VIEW_PAGES.map((page) => page.urlPath), '/atlas/model/'].sort();
+    const gated = REGION_VIEW_PAGES.filter((page) => 'interactionGatedEntryNames' in page);
+    const listed = [...gated.map((page) => page.urlPath), '/atlas/model/'].sort();
     expect(listed).toEqual(MOUNTS.map((mount) => mount.builtPath).sort());
-    for (const page of REGION_VIEW_PAGES) expect(page.interactionGatedEntryNames, page.urlPath).toEqual(['RegionViewPanel']);
+    for (const page of gated) expect(page.interactionGatedEntryNames, page.urlPath).toEqual(['RegionViewPanel']);
   });
 
-  it('names one chunk that reaches three.js without the visitor asking: the homepage\'s brain hero', () => {
+  it('names one chunk that reaches three.js without the visitor asking: the TARA page\'s brain hero', () => {
     const arrivals = [...REGION_VIEW_PAGES, ...TOOL_PAGES].filter((page) => 'arrivalEntryNames' in page);
-    expect(arrivals.map((page) => [page.urlPath, page.arrivalEntryNames])).toEqual([['/', ['BrainHeroPanel']]]);
+    expect(arrivals.map((page) => [page.urlPath, page.arrivalEntryNames])).toEqual([['/atlas/tara/', ['BrainHeroPanel']]]);
   });
 });
