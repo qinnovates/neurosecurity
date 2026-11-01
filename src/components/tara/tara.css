@@ -1,0 +1,85 @@
+.tara-page, .tara-explorer { color: var(--color-text-primary); min-width: 0; }
+.tara-page { padding-bottom: 4rem; }
+.tara-title { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 1rem; padding: 1.75rem 0; }
+.tara-title-copy { flex: 1 1 24rem; min-width: 0; max-width: 100%; }
+.tara-title > .tara-pill { flex-shrink: 0; }
+.tara-eyebrow { font: 0.7rem var(--font-mono); letter-spacing: 0.12em; color: var(--color-text-muted); }
+.tara-title h1 { font: 600 clamp(2.4rem, 4vw, 3rem)/1.1 var(--font-heading); letter-spacing: -0.04em; margin: 0.75rem 0; }
+.tara-title h1 span { font-size: 0.45em; letter-spacing: -0.02em; white-space: normal; color: var(--color-text-muted); }
+.tara-subtitle { font-size: clamp(1.1rem, 2vw, 1.5rem); }
+.tara-legal, .tara-caption, .tara-footer { font-size: 0.8rem; color: var(--color-text-muted); }
+.tara-legal { margin-top: 0.75rem; }
+.tara-caption, .tara-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.tara-pill { display: inline-flex; justify-content: center; align-items: center; min-height: 44px; padding: 0.5rem 1.1rem; border: 1px solid var(--color-border-hover); border-radius: 999px; background: var(--color-bg-elevated); color: var(--color-text-primary); cursor: pointer; text-decoration: none; }
+.tara-primary { background: var(--color-text-primary); color: var(--color-bg-deep); font-weight: 600; }
+.tara-caption { margin: 1rem 0 2rem; }
+.tara-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1rem; }
+.tara-card { padding: 1.25rem; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-bg-surface); text-decoration: none; transition: box-shadow 320ms; }
+.tara-card h2 { font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; }
+.tara-card p { font-size: 0.85rem; color: var(--color-text-muted); }
+.tara-card:hover { box-shadow: 0 0 24px var(--color-glow-primary); }
+.tara-footer { margin-top: 2rem; }
+.tara-explorer .tara-panel { border-radius: 16px; background: var(--color-bg-surface); height: var(--tara-stage-height); min-height: 0; max-height: none; }
+.tara-panel[data-selected="true"] { border: 1px solid var(--color-border-hover); box-shadow: 0 0 24px var(--color-glow-primary); }
+.tara-panel h2 { font: 600 1.4rem var(--font-heading); margin: 0.5rem 0; }
+.tara-panel p { font-size: 0.85rem; margin: 0.65rem 0; }
+.tara-row { border-top: 1px solid var(--color-border); margin-top: 0.5rem; }
+.tara-row > button { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 52px; padding: 0.6rem 0; text-align: left; cursor: pointer; }
+.tara-row button > span:first-child { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+.tara-badge { border: 1px solid var(--color-border-hover); border-radius: 999px; padding: 0.2rem 0.5rem; font-size: 0.65rem; }
+.tara-row ul { list-style: none; padding: 0; }
+.tara-row a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; }
+.tara-page :focus-visible, .tara-dialog :focus-visible { outline: 2px solid #7DD3FC; outline-offset: 3px; }
+.tara-explorer :is(button, .atlas-chip, select) { min-height: 44px; }
+.tara-explorer .brain-hero-lens[aria-pressed="true"] { color: var(--color-text-primary); background: var(--color-bg-elevated); box-shadow: 0 0 16px var(--color-glow-primary); outline: 1px solid var(--color-border-hover); }
+.tara-dialog { color: var(--color-text-primary); background: var(--color-bg-surface); border: 1px solid var(--color-border-hover); border-radius: 16px; padding: 1.25rem; width: min(40rem, calc(100% - 32px)); max-height: 85vh; margin: auto; }
+.tara-dialog::backdrop { background: #000b; }
+.tara-dialog h2 { font-size: 1.3rem; margin-bottom: 0.75rem; }
+.tara-dialog label { display: block; font-size: 0.8rem; }
+.tara-dialog input { width: 100%; min-height: 44px; border: 1px solid var(--color-border-hover); border-radius: 12px; padding: 0.75rem; margin: 0.5rem 0; }
+.tara-results { max-height: 50vh; overflow-y: auto; margin-top: 1rem; }
+.tara-results h3 { color: var(--color-text-muted); font-size: 0.75rem; margin: 0.75rem 0; }
+.tara-results button { display: flex; justify-content: space-between; gap: 1rem; width: 100%; min-height: 44px; padding: 0.65rem; text-align: left; border-radius: 12px; cursor: pointer; transition: box-shadow 160ms; }
+.tara-results [aria-selected="true"] { box-shadow: inset 0 0 0 1px var(--color-border-hover), inset 0 0 20px var(--color-glow-primary); }
+.tara-results small { flex-shrink: 0; }
+.tara-page *, .tara-dialog * { overflow-wrap: anywhere; }
+/* Keep the picture and region panel in one row. Shared hero styles also serve
+   the homepage; these placements belong only to the TARA workspace. */
+.tara-explorer { --tara-stage-height: 540px; }
+.tara-explorer .brain-hero { position: relative; gap: 1rem 1.25rem; }
+.tara-explorer .brain-hero[data-brain-hero="open"] { display: grid; grid-template-columns: minmax(0, 55fr) minmax(0, 45fr); align-items: start; }
+.tara-explorer .brain-hero[data-brain-hero="open"] .atlas-picture { grid-column: 1; grid-row: 1; height: var(--tara-stage-height); display: flex; flex-direction: column; }
+.tara-explorer .brain-hero .atlas-canvas { flex: 1; min-height: 0; height: auto; }
+.tara-explorer .brain-hero[data-brain-hero="open"] .atlas-viewport-header { position: absolute; top: 0.75rem; left: 0.75rem; z-index: 2; max-width: calc(55% - 2rem); }
+.tara-explorer .brain-hero[data-brain-hero="open"] .tara-panel { grid-column: 2; grid-row: 1; }
+.tara-explorer .brain-hero[data-brain-hero="open"] .atlas-viewport-side { grid-column: 1; grid-row: 2; }
+.tara-explorer .brain-hero[data-brain-hero="open"] .atlas-viewport > .atlas-link-button { grid-column: 1; grid-row: 3; }
+.tara-explorer .brain-hero[data-brain-hero="open"] .atlas-viewport > .atlas-loading { grid-column: 1; grid-row: 1; height: var(--tara-stage-height); }
+.tara-explorer .brain-hero[data-brain-hero="fallback"] { grid-template-columns: minmax(0, 55fr) minmax(0, 45fr); }
+.tara-explorer .brain-hero[data-brain-hero="fallback"] .atlas-failure { grid-column: 1; grid-row: 1; }
+.tara-explorer .brain-hero-regions { grid-column: 1; grid-row: 2; max-height: var(--tara-stage-height); overflow-y: auto; }
+.tara-explorer .brain-hero[data-brain-hero="fallback"] .tara-panel { grid-column: 2; grid-row: 1 / span 2; }
+.tara-explorer .atlas-root :is(a, summary) { min-height: 44px; }
+.tara-explorer .atlas-caption a, .tara-caption > a { display: inline-flex; align-items: center; min-height: 44px; }
+.tara-explorer .atlas-caption-notes > summary { display: flex; align-items: center; cursor: pointer; }
+@media (max-width: 1023px) {
+  main:has(.tara-page) { padding-inline: 16px; }
+  .tara-title { flex-direction: column; }
+  .tara-title-copy { flex: 0 1 auto; width: 100%; }
+  .tara-explorer { --tara-stage-height: 440px; }
+  .tara-explorer .brain-hero[data-brain-hero] { grid-template-columns: minmax(0, 1fr); }
+  .tara-explorer .brain-hero[data-brain-hero="open"] .atlas-viewport-header { max-width: calc(100% - 1.5rem); }
+  .tara-explorer .brain-hero[data-brain-hero="open"] .tara-panel { grid-column: 1; grid-row: 2; }
+  .tara-explorer .brain-hero[data-brain-hero="open"] .atlas-viewport-side { grid-column: 1; grid-row: 3; }
+  .tara-explorer .brain-hero[data-brain-hero="open"] .atlas-viewport > .atlas-link-button { grid-column: 1; grid-row: 4; }
+  .tara-explorer .brain-hero[data-brain-hero="fallback"] .tara-panel { grid-column: 1; grid-row: 3; }
+  .tara-explorer .tara-panel { height: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tara-page *, .tara-dialog * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+.tara-explorer .atlas-root { --atlas-quick: 160ms; --atlas-move: 320ms; }
+.tara-explorer .atlas-root :focus-visible { outline: 2px solid #7DD3FC; outline-offset: 3px; }
+@media (prefers-reduced-motion: no-preference) {
+  .tara-panel { transition: box-shadow 640ms; }
+}

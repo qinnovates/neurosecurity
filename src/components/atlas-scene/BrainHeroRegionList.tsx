@@ -4,6 +4,7 @@ import { buildRegionDeepLink } from './atlas-deep-link';
 
 interface Props {
   model: ExplorerModel;
+  onSelectRegion?: (id: string) => void;
 }
 
 /**
@@ -11,13 +12,13 @@ interface Props {
  * holds, each a link into the full atlas with that region selected. Words
  * rather than a blank box, and the same destinations the picture offers.
  */
-export default function BrainHeroRegionList({ model }: Props) {
+export default function BrainHeroRegionList({ model, onSelectRegion }: Props) {
   return (
     <section className="brain-hero-regions" aria-labelledby="brain-hero-regions-heading">
       <h3 className="brain-hero-card-heading" id="brain-hero-regions-heading">{HERO_COPY.fallback_title}</h3>
       <p className="brain-hero-card-text">{HERO_COPY.fallback}</p>
       <ul className="atlas-chips">
-        {model.regions.map((region) => <li key={region.id}><a className="atlas-chip brain-hero-region-link" href={buildRegionDeepLink(region.id)} data-astro-reload>{region.name}</a></li>)}
+        {model.regions.map((region) => <li key={region.id}><a onClick={onSelectRegion ? (event) => { event.preventDefault(); onSelectRegion(region.id); } : undefined} className="atlas-chip brain-hero-region-link" href={buildRegionDeepLink(region.id)} data-astro-reload>{region.name}</a></li>)}
       </ul>
     </section>
   );

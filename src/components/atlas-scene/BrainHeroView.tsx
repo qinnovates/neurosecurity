@@ -4,11 +4,12 @@ import type { ExplorerModel } from '@/lib/atlas-explorer/explorer-model';
 import { LENS_LABELS, SUBJECT_FREE_LENS_KINDS, emptyLens, type Lens } from '@/lib/atlas-explorer/lens-state';
 import { INITIAL_EXPLORER_STATE } from './atlas-state';
 import AtlasViewport, { type AtlasViewportProps } from './AtlasViewport';
+import type { BrainHeroPanelProps } from './BrainHeroPanel';
 import BrainHeroRegionList from './BrainHeroRegionList';
 import BrainHeroSummary from './BrainHeroSummary';
 import { GATE_NOTICES, decideGate, probeWebGL } from './viewport-gate';
 
-interface Props {
+interface Props extends BrainHeroPanelProps {
   model: ExplorerModel;
   isIndexPinned: boolean;
   isOutOfStep: boolean;
@@ -50,15 +51,18 @@ function HeroLensSwitch({ lens, onChoose }: { lens: Lens; onChoose: (lens: Lens)
  * own probe, so a browser that cannot draw gets the region list in the
  * picture's place and never waits on a view that would only say no.
  */
-export default function BrainHeroView({ model, isIndexPinned, isOutOfStep, probe = probeWebGL, loadOpenView }: Props) {
-  const [selectedRegionId, setSelectedRegionId] = useState<string | null>(null);
+export default function BrainHeroView({ model, isIndexPinned, isOutOfStep, probe = probeWebGL, loadOpenView, selectedRegionId: controlledId, onSelectRegion, renderRegionPanel }: Props) {
+  const [localId, setSelectedRegionId] = useState<string | null>(null);
+  const selectedRegionId = controlledId === undefined ? localId : controlledId;
+  const select = (id: string | null) => { setSelectedRegionId(id); onSelectRegion?.(id); };
   const [lens, setLens] = useState<Lens>(HERO_DEFAULT_LENS);
   const gate = useMemo(() => decideGate(isIndexPinned, globalThis.crypto?.subtle !== undefined, probe, isOutOfStep), [isIndexPinned, isOutOfStep, probe]);
   if (gate !== 'open') {
     return (
       <div className="atlas-root brain-hero" data-brain-hero="fallback" data-gate={gate}>
         <p className="atlas-failure" role="alert" data-gate-notice={gate}>{GATE_NOTICES[gate]}</p>
-        <BrainHeroRegionList model={model} />
+        <BrainHeroRegionList model={model} onSelectRegion={onSelectRegion ? select : undefined} />
+        {renderRegionPanel?.(model, selectedRegionId)}
       </div>
     );
   }
@@ -66,9 +70,9 @@ export default function BrainHeroView({ model, isIndexPinned, isOutOfStep, probe
     <div className="atlas-root brain-hero" data-brain-hero="open" data-hero-lens={lens.kind}>
       <AtlasViewport
         model={model} lens={lens} layers={HERO_LAYERS} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep} isAsked
-        onSelectRegion={setSelectedRegionId} probe={probe} loadOpenView={loadOpenView} headerControls={<HeroLensSwitch lens={lens} onChoose={setLens} />}
+        onSelectRegion={select} probe={probe} loadOpenView={loadOpenView} headerControls={<HeroLensSwitch lens={lens} onChoose={setLens} />}
       />
-      <BrainHeroSummary model={model} regionId={selectedRegionId} lens={lens} />
+      {renderRegionPanel ? renderRegionPanel(model, selectedRegionId) : <BrainHeroSummary model={model} regionId={selectedRegionId} lens={lens} />}
     </div>
   );
 }
