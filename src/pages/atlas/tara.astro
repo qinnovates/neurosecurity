@@ -12,7 +12,7 @@ import '@/components/tara/tara.css';
 const regions = atlas.brain_regions.map(({ id, name }) => ({ id, name }));
 const index = buildSearchIndex(THREAT_VECTORS, regions, HOURGLASS_BANDS);
 const cards = [
-  { title: 'Threat story, step by step', href: '/atlas/chains/', text: 'Follow the connections between threats and defensive controls.' },
+  { title: 'Threat story', href: '/atlas/chains/', text: 'Follow the connections between threats and defensive controls.' },
   { title: 'Threat library', href: '/atlas/tara/ttps/', text: `Browse ${THREAT_VECTORS.length} public techniques and their evidence status.` },
   { title: 'Why believe this?', href: '/atlas/scoring/', text: 'Understand the scoring methodology and its limitations.' },
 ];

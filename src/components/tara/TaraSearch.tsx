@@ -42,8 +42,9 @@ export default function TaraSearch({ index, onSelectRegion }: { index: SearchHit
     dialog.current?.close();
     if (hit.kind === 'region') onSelectRegion(hit.id); else if (hit.href) window.location.assign(hit.href);
   };
-  return <><button ref={trigger} className="tara-pill" onClick={() => dialog.current?.showModal()}>Search ⌘K</button>
+  return <><button ref={trigger} className="tara-pill" title="Search public TARA data (Cmd or Ctrl+K)" aria-keyshortcuts="Meta+k Control+k" onClick={() => dialog.current?.showModal()}>Search ⌘K<span className="tara-search-shortcut">/ Ctrl+K</span></button>
     <dialog ref={dialog} className="tara-dialog" aria-labelledby="tara-search-title" onClose={() => trigger.current?.focus()}>
+      <p className="tara-search-scope">Public TARA catalog only · techniques, regions and bands.</p>
       <SearchInput query={query} setQuery={setQuery} active={active} setActive={setActive} hits={hits} choose={choose} />
       <button className="tara-pill" onClick={() => dialog.current?.close()}>Close · Esc</button>
       <SearchResults hits={hits} active={active} choose={choose} />
