@@ -32,14 +32,15 @@ export const HERO_DEFAULT_LENS: Lens = HERO_LENSES[0];
 export const HERO_LAYERS: Readonly<Record<LayerId, boolean>> = { ...INITIAL_EXPLORER_STATE.layers, deep: false };
 
 /** Two buttons in the view's header, above the picture: what the brain is coloured by. The caption under the picture names the lens in words. */
-function HeroLensSwitch({ lens, onChoose }: { lens: Lens; onChoose: (lens: Lens) => void }) {
+function HeroLensSwitch({ lens, onChoose, onShowEvidence }: { lens: Lens; onChoose: (lens: Lens) => void; onShowEvidence?: () => void }) {
   return (
     <div className="brain-hero-lenses" role="group" aria-label="Colour the brain by">
       {HERO_LENSES.map((choice) => (
         <button key={choice.kind} type="button" className="brain-hero-lens" aria-pressed={choice.kind === lens.kind} onClick={() => onChoose(choice)}>
-          {LENS_LABELS[choice.kind]}
+          {onShowEvidence && choice.kind === 'niss' ? 'NISS' : LENS_LABELS[choice.kind]}
         </button>
       ))}
+      {onShowEvidence && <button type="button" className="brain-hero-lens" aria-pressed="false" onClick={onShowEvidence}>Evidence</button>}
     </div>
   );
 }
@@ -51,7 +52,7 @@ function HeroLensSwitch({ lens, onChoose }: { lens: Lens; onChoose: (lens: Lens)
  * own probe, so a browser that cannot draw gets the region list in the
  * picture's place and never waits on a view that would only say no.
  */
-export default function BrainHeroView({ model, isIndexPinned, isOutOfStep, probe = probeWebGL, loadOpenView, selectedRegionId: controlledId, onSelectRegion, renderRegionPanel }: Props) {
+export default function BrainHeroView({ model, isIndexPinned, isOutOfStep, probe = probeWebGL, loadOpenView, selectedRegionId: controlledId, onSelectRegion, renderRegionPanel, onShowEvidence }: Props) {
   const [localId, setSelectedRegionId] = useState<string | null>(null);
   const selectedRegionId = controlledId === undefined ? localId : controlledId;
   const select = (id: string | null) => { setSelectedRegionId(id); onSelectRegion?.(id); };
@@ -70,7 +71,7 @@ export default function BrainHeroView({ model, isIndexPinned, isOutOfStep, probe
     <div className="atlas-root brain-hero" data-brain-hero="open" data-hero-lens={lens.kind}>
       <AtlasViewport
         model={model} lens={lens} layers={HERO_LAYERS} selectedRegionId={selectedRegionId} isIndexPinned={isIndexPinned} isOutOfStep={isOutOfStep} isAsked
-        onSelectRegion={select} probe={probe} loadOpenView={loadOpenView} headerControls={<HeroLensSwitch lens={lens} onChoose={setLens} />}
+        onSelectRegion={select} probe={probe} loadOpenView={loadOpenView} headerControls={<HeroLensSwitch lens={lens} onChoose={setLens} onShowEvidence={onShowEvidence} />}
       />
       {renderRegionPanel ? renderRegionPanel(model, selectedRegionId) : <BrainHeroSummary model={model} regionId={selectedRegionId} lens={lens} />}
     </div>

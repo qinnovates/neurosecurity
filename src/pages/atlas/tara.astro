@@ -1,30 +1,35 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
-import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
 import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';
 import atlas from '@shared/qif-brain-bci-atlas.json';
 import TaraExplorer from '@/components/tara/TaraExplorer';
 import { buildSearchIndex } from '@/components/tara/search-index';
 import { HOURGLASS_BANDS } from '@/lib/qif-constants';
-import { CATALOG_VERSION, THREAT_VECTORS } from '@/lib/threat-data';
+import Wordmark from '@/components/Wordmark.astro';
+import { THREAT_VECTORS } from '@/lib/threat-data';
 import '@/components/tara/tara.css';
 
 const regions = atlas.brain_regions.map(({ id, name }) => ({ id, name }));
 const index = buildSearchIndex(THREAT_VECTORS, regions, HOURGLASS_BANDS);
 const cards = [
-  { title: 'Threat story', href: '/atlas/chains/', text: 'Follow the connections between threats and defensive controls.' },
-  { title: 'Threat library', href: '/atlas/tara/ttps/', text: `Browse ${THREAT_VECTORS.length} public techniques and their evidence status.` },
-  { title: 'Why believe this?', href: '/atlas/scoring/', text: 'Understand the scoring methodology and its limitations.' },
+  { title: 'Threat story, step by step', href: '/atlas/chains/', text: 'Trace the path to harm.', icon: 'story' },
+  { title: 'Threat library', href: '/atlas/tara/ttps/', text: 'Explore the risk landscape.', icon: 'book' },
+  { title: 'Why believe this?', href: '/atlas/scoring/', text: 'Inspect sources and uncertainty.', icon: 'shield' },
+  { title: 'Accident or attack?', href: '/guardrails/', text: 'Separate failure from intent.', icon: 'branch' },
 ];
 ---
-<PageLayout title="TARA Glia by Qinnovate" description="Threat Analysis Risk Atlas for the neural frontier." breadcrumbs={[{ label: 'Atlas', href: '/atlas/' }, { label: 'TARA' }]} wide>
-  <AtlasViewSwitcher current="/atlas/tara/" />
+<PageLayout title="TARA Glia by Qinnovate" description="Threat Analysis Risk Atlas for the neural frontier." wide>
   <article class="tara-page">
     <AtlasIndexPin />
-    <TaraExplorer client:load index={index} catalogVersion={CATALOG_VERSION} />
+    <TaraExplorer client:load index={index}><Wordmark slot="wordmark" /></TaraExplorer>
     <noscript><p>Explore region names and mappings in the <a href="/atlas/explorer/">full atlas</a>. The interactive brain and search require JavaScript.</p></noscript>
-    <div class="tara-caption"><p>Defensive threat modelling. Placement is AI-drafted, unreviewed. Scores are Draft.</p><a href="/atlas/attribution/">Atlas sources & attribution ↗</a></div>
-    <div class="tara-cards">{cards.map((card) => <a class="tara-card" href={card.href}><h2>{card.title} <span aria-hidden="true">↗</span></h2><p>{card.text}</p></a>)}</div>
-    <footer class="tara-footer"><p>A research atlas for asking better questions about neural-device safety. Not a compliance claim.</p><a class="tara-pill tara-primary" href="/atlas/explorer/">Open full atlas ↗</a></footer>
+    <section class="tara-features" id="features" aria-label="Explore Glia">
+      <div class="tara-section-heading"><h2>FOLLOW THE CONNECTIONS</h2><span>From region to risk</span></div>
+      <div class="tara-cards">{cards.map((card) => <a class="tara-card" href={card.href}>
+        <svg class="tara-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d={card.icon === 'story' ? 'M4 5h5v5H4Zm11 9h5v5h-5ZM9 7h8v7M6 10v7h9' : card.icon === 'book' ? 'M4 4h6l2 2 2-2h6v15h-6l-2 2-2-2H4V4Zm8 2v15' : card.icon === 'shield' ? 'm12 3 8 3v6c0 4-4 7-8 9-4-2-8-5-8-9V6l8-3Z' : 'M12 21V11M12 11 5 4m7 7 7-7M5 9V4h5m4 0h5v5'} /></svg>
+        <span class="tara-feature-arrow" aria-hidden="true">↗</span><h3>{card.title}</h3><p>{card.text}</p>
+      </a>)}</div>
+    </section>
+    <footer class="tara-footer"><p>Trademark status pending. Confirm wording with counsel before publishing.</p><span>QINNOVATE / TARA GLIA</span></footer>
   </article>
 </PageLayout>

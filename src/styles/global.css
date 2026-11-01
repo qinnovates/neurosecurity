@@ -14,6 +14,7 @@
   --color-bg-elevated: #15151c;
   /* Accent roles: primary = interactive, secondary = therapeutic use, tertiary = adversarial use.
      Primary reads 6.05:1 on the ground and 5.24:1 on the elevated surface, so it may carry text. */
+  --color-identity: #9E61EB;
   --color-accent-primary: #3d86ff;
   /* Solid fills that carry white text: the primary is too light for that (3.47:1), this deeper step
      of the same blue clears it at 5.48:1. */

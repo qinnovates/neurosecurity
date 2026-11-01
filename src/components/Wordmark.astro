@@ -1,0 +1,49 @@
+---
+// Qinnovate wordmark: the approved mark in place of the letter Q, then "innovate".
+// Geometry and colour rules: src/site/brand/LOGO-TRUTH.md. Decorative: the parent link carries the name.
+import LogoMark from './LogoMark.astro';
+
+---
+<span class="wordmark">
+  <span class="wordmark-mark">
+    <LogoMark maskId="wordmark-knockout" />
+  </span>
+  <span class="wordmark-text"><span class="wordmark-i">&#305;<i class="wordmark-idot"></i></span>nnovate</span>
+</span>
+
+<style>
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    font-family: var(--font-logo);
+    font-weight: 588;
+    line-height: 1;
+  }
+  .wordmark-mark {
+    width: 1.3em;
+    height: 1.3em;
+    flex: none;
+  }
+  .wordmark-text {
+    color: var(--color-logo-text);
+    font-size: 1em;
+    letter-spacing: -0.02em;
+    margin-left: -0.06em;
+    transform: scaleY(1.15);
+  }
+  .wordmark-i {
+    position: relative;
+    display: inline-block;
+  }
+  .wordmark-idot {
+    position: absolute;
+    left: 50%;
+    top: 0.12em;
+    width: 0.13em;
+    height: 0.13em;
+    margin-left: -0.065em;
+    border-radius: 50%;
+    background: currentColor;
+  }
+</style>

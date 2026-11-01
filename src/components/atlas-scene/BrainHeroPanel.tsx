@@ -14,6 +14,7 @@ import sceneStylesUrl from './atlas-scene.css?url';
 const STYLESHEET_URLS: readonly string[] = [sceneStylesUrl, heroStylesUrl];
 
 export interface BrainHeroPanelProps {
+  onShowEvidence?: () => void;
   selectedRegionId?: string | null;
   onSelectRegion?: (id: string | null) => void;
   renderRegionPanel?: (model: import('@/lib/atlas-explorer/explorer-model').ExplorerModel, id: string | null) => ReactNode;

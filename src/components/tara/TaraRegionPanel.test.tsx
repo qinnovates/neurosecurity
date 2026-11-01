@@ -19,6 +19,8 @@ describe('region panel', () => {
     expect(screen.getByRole('button', { name: /BCI mapping AI-drafted, unreviewed/ })).toBeTruthy();
     fireEvent.click(niss);
     expect(niss.getAttribute('aria-expanded')).toBe('true');
+    view.rerender(<TaraRegionPanel model={model} regionId={region.id} evidenceRequest={1} />);
+    expect(screen.getByRole('button', { name: /Evidence/ }).getAttribute('aria-expanded')).toBe('true');
   });
   it('resets score disclosure when selecting another region', () => {
     const view = render(<TaraRegionPanel model={model} regionId={model.regions[0].id} />);

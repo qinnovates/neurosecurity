@@ -1,7 +1,6 @@
-/* TARA follows wt-home's black ground, Inter typography and glass nav controls.
-   Keep these tokens local: the shared atlas also serves other content pages. */
+/* Approved TARA composition. Shared atlas and site navigation remain independent. */
 .tara-page, .tara-dialog {
-  --color-bg-deep: #000;
+  --color-bg-deep: #0b0b10;
   --color-bg-surface: #0b0b10;
   --color-bg-elevated: #15151c;
   --color-text-primary: #e8e8ee;
@@ -25,31 +24,18 @@
   min-width: 0;
   max-width: 100%;
 }
-main:has(.tara-page) { background: #000; }
-.tara-page { padding-bottom: 4rem; }
+main:has(.tara-page) { background: #0b0b10; }
 .tara-page *, .tara-dialog * { box-sizing: border-box; overflow-wrap: anywhere; }
 .tara-explorer { min-width: 0; max-width: 100%; --tara-stage-height: 540px; }
-.tara-title { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.5rem 0 2rem; }
-.tara-title-copy { flex: 1 1 32rem; min-width: 0; max-width: 100%; }
-.tara-eyebrow { font: 500 .6875rem/1.5 'Inter', system-ui, sans-serif; letter-spacing: .14em; color: var(--color-text-faint); }
-.tara-title .tara-eyebrow { display: inline-flex; align-items: center; flex-wrap: wrap; padding: .5rem .875rem; border-radius: 999px; }
-.tara-title h1 { font: 600 clamp(2.25rem,4vw,3.25rem)/1.08 'Inter', system-ui, sans-serif; letter-spacing: -.035em; margin: 1rem 0 .75rem; }
-.tara-title h1 span { display: inline-block; font-size: .45em; letter-spacing: -.02em; color: var(--color-text-muted); }
-.tara-subtitle { font-size: clamp(1.125rem,2vw,1.5rem); line-height: 1.5; white-space: normal; max-width: 100%; }
-.tara-legal, .tara-caption, .tara-footer { font-size: .8rem; line-height: 1.6; color: var(--color-text-muted); }
-.tara-legal { margin-top: .75rem; }
-.tara-caption, .tara-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-.tara-caption { margin: 1rem 0 2rem; }
-.tara-caption > a { display: inline-flex; align-items: center; min-height: 44px; }
-.tara-cards { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1rem; }
-.tara-card { padding: 1.5rem; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-bg-surface); text-decoration: none; transition: box-shadow 320ms var(--tara-ease), transform 160ms var(--tara-ease); }
-.tara-card h2 { display: flex; justify-content: space-between; gap: .75rem; font-size: 1.125rem; font-weight: 600; margin-bottom: .75rem; }
-.tara-card h2 span { color: var(--color-text-faint); }
-.tara-card p { font-size: .875rem; line-height: 1.6; color: var(--color-text-muted); }
-.tara-card:hover { transform: translateY(-1px); box-shadow: var(--tara-selected); }
-.tara-footer { margin-top: 2rem; }
+.tara-title { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; }
+.tara-title-copy { flex:1 1 32rem; min-width:0; max-width:100%; }
+.tara-eyebrow { font:500 .6875rem/1.5 'Inter',system-ui,sans-serif; letter-spacing:.14em; color:var(--color-text-faint); }
+.tara-footer { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; line-height:1.6; }
+.tara-cards { display:grid; }
+.tara-card { border:1px solid var(--color-border); background:var(--color-bg-surface); text-decoration:none; transition:background .2s,border-color .2s; }
+.tara-card:hover { background:var(--color-bg-elevated); border-color:var(--color-border-hover); }
 .tara-page .tara-pill, .tara-dialog .tara-pill { display: inline-flex; justify-content: center; align-items: center; gap: .75rem; min-height: 44px; max-width: 100%; padding: .625rem 1.25rem; border-radius: 999px; color: #fff; font: 500 .875rem/1.4 'Inter',system-ui,sans-serif; text-decoration: none; cursor: pointer; transition: transform 160ms var(--tara-ease),box-shadow 320ms var(--tara-ease); }
-.tara-page .tara-pill, .tara-dialog, .tara-dialog .tara-pill, .tara-title .tara-eyebrow,
+.tara-page .tara-pill, .tara-dialog, .tara-dialog .tara-pill,
 .tara-explorer .tara-panel, .tara-explorer .brain-hero-lenses {
   background: var(--color-glass-bg);
   backdrop-filter: blur(14px) saturate(110%);
@@ -59,14 +45,11 @@ main:has(.tara-page) { background: #000; }
 }
 .tara-page .tara-pill:hover, .tara-dialog .tara-pill:hover { transform: translateY(-1px); box-shadow: var(--tara-selected); }
 .tara-search-shortcut { color: var(--color-text-muted); font-size: .75rem; }
-.tara-explorer .tara-panel { border-radius: 16px; padding: 1.5rem; height: auto; min-height: var(--tara-stage-height); max-height: none; overflow: visible; align-self: stretch; }
-.tara-explorer .tara-panel[data-selected="true"] { box-shadow: var(--tara-selected),var(--tara-sheen); }
 .tara-panel h2 { font: 600 1.5rem/1.2 'Inter',system-ui,sans-serif; letter-spacing: -.02em; margin: .625rem 0; }
 .tara-panel p { font-size: .875rem; line-height: 1.6; margin: .65rem 0; color: var(--color-text-muted); }
-.tara-row { border-top: 1px solid var(--color-border); margin-top: .5rem; }
+
 .tara-row > button { display: flex; align-items: center; justify-content: space-between; gap: .75rem; width: 100%; min-height: 52px; padding: .75rem 0; text-align: left; color: var(--color-text-primary); cursor: pointer; }
-.tara-row button > span:first-child { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
-.tara-badge { border: 1px solid rgba(245,158,11,.3); color: #f59e0b; background: rgba(245,158,11,.06); border-radius: 999px; padding: .2rem .5rem; font-size: .6875rem; font-weight: 500; }
+
 .tara-row ul { list-style: none; padding: 0; }
 .tara-explorer .tara-row a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; }
 .tara-page :focus-visible, .tara-dialog :focus-visible, .tara-explorer .atlas-root :focus-visible { outline: 2px solid #7DD3FC; outline-offset: 3px; }
@@ -79,7 +62,7 @@ main:has(.tara-page) { background: #000; }
 .tara-explorer .brain-hero-lenses { display: flex; flex-wrap: wrap; border-radius: 999px; }
 .tara-explorer :is(button,.atlas-chip,select,.atlas-link-button) { min-height: 44px; border-radius: 999px; }
 .tara-explorer .brain-hero-lens { color: var(--color-text-primary); }
-.tara-explorer .brain-hero-lens[aria-pressed="true"] { color: var(--color-text-primary); background: var(--color-bg-elevated); box-shadow: var(--tara-selected); outline: none; }
+.tara-explorer .brain-hero-lens[aria-pressed="true"] { color: var(--color-text-primary); background: var(--color-bg-elevated); border-color:rgba(61,134,255,.6); box-shadow:0 0 13px rgba(61,134,255,.2); }
 .tara-explorer .brain-hero[data-brain-hero="open"] .tara-panel { grid-column: 2; grid-row: 1; }
 .tara-explorer .brain-hero[data-brain-hero="open"] .atlas-viewport-side { grid-column: 1; grid-row: 2; }
 .tara-explorer .brain-hero[data-brain-hero="open"] .atlas-viewport > .atlas-link-button { grid-column: 1; grid-row: 3; }
@@ -120,3 +103,112 @@ main:has(.tara-page) { background: #000; }
   .tara-page *, .tara-page *::before, .tara-page *::after, .tara-dialog *, .tara-dialog::backdrop { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 @media (prefers-reduced-transparency: reduce) { .tara-page .tara-pill, .tara-dialog, .tara-title .tara-eyebrow, .tara-explorer .tara-panel, .tara-explorer .brain-hero-lenses { background: #15151c; } }
+/* Composition from the approved codex-gui render. Shared site navigation is unchanged. */
+main:has(.tara-page) { max-width: 1600px; padding-inline: 56px; }
+.tara-page { padding-bottom:0; --font-mono:'Inter',system-ui,sans-serif; }
+.tara-nav { min-height:94px; display:flex; align-items:center; gap:48px; border-bottom:1px solid var(--color-border); }
+.tara-brand { display:flex; align-items:center; gap:12px; font-size:17px; font-weight:650; letter-spacing:-.5px; text-decoration:none; }
+.tara-brand svg { width:28px; height:28px; }
+.tara-brand span { font-weight:400; color:var(--color-text-muted); margin-left:3px; }
+.tara-nav-links { display:flex; gap:32px; margin-left:56px; font-size:13px; color:var(--color-text-muted); }
+.tara-nav a { min-height:44px; display:inline-flex; align-items:center; text-decoration:none; }
+.tara-nav-actions { margin-left:auto; display:flex; gap:12px; align-items:center; }
+.tara-nav .tara-pill { font-size:12px; padding:0 15px; color:var(--color-text-muted); }
+.tara-ink { gap:14px; border-radius:999px; padding:0 22px; background:#f5f6f8; color:#0b0b10; font-size:12px; font-weight:600; }
+.tara-title { min-height:164px; padding:24px 0; gap:24px; }
+.tara-title .tara-eyebrow { display:block; padding:0; border:0; border-radius:0; background:none; box-shadow:none; backdrop-filter:none; font-size:10px; font-weight:400; line-height:1.5; letter-spacing:2px; margin:0 0 13px; }
+.tara-title h1 { font:550 38px/1.1 'Inter',system-ui,sans-serif; letter-spacing:-1.6px; margin:0 0 13px; }
+.tara-title .tara-glia { font:inherit; color:var(--color-identity); }
+.tara-title .tara-by { font-size:.5em; font-weight:400; letter-spacing:0; color:var(--color-text-muted); white-space:nowrap; }
+.tara-wordmark { display:inline-flex; vertical-align:-.12em; --font-logo:"Space Grotesk","Inter",system-ui,sans-serif; --color-logo-ring:#f5f6f8; --color-logo-dot:#0ea5e9; --color-logo-text:#f5f6f8; }
+.tara-subtitle { font-size:15px; line-height:1.5; color:var(--color-text-muted); margin:0; }
+.tara-legal { margin:7px 0 0; font-size:10px; color:var(--color-text-faint); }
+.tara-preview { display:flex; align-items:center; gap:8px; padding:9px 13px; border:1px solid var(--color-border); border-radius:999px; background:var(--color-glass-bg); backdrop-filter:blur(14px); color:var(--color-text-muted); font-size:11px; }
+.tara-preview i { width:5px; height:5px; background:#3d86ff; border-radius:50%; }
+.tara-explorer .brain-hero[data-brain-hero="open"] .atlas-picture { border:1px solid var(--color-border); border-radius:16px; background:radial-gradient(ellipse at 49% 46%,rgba(255,63,164,.045),transparent 62%),var(--color-glass-bg); box-shadow:var(--tara-sheen); height:540px; min-height:540px; padding-top:76px; }
+.tara-explorer .brain-hero[data-brain-hero="open"] .atlas-viewport-header { top:23px; left:24px; width:calc(55% - 59px); max-width:none; display:flex; align-items:center; justify-content:space-between; }
+.tara-explorer .atlas-viewport-header::before { content:'BRAIN ATLAS'; font-size:11px; letter-spacing:1.2px; color:var(--color-text-muted); }
+.tara-explorer .brain-hero-lenses { gap:6px; padding:5px; }
+.tara-explorer .brain-hero-lens { border:1px solid transparent; font-size:11px; font-weight:400; line-height:1.4; padding:0 13px; }
+.tara-explorer .tara-panel { height:540px; min-height:540px; overflow:auto; border-radius:16px; padding:25px 26px 12px; box-shadow:var(--tara-sheen); }
+.tara-explorer .tara-panel[data-selected="true"] { box-shadow:var(--tara-sheen); }
+.tara-panel-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding-bottom:22px; border-bottom:1px solid var(--color-border); }
+.tara-panel-head .tara-eyebrow { margin:0 0 10px; font-size:9px; letter-spacing:2px; }
+.tara-panel h2 { font-size:25px; font-weight:500; letter-spacing:-.6px; margin:0 0 7px; }
+.tara-panel p.tara-region-meta { margin:0; font-size:11px; color:var(--color-text-faint); display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
+.tara-region-icon { display:grid; place-items:center; flex-shrink:0; width:44px; height:44px; border-radius:50%; border:1px solid var(--color-border); background:var(--color-bg-elevated); color:var(--color-text-muted); }
+.tara-row { margin:0; border-top:0; border-bottom:1px solid var(--color-border); }
+.tara-row:last-child { border-bottom:0; }
+.tara-row > button { background:transparent; border:0; font-family:inherit; min-height:57px; font-size:13px; justify-content:flex-start; gap:10px; border-radius:0; }
+.tara-row > button > span:last-child { margin-left:auto; color:var(--color-text-faint); }
+.tara-row-icon { width:17px; height:17px; flex-shrink:0; color:var(--color-text-faint); }
+.tara-badge { border:1px solid var(--color-border); border-radius:999px; font-size:9px; font-weight:400; padding:4px 7px; color:var(--color-text-muted); background:none; }
+.tara-threat-content { padding:0 0 19px 27px; }
+.tara-threat { border:1px solid var(--color-border); border-radius:12px; padding:15px; background:var(--color-bg-elevated); }
+.tara-threat-top,.tara-threat-foot { display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:9px; color:var(--color-text-faint); }
+.tara-threat-top { margin-bottom:10px; letter-spacing:1.1px; }
+.tara-adversarial { letter-spacing:0; color:var(--color-text-muted); }
+.tara-adversarial::before { content:''; display:inline-block; width:5px; height:5px; border-radius:50%; background:#ff3fa4; margin-right:5px; }
+.tara-threat h3 { margin:0 0 8px; font-size:15px; font-weight:500; letter-spacing:-.2px; }
+.tara-panel .tara-threat p { margin:0; font-size:11px; }
+.tara-threat-foot { margin-top:14px; padding-top:8px; border-top:1px solid var(--color-border); font-size:10px; }
+.tara-explorer .tara-threat-foot a { font-size:10px; text-decoration:none; color:var(--color-text-primary); }
+.tara-features { margin-top:29px; }
+.tara-section-heading { display:flex; justify-content:space-between; align-items:center; margin-bottom:13px; color:var(--color-text-faint); font-size:10px; }
+.tara-section-heading h2 { font-size:10px; letter-spacing:1.6px; font-weight:500; margin:0; }
+.tara-cards { grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+.tara-card { position:relative; min-height:119px; padding:18px 19px; border-radius:12px; }
+.tara-feature-icon { width:18px; height:18px; color:var(--color-text-muted); margin-bottom:13px; }
+.tara-feature-arrow { position:absolute; top:18px; right:18px; font-size:16px; color:var(--color-text-faint); }
+.tara-card h3 { margin:0 0 6px; font-size:13px; font-weight:500; }
+.tara-card p { margin:0; font-size:11px; color:var(--color-text-faint); }
+.tara-footer { min-height:65px; margin-top:0; font-size:10px; color:var(--color-text-faint); }
+.tara-footer span { font-size:9px; letter-spacing:1.3px; }
+@media(max-width:1023px) {
+ main:has(.tara-page) { padding-inline:24px; }
+ .tara-nav { gap:24px; flex-wrap:wrap; padding-block:16px; }
+ .tara-nav-links { margin-left:0; gap:20px; }
+.tara-title { flex-direction:row; }
+.tara-title-copy { flex:1 1 28rem; }
+ .tara-explorer .brain-hero[data-brain-hero="open"] .atlas-viewport-header { width:calc(100% - 48px); }
+ .tara-explorer .tara-panel { min-height:540px; }
+ .tara-cards { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:600px) {
+ main:has(.tara-page) { padding-inline:16px; }
+ .tara-nav { gap:16px; }
+ .tara-nav-links { order:3; width:100%; justify-content:space-between; }
+ .tara-nav-actions { gap:6px; }
+ .tara-nav .tara-pill,.tara-ink { padding-inline:12px; }
+.tara-title h1 { font-size:30px; }
+ .tara-explorer .brain-hero[data-brain-hero="open"] .atlas-viewport-header { left:16px; width:calc(100% - 32px); gap:8px; }
+ .tara-explorer .brain-hero-lens { padding-inline:9px; }
+ .tara-cards { grid-template-columns:1fr; }
+ .tara-explorer .tara-panel { padding-inline:20px; }
+}
+
+.tara-row button > span:nth-child(2) { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+.tara-nav .tara-pill { display:flex; gap:24px; }
+
+/* Brand font rule: Inter for all UI, headings and body on this page. Space Grotesk is
+   reserved for the wordmark, which sets its own font on .wordmark and is not overridden here. */
+.tara-page,
+.tara-page h1,
+.tara-page h2,
+.tara-page h3,
+.tara-page h4,
+.tara-page button,
+.tara-page input,
+.tara-page select {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.tara-page .wordmark {
+  font-family: var(--font-logo);
+}
+
+/* Locked layout fixes: keep the lens group clear of the orientation cube, and give the local
+   header the render's colours (white brand, muted links) instead of default link blue. */
+.tara-page .atlas-viewport-header { padding-right: 7.5rem; }
+.tara-page .tara-brand { color: var(--color-text-primary); }
+.tara-page .tara-nav a { color: var(--color-text-muted); }
+.tara-page .tara-nav a:hover, .tara-page .tara-nav a:focus-visible { color: var(--color-text-primary); }
