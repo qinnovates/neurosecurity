@@ -83,23 +83,23 @@ export function loadAnalytics(win, doc) {
 }
 
 const BANNER_CSS = `
-#${BANNER_ID}{position:fixed;z-index:2147483000;left:max(1rem,env(safe-area-inset-left,0px));right:max(1rem,env(safe-area-inset-right,0px));bottom:max(1rem,env(safe-area-inset-bottom,0px));max-width:38rem;margin-inline:auto;padding:1.125rem 1.25rem;border:1px solid rgba(255,255,255,.28);border-radius:.75rem;background:#0b0b10;color:#e8e8ee;font:400 .875rem/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 12px 40px rgba(0,0,0,.55)}
-#${BANNER_ID} h2{margin:0 0 .375rem;font:600 1rem/1.3 "Space Grotesk",Inter,system-ui,sans-serif;color:#fff}
+#${BANNER_ID}{position:fixed;z-index:2147483000;left:max(1rem,env(safe-area-inset-left,0px));right:max(1rem,env(safe-area-inset-right,0px));bottom:max(1rem,env(safe-area-inset-bottom,0px));max-width:38rem;margin-inline:auto;padding:1.25rem 1.375rem;border:1px solid rgba(255,255,255,.14);border-radius:1rem;background:rgba(21,21,28,.86);-webkit-backdrop-filter:blur(14px) saturate(110%);backdrop-filter:blur(14px) saturate(110%);color:#e8e8ee;font:400 .875rem/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 12px 40px rgba(0,0,0,.45)}
+#${BANNER_ID} h2{margin:0 0 .375rem;font:600 1rem/1.3 Inter,system-ui,sans-serif;letter-spacing:-.01em;color:#f5f6f8}
 #${BANNER_ID} h2:focus{outline:none}
 #${BANNER_ID} p{margin:0 0 .5rem}
-#${BANNER_ID} a{color:#9bbcff;text-decoration:underline}
-#${BANNER_ID} .qc-actions{display:flex;flex-wrap:wrap;gap:.625rem;margin-top:.875rem}
-#${BANNER_ID} button{flex:1 1 8rem;min-height:2.75rem;padding:.5rem 1rem;border:1px solid #1d5fe6;border-radius:.5rem;background:#1d5fe6;color:#fff;font:600 .875rem/1.2 inherit;cursor:pointer}
-#${BANNER_ID} button:hover{background:#2468f0}
-#${BANNER_ID} button.qc-secondary{background:transparent;border-color:rgba(255,255,255,.55)}
-#${BANNER_ID} button.qc-secondary:hover{background:rgba(255,255,255,.1)}
-#${BANNER_ID} button:focus-visible,#${BANNER_ID} a:focus-visible,#${BANNER_ID} input:focus-visible{outline:3px solid #fff;outline-offset:2px}
-#${BANNER_ID} .qc-row{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;padding:.75rem 0;border-top:1px solid rgba(255,255,255,.18)}
-#${BANNER_ID} .qc-row strong{display:block;color:#fff}
-#${BANNER_ID} .qc-row span{display:block;color:#c9cad6}
-#${BANNER_ID} .qc-state{flex:none;font-weight:600;color:#c9cad6;white-space:nowrap}
-#${BANNER_ID} .qc-switch{flex:none;display:flex;align-items:center;gap:.5rem;min-height:2.75rem;font-weight:600;color:#fff;cursor:pointer}
-#${BANNER_ID} .qc-switch input{width:1.5rem;height:1.5rem;margin:0;accent-color:#3d86ff;cursor:pointer}
+#${BANNER_ID} a{color:#7dd3fc;text-decoration:underline;text-underline-offset:3px}
+#${BANNER_ID} .qc-actions{display:flex;flex-wrap:wrap;gap:.625rem;margin-top:1rem}
+#${BANNER_ID} button{flex:1 1 8rem;min-height:2.75rem;padding:.5rem 1.25rem;border:1px solid #f5f6f8;border-radius:999px;background:#f5f6f8;color:#0b0b10;font:500 .9375rem/1.2 Inter,system-ui,sans-serif;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease}
+#${BANNER_ID} button:hover{transform:translateY(-1px);box-shadow:0 4px 14px -8px rgba(14,165,233,.35)}
+#${BANNER_ID} button.qc-secondary{background:rgba(255,255,255,.08);border-color:transparent;color:#f5f6f8;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+#${BANNER_ID} button.qc-secondary:hover{background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1px rgba(255,255,255,.28)}
+#${BANNER_ID} button:focus-visible,#${BANNER_ID} a:focus-visible,#${BANNER_ID} input:focus-visible{outline:2px solid #7dd3fc;outline-offset:3px}
+#${BANNER_ID} .qc-row{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;padding:.75rem 0;border-top:1px solid rgba(255,255,255,.12)}
+#${BANNER_ID} .qc-row strong{display:block;color:#f5f6f8;font-weight:500}
+#${BANNER_ID} .qc-row span{display:block;color:#a3a7b5}
+#${BANNER_ID} .qc-state{flex:none;font-weight:500;color:#a3a7b5;white-space:nowrap}
+#${BANNER_ID} .qc-switch{flex:none;display:flex;align-items:center;gap:.5rem;min-height:2.75rem;font-weight:500;color:#f5f6f8;cursor:pointer}
+#${BANNER_ID} .qc-switch input{width:1.5rem;height:1.5rem;margin:0;accent-color:#0ea5e9;cursor:pointer}
 .qc-reopen{padding:.5rem .25rem;border:0;background:none;color:inherit;font:inherit;text-decoration:underline;cursor:pointer}
 `;
 

@@ -1,8 +1,8 @@
 {
   "_meta": {
-    "version": "1.1.0",
+    "version": "1.2.0",
     "schema": "qinnovates-brands-v1",
-    "last_updated": "2026-02-13",
+    "last_updated": "2026-11-01",
     "consumers": [
       "qinnovates.github.io/brand-loader.js",
       "_tools/scripts/sync_brands.py"
@@ -49,7 +49,16 @@
       "text_secondary": "#a3a7b5",
       "brand_teal": "#22C68D",
       "gateway_amber": "#d97706",
-      "identity_purple": "#9E61EB"
+      "identity_purple": "#9E61EB",
+      "logo_ring_dark": "#F5F6F8",
+      "logo_dot_dark": "#0EA5E9",
+      "logo_text_dark": "#F5F6F8",
+      "logo_ring_light": "#10121A",
+      "logo_dot_light": "#2563EB",
+      "logo_text_light": "#10121A",
+      "accent_highlight": "#FBBF24",
+      "orb_periwinkle": "#818CF8",
+      "orb_lens": "#E879F9"
     },
     "gradients": {
       "hero": "linear-gradient(135deg, #0a0a0f 0%, #0d1525 50%, #0a0a0f 100%)",
@@ -59,8 +68,12 @@
     },
     "fonts": {
       "primary": "Inter",
+      "heading": "Inter",
       "fallback": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-      "mono": "'JetBrains Mono', 'Fira Code', monospace"
+      "code": "'JetBrains Mono', 'Fira Code', monospace",
+      "code_usage": "code and pre elements only; never UI labels or breadcrumbs",
+      "logo": "Space Grotesk",
+      "logo_usage": "wordmark 'innovate' only (see logo.wordmark)"
     },
     "glows": {
       "cyan": "0 0 20px rgba(0,229,255,0.3)",
@@ -100,30 +113,133 @@
   "layers": {
     "_comment": "Single source of truth for 14-layer model. L1-L7 Silicon, L8 Gateway, L9-L14 Biology (hourglass/funnel model)",
     "silicon": [
-      { "id": "L1", "name": "Physical Carrier", "zone": "Physical", "color": "#1e3a5f" },
-      { "id": "L2", "name": "Signal Processing", "zone": "Data Link", "color": "#1e4d6f" },
-      { "id": "L3", "name": "Protocol", "zone": "Network", "color": "#1e5f7f" },
-      { "id": "L4", "name": "Transport", "zone": "Transport", "color": "#1e6f8f" },
-      { "id": "L5", "name": "Session", "zone": "Session", "color": "#1e7f9f" },
-      { "id": "L6", "name": "Presentation", "zone": "Presentation", "color": "#1e8faf" },
-      { "id": "L7", "name": "Application Interface", "zone": "Application", "color": "#2d9fbf" }
+      {
+        "id": "L1",
+        "name": "Physical Carrier",
+        "zone": "Physical",
+        "color": "#1e3a5f"
+      },
+      {
+        "id": "L2",
+        "name": "Signal Processing",
+        "zone": "Data Link",
+        "color": "#1e4d6f"
+      },
+      {
+        "id": "L3",
+        "name": "Protocol",
+        "zone": "Network",
+        "color": "#1e5f7f"
+      },
+      {
+        "id": "L4",
+        "name": "Transport",
+        "zone": "Transport",
+        "color": "#1e6f8f"
+      },
+      {
+        "id": "L5",
+        "name": "Session",
+        "zone": "Session",
+        "color": "#1e7f9f"
+      },
+      {
+        "id": "L6",
+        "name": "Presentation",
+        "zone": "Presentation",
+        "color": "#1e8faf"
+      },
+      {
+        "id": "L7",
+        "name": "Application Interface",
+        "zone": "Application",
+        "color": "#2d9fbf"
+      }
     ],
     "gateway": [
-      { "id": "L8", "name": "Neural Gateway", "zone": "Firewall", "color": "#d97706", "highlight": true }
+      {
+        "id": "L8",
+        "name": "Neural Gateway",
+        "zone": "Firewall",
+        "color": "#d97706",
+        "highlight": true
+      }
     ],
     "biology": [
-      { "id": "L9", "name": "Signal Processing", "zone": "Filtering", "color": "#14532d" },
-      { "id": "L10", "name": "Neural Protocol", "zone": "Encoding", "color": "#166534" },
-      { "id": "L11", "name": "Cognitive Transport", "zone": "Delivery", "color": "#15803d" },
-      { "id": "L12", "name": "Cognitive Session", "zone": "Context", "color": "#16a34a" },
-      { "id": "L13", "name": "Semantic Layer", "zone": "Intent", "color": "#22c55e" },
-      { "id": "L14", "name": "Identity Layer", "zone": "Self", "color": "#9E61EB" }
+      {
+        "id": "L9",
+        "name": "Signal Processing",
+        "zone": "Filtering",
+        "color": "#14532d"
+      },
+      {
+        "id": "L10",
+        "name": "Neural Protocol",
+        "zone": "Encoding",
+        "color": "#166534"
+      },
+      {
+        "id": "L11",
+        "name": "Cognitive Transport",
+        "zone": "Delivery",
+        "color": "#15803d"
+      },
+      {
+        "id": "L12",
+        "name": "Cognitive Session",
+        "zone": "Context",
+        "color": "#16a34a"
+      },
+      {
+        "id": "L13",
+        "name": "Semantic Layer",
+        "zone": "Intent",
+        "color": "#22c55e"
+      },
+      {
+        "id": "L14",
+        "name": "Identity Layer",
+        "zone": "Self",
+        "color": "#9E61EB"
+      }
+    ]
+  },
+  "logo": {
+    "name": "Qinnovate mark and wordmark (logo truth)",
+    "approved": "2026-11-01",
+    "source_file": "src/site/brand/qinnovate-mark.svg",
+    "geometry": {
+      "viewbox": 100,
+      "ring_radius": 35,
+      "ring_stroke": 11,
+      "gap_degrees": 40,
+      "gap_centre_degrees": 45,
+      "tail_length": 12,
+      "tail_width_base": 11,
+      "tail_width_tip": 5.2,
+      "dot_radius": 10.8,
+      "knockout_radius": 13.5
+    },
+    "wordmark": {
+      "text": "innovate",
+      "font": "Space Grotesk",
+      "weight": 588,
+      "letter_spacing_em": -0.02,
+      "i_dot": "text colour"
+    },
+    "notes": [
+      "logo_dot_dark is the approved D colour. On light grounds it fails 3:1 (about 2.3:1), so logo_dot_light is #2563EB, pending owner approval.",
+      "Layer colours in theme and hourglass sections are domain meanings and are not changed by the logo."
     ]
   },
   "brand_color": {
     "_comment": "The teal where L9 and L10 overlap — two biological layers in harmony.",
     "hex": "#22C68D",
-    "rgb": [34, 198, 141],
+    "rgb": [
+      34,
+      198,
+      141
+    ],
     "name": "Neurosec Teal"
   },
   "stats": {

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import EndCta from '../components/EndCta.astro';
 import TrustBar from '../components/TrustBar.astro';
 import { HOURGLASS_BANDS, HOURGLASS_WIDTHS } from '../lib/qif-constants';
 import { NEURORIGHT_COUNT } from '../lib/neurorights-taxonomy';
@@ -12,6 +13,7 @@ import HourglassReveal from '../components/HourglassReveal';
 import AtlasExplorerLink from '../components/brain/AtlasExplorerLink';
 import DualUseSplit from '../components/DualUseSplit';
 import GliaTeaser from '../components/GliaTeaser.astro';
+import Wordmark from '../components/Wordmark.astro';
 import NeurorightsRadar from '@/components/radar/NeurorightsRadar';
 import '../styles/global.css';
 import registry from '@shared/qtara-registrar.json';
@@ -19,6 +21,10 @@ import { readNeurorightsTaxonomy, type NeurorightCode } from '@/lib/anatomy/tech
 import { foldNeurorights } from '@/lib/neurorights-fold';
 import { CODE_LABELS, METRIC_NAMES, parseNiss } from '../lib/niss-parser';
 import { getCatalogCoverage, PURPOSE_SUMMARY, STATEMENT_LINKS } from '../lib/purpose-and-limits';
+
+// Page 2 statement, split into words so each one can light on scroll.
+const TARA_BODY = "Neural interfaces create new security questions where digital systems meet neural signals. Depending on design, these devices can record neural activity or deliver stimulation, so device integrity and effects on people belong in the threat model. TARA catalogues proposed attack techniques, maps them to QIF's layered framework, and uses the draft NISS method to assess severity. It is an open research effort: unvalidated, not a standard, and not clinical guidance.";
+const TARA_WORDS = TARA_BODY.split(' ');
 
 // Compute hero metrics from registrar (build-time)
 const techniques = (registry as any).techniques ?? [];
@@ -70,15 +76,36 @@ const neurorightsFold = foldNeurorights(
   <Nav />
 
   <!-- ═══ HERO: the render, then the goals as the reader scrolls ═══ -->
+  <div class="home-stage">
+  <!-- The render stays fixed while the text above and below it scrolls over it. -->
+  <div class="home-bg" aria-hidden="true">
+    <img class="home-hero-image" src="/images/home-hero.png" alt="" width="1672" height="941" fetchpriority="high" />
+    <div class="home-hero-scrim"></div>
+  </div>
   <section class="home-hero" aria-labelledby="hero-heading">
-    <img class="home-hero-image" src="/images/home-hero.png" alt="A silhouetted head in profile, lit by a blue rim light" width="1672" height="941" fetchpriority="high" />
-    <div class="home-hero-scrim" aria-hidden="true"></div>
     <div class="home-hero-copy">
-      <h1 id="hero-heading" class="home-hero-title font-[family-name:var(--font-heading)]">Qinnovate</h1>
-      <p class="home-hero-sub">An open research effort on the security and governance of brain-computer interfaces.</p>
+      <h1 id="hero-heading" class="sr-only">Qinnovate: The Open Neural Atlas</h1>
+      <span class="home-hero-settle"><span class="home-hero-wordmark enter-fade" style="--enter-i: 6"><span class="home-hero-breathe"><Wordmark /></span></span></span>
+      <a class="home-hero-link enter-fade" style="--enter-i: 7" href="/research/whitepaper/">Whitepaper</a>
     </div>
-    <div class="home-hero-cue" aria-hidden="true"><span>SCROLL</span><span class="home-hero-cue-line"></span></div>
+    <div class="home-hero-cue" aria-hidden="true">
+      <svg class="home-hero-mouse" width="22" height="34" viewBox="0 0 24 36" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="1" y="1" width="22" height="34" rx="11" />
+        <circle class="home-hero-mouse-dot" cx="12" cy="9" r="2" fill="currentColor" stroke="none" />
+      </svg>
+    </div>
   </section>
+
+  <!-- Page 2: TARA in words. Text only, over the same render; each word lights as the reader scrolls. -->
+  <section class="home-tara" aria-labelledby="tara-heading">
+    <div class="home-tara-inner">
+      <p class="home-tara-eyebrow">Qinnovate · TARA (Threat Atlas Risk Assessment) for BCIs</p>
+      <h2 id="tara-heading" class="home-tara-heading">The Open Neural Atlas</h2>
+      <p class="home-tara-sub">Protecting the neural frontier</p>
+      <p class="home-tara-copy" data-reveal>{TARA_WORDS.map((word) => <><span class="w">{word}</span>{' '}</>)}</p>
+    </div>
+  </section>
+  </div>
 
   <section class="home-goals" aria-label="Our goals">
     <div class="home-goal reveal">
@@ -155,19 +182,56 @@ const neurorightsFold = foldNeurorights(
     <p>About this site: QIF, TARA and NISS are proposed research frameworks. They are not validated, not peer-reviewed and not adopted by any standards body. The brain and signal visuals are illustrative, and each pattern shown on the TARA page is labelled with its evidence. Source, data and mappings are public: <a href="https://github.com/qinnovates/neurosecurity">source on GitHub</a> and <a href="/atlas/tara/">the datalake mapping</a>. Privacy choices are in the footer.</p>
   </div>
 
+  <EndCta />
   <Footer />
 
 
   <style>
-    .home-hero { position: relative; height: min(88vh, 720px); min-height: 520px; overflow: hidden; background: #000; }
-    .home-hero-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .home-stage { position: relative; }
+    .home-bg { position: sticky; top: 0; height: 100vh; margin-bottom: -100vh; overflow: hidden; background: #000; z-index: 0; }
+    .home-hero { position: relative; z-index: 1; height: min(88vh, 720px); min-height: 520px; }
+    .home-tara { position: relative; z-index: 1; min-height: 220vh; padding: 0 48px; }
+    .home-tara-inner { position: sticky; top: 22vh; max-width: 52rem; margin: 0 auto; color: #f5f6f8; }
+    .home-tara-eyebrow { margin: 0 0 14px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #c9cdd9; }
+    .home-tara-heading { margin: 0; font-size: clamp(2.25rem, 4.5vw, 3.25rem); line-height: 1.08; letter-spacing: -.02em; font-weight: 600; text-wrap: balance; }
+    .home-tara-sub { margin: 10px 0 36px; font-size: clamp(1.125rem, 2vw, 1.5rem); color: #a3a7b5; }
+    .home-tara-copy { margin: 0; font-size: clamp(1.375rem, 2.6vw, 1.875rem); line-height: 1.45; font-weight: 500; letter-spacing: -.01em; }
+    .home-tara-copy .w { color: rgba(232, 232, 238, .55); transition: color .35s ease; }
+    .home-tara-copy .w.is-lit { color: #f5f6f8; }
+    @media (prefers-reduced-motion: reduce) { .home-tara-copy .w { transition: none; } }
+    .home-hero-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transform: translateY(4vh); }
     .home-hero-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,0) 40%, #000 100%); }
-    .home-hero-copy { position: absolute; left: 0; right: 0; bottom: 136px; padding: 0 48px; text-align: center; display: flex; flex-direction: column; gap: 14px; align-items: center; }
-    .home-hero-title { margin: 0; font-size: clamp(40px, 6vw, 72px); font-weight: 700; color: #fff; letter-spacing: .02em; }
-    .home-hero-sub { margin: 0; font-size: clamp(16px, 2vw, 20px); line-height: 1.5; color: #e8e8ee; max-width: 640px; }
-    .home-hero-cue { position: absolute; left: 0; right: 0; bottom: 40px; display: flex; flex-direction: column; align-items: center; gap: 10px; color: #c9cdd9; font-size: 12px; letter-spacing: .12em; }
-    .home-hero-cue-line { width: 1px; height: 36px; background: rgba(255,255,255,.35); }
-    .home-goals { background: #000; padding: 96px 48px; display: flex; flex-direction: column; align-items: center; gap: 56px; }
+    /* The hero is always dark, so the logo takes the dark-ground tokens whatever the page theme. */
+    /* The logo is centred on the viewport; the Whitepaper link hangs below it. */
+    .home-hero-copy { --color-logo-ring: #f5f6f8; --color-logo-dot: #0ea5e9; --color-logo-text: #f5f6f8; position: absolute; inset: 0; padding: 0 48px; text-align: center; }
+    .home-hero-wordmark { position: absolute; left: 0; right: 0; top: 50vh; transform: translateY(-50%); font-size: clamp(38.4px, 5.6vw, 70.4px); }
+    /* A slow breath: a 2% swell and a faint blue halo. Uses the individual `scale` property so it
+       does not fight the centring transform or the enter-fade animation on the parent. */
+    .home-hero-breathe { display: inline-block; animation: hero-breathe 7s ease-in-out infinite; }
+    @keyframes hero-breathe {
+      0%, 100% { scale: 1; filter: drop-shadow(0 0 0 rgba(14, 165, 233, 0)); }
+      50% { scale: 1.02; filter: drop-shadow(0 0 22px rgba(14, 165, 233, 0.28)); }
+    }
+    @media (prefers-reduced-motion: reduce) { .home-hero-breathe { animation: none; } }
+    /* After the one-time load sequence (about 4.2s), the logo settles to 75% opacity and stays there. */
+    .home-hero-settle { animation: hero-settle 0.8s ease 4.2s 1 both; }
+    @keyframes hero-settle {
+      from { opacity: 1; }
+      to { opacity: 0.75; }
+    }
+    @media (prefers-reduced-motion: reduce) { .home-hero-settle { animation: none; } }
+    .home-hero-mouse-dot { animation: wheel-tick 1.8s ease-in-out infinite; }
+    @keyframes wheel-tick {
+      0% { transform: translateY(0); opacity: 1; }
+      60% { transform: translateY(8px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { .home-hero-mouse-dot { animation: none; opacity: 1; } }
+    .home-hero-link { position: absolute; left: 0; right: 0; top: calc(50vh + 3.75rem); color: #e8e8ee; font-size: clamp(16px, 2vw, 20px); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(255,255,255,.45); }
+    .home-hero-link:hover { color: #fff; text-decoration-color: #fff; }
+    .home-hero-link:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 2px; }
+    .home-hero-cue { position: absolute; left: 0; right: 0; bottom: 12px; display: flex; flex-direction: column; align-items: center; gap: 10px; color: #c9cdd9; font-size: 12px; letter-spacing: .12em; }
+    .home-goals { position: relative; z-index: 1; background: #0b0b10; padding: 96px 48px; display: flex; flex-direction: column; align-items: center; gap: 56px; }
     .home-goal { max-width: 880px; display: flex; flex-direction: column; gap: 14px; text-align: center; }
     .home-goal h2 { margin: 0; font-size: clamp(32px, 4.5vw, 52px); line-height: 1.1; font-weight: 700; color: #fff; text-wrap: balance; }
     .home-goal p { margin: 0; font-size: 19px; line-height: 1.6; color: #b8bccb; }
@@ -207,5 +271,28 @@ const neurorightsFold = foldNeurorights(
       const bibtex = '@misc{qinnovate2026qif,\n  author = {{Qinnovate}},\n  title = {QIF: Quantified Interconnection Framework for Brain-Computer Interface Security},\n  year = {2026},\n  doi = {10.5281/zenodo.18640105},\n  url = {https://qinnovate.com},\n  note = {Proposed framework, not yet peer-reviewed}\n}';
       navigator.clipboard.writeText(bibtex).then(() => { this.textContent = 'Copied!'; });
     });
+  </script>
+  <script>
+    const copy = document.querySelector<HTMLElement>('[data-reveal]');
+    const stage = document.querySelector<HTMLElement>('.home-tara');
+    if (copy && stage) {
+      const words = Array.from(copy.querySelectorAll<HTMLElement>('.w'));
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let frame = 0;
+      const update = (): void => {
+        const travel = stage.offsetHeight - window.innerHeight;
+        const scrolled = -stage.getBoundingClientRect().top;
+        const progress = travel <= 0 ? 1 : Math.min(1, Math.max(0, scrolled / travel));
+        const litCount = Math.round(progress * words.length);
+        words.forEach((word, index) => word.classList.toggle('is-lit', reduced || index < litCount));
+      };
+      const scheduleUpdate = (): void => {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(update);
+      };
+      window.addEventListener('scroll', scheduleUpdate, { passive: true });
+      window.addEventListener('resize', scheduleUpdate);
+      update();
+    }
   </script>
 </BaseLayout>

@@ -1,0 +1,183 @@
+<!-- Closing call to action. The particle wave only loads and runs once this section is mostly on screen,
+     so visitors who never reach the end pay nothing for three.js. -->
+<section class="end-cta" data-end-cta aria-labelledby="end-cta-heading">
+  <canvas class="end-cta-canvas" data-end-wave aria-hidden="true"></canvas>
+  <div class="end-cta-scrim" aria-hidden="true"></div>
+  <div class="end-cta-copy">
+    <p class="end-cta-eyebrow">Open source · Neurosecurity</p>
+    <h2 id="end-cta-heading" class="end-cta-heading">Pioneer the community with us.</h2>
+    <p class="end-cta-body">
+      Neurotechnology can restore movement, speech and sight. We are building the threat models that let it do that safely, so people who depend on it never have to choose between a breakthrough and their trust.
+    </p>
+    <p class="end-cta-os">Only our threat mapping is open source: the TARA catalogue, the QIF mapping and the NISS method.</p>
+    <p class="end-cta-ask">Interested in contributing or partnering? Reach out to us for more information.</p>
+    <div class="end-cta-actions">
+      <a class="end-cta-primary" href="https://github.com/qinnovates/neurosecurity">Contribute on GitHub</a>
+      <a class="end-cta-secondary" href="https://www.reddit.com/r/neurosec/">Join the community on r/neurosec</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .end-cta {
+    position: relative;
+    isolation: isolate;
+    min-height: min(80vh, 640px);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: #000;
+    color: #f5f6f8;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .end-cta-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: block;
+  }
+  .end-cta-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.35) 35%, rgba(0, 0, 0, 0.35) 65%, #000 100%);
+  }
+  .end-cta-copy {
+    position: relative;
+    z-index: 2;
+    max-width: 44rem;
+    padding: 6rem 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.1rem;
+  }
+  .end-cta-eyebrow {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #c9cdd9;
+  }
+  .end-cta-heading {
+    margin: 0;
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  .end-cta-body {
+    margin: 0;
+    max-width: 36rem;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: #c9cdd9;
+  }
+  .end-cta-os {
+    margin: 0;
+    max-width: 36rem;
+    font-size: 0.9375rem;
+    color: #a3a7b5;
+  }
+  .end-cta-ask {
+    margin: 0.5rem 0 0;
+    font-size: 0.9375rem;
+    color: #f5f6f8;
+  }
+  .end-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+  .end-cta-primary,
+  .end-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    height: 2.75rem;
+    padding: 0 1.25rem;
+    border-radius: 9999px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .end-cta-primary {
+    background: #f5f6f8;
+    color: #0b0b10;
+  }
+  .end-cta-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: #f5f6f8;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+    -webkit-backdrop-filter: blur(14px) saturate(110%);
+    backdrop-filter: blur(14px) saturate(110%);
+  }
+  .end-cta-primary:hover,
+  .end-cta-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -8px rgba(37, 99, 235, 0.55);
+  }
+  .end-cta-primary:focus-visible,
+  .end-cta-secondary:focus-visible {
+    outline: 2px solid #7dd3fc;
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .end-cta-primary,
+    .end-cta-secondary {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import type { EndWave } from './end-wave/end-wave';
+
+  const section = document.querySelector<HTMLElement>('[data-end-cta]');
+  const canvas = section?.querySelector<HTMLCanvasElement>('[data-end-wave]');
+
+  if (section && canvas) {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Share of the section that must be on screen before the wave loads and runs.
+    const REVEAL_RATIO = 0.4;
+
+    let wave: EndWave | null = null;
+    let loading: Promise<void> | null = null;
+    let isRevealed = false;
+
+    const loadWave = (): Promise<void> => {
+      loading ??= import('./end-wave/end-wave').then(({ createEndWave }) => {
+        wave = createEndWave(canvas, { reducedMotion });
+        if (wave === null) {
+          section.dataset.waveUnsupported = '';
+          return;
+        }
+        if (isRevealed) wave.start();
+      });
+      return loading;
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          isRevealed = entry.isIntersecting && entry.intersectionRatio >= REVEAL_RATIO;
+          if (isRevealed) {
+            loadWave().then(() => wave?.start());
+          } else {
+            wave?.stop();
+          }
+        }
+      },
+      { threshold: [0, REVEAL_RATIO] },
+    );
+    observer.observe(section);
+  }
+</script>

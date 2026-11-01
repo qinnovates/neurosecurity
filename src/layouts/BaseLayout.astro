@@ -38,7 +38,7 @@ const DEFAULT_THEME = 'dark';
   <link rel="canonical" href={canonicalURL} />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' font-family='system-ui' fill='%2306b6d4'%3EQ%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cstyle%3E.r%7Bfill:%2310121A;stroke:%2310121A%7D.d%7Bfill:%232563EB%7D@media (prefers-color-scheme:dark)%7B.r%7Bfill:%23F5F6F8;stroke:%23F5F6F8%7D.d%7Bfill:%230EA5E9%7D%7D%3C/style%3E%3Cdefs%3E%3Cmask id='k'%3E%3Crect width='100' height='100' fill='%23FFF'/%3E%3Ccircle cx='83.23' cy='83.23' r='13.5' fill='%23000'/%3E%3C/mask%3E%3C/defs%3E%3Cg mask='url(%23k)' class='r'%3E%3Cpath d='M 64.79 81.72 A 35 35 0 1 1 81.72 64.79' fill='none' stroke-width='11' stroke-linecap='round'/%3E%3Cpolygon points='70.86,78.64 81.39,85.07 85.07,81.39 78.64,70.86' stroke='none'/%3E%3C/g%3E%3Ccircle cx='83.23' cy='83.23' r='10.8' class='d'/%3E%3C/svg%3E" />
 
   <!-- Open Graph -->
   <meta property="og:title" content={title} />
@@ -147,6 +147,7 @@ const DEFAULT_THEME = 'dark';
   </script>
 </head>
 <body class="min-h-screen">
+  <div class="ambient-orbs" aria-hidden="true"><span class="ambient-orb ambient-orb-a"></span><span class="ambient-orb ambient-orb-b"></span></div>
   <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[var(--color-accent-fill)] focus:text-white focus:text-sm focus:font-bold">Skip to content</a>
   <main id="main-content">
     <slot />

@@ -20,6 +20,16 @@
   --color-accent-fill: #1d5fe6;
   --color-accent-secondary: #22c68d;
   --color-accent-tertiary: #ff3fa4;
+  /* Logo truth (src/site/brand/LOGO-TRUTH.md, brands.json logo): ring and wordmark on the ground,
+     and the dot. The dot on light grounds is a deeper blue, because #0EA5E9 is 2.3:1 on light. */
+  --color-logo-ring: #f5f6f8;
+  --color-logo-dot: #0ea5e9;
+  --color-logo-text: #f5f6f8;
+  /* Highlight accent for selected states and emphasis. 11.8:1 on the page ground; text on it is #0b0b10. */
+  --color-accent-highlight: #fbbf24;
+  /* Background orbs only, never text or UI. Periwinkle is the primary; the pink is a faint lens tint. */
+  --color-orb-periwinkle: #818cf8;
+  --color-orb-lens: #e879f9;
   /* The secondary and tertiary roles as solid fills under white text: 5.33:1 and 5.54:1. */
   --color-accent-secondary-fill: #0c7a57;
   --color-accent-tertiary-fill: #c8156f;
@@ -44,9 +54,11 @@
   --color-glow-tertiary: rgba(180, 74, 255, 0.15);
 
   /* Typography */
-  --font-heading: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-heading: "Inter", system-ui, sans-serif;
+  --font-logo: "Space Grotesk", "Inter", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-mono: "Inter", system-ui, sans-serif;
+  --font-code: "JetBrains Mono", ui-monospace, monospace;
 
   /* Spacing scale */
   --spacing-section: 6rem;
@@ -129,6 +141,9 @@
   --color-bg-deep: #f5f6f8;
   --color-bg-surface: #eceef2;
   --color-bg-elevated: #dfe2e9;
+  --color-logo-ring: #10121a;
+  --color-logo-dot: #2563eb;
+  --color-logo-text: #10121a;
   /* The same electric blue, stepped down for a light ground: 6.27:1 on it, 6.78:1 under white text. */
   --color-accent-primary: #1f4fd1;
   --color-accent-fill: #1f4fd1;
@@ -261,12 +276,16 @@ button.glass:hover {
   -webkit-backdrop-filter: blur(12px);
 }
 
+/* Dropdown panel: the nav bar's glass (tint, blur, saturation) at a higher tint so the text stays legible. */
 .nav-dropdown {
-  background: rgba(24, 24, 27, 0.92);
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--color-text-primary);
+  backdrop-filter: blur(14px) saturate(110%);
+  -webkit-backdrop-filter: blur(14px) saturate(110%);
 }
 
 :root[data-theme="light"] .nav-dropdown {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .glass-subtle {
@@ -290,7 +309,13 @@ h3 { font-size: 1.5rem; }
 h4 { font-size: 1.25rem; }
 
 code, pre {
-  font-family: var(--font-mono);
+  font-family: var(--font-code);
+}
+
+/* Pagefind's keyboard hint falls back to the system face unless pinned. */
+.pf-trigger-key,
+.pf-searchbox-footer-hint {
+  font-family: var(--font-body) !important;
 }
 
 /* ═══ Link Styles ═══ */
@@ -950,3 +975,56 @@ html[data-embedded] #search-modal,
 html[data-embedded] footer,
 html[data-embedded] .atlas-view-switcher { display: none !important; }
 html[data-embedded] main { padding-top: 1rem !important; }
+
+/* Staggered page-load fade. Set --enter-i on each element (0, 1, 2 ...). "backwards" holds the start state during the delay and releases it afterwards, so hover styles still apply. */
+.enter-fade {
+  animation: enter-fade 0.6s ease backwards;
+  animation-delay: calc(var(--enter-i, 0) * 120ms);
+}
+@keyframes enter-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .enter-fade { animation: none; }
+}
+
+/* ═══ Ambient orbs: decorative, outside the content, behind everything ═══ */
+.ambient-orbs {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.05;
+  animation: ambient-drift 80s ease-in-out infinite alternate;
+}
+.ambient-orb-a {
+  width: 46vmax;
+  height: 46vmax;
+  top: -12vmax;
+  left: -14vmax;
+  background: var(--color-orb-periwinkle);
+}
+.ambient-orb-b {
+  width: 38vmax;
+  height: 38vmax;
+  bottom: -14vmax;
+  right: -10vmax;
+  background: var(--color-orb-lens);
+  opacity: 0.03;
+  animation-duration: 95s;
+  animation-delay: -30s;
+}
+@keyframes ambient-drift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(3vw, 2vh, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ambient-orb { animation: none; }
+}

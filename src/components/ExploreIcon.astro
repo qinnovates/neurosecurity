@@ -1,0 +1,33 @@
+---
+// The Q mark in miniature: the ring with its gap and the dot at the tail. On hover the dot travels to the centre.
+---
+<svg class="explore-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+  <path class="explore-icon-ring" d="M15.8 20.16 A9 9 0 1 1 20.16 15.8" />
+  <circle class="explore-icon-dot" cx="20.55" cy="20.55" r="2.2" />
+</svg>
+
+<style>
+  .explore-icon {
+    width: 1rem;
+    height: 1rem;
+    flex: none;
+    overflow: visible;
+  }
+  .explore-icon-ring {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+  }
+  .explore-icon-dot {
+    fill: var(--color-logo-dot);
+    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  :global(.nav-cta:hover) .explore-icon-dot,
+  :global(.nav-cta:focus-visible) .explore-icon-dot {
+    transform: translate(-8.55px, -8.55px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .explore-icon-dot { transition: none; }
+  }
+</style>

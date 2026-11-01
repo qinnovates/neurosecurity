@@ -1,7 +1,8 @@
 ---
 import Search from 'astro-pagefind/components/Search.astro';
-import GliaTeaser from './GliaTeaser.astro';
 import ThemeToggle from './ThemeToggle.astro';
+import LogoMark from './LogoMark.astro';
+import ExploreIcon from './ExploreIcon.astro';
 import { TARA_TECHNIQUES } from '../lib/qif-constants';
 import { NEURORIGHT_COUNT } from '../lib/neurorights-taxonomy';
 
@@ -110,29 +111,26 @@ const navSections: NavSection[] = [
 ];
 ---
 
-<nav class="glass nav-pill fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[min(1200px,calc(100%-2rem))] rounded-full" id="main-nav" transition:persist>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-10">
+<nav class="nav-root fixed top-4 left-0 right-0 z-50 pointer-events-none px-4 sm:px-6 lg:px-8" id="main-nav" transition:persist>
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-3">
+    <div class="nav-bar-row flex items-center justify-between h-9 w-full">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
-        <span class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">Q</span>
-        <span class="text-sm font-medium tracking-wider uppercase hidden sm:inline text-[var(--color-text-primary)]">innovate</span>
+      <a href="/" class="pointer-events-auto flex items-center gap-2 hover:opacity-80 transition-opacity enter-fade" style="--enter-i: 0" aria-label="Qinnovate home">
+        <span class="nav-logo"><LogoMark maskId="nav-logo-knockout" /></span>
         <span class="text-xs text-[var(--color-text-faint)] hidden sm:inline ml-1">|</span>
         <span class="text-xs font-medium tracking-wide hidden sm:inline text-[var(--color-text-muted)]">Open Neural Atlas</span>
       </a>
 
       <!-- Desktop links -->
-      <div class="hidden lg:flex items-center gap-0.5">
+      <div class="nav-pill pointer-events-auto hidden lg:flex items-center gap-10 h-9 px-5 rounded-full enter-fade" style="--enter-i: 1">
         {navSections.map((section) => (
           <div class="relative" data-dropdown={section.id}>
             <a
               href={section.href}
               aria-expanded="false"
               class:list={[
-                "flex items-center gap-1 px-2.5 py-2 rounded-lg text-sm font-medium transition-colors",
-                section.isActive
-                  ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-                  : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
+                "nav-link flex items-center gap-1 transition-colors",
+                section.isActive ? "nav-link-active" : ""
               ]}
             >
               {section.label}
@@ -141,7 +139,7 @@ const navSections: NavSection[] = [
               </svg>
             </a>
             <div class="dropdown-menu absolute left-0 top-full pt-2 hidden">
-              <div class="glass nav-dropdown rounded-xl border border-[var(--color-border)] shadow-xl overflow-hidden max-h-[75vh] overflow-y-auto"
+              <div class="nav-dropdown rounded-2xl overflow-hidden max-h-[75vh] overflow-y-auto"
                 style={`width: ${section.groups.length > 2 ? '640px' : '420px'};`}
               >
                 <div class={`p-3 ${section.groups.length > 2 ? 'grid grid-cols-3 gap-3' : section.groups.length === 2 ? 'grid grid-cols-2 gap-3' : ''}`}>
@@ -156,7 +154,7 @@ const navSections: NavSection[] = [
                           class:list={[
                             "block px-2 py-2 rounded-lg transition-colors",
                             currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-                              ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
+                              ? "nav-item-active"
                               : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5"
                           ]}
                         >
@@ -176,62 +174,39 @@ const navSections: NavSection[] = [
       </div>
 
       <!-- Right side -->
-      <div class="flex items-center gap-2">
-        <ThemeToggle />
-
-        <!-- Explore TARA CTA -->
-        <a
-          href="/atlas/tara/"
-          class:list={[
-            "nav-cta hidden md:inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium transition-colors text-[var(--color-text-primary)]",
-            currentPath.startsWith('/atlas/tara') ? "nav-cta-active" : ""
-          ]}
-        >
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v5M12 16v5M3 12h5M16 12h5"/></svg>
-          Explore TARA
-        </a>
-
-        <!-- Whitepaper — secondary, text-only so it doesn't compete with the one filled CTA -->
-        <a
-          href="/research/whitepaper/"
-          class="hidden md:inline-flex px-3 py-1.5 rounded-lg text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors"
-        >
-          Whitepaper
-        </a>
-
-        <!-- Glia is teased, not offered: no request door exists yet. -->
-        <div class="hidden lg:block">
-          <GliaTeaser compact />
-        </div>
-
-        <!-- GitHub link -->
-        <a
-          href="https://github.com/qinnovates/neurosecurity"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors"
-          aria-label="GitHub"
-        >
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-        </a>
+      <div class="pointer-events-auto flex items-center gap-2">
+        <span class="enter-fade" style="--enter-i: 2"><ThemeToggle /></span>
 
         <!-- Search button -->
         <button
           id="search-btn"
-          class="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors"
+          class="nav-round enter-fade"
+          style="--enter-i: 3"
           aria-label="Search"
         >
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
         </button>
 
+        <!-- Explore TARA CTA: glass pill with crosshair, same tint as the link bar -->
+        <a
+          href="/atlas/tara/"
+          class:list={[
+            "nav-cta hidden md:inline-flex items-center gap-2 px-4 h-9 rounded-full text-base enter-fade",
+            currentPath.startsWith('/atlas/tara') ? "nav-cta-active" : ""
+          ]}
+          style="--enter-i: 4"
+        >
+          <ExploreIcon />
+          Explore TARA
+        </a>
+
         <!-- Mobile menu button -->
         <button
           id="mobile-menu-btn"
-          class="lg:hidden p-2 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-black/5 transition-colors"
+          class="nav-round lg:hidden enter-fade"
+          style="--enter-i: 5"
           aria-label="Open menu"
           aria-expanded="false"
         >
@@ -243,80 +218,24 @@ const navSections: NavSection[] = [
     </div>
   </div>
 
-  <!-- Mobile menu -->
-  <div id="mobile-menu" class="lg:hidden hidden border-t border-[var(--color-border)] max-h-[80vh] overflow-y-auto">
-    <div class="px-4 py-3 space-y-1">
-      <!-- Mobile CTAs -->
-      <div class="pb-2 mb-2 border-b border-[var(--color-border)] space-y-2">
-        <a
-          href="/atlas/tara/"
-          class="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-[var(--color-accent-fill)] text-white text-sm font-medium text-center hover:opacity-90 transition-opacity"
-        >
-          Explore TARA
-        </a>
-        <a
-          href="/research/whitepaper/"
-          class="block w-full px-4 py-2.5 rounded-lg text-sm font-medium text-center text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors"
-        >
-          Whitepaper
-        </a>
-      </div>
-
-      <!-- Mobile nav sections with nested groups -->
+  <!-- Mobile menu: a black sheet that opens outward from the menu button, top-level sections only -->
+  <div id="mobile-menu" class="mobile-sheet lg:hidden hidden">
+    <ul class="mobile-sheet-list">
       {navSections.map((section) => (
-        <div class="border-t border-[var(--color-border)] pt-1 mt-1">
-          <button
-            data-mobile-toggle={section.id}
-            class:list={[
-              "flex items-center justify-between w-full px-3 py-2 rounded-lg text-sm font-semibold transition-colors",
-              section.isActive
-                ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/10"
-                : "text-[var(--color-text-primary)] hover:bg-black/5"
-            ]}
+        <li>
+          <a
+            href={section.href}
+            class:list={["mobile-sheet-link", section.isActive ? "nav-item-active" : ""]}
           >
             {section.label}
-            <svg class="w-3.5 h-3.5 opacity-60 transition-transform" data-chevron={section.id} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-            </svg>
-          </button>
-
-          <div data-mobile-list={section.id} class="hidden mt-1 space-y-1">
-            {section.groups.map((group) => (
-              <div class="ml-2">
-                <button
-                  data-mobile-group={`${section.id}-${group.title.toLowerCase().replace(/\s+/g, '-')}`}
-                  class="flex items-center justify-between w-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] rounded-lg transition-colors hover:bg-black/5"
-                  style="color: var(--color-text-faint);"
-                >
-                  {group.title}
-                  <svg class="w-3 h-3 opacity-50 transition-transform" data-group-chevron={`${section.id}-${group.title.toLowerCase().replace(/\s+/g, '-')}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                  </svg>
-                </button>
-                <div data-mobile-group-list={`${section.id}-${group.title.toLowerCase().replace(/\s+/g, '-')}`} class="hidden ml-2 space-y-0.5 mt-0.5 mb-1">
-                  {group.links.map((link) => (
-                    <a
-                      href={link.href}
-                      class:list={[
-                        "block px-3 py-1.5 rounded-lg text-sm transition-colors",
-                        currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-                          ? "text-[var(--color-accent-primary)] bg-[var(--color-accent-primary)]/5"
-                          : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]"
-                      ]}
-                    >
-                      {link.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+          </a>
+        </li>
       ))}
-      <div class="px-3 pt-2 mt-2 border-t border-[var(--color-border)]">
-        <GliaTeaser compact />
-      </div>
-    </div>
+    </ul>
+    <a href="/atlas/tara/" class="nav-cta nav-cta-menu mobile-sheet-cta">
+      <ExploreIcon />
+      Explore TARA
+    </a>
   </div>
 </nav>
 
@@ -380,30 +299,6 @@ const navSections: NavSection[] = [
         if (!dropdown.contains((e as FocusEvent).relatedTarget as Node)) {
           hide();
         }
-      });
-    });
-
-    // Mobile section accordion toggles
-    document.querySelectorAll<HTMLElement>('[data-mobile-toggle]').forEach((btn) => {
-      const key = btn.getAttribute('data-mobile-toggle');
-      const list = document.querySelector<HTMLElement>(`[data-mobile-list="${key}"]`);
-      const chevron = document.querySelector<HTMLElement>(`[data-chevron="${key}"]`);
-
-      btn.addEventListener('click', () => {
-        list?.classList.toggle('hidden');
-        chevron?.classList.toggle('rotate-180');
-      });
-    });
-
-    // Mobile group sub-accordion toggles
-    document.querySelectorAll<HTMLElement>('[data-mobile-group]').forEach((btn) => {
-      const key = btn.getAttribute('data-mobile-group');
-      const list = document.querySelector<HTMLElement>(`[data-mobile-group-list="${key}"]`);
-      const chevron = document.querySelector<HTMLElement>(`[data-group-chevron="${key}"]`);
-
-      btn.addEventListener('click', () => {
-        list?.classList.toggle('hidden');
-        chevron?.classList.toggle('rotate-90');
       });
     });
 
@@ -477,10 +372,58 @@ const navSections: NavSection[] = [
 </script>
 
 <style>
-  .nav-pill { background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.22); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18); backdrop-filter: blur(14px) saturate(120%); -webkit-backdrop-filter: blur(14px) saturate(120%); height: 40px; }
-  .nav-pill > div { height: 40px; padding-left: 20px; padding-right: 8px; }
-  .nav-cta { height: 40px; padding: 0 18px; background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.22); }
-  .nav-cta:hover { background: rgba(255, 255, 255, 0.24); }
-  .nav-cta-active { background: rgba(61, 134, 255, 0.28); border-color: rgba(61, 134, 255, 0.5); }
-  @media (prefers-reduced-transparency: reduce) { .nav-pill { background: #15151c; } }
+  /* Measured from the Starcloud reference (2x captures): 36px pills, full radius,
+     40px gaps between links, 20px inner padding. Tint is black at ~30% on light
+     and ~45% on dark; links are white at ~68%, the active link pure white. */
+  .nav-root { --nav-tint: rgba(0, 0, 0, 0.45); --nav-text: rgba(255, 255, 255, 0.68); }
+  :root[data-theme="light"] .nav-root { --nav-tint: rgba(0, 0, 0, 0.3); }
+  .nav-logo { display: block; width: 28px; height: 28px; }
+  /* Bar sits above the mobile sheet so the logo and the menu button stay usable while it is open. */
+  .nav-bar-row { position: relative; z-index: 1; }
+  /* Mobile sheet: solid black, opens as a circle growing out of the menu button (top right). */
+  .mobile-sheet { position: fixed; inset: 0; z-index: 0; background: #000; pointer-events: auto; }
+  .mobile-sheet:not(.hidden) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 6rem 1.5rem 3rem;
+    animation: mobile-sheet-open 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  @keyframes mobile-sheet-open {
+    from { clip-path: circle(0px at calc(100% - 34px) 34px); }
+    to { clip-path: circle(150vmax at calc(100% - 34px) 34px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-sheet:not(.hidden) { animation: none; }
+  }
+  @media (min-width: 1024px) {
+    .mobile-sheet { display: none !important; }
+  }
+  .mobile-sheet-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .mobile-sheet-link { display: block; padding: 0.6rem 1.25rem; border-radius: 1rem; font-size: 1.5rem; font-weight: 500; color: rgba(255, 255, 255, 0.7); text-align: center; transition: color 0.2s ease; }
+  .mobile-sheet-link:hover { color: #ffffff; }
+  .mobile-sheet-cta { margin-top: 1rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; height: 2.75rem; padding: 0 1.5rem; border-radius: 9999px; font-size: 1rem; }
+  .nav-pill, .nav-cta, .nav-round {
+    background: var(--nav-tint);
+    backdrop-filter: blur(14px) saturate(110%);
+    -webkit-backdrop-filter: blur(14px) saturate(110%);
+    color: var(--nav-text);
+  }
+  .nav-link { font-size: 16px; line-height: 1; color: var(--nav-text); transition: color 0.2s ease; }
+  .nav-link:hover, .nav-link-active { color: #ffffff; }
+  /* Selected item: a glass box with a soft white glow, no accent colour. */
+  .nav-item-active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.4), 0 0 18px rgba(251, 191, 36, 0.14);
+  }
+  .nav-cta { font-size: 16px; line-height: 1; color: #ffffff; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  /* Inside the mobile panel (which is already glass) the pill needs its own lighter sheen to read as a button. */
+  .nav-cta-menu { background: rgba(255, 255, 255, 0.12); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18); }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 14px -8px rgba(14, 165, 233, 0.35); }
+  .nav-round { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 9999px; transition: color 0.2s ease; pointer-events: auto; }
+  .nav-round:hover { color: #ffffff; }
+  @media (prefers-reduced-transparency: reduce) { .nav-pill, .nav-cta, .nav-round { background: #15151c; } }
 </style>
