@@ -1,0 +1,39 @@
+---
+import BrainAtlas from './BrainAtlas.astro';
+import RegionPanel from './RegionPanel.astro';
+import LinkCards from './LinkCards.astro';
+import { getExplorerData } from './explorer-data';
+import { CATALOG_VERSION } from '@/lib/threat-data';
+import { getCatalogCoverage } from '@/lib/purpose-and-limits';
+import { QIF_BANDS_FRAMEWORK_NOTE } from '@/lib/brain-view-data';
+import './explorer.css';
+const bands = getExplorerData();
+const regions = bands.flatMap(band => band.regions.map(region => ({ region, band })));
+const initial = regions.find(({ region }) => /prefrontal/i.test(region.name)) ?? regions[0];
+const coverage = getCatalogCoverage();
+---
+<section class="tara-gui" aria-label="TARA explorer" data-tara-gui>
+  <header class="tara-intro">
+    <div>
+      <p class="tara-eyebrow">The neural threat atlas · Catalog v{CATALOG_VERSION}</p>
+      <h1><svg class="tara-logo" viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6"><path d="m16 3 11 6v14l-11 6-11-6V9L16 3Z"/><path d="M16 3v26M5 9l22 14M27 9 5 23"/></g><circle cx="16" cy="16" r="3" /></svg>TARA <span>by Qinnovate</span></h1>
+      <p class="tara-subtitle">Threat Atlas Risk Assessment for the neural frontier</p>
+    </div>
+    <span class="tara-preview">Research preview</span>
+  </header>
+  <p class="tara-overview">{coverage.total} catalog techniques · {coverage.detected} with detection guidance · {coverage.scored} with draft NISS scores</p>
+  <div class="tara-workspace">
+    <BrainAtlas bands={bands} initialId={initial?.region.id} />
+    <aside class="tara-panel" aria-label="Selected region details">
+      {regions.map(({ region, band }) => <RegionPanel region={region} band={band} selected={region.id === initial?.region.id} />)}
+    </aside>
+  </div>
+  <p class="tara-limit">{QIF_BANDS_FRAMEWORK_NOTE} Technique counts refer to a band, not verified anatomical targeting.</p>
+  <LinkCards />
+  <p class="tara-trademark">Trademark status pending. Confirm wording with counsel before publishing.</p>
+</section>
+<script>
+  import { initTaraExplorers } from './interaction';
+  initTaraExplorers();
+  document.addEventListener('astro:page-load', initTaraExplorers);
+</script>

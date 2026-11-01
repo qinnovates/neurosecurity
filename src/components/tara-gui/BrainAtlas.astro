@@ -1,0 +1,27 @@
+---
+import type { ExplorerBand } from './explorer-data';
+interface Props { bands: ExplorerBand[]; initialId?: string }
+const { bands, initialId } = Astro.props;
+---
+<section class="tara-stage" aria-label="Brain atlas">
+  <div class="tara-stage-top">
+    <span class="tara-eyebrow">Brain atlas</span>
+    <div class="tara-tabs" role="tablist" aria-label="Atlas detail view">
+      {['Band', 'NISS', 'Evidence'].map((label, i) => <button type="button" id={`tara-tab-${label.toLowerCase()}`} role="tab" aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} aria-controls={`tara-${label.toLowerCase()}-${initialId}`} data-tab={label.toLowerCase()}>{label}</button>)}
+    </div>
+  </div>
+  <svg class="tara-brain" viewBox="95 25 550 335" role="img" aria-labelledby="tara-brain-title">
+    <title id="tara-brain-title">Left hemisphere schematic; select an atlas region from the list below</title>
+<path class="brain-base" d="M139 240C111 218 120 187 140 169C133 143 155 118 181 115C185 85 217 69 244 76C259 49 297 43 321 57C344 35 382 38 405 56C437 44 470 56 483 77C519 75 545 95 553 120C584 127 604 150 600 177C627 199 622 226 602 244C606 270 584 290 556 291C535 310 511 311 484 302L458 309L445 337L421 331L420 298C398 292 388 277 368 274C344 295 311 292 294 278C268 292 241 282 227 269C190 281 153 268 139 240Z"/>
+<g class="fold"><path d="M145 169c19-8 33 4 39-8s-6-23 6-32 34-1 41-12-1-25 13-41M128 204c14-12 25-4 35-13s8-24 25-24 21 10 34 1 7-24 18-31M144 236c14 7 32 0 32-15s-5-24 10-29 22 5 32-1M171 259c23-3 27-17 24-30s4-20 16-19 18 18 31 10 4-24 18-29M220 266c-5-14 4-22 16-23s21-7 22-19M265 65c-4 18 16 24 10 40s-23 17-17 34M299 56c-15 13-7 25 6 32s8 22-5 28-13 23-3 35M327 61c-2 15 21 17 20 35s-21 19-20 33 17 16 16 30M359 46c-9 19 13 28 10 45s-15 28-9 42M400 57c-17 7-23 23-11 35s9 23-4 30-12 26-5 38M428 66c19 13 5 26-9 31s-18 23-5 34 7 25-7 31M464 76c-18 4-20 20-11 32s24 14 20 28-23 12-31 27M493 89c-9 15 9 23 8 37s-17 18-13 33M529 112c-9 15-4 29 13 34s16 21 4 28M559 137c-6 24 24 21 22 44s-21 17-25 33M597 185c-18-1-22 12-20 25s-9 21-24 23M282 161c22 8 27 24 52 24s26-18 49-14 33 22 55 14 31-23 52-7 31 12 46 8M268 216c17 7 30 0 40 10s4 25 20 28 20-9 34-9M292 277c14-4 17-13 10-23M344 282c10-12 4-24 15-34s23-3 32-10M279 199c15-2 21 10 41 7s24-12 37-8 20 17 37 13 22-15 42-10 29 7 43-2M377 274c5-17 24-19 36-12s17 21 35 19 29-12 44-7M408 240c14-13 31-4 44-12s31-10 42 2 34 11 41-5M468 256c13-11 27-3 38 6s24 10 35 2M545 283c3-18 21-17 31-22s8-17 17-20"/></g>
+<g class="fold-fine"><path d="M155 147c7-15 19-16 26-17M202 104c5-9 17-12 26-9M144 220c5-7 15-7 20-4M200 251c7 0 12-8 11-17M242 183c3-7 2-16-4-23M284 137c-5-10 1-17 5-21M315 98c5-5 5-16 0-21M346 115c7 0 11 9 9 16M397 69c10 2 16 8 14 17M455 141c-15-6-23 2-24 10M511 155c7-4 18 1 19 10M566 183c-11-4-21 0-25 8M327 237c12-5 19 0 21 9M365 224c12 5 20 1 24-5M417 252c9-4 16 0 19 7M496 288c8-6 19-4 24 1M573 249c-12-5-25 1-27 9"/></g>
+  </svg>
+  <div class="tara-stage-caption"><span>● Adversarial</span><span>Left hemisphere · Schematic</span></div>
+  <p class="tara-eyebrow tara-region-heading">Regions by QIF band</p>
+  <div class="tara-regions" role="listbox" aria-label="Atlas regions" aria-orientation="vertical">
+    {bands.map(band => <div role="group" aria-label={`${band.id} ${band.name}`}>
+      <p class="tara-band-heading">{band.id} · {band.name}{band.count !== undefined && <span>{band.count} band techniques</span>}</p>
+      {band.regions.map(region => <button type="button" role="option" data-region={region.id} aria-selected={region.id === initialId ? 'true' : 'false'} tabindex={region.id === initialId ? 0 : -1}>{region.name}<span aria-hidden="true">↗</span></button>)}
+    </div>)}
+  </div>
+</section>

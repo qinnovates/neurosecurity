@@ -1,0 +1,15 @@
+---
+const links = [
+  { title: 'Threat story, step by step', copy: 'Trace the path to harm.', href: '/atlas/chains/', icon: '↳' },
+  { title: 'Threat library', copy: 'Explore the risk landscape.', href: '#tara-command-center', icon: '▤' },
+  { title: 'Why believe this?', copy: 'Inspect sources and uncertainty.', href: '/atlas/tara/coverage-gaps/', icon: '◇' },
+  { title: 'Accident or attack?', copy: 'Examine mechanisms and intent.', href: '/atlas/analysis/', icon: '⑂' },
+];
+---
+<section class="tara-connections" aria-label="Follow the connections">
+  <p class="tara-eyebrow">Follow the connections <span>From region to risk</span></p>
+  <div class="tara-cards">{links.map(link => <a class="tara-card" href={link.href} data-library-link={link.icon === '▤' ? '' : undefined}>
+    <span class="tara-card-icon" aria-hidden="true">{link.icon}</span><span class="tara-card-arrow" aria-hidden="true">↗</span>
+    <h3>{link.title}</h3><p>{link.copy}</p>
+  </a>)}</div>
+</section>

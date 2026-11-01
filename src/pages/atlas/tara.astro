@@ -4,17 +4,14 @@ import AtlasViewSwitcher from '@/components/atlas/AtlasViewSwitcher.astro';
 import BciKql from '@/components/bci/BciKql';
 import { getKqlTables } from '@/lib/kql-tables';
 import { HOURGLASS_BANDS } from '@/lib/qif-constants';
-import { CATALOG_VERSION, THREAT_CATEGORIES, THREAT_VECTORS, getStatusStats, getNeurorightStats } from '@/lib/threat-data';
+import { THREAT_CATEGORIES, THREAT_VECTORS } from '@/lib/threat-data';
 import TaraVisualization from '@/components/TaraVisualization';
-import BrainHeroMount from '@/components/atlas-scene/BrainHeroMount';
+import TaraExplorer from '@/components/tara-gui/TaraExplorer.astro';
 import AtlasIndexPin from '@/components/atlas-scene/AtlasIndexPin.astro';
 import { getCatalogCoverage } from '@/lib/purpose-and-limits';
 
-const therapeuticCount = THREAT_VECTORS.filter((vector) => vector.clinical?.therapeuticAnalog === true).length;
 const kqlTables = getKqlTables();
 const coverage = getCatalogCoverage();
-const statusStats = getStatusStats();
-const nrStats = getNeurorightStats();
 const bands = [...HOURGLASS_BANDS];
 const categories = [...THREAT_CATEGORIES];
 ---
@@ -29,55 +26,8 @@ const categories = [...THREAT_CATEGORIES];
   <div id="tara-command-center" class="min-h-screen -mt-4 pt-4">
     <div class="max-w-[1400px] mx-auto">
       <AtlasIndexPin />
-      <section class="mb-16" aria-label="The brain, by region">
-        <BrainHeroMount client:load />
-        <p class="text-sm text-slate-500 mt-4">{therapeuticCount} of those same mechanisms are already used in medicine.</p>
-      </section>
+      <TaraExplorer />
       <div class="mb-12">
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-16">
-          <div class="max-w-3xl">
-            <div class="flex items-center gap-3 mb-6">
-                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">TARA catalog v{CATALOG_VERSION}</span>
-                <span class="w-1 h-1 rounded-full bg-slate-300"></span>
-                <span class="text-[11px] font-semibold text-amber-500 uppercase tracking-widest">Proposed</span>
-            </div>
-            <h1 class="text-5xl sm:text-7xl font-semibold tracking-tight text-slate-900 mb-6">
-              The TARA Atlas
-            </h1>
-            <p class="text-2xl text-slate-500 font-medium leading-relaxed tracking-tight">
-              {coverage.total} techniques documented for threat modeling, each with an evidence status. {coverage.detected} include detection guidance; {coverage.scored} carry draft NISS scores. <a href="/atlas/tara/coverage-gaps/" class="text-[var(--color-accent-primary)] hover:underline">Entries without detection guidance</a>.
-            </p>
-          </div>
-          
-          <div class="flex flex-col gap-4">
-              <div class="bg-white px-8 py-5 rounded-[2rem] border border-slate-100 shadow-sm min-w-[200px]">
-                  <span class="block text-[11px] text-slate-400 font-semibold mb-1">Total Techniques</span>
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-3xl font-semibold text-slate-900">{THREAT_VECTORS.length}</span>
-                  </div>
-              </div>
-              <div class="bg-slate-900 px-8 py-5 rounded-[2rem] shadow-xl shadow-slate-900/10 min-w-[200px]">
-                  <span class="block text-[11px] text-slate-500 font-semibold mb-1">Demonstrated or confirmed</span>
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-3xl font-semibold text-red-500">{statusStats.CONFIRMED + statusStats.DEMONSTRATED}</span>
-                  </div>
-              </div>
-              <div class="bg-purple-50 px-8 py-5 rounded-[2rem] border border-[var(--color-border)] shadow-sm min-w-[200px]">
-                  <span class="block text-[11px] text-[var(--color-accent-tertiary)] font-semibold mb-1">Neurorights Mapped</span>
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-3xl font-semibold text-[var(--color-accent-tertiary)]">{nrStats.withNeurorights}/{THREAT_VECTORS.length}</span>
-                    <span class="text-sm text-[var(--color-accent-tertiary)] font-medium">5 rights</span>
-                  </div>
-              </div>
-              <a href="/atlas/chains/" class="group flex items-center justify-between px-8 py-4 rounded-[2rem] border border-slate-100 hover:border-slate-300 transition-colors min-w-[200px]">
-                  <span class="text-sm font-medium text-slate-500 group-hover:text-slate-900 transition-colors">See a technique in a kill chain</span>
-                  <svg class="w-4 h-4 text-slate-400 group-hover:text-slate-900 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                  </svg>
-              </a>
-          </div>
-        </div>
-
         <div class="mt-8">
           <TaraVisualization 
             client:only="react" 

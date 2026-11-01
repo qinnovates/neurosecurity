@@ -1,0 +1,44 @@
+---
+import type { ExplorerBand } from './explorer-data';
+import { formatNissScore } from '@/lib/threat-data';
+interface Props {
+  region: ExplorerBand['regions'][number];
+  band: ExplorerBand;
+  selected: boolean;
+}
+const { region, band, selected } = Astro.props;
+const techniques = band.threats;
+const scored = techniques.filter(t => t.niss.scoring_state === 'scored').length;
+const sourceCount = new Set(techniques.flatMap(t => t.sources)).size;
+---
+<section data-region-panel={region.id} hidden={!selected}>
+  <header class="tara-panel-head">
+    <p class="tara-eyebrow">Selected region · {band.id}</p>
+    <h2>{region.name}</h2>
+    <p>{region.function}</p>
+  </header>
+  <div id={`tara-band-${region.id}`} role="tabpanel" aria-labelledby="tara-tab-band" data-lens="band" tabindex="0">
+    <h3>TARA threats {band.count !== undefined && <span class="tara-badge">{band.count} in band</span>}</h3>
+    <p>{band.name} · {band.description}</p>
+    <p class="tara-limit">Band associations are candidate links; they do not demonstrate an attack on this region.</p>
+    {techniques.length ? techniques.slice(0, 3).map(threat => <article class="tara-threat">
+      <p class="tara-eyebrow">{threat.id} · Adversarial</p>
+      <h4><a href={`/atlas/tara/${threat.id}/`}>{threat.name} <span aria-hidden="true">↗</span></a></h4>
+      <p>{threat.description}</p>
+    </article>) : <p>No catalog techniques mapped to this band.</p>}
+    <details><summary>BCI mapping</summary><p>Atlas anatomy grouped by QIF band; individual technique targeting requires review.</p></details>
+    <details><summary>Neurorights</summary><p>{band.neurorights.join(' · ') || 'No band mapping available.'}</p><a href="/governance/rights/">Read the rights framework ↗</a></details>
+  </div>
+  <div id={`tara-niss-${region.id}`} role="tabpanel" aria-labelledby="tara-tab-niss" data-lens="niss" tabindex="0" hidden>
+    <h3>NISS <span class="tara-badge">Draft</span></h3>
+    {techniques.length ? <p>{scored} of {techniques.length} band techniques have a complete draft score.</p> : <p>No band scoring data available.</p>}
+    <p class="tara-limit">Technique scores are not region scores. Provisional ranges and unscored entries remain explicit.</p>
+    <ul class="tara-results">{techniques.map(threat => <li><a href={`/atlas/tara/${threat.id}/`}>{threat.name}<span>{formatNissScore(threat.niss)} · {threat.niss.scoring_state}</span></a></li>)}</ul>
+  </div>
+  <div id={`tara-evidence-${region.id}`} role="tabpanel" aria-labelledby="tara-tab-evidence" data-lens="evidence" tabindex="0" hidden>
+    <h3>Evidence</h3>
+    {techniques.length ? <p>{sourceCount} distinct source references across {techniques.length} band techniques.</p> : <p>No band evidence data available.</p>}
+    <p class="tara-limit">Evidence status applies to each technique. A citation alone does not confirm anatomical targeting.</p>
+    <ul class="tara-results">{techniques.map(threat => <li><a href={`/atlas/tara/${threat.id}/`}>{threat.name}<span>{threat.evidence?.tier ?? threat.status} · {threat.sources.length} source references</span></a></li>)}</ul>
+  </div>
+</section>

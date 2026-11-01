@@ -1,0 +1,84 @@
+.tara-gui {
+  /* Local dark instrument surface, using the site's ground, logo, and highlight tokens. */
+  --tara-ground: var(--color-bg-surface, #0B0B10);
+  --tara-ink: var(--color-logo-text, #F5F6F8);
+  --tara-muted: var(--color-text-muted, #A3A7B5);
+  color: var(--tara-ink);
+  background: var(--tara-ground);
+  padding: clamp(16px, 3vw, 40px);
+  margin-bottom: 4rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-3xl);
+  font-family: var(--font-body);
+  min-width: 0;
+}
+.tara-gui *, .tara-gui *::before, .tara-gui *::after { box-sizing: border-box; }
+.tara-gui [hidden] { display: none !important; }
+.tara-gui h1, .tara-gui h2, .tara-gui h3, .tara-gui h4, .tara-gui p { margin: 0; color: inherit; }
+.tara-gui a { color: inherit; text-decoration: none; }
+.tara-gui button { font: inherit; color: inherit; cursor: pointer; }
+.tara-gui :is(a, button, summary, [tabindex]):focus-visible { outline: 2px solid var(--tara-ink); outline-offset: 3px; }
+.tara-gui :is(a, button, summary) { min-height: 44px; }
+.tara-gui a:hover { text-decoration: underline; }
+.tara-intro { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 12px 0 28px; }
+.tara-gui .tara-eyebrow { font-size: 10px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--tara-muted); }
+.tara-gui h1 { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; font-size: clamp(30px, 4vw, 42px); letter-spacing: -1.5px; font-weight: 550; margin: 12px 0; }
+.tara-gui h1 span { color: var(--tara-muted); font-size: .65em; letter-spacing: -.5px; font-weight: 400; }
+.tara-logo { width: 32px; height: 32px; flex-shrink: 0; }
+.tara-logo circle { fill: var(--color-logo-dot, #0EA5E9); }
+.tara-gui .tara-subtitle, .tara-gui .tara-overview { color: var(--tara-muted); font-size: 14px; line-height: 1.7; }
+.tara-preview { border: 1px solid var(--color-border); border-radius: 999px; padding: 8px 12px; font-size: 11px; white-space: nowrap; color: var(--tara-muted); }
+.tara-gui .tara-overview { margin-bottom: 22px; }
+.tara-workspace { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 20px; }
+.tara-stage, .tara-panel { border: 1px solid var(--color-border); border-radius: var(--radius-3xl); min-width: 0; }
+.tara-stage { padding: 20px; }
+.tara-stage-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.tara-tabs { display: flex; padding: 4px; border: 1px solid var(--color-border); border-radius: 999px; }
+.tara-tabs button { min-width: 44px; padding: 0 12px; border: 1px solid transparent; border-radius: 999px; background: transparent; font-size: 12px; }
+.tara-tabs button[aria-selected=true], .tara-regions button[aria-selected=true] { color: var(--color-accent-highlight); border-color: var(--color-accent-highlight); background: var(--color-bg-elevated); }
+.tara-brain { display: block; width: 100%; height: auto; margin: 18px 0 6px; }
+.tara-brain .brain-base { fill: var(--color-bg-elevated); stroke: var(--tara-muted); stroke-width: 1.4; }
+.tara-brain .fold, .tara-brain .fold-fine { fill: none; stroke: var(--tara-muted); stroke-width: 1.5; stroke-linecap: round; opacity: .65; }
+.tara-brain .fold-fine { opacity: .35; stroke-width: 1; }
+.tara-stage-caption { display: flex; justify-content: space-between; gap: 12px; color: var(--tara-muted); font-size: 10px; }
+.tara-gui .tara-region-heading { margin: 26px 0 12px; }
+.tara-regions { max-height: 240px; overflow-y: auto; padding: 5px; scrollbar-width: thin; }
+.tara-gui .tara-band-heading { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11px; color: var(--tara-muted); padding: 12px 4px 6px; }
+.tara-band-heading span { margin-left: auto; }
+.tara-regions button { display: flex; justify-content: space-between; align-items: center; gap: 12px; width: 100%; text-align: left; background: transparent; border: 1px solid transparent; border-radius: var(--radius-xl); padding: 10px 12px; font-size: 12px; }
+.tara-panel { padding: 24px; max-height: 700px; overflow-y: auto; scrollbar-width: thin; }
+.tara-panel-head { padding-bottom: 22px; margin-bottom: 20px; border-bottom: 1px solid var(--color-border); }
+.tara-gui .tara-panel h2 { font-size: 25px; font-weight: 500; line-height: 1.2; letter-spacing: -.6px; margin: 10px 0; }
+.tara-panel p { font-size: 12px; line-height: 1.7; color: var(--tara-muted); overflow-wrap: anywhere; }
+.tara-panel h3 { font-size: 15px; font-weight: 500; margin-bottom: 12px; }
+.tara-badge { display: inline-block; font-size: 10px; padding: 4px 7px; border: 1px solid var(--color-border); border-radius: 999px; color: var(--tara-muted); }
+.tara-gui .tara-limit { color: var(--tara-muted); font-size: 11px; line-height: 1.7; margin: 16px 0; }
+.tara-threat { padding: 16px; border: 1px solid var(--color-border); border-radius: var(--radius-2xl); background: var(--color-bg-elevated); margin: 12px 0; }
+.tara-threat h4 { font-size: 15px; line-height: 1.5; margin: 8px 0; }
+.tara-threat a { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.tara-gui details { border-top: 1px solid var(--color-border); padding: 8px 0; font-size: 12px; }
+.tara-gui summary { display: list-item; align-content: center; cursor: pointer; padding: 12px 4px; }
+.tara-gui details a { display: flex; align-items: center; }
+.tara-results { list-style: none; padding: 0; margin: 16px 0 0; }
+.tara-results li { border-top: 1px solid var(--color-border); }
+.tara-results a { display: flex; flex-direction: column; justify-content: center; padding: 12px 4px; font-size: 12px; gap: 5px; overflow-wrap: anywhere; }
+.tara-results span { color: var(--tara-muted); font-size: 11px; }
+.tara-connections { margin-top: 28px; }
+.tara-connections > p { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.tara-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.tara-card { position: relative; border: 1px solid var(--color-border); border-radius: var(--radius-2xl); padding: 18px; }
+.tara-card:hover { background: var(--color-bg-elevated); }
+.tara-card-icon { display: block; color: var(--tara-muted); font-size: 20px; margin-bottom: 12px; }
+.tara-card-arrow { position: absolute; right: 18px; top: 18px; color: var(--tara-muted); }
+.tara-gui .tara-card h3 { font-size: 13px; font-weight: 500; line-height: 1.5; margin-bottom: 6px; }
+.tara-gui .tara-card p { font-size: 11px; line-height: 1.6; color: var(--tara-muted); }
+.tara-gui .tara-trademark { font-size: 10px; line-height: 1.6; color: var(--tara-muted); margin-top: 24px; }
+@media (max-width: 899px) {
+  .tara-workspace, .tara-cards { grid-template-columns: minmax(0, 1fr); }
+  .tara-intro { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .tara-panel { max-height: none; padding: 20px; }
+  .tara-stage { padding: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tara-gui *, .tara-gui *::before, .tara-gui *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
