@@ -112,7 +112,7 @@ const navSections: NavSection[] = [
 
 <nav class="glass nav-pill fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[min(1200px,calc(100%-2rem))] rounded-full" id="main-nav" transition:persist>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
+    <div class="flex items-center justify-between h-10">
       <!-- Logo -->
       <a href="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
         <span class="text-2xl font-bold font-[family-name:var(--font-heading)] text-[var(--color-accent-primary)]">Q</span>
@@ -187,6 +187,7 @@ const navSections: NavSection[] = [
             currentPath.startsWith('/atlas/tara') ? "nav-cta-active" : ""
           ]}
         >
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v5M12 16v5M3 12h5M16 12h5"/></svg>
           Explore TARA
         </a>
 
@@ -476,9 +477,10 @@ const navSections: NavSection[] = [
 </script>
 
 <style>
-  .nav-pill { background: rgba(18, 18, 24, 0.55); border-color: rgba(255, 255, 255, 0.14); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12); }
-  .nav-cta { background: rgba(255, 255, 255, 0.10); border: 1px solid rgba(255, 255, 255, 0.18); }
-  .nav-cta:hover { background: rgba(255, 255, 255, 0.18); }
-  .nav-cta-active { background: rgba(61, 134, 255, 0.22); border-color: rgba(61, 134, 255, 0.45); }
-  @media (prefers-reduced-transparency: reduce) { .nav-pill { background: #0b0b10; } }
+  .nav-pill { background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.22); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18); backdrop-filter: blur(14px) saturate(120%); -webkit-backdrop-filter: blur(14px) saturate(120%); height: 40px; }
+  .nav-pill > div { height: 40px; padding-left: 20px; padding-right: 8px; }
+  .nav-cta { height: 40px; padding: 0 18px; background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.22); }
+  .nav-cta:hover { background: rgba(255, 255, 255, 0.24); }
+  .nav-cta-active { background: rgba(61, 134, 255, 0.28); border-color: rgba(61, 134, 255, 0.5); }
+  @media (prefers-reduced-transparency: reduce) { .nav-pill { background: #15151c; } }
 </style>
