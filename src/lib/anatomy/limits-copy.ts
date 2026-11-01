@@ -17,6 +17,7 @@
  */
 
 export const LIMIT_TEMPLATES = {
+  lens_evidence: 'Colours show recorded evidence tiers for mapped techniques. Mixed tiers stay neutral. These draft mappings do not establish that a threat occurred in a region.',
   // What stands for a region.
   region_matching: 'Where a shape is shown it only roughly marks the QIF region: an AI drafted the matching, no expert has checked it, and real borders differ from person to person.',
   list_terms: 'A catalog entry is one attack technique in the TARA catalog. "Filed under" means an AI placed a paper\'s finding beside a region; each statement says what the paper itself is about.',

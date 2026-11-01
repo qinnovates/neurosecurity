@@ -7,18 +7,21 @@
 import type { ColourMode } from '@/lib/anatomy/colour-modes';
 
 export const LENS_KINDS = ['band', 'technique', 'niss', 'dsm', 'stated_targets'] as const;
-export type LensKind = typeof LENS_KINDS[number];
+// Evidence is supplied by embedding pages with their public tier projection; it is not a generic menu option.
+export type LensKind = typeof LENS_KINDS[number] | 'evidence';
 /** The kinds a highlight drives: each is a thing picked out, and not a fact about every region, so none has a button on the lens bar. */
 export const HIGHLIGHT_LENS_KINDS: readonly LensKind[] = ['technique', 'stated_targets'];
 
 export type Lens =
+  | { kind: 'evidence'; tiersByTechnique?: Readonly<Record<string, string>> }
   | { kind: 'band' }
   | { kind: 'niss' }
   | { kind: 'technique'; techniqueId: string | null }
   | { kind: 'dsm'; cluster: string | null }
   | { kind: 'stated_targets'; deviceId: string | null };
 
-export const LENS_LABELS: Readonly<Record<LensKind, string>> = {
+export const LENS_LABELS: Readonly<Record<Lens['kind'], string>> = {
+  evidence: 'Evidence',
   band: 'Band',
   technique: 'Technique',
   niss: 'NISS severity',
@@ -27,7 +30,8 @@ export const LENS_LABELS: Readonly<Record<LensKind, string>> = {
 };
 
 /** What each lens colours by, in one line under the lens bar, so a visitor knows what a choice shows before reading its limits. */
-export const LENS_DESCRIPTIONS: Readonly<Record<LensKind, string>> = {
+export const LENS_DESCRIPTIONS: Readonly<Record<Lens['kind'], string>> = {
+  evidence: 'Colours regions by the evidence tiers of mapped techniques; mixed tiers stay neutral.',
   band: 'Colours each region by the QIF band it is grouped under.',
   technique: 'Colours the regions an AI linked to one technique. Choose the technique below.',
   niss: 'Colours each region by the highest NISS step among the techniques an AI linked to it.',
@@ -41,8 +45,9 @@ export const LENS_SUBJECT_NOUNS: Readonly<Partial<Record<LensKind, string>>> = {
 export const DEFAULT_LENS: Lens = { kind: 'band' };
 
 /** A lens of this kind with no subject chosen yet. */
-export function emptyLens(kind: LensKind): Lens {
+export function emptyLens(kind: Lens['kind']): Lens {
   switch (kind) {
+    case 'evidence': return { kind };
     case 'band': return { kind };
     case 'niss': return { kind };
     case 'technique': return { kind, techniqueId: null };
@@ -52,8 +57,9 @@ export function emptyLens(kind: LensKind): Lens {
 }
 
 /** Whether a lens of this kind waits for a subject. No default: adding a kind makes the type checker name this switch. */
-export function lensNeedsSubject(kind: LensKind): boolean {
+export function lensNeedsSubject(kind: Lens['kind']): boolean {
   switch (kind) {
+    case 'evidence': return false;
     case 'band': return false;
     case 'niss': return false;
     case 'technique': return true;
@@ -90,6 +96,7 @@ export function withLensSubject(kind: LensKind, subjectId: string): Lens {
 /** The colour mode the style functions understand, or null while the lens still waits for its subject. */
 export function toColourMode(lens: Lens): ColourMode | null {
   switch (lens.kind) {
+    case 'evidence': return { kind: 'evidence', tiersByTechnique: lens.tiersByTechnique };
     case 'band': return { kind: 'band' };
     case 'niss': return { kind: 'niss' };
     case 'technique': return lens.techniqueId === null ? null : { kind: 'technique', techniqueId: lens.techniqueId };

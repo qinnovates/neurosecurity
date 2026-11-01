@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, type ReactNode } from 'react';
 import { ANATOMY_INDEX_PATH } from '@/lib/anatomy/anatomy-index-types';
 import type { AtlasViewportProps } from './AtlasViewport';
 import BrainHeroView from './BrainHeroView';
@@ -14,6 +14,14 @@ import sceneStylesUrl from './atlas-scene.css?url';
 const STYLESHEET_URLS: readonly string[] = [sceneStylesUrl, heroStylesUrl];
 
 export interface BrainHeroPanelProps {
+  onShowEvidence?: () => void;
+  lens?: import('@/lib/atlas-explorer/lens-state').Lens;
+  hideLensControl?: boolean;
+  keyboardRegions?: boolean;
+  techniqueIds?: readonly string[];
+  selectedRegionId?: string | null;
+  onSelectRegion?: (id: string | null) => void;
+  renderRegionPanel?: (model: import('@/lib/atlas-explorer/explorer-model').ExplorerModel, id: string | null) => ReactNode;
   /** Replaceable in tests. In the page they are the real WebGL probe and the real 3D view, fetched only once the gate opens. */
   probe?: AtlasViewportProps['probe'];
   loadOpenView?: AtlasViewportProps['loadOpenView'];
@@ -25,7 +33,7 @@ export interface BrainHeroPanelProps {
  * and parses them, and hands the model to the hero view. If any of that fails
  * it says which; the page's link to the full atlas is unchanged.
  */
-export default function BrainHeroPanel({ probe, loadOpenView }: BrainHeroPanelProps) {
+export default function BrainHeroPanel({ probe, loadOpenView, ...selection }: BrainHeroPanelProps) {
   useViewStylesheets(STYLESHEET_URLS);
   const pin = useMemo(() => readIndexPin(), []);
   const load = useCallback((signal: AbortSignal) => loadExplorerModel(signal, pin), [pin]);
@@ -37,5 +45,5 @@ export default function BrainHeroPanel({ probe, loadOpenView }: BrainHeroPanelPr
       </div>
     );
   }
-  return <BrainHeroView model={state.data.model} isIndexPinned={state.data.indexPinState === 'pinned'} isOutOfStep={state.data.indexPinState === 'mismatched'} probe={probe} loadOpenView={loadOpenView} />;
+  return <BrainHeroView {...selection} model={state.data.model} isIndexPinned={state.data.indexPinState === 'pinned'} isOutOfStep={state.data.indexPinState === 'mismatched'} probe={probe} loadOpenView={loadOpenView} />;
 }

@@ -30,8 +30,18 @@ const ACCENT: Record<Lens, { bg: string; border: string; text: string; glow: str
  * 3-state segmented control: Security | Both | Clinical.
  * Compact pill with sliding indicator and roving tabindex.
  */
-export default function LensToggle() {
+export default function LensToggle(props: { value?: Lens; onChange?: (lens: Lens) => void } = {}) {
+  return props.value !== undefined && props.onChange
+    ? <PerspectiveControl lens={props.value} setLens={props.onChange} />
+    : <StoredLensToggle />;
+}
+
+function StoredLensToggle() {
   const { lens, setLens } = useLens();
+  return <PerspectiveControl lens={lens} setLens={setLens} />;
+}
+
+function PerspectiveControl({ lens, setLens }: { lens: Lens; setLens: (lens: Lens) => void }) {
   const groupRef = useRef<HTMLDivElement>(null);
   const hasMounted = useRef(false);
 
@@ -92,7 +102,7 @@ export default function LensToggle() {
           WebkitBackdropFilter: 'blur(12px)',
         }}
         role="radiogroup"
-        aria-label="Analysis lens"
+        aria-label="Analysis perspective"
       >
         {/* Sliding indicator */}
         <span

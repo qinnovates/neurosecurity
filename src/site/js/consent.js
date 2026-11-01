@@ -3,7 +3,7 @@
  * Analytics, which sets no cookie and stores nothing in the browser.
  *
  * The Cloudflare script is not even requested until a visitor presses "Accept all" or turns
- * analytics on under "Customize". "Necessary only" and "Accept all" are the same size and weight,
+ * analytics on under "Customize". "Reject all" and "Accept all" are the same size and weight,
  * and "Customize" opens a category list with the necessary storage locked on and analytics off.
  * A browser that sends Global Privacy Control is treated as a rejection and is not asked. The
  * choice is kept in localStorage for 180 days, then asked again, and can be changed from any
@@ -89,17 +89,23 @@ const BANNER_CSS = `
 #${BANNER_ID} p{margin:0 0 .5rem}
 #${BANNER_ID} a{color:#9bbcff;text-decoration:underline}
 #${BANNER_ID} .qc-actions{display:flex;flex-wrap:wrap;gap:.625rem;margin-top:.875rem}
-#${BANNER_ID} button{flex:1 1 8rem;min-height:2.75rem;padding:.5rem 1rem;border:1px solid #1d5fe6;border-radius:.5rem;background:#1d5fe6;color:#fff;font:600 .875rem/1.2 inherit;cursor:pointer}
-#${BANNER_ID} button:hover{background:#2468f0}
-#${BANNER_ID} button.qc-secondary{background:transparent;border-color:rgba(255,255,255,.55)}
-#${BANNER_ID} button.qc-secondary:hover{background:rgba(255,255,255,.1)}
-#${BANNER_ID} button:focus-visible,#${BANNER_ID} a:focus-visible,#${BANNER_ID} input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+#${BANNER_ID} .qc-actions button{flex:1 1 8rem;min-width:44px;min-height:44px;padding:.5rem 1.25rem;border:1px solid var(--color-glass-border,rgba(255,255,255,.1));border-radius:9999px;background:var(--cta-tint,rgba(0,0,0,.45));color:#fff;font:500 1rem/1.2 Inter,system-ui,sans-serif;cursor:pointer;backdrop-filter:blur(14px) saturate(110%);-webkit-backdrop-filter:blur(14px) saturate(110%);box-shadow:inset 0 1px 0 var(--color-glass-sheen,rgba(255,255,255,.08));transition:transform .25s ease,box-shadow .25s ease}
+#${BANNER_ID} .qc-actions button:hover{transform:translateY(-1px);box-shadow:var(--cta-hover-shadow,0 4px 14px -8px rgba(14,165,233,.35))}
+#${BANNER_ID} .qc-actions button.qc-secondary{border-color:var(--color-glass-border,rgba(255,255,255,.1));font-size:.875rem}
+#${BANNER_ID} button:focus-visible,#${BANNER_ID} a:focus-visible,#${BANNER_ID} input:focus-visible{outline:2px solid #7DD3FC;outline-offset:3px}
 #${BANNER_ID} .qc-row{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;padding:.75rem 0;border-top:1px solid rgba(255,255,255,.18)}
 #${BANNER_ID} .qc-row strong{display:block;color:#fff}
 #${BANNER_ID} .qc-row span{display:block;color:#c9cad6}
 #${BANNER_ID} .qc-state{flex:none;font-weight:600;color:#c9cad6;white-space:nowrap}
 #${BANNER_ID} .qc-switch{flex:none;display:flex;align-items:center;gap:.5rem;min-height:2.75rem;font-weight:600;color:#fff;cursor:pointer}
-#${BANNER_ID} .qc-switch input{width:1.5rem;height:1.5rem;margin:0;accent-color:#3d86ff;cursor:pointer}
+#${BANNER_ID} .qc-switch{position:relative;min-width:44px}
+#${BANNER_ID} .qc-switch input{appearance:none;width:44px;height:26px;margin:9px 0;border:1px solid #a3a7b5;border-radius:999px;background:#353541;cursor:pointer}
+#${BANNER_ID} .qc-switch input:before{content:"";display:block;width:18px;height:18px;margin:3px;border-radius:50%;background:#fff;transition:transform .2s}
+#${BANNER_ID} .qc-switch input:checked{background:var(--color-accent-fill,#1d5fe6)}
+#${BANNER_ID} .qc-switch input:checked:before{transform:translateX(18px)}
+#${BANNER_ID} .qc-switch input:disabled{cursor:default}
+@media(prefers-reduced-motion:reduce){#${BANNER_ID} .qc-actions button,#${BANNER_ID} .qc-switch input:before{transition:none}}
+@media(prefers-reduced-transparency:reduce){#${BANNER_ID} .qc-actions button{background:#15151c}}
 .qc-reopen{padding:.5rem .25rem;border:0;background:none;color:inherit;font:inherit;text-decoration:underline;cursor:pointer}
 `;
 
@@ -148,7 +154,7 @@ function renderSummary(doc, banner, consent, onChoose, openPreferences) {
   nodes.push(policy);
   const actions = element(doc, 'div', undefined, { class: 'qc-actions' });
   actions.append(
-    choiceButton(doc, 'Necessary only', () => onChoose(false)),
+    choiceButton(doc, 'Reject all', () => onChoose(false)),
     choiceButton(doc, 'Customize', openPreferences, 'qc-secondary'),
     choiceButton(doc, 'Accept all', () => onChoose(true)),
   );
@@ -161,13 +167,27 @@ function renderPreferences(doc, banner, consent, onChoose, backToSummary) {
   const necessary = element(doc, 'div', undefined, { class: 'qc-row' });
   const necessaryText = element(doc, 'div');
   necessaryText.append(element(doc, 'strong', 'Strictly necessary'), element(doc, 'span', 'Remembers this choice and your display settings, such as theme, in your browser. Never sent to us.'));
-  necessary.append(necessaryText, element(doc, 'span', 'Always on', { class: 'qc-state' }));
+  const necessaryToggle = element(doc, 'label', undefined, { class: 'qc-switch' });
+  const necessarySwitch = element(doc, 'input', undefined, { type: 'checkbox', role: 'switch', 'aria-checked': 'true', 'aria-label': 'Strictly necessary: Always on', disabled: '' });
+  necessarySwitch.checked = true;
+  necessaryToggle.append(necessarySwitch, doc.createTextNode('Always on'));
+  necessary.append(necessaryText, necessaryToggle);
   const analytics = element(doc, 'div', undefined, { class: 'qc-row' });
   const analyticsText = element(doc, 'div');
   analyticsText.append(element(doc, 'strong', 'Analytics', { id: 'qc-analytics-name' }), element(doc, 'span', 'Cloudflare Web Analytics counts which pages are read. Off unless you turn it on.', { id: 'qc-analytics-note' }));
   const toggle = element(doc, 'label', undefined, { class: 'qc-switch' });
-  const checkbox = element(doc, 'input', undefined, { type: 'checkbox', id: 'qc-analytics', 'aria-labelledby': 'qc-analytics-name', 'aria-describedby': 'qc-analytics-note' });
-  checkbox.checked = consent !== null && consent.analytics === true;
+  const checkbox = element(doc, 'input', undefined, { type: 'checkbox', role: 'switch', 'aria-checked': 'false', id: 'qc-analytics', 'aria-labelledby': 'qc-analytics-name', 'aria-describedby': 'qc-analytics-note' });
+  checkbox.checked = false;
+  const syncSwitch = () => checkbox.setAttribute('aria-checked', String(checkbox.checked));
+  checkbox.addEventListener('change', syncSwitch);
+  checkbox.addEventListener('keydown', (event) => {
+    if (event.key === ' ' || event.key === 'Enter') {
+      event.preventDefault();
+      if (event.repeat) return;
+      checkbox.checked = !checkbox.checked;
+      syncSwitch();
+    }
+  });
   toggle.append(checkbox, doc.createTextNode('Allow'));
   analytics.append(analyticsText, toggle);
   const actions = element(doc, 'div', undefined, { class: 'qc-actions' });

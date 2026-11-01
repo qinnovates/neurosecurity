@@ -1,0 +1,47 @@
+---
+// The approved Qinnovate mark on its own. Geometry and colour rules: src/site/brand/LOGO-TRUTH.md.
+// maskId must be unique on the page, because each instance defines its own knockout mask.
+interface Props {
+  maskId?: string;
+}
+const { maskId = 'logo-knockout' } = Astro.props;
+---
+<svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+  <defs>
+    <mask id={maskId}>
+      <rect width="100" height="100" fill="#FFFFFF" />
+      <circle cx="83.23" cy="83.23" r="13.5" fill="#000000" />
+    </mask>
+  </defs>
+  <g mask={`url(#${maskId})`} class="logo-mark-ring">
+    <path d="M 64.79 81.72 A 35 35 0 1 1 81.72 64.79" fill="none" stroke-width="11" stroke-linecap="round" />
+    <polygon points="70.86,78.64 81.39,85.07 85.07,81.39 78.64,70.86" />
+  </g>
+  <circle cx="83.23" cy="83.23" r="10.8" class="logo-mark-dot" />
+</svg>
+
+<style>
+  .logo-mark {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .logo-mark-ring {
+    fill: var(--color-logo-ring);
+    stroke: var(--color-logo-ring);
+  }
+  .logo-mark-dot {
+    fill: var(--color-logo-dot);
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: logo-dot-pulse 6s ease-in-out infinite;
+  }
+  @keyframes logo-dot-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.06); opacity: 0.85; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .logo-mark-dot { animation: none; }
+  }
+</style>

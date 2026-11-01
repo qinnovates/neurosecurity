@@ -157,6 +157,7 @@ function colourOfStep(mode: ColourMode, step: string | null, isKnown: boolean, t
   if (step === null || !isKnown) return NEUTRAL_COLOUR;
   const isDark = theme === 'dark';
   if (mode.kind === 'band') return (isDark ? BAND_COLOURS_DARK : BAND_COLOURS)[step] ?? NEUTRAL_COLOUR;
+  if (mode.kind === 'evidence') return ({ validated_rct: '#34d399', validated_replication: '#6ee7b7', demonstrated_lab: '#60a5fa', demonstrated_case: '#93c5fd', theoretical_modeled: '#fbbf24', theoretical_proposed: '#fcd34d', speculative: '#c4b5fd' } as Record<string, string>)[step] ?? NEUTRAL_COLOUR;
   if (mode.kind === 'niss') return (isDark ? NISS_COLOURS_DARK : NISS_COLOURS)[step] ?? NEUTRAL_COLOUR;
   return LINKED_COLOUR;
 }

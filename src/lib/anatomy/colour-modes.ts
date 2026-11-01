@@ -27,6 +27,7 @@ export const MARK_REASONS = [
 export type MarkReason = typeof MARK_REASONS[number];
 
 export type ColourMode =
+  | { kind: 'evidence'; tiersByTechnique?: Readonly<Record<string, string>> }
   | { kind: 'band' }
   | { kind: 'technique'; techniqueId: string }
   | { kind: 'niss' }
@@ -133,6 +134,11 @@ function createLighter(index: AnatomyIndex, mode: ColourMode): (owner: IndexOwne
       const litRegionIds = technique === undefined ? [] : listLitRegionIds(technique);
       return (owner) => lightIf(owner.subject_kind === 'region' && litRegionIds.includes(owner.subject_id), mode.techniqueId);
     }
+    case 'evidence':
+      return (owner) => {
+        const values = [...new Set(techniquesLighting(owner.subject_id).flatMap((t) => mode.tiersByTechnique?.[t.id] ?? []))];
+        return owner.subject_kind === 'region' ? { lit: values.length > 0, values } : UNLIT;
+      };
     case 'niss':
       return (owner) => {
         const severities = techniquesLighting(owner.subject_id).map((technique) => technique.niss_severity).filter((severity) => severity !== null);

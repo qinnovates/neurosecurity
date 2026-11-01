@@ -74,6 +74,7 @@ exports[`limit sentences > are held word for word, so any change of wording is a
   "layers_text_only": "Layers choose what the 3D view draws. The list always shows every region.",
   "lens_band": "Bands are QIF's own way of grouping brain regions; QIF is a proposed framework that has not been peer reviewed.",
   "lens_dsm": "These are category names from a psychiatric manual that the catalog attaches to techniques for threat modelling; the links are unreviewed. They are not diagnoses and say nothing about any person.",
+  "lens_evidence": "Colours show recorded evidence tiers for mapped techniques. Mixed tiers stay neutral. These draft mappings do not establish that a threat occurred in a region.",
   "lens_fills_nothing": "Nothing is filled under this lens. Where it holds a value, the value lies somewhere inside a larger shape, which is drawn pale and darker than the shapes with no record.",
   "lens_needs_subject": "Choose one from the list to see which regions it is linked to.",
   "lens_niss": "The steps show the highest score that NISS, a proposed and unreviewed scale, gives to any technique an AI has linked to this region. Regions with no linked technique are marked "no data", not "low". It is not a measurement of risk to this part of the brain.",

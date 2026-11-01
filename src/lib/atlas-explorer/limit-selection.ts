@@ -62,6 +62,7 @@ function limitsForTechnique(model: ExplorerModel, techniqueId: string): LimitSen
 /** The sentences shown beside the lens controls for the lens as it stands. Never empty. */
 export function limitsForLens(model: ExplorerModel, lens: Lens): LimitSentence[] {
   switch (lens.kind) {
+    case 'evidence': return [limitSentence('lens_evidence')];
     case 'band': return [limitSentence('lens_band')];
     case 'niss': return [limitSentence('niss_meaning'), limitSentence('lens_niss'), limitSentence('counts_are_entries')];
     case 'technique': return lens.techniqueId === null ? [limitSentence('lens_technique'), limitSentence('lens_needs_subject')] : limitsForTechnique(model, lens.techniqueId);

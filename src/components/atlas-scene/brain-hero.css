@@ -81,7 +81,9 @@
 /* Where the view cannot open: the notice, then every region as a link, in the picture's place. */
 .brain-hero[data-brain-hero="fallback"] .atlas-failure { margin: 0; }
 .brain-hero-regions .atlas-chips { margin: 0; }
-.brain-hero-region-link { display: inline-flex; align-items: center; padding: 0 0.75rem; color: inherit; text-decoration: none; }
+.brain-hero-regions .atlas-chips > li { display: flex; min-width: 0; max-width: 100%; }
+/* Outrank .atlas-root a, including when atlas-scene.css loads after this file. */
+.brain-hero-regions a.brain-hero-region-link { display: flex; flex: 1; align-items: center; box-sizing: border-box; min-height: 44px; height: auto; max-width: 100%; padding: 0.5rem 0.9rem; line-height: 1.3; white-space: normal; overflow-wrap: anywhere; text-align: left; border-radius: 999px; color: var(--color-accent-primary, inherit); text-decoration: none; }
 
 @media (min-width: 961px) {
   .brain-hero[data-brain-hero="open"] { grid-template-columns: minmax(0, 1.8fr) minmax(17rem, 1fr); gap: 0.75rem 1.25rem; align-items: start; }
