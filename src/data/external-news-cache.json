@@ -1,21 +1,39 @@
 [
   {
     "type": "external",
-    "title": "Elon Musk says Neuralink is ready to cure blindness — says Blindsight will ‘enable even those who are completely blind or have never seen to see’ - Tom's Hardware",
-    "date": "2026-11-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiogJBVV95cUxNNWtBSWlfaWpLSTVMTzhzS3ZqZ3Z6ZWJtQXZ2dXhjQkNrMHU4QmN3S0VwSElkOHdJWnkteF84UW1Fc29xZm9xR0JTLU14TmMzc1pNNkFKY3pnMjRha094NndiWmd2VzVlYmFDWkF2WHhxLUtleWl6bXQ5ZFRJeE1XNEZsOHYyVEFZbXEyRjFmalJRN3VMS1BVQjZnc0xKS19vcnQ1d2NDa0hyMnRhWVEzZ2ZrWjBISEhvbC16QXN2YmdBNUtnbTFqTnNDVmV2akJOOVRwT3N3amxVcFZNUzlwa2NmMnBEd0hxNm5xNk96QWVDbHpIUE5Sbl9nU2E4U3hCLTVFYjk3RUNxYzdWVlpYRzlfR1g2OWhLNDVRT1FMdHZCZw?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk says Neuralink is ready to cure blindness — says Blindsight will ‘enable even those who are completely blind or have never seen to see’&nbsp;&nbsp;Tom's Hardware",
+    "title": "Regretamine to brain-computer interface: Musk's top 5 'unreal' ideas - WION",
+    "date": "2026-11-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMisgFBVV95cUxPYkwzSEpKYVotemhLS1dlQTlZLTlhejI3VnU3ZUd3TDVNaGtPY1FmajJzSmdKYW5MSnRqX2lnQTQtQWN5TXJNc1ZiZFRPc1RIS0dFY2FERzJxaEtrYUwwMDRhX3dxSUdBWHhlODdvY1VtcUxGV29VUzVlTE1VMUNmQ2RZeWZrMGpVOVI5elRuR0U2c0RZY1l6b0UyYlhSc3E0WHV5ek1lMGFqdDNnNTZoRDJn0gG3AUFVX3lxTFA4MERaemlybU5CRHIxR0JJbm5BTTc1RWRscEs0Ml92Y0tGaTNXQ2tDYllTcU1Uc1ZxQ0tqRlBNdjZPVExCbU1CaVNTS0R5TlRZdjg1LUtLTWFsaVRNeHZrNUNRZEpsRVJ2VGpvbWgzdUtYbjk5VEE5cDBsNENqdnNwemlkVWN3Wk45OFpDSGhxdzg0Ui1xaE5iOThhT1RzUy1zalE4UktQWDVEZzFCR2p2bkFUT3NnUQ?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Regretamine to brain-computer interface: Musk's top 5 'unreal' ideas&nbsp;&nbsp;WION",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Elon Musk Reveals Neuralink Implants That Could Restore Sight and Enable Communication Through Thoughts, Mom Maye Highlights This ‘Amazing’ Achievement - Yahoo Tech",
-    "date": "2026-11-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimgFBVV95cUxPeUtyRXBJejQzaUhZbHdfLTZSWElrQjJwTmdJUTY3eFpnQkFrWC1UbXhKZEVVekdha1d1TzJrdExFXzNqeFJhZXZRYmhsUkc4dDVSZXpfamZWVmItdS1SaXpuTU5sUk0wVGx1eEo5WGF5aHdib2NzUUxVWnJsY2xUbHNrQnBWS1pKQ2xsZk1CVlgzd2RPaHNDaHBn?oc=5",
+    "title": "Elon Musk's Neuralink aims to restore sight to the blind - Fox News",
+    "date": "2026-11-02",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiVkFVX3lxTE9MTjFFSExJbERBRmJPOVhNUWstM1AzWU94cE5PdmFMWFdtNEFGNWh0NW92cks1akFSNVV5MGlHZ3dfZTlhcXRvR0pVd0tQazRsVjhDNVBn?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Elon Musk Reveals Neuralink Implants That Could Restore Sight and Enable Communication Through Thoughts, Mom Maye Highlights This ‘Amazing’ Achievement&nbsp;&nbsp;Yahoo Tech",
+    "summary": "Elon Musk's Neuralink aims to restore sight to the blind&nbsp;&nbsp;Fox News",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Explainable AI-Driven Neural Activity Analysis in Parkinsonian Rats under Electrical Stimulation",
+    "date": "2026-11-02",
+    "url": "hxxps://arxiv[.]org/abs/2502[.]12471",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2502.12471v2 Announce Type: replace Abstract: Parkinson's disease (PD) is characterized by motor dysfunction and abnormal neural oscillations. This study combined graphene-based cortical stimula",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Building functional and mechanistic models of cortical computation based on canonical cell type connectivity",
+    "date": "2026-11-02",
+    "url": "hxxps://arxiv[.]org/abs/2504[.]03031",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2504.03031v3 Announce Type: replace Abstract: Neuronal circuits of the cerebral cortex are the structural basis of mammalian cognition. The same qualitative components and connectivity motifs ar",
+    "category": "research"
   },
   {
     "type": "external",
@@ -24,6 +42,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMidkFVX3lxTE1ROEQ2NTBtS2pxNDFEZ1hoRmlfeVZLN255TkEzbTFFc1ZnTEs2N2xjcW1fY3R6UEZ5dEdYemkzaVA4RnBEbDVRdkVfdUtYbEVyOG9DN2M2TFB4N0xqS1l6NmM2eFhkU1h0TVJzbnAxVnl1T3lMOGc?oc=5",
     "source": "Google News — BCI",
     "summary": "Musk's Brain-Computer Interface Connects to Grok Agent, Letting ALS Patient Control AI and Make Phone Calls With His Mind&nbsp;&nbsp;BigGo Finance",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China's Stairmed raises $210M for brain-computer implants, ranking in the 99th percentile - Dealroom",
+    "date": "2026-10-30",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivgFBVV95cUxPWmVBZ21JQkk2cWRMQmJreXZNcC1nbzUybnEzaGs3dHhfQUhOZXlrMjZLZXNGVGRhLXhuMzgwY3B1TDlrZXNzcWRBTU5UUW11Ykp6WXA5NXhBemhFdnlWX0ZOMDBzeVNqNmJ6Zi1kRm5Jc0VTTGp0bmFSODBWMEhkZDA5ZUxUWFlzc2hPd281ZjlzdUFYQzBsMDNkQ2dJaGVtOG1nSk82aV9MUmd5SGR1UnFFZWg2anBoSzBOb25R?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China's Stairmed raises $210M for brain-computer implants, ranking in the 99th percentile&nbsp;&nbsp;Dealroom",
     "category": "neurotechnology"
   },
   {
@@ -73,9 +100,18 @@
   },
   {
     "type": "external",
+    "title": "U.K. Startup Demonstrates Controlling Drones via Brain Signals - National Defense Magazine",
+    "date": "2026-10-25",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMivAFBVV95cUxQVk5HcW1BNjY2M295M1k4YjFSNl9jS09WZ0ZSUktPU1ZVRDYxMVMwNEdib0g2QmU0UzlTZThWRGRDSWFfck9Id1RfTFNBcGZLOElIaV9nbUFWT3dJZkVpd2g3WGFpazNiUWlScEJ4TE1hZlI5a21CUGlDdkJHTDNLaXdKT1pDOGdSN3RFTHo3SmpkWTJ3X25SWHlwLUtRemNCd1JBRkpMMWoxMVhrOExWSzJCRmxXNGRENzVYYg?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "U.K. Startup Demonstrates Controlling Drones via Brain Signals&nbsp;&nbsp;National Defense Magazine",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "China takes step to standardise technology linking human minds to computers - South China Morning Post",
     "date": "2026-10-22",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiyAFBVV95cUxOM0RWcVpJemZ1ZnlVZkt5WG9WZGdZUzlfS0hVd01qR2VwSWoxQXVsQmNkOW13SFJveE0tS0ZCVHM2SjA5NXVabWo3QVRkVFZiR1JiUlZObVlsUnFHcno4cGVIbDRHWFNkVlRpU0lNSFQ3aEM3QlgzU0VVUTRWSjJiOGpYZGdOWUhZWS1laVczSTdwOTFLQ0FSV00tdUNEa1BHZzJqRkhZLW1PTnNETVU0LUFtTG1qU29yNzVHdUo4bWNqVWpxeHJiWNIByAFBVV95cUxPZXZhNS1JazE3dXZla2lqdkptNG5WNGVhWHBjWm43d2p4OXZjLW94Ulp2ZVJCZmlvWnVleG9OQkMwbjBuTzVLaENpOFhST0hMZTV4TmRTbm15bHlSQmFMRnREdUJUOGxRbE4wZkpCTEhaM2Zsc056aEVxbTFYRkkzS05OT0J2aExTN2lWMk82N1JHU1B2WmFVellCWmVvdFRsT2JTZHBYSC1DWC1IblNWc1J4Q3pqZ2xPTXRYNXRUYlRfQXhQUF9ISA?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiyAFBVV95cUxOM0RWcVpJemZ1ZnlVZkt5WG9WZGdZUzlfS0hVd01qR2VwSWoxQXVsQmNkOW13SFJveE0tS0ZCVHM2SjA5NXVabWo3QVRkVFZiR1JiUlZObVlsUnFHcno4cGVIbDRHWFNkVlRpU0lNSFQ3aEM3QlgzU0VVUTRWSjJiOGpYZGdOWUhZWS1laVczSTdwOTFLQ0FSV00tdUNEa1BHZzJqRkhZLW1PTnNETVU0LUFtTG1qU29yNzVHdUo4bWNqVWpxeHJiWA?oc=5",
     "source": "Google News — BCI",
     "summary": "China takes step to standardise technology linking human minds to computers&nbsp;&nbsp;South China Morning Post",
     "category": "neurotechnology"
@@ -109,11 +145,11 @@
   },
   {
     "type": "external",
-    "title": "Ethical considerations for implantable human brain–computer interfaces - Nature",
-    "date": "2026-09-07",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTE1OdlU3YnltOEduS1ZHWC1xMzdiWVhINWFJdmI2ZENYSDdSQnJTdHE1VnhHYjd0X3gySHhMdXRnWEJLVXAyaEpxeVVZdFdGSHNDZHRJcVJUSHNXV3lDd1N3?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Ethical considerations for implantable human brain–computer interfaces&nbsp;&nbsp;Nature",
+    "title": "Neuralink brain implant helps man with ALS speak using his thoughts - MobiHealthNews",
+    "date": "2026-09-23",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxPYm9qUFd2LWdiSGs5NzExN014MDgxT005dnpQdFl4Uk5IRVhpYjljN1VRMU5BQW5kdUt5dWk4WHFkSG5YQUQzNUNlN19QWlYwUU1pSzYyd1daUDdXQ3NwdURpSnF3SzhKWVAxbTdMYmRmZnFacml5RUh6MGhzX0NscEdkdHlfUW42c0xkSFRKS0N6dEFrMzRtcnFkU0YyLW8?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink brain implant helps man with ALS speak using his thoughts&nbsp;&nbsp;MobiHealthNews",
     "category": "neurotechnology"
   },
   {
@@ -127,15 +163,6 @@
   },
   {
     "type": "external",
-    "title": "Butterfly Network, Merge Labs partner on ultrasound brain-computer interfaces - MobiHealthNews",
-    "date": "2026-09-03",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirgFBVV95cUxOLXpXNkJyYkhncDE1N3lYTGg3Tk5kd2tocGVjaDdaR21jcDQ3TXpVZ3BZQVdiVEFmelEtM1A0dVNXVDB6MG5wSjEtUlZlN2FmeW8xT0taLUN3ODZ3YmJHWXdmakVGUDlMLTVFd21vamRTdVlSZkd0bk13RDVUTVFhZ2QwVHlqaFlscmJldkxBeURMSUtBNV9JOVRZMkViRVVNM2pxUFlXS0xyZUM2X2c?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Butterfly Network, Merge Labs partner on ultrasound brain-computer interfaces&nbsp;&nbsp;MobiHealthNews",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "From Maple to Mind Taps: New Vermont Law Puts Neurotech on Notice - JD Supra",
     "date": "2026-06-24",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiigFBVV95cUxOZThuek9LZFlGNWczajZuMTdjWWMwaUJDTlliUGhaRTlaOTJGMFNRdlJJd2pzYTJRTVNhdzhDcHk1b090QlY3WWdoNnh0LVZqRFBBZHlQYmM4cG5sMmYwOFdtb3U3a0NIbEtER0hpeF9XUU5JTEpyMU8wdUdFZFUtWEtvY3NKay1GalE?oc=5",
@@ -145,12 +172,12 @@
   },
   {
     "type": "external",
-    "title": "A brain-computer interface that works with, not against, the brain - YaleNews",
-    "date": "2026-06-09",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxNbHRkYzgwQkRKY0pTRnE1UzRfaEpIMG5hNFF2N09fb05PQ3VUenR0d1RsbWVFTm9iQVVQSk5iQUxXZ3dDLWw1RUtxQklJczBQc0EyeDdEVWxGTGxWUHA4VTlzV21fYWZ5NGdwd2FfN3lscV84UzM2dkl1aGxCeTVSbUNYOFpBcTJV?oc=5",
-    "source": "Google News — BCI",
-    "summary": "A brain-computer interface that works with, not against, the brain&nbsp;&nbsp;YaleNews",
-    "category": "neurotechnology"
+    "title": "Big Tech Wants Direct Access to Our Brains - The New York Times",
+    "date": "2025-11-18",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikAFBVV95cUxPdGp4VktMc3lUOWFRazdBSHpibWM5bDA4V2ZrMkpYanZGbHhldFlWaEhxcUxRNjl2TU94WURNbXR4aF96M3JoVGVic3ljd0lxMFBVYkh6emNNVHU4LWs4QnU2V252VEhXTlhtaFduckdjazJyQXVTNENFSkIySG1ndXJfNWREZFpRUmNDS0dHbVM?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "Big Tech Wants Direct Access to Our Brains&nbsp;&nbsp;The New York Times",
+    "category": "neuroethics"
   },
   {
     "type": "external",
@@ -177,15 +204,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxNS3FBelpMZGNUWExYbEtEQzZtLXNYRGJnRjhsNjFTYTRrMHpMYW9iU2ZlM3JqM3BBendfblNmNHVNUURrNG4xNzlRNU1xLWN5ZmIzNVJSR1JBRTFBclU5NHFQMTUxLVQ2OEY4bVJJS3VRRFVFcm95NEZpbTRtY1lhWDdBdmJydTI2MHBLNVJvVkxUS0E?oc=5",
     "source": "Google News — MIND Act",
     "summary": "Senators ask FTC to study neurotechnology's promises, implications&nbsp;&nbsp;IAPP",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "Mind over Machine: Navigating the Legal and Ethical Frontier of Neurotech - Petrie-Flom Center",
-    "date": "2025-02-27",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiuwFBVV95cUxPN0RJTWI5UzFiUUxSbnFfZFh0RUdQYkw0LUJDTkctc21sNFUteENfTHFBZk1lSnpVaW42NWJ2a3VmaHlDQ2xiR0VLWDVBVnBpNWV4UWQ2UDVualBoQTlkTkpiYWo4V0J3Wmo5SkhSQ2JmUFg1em5zLVlNQ0Z6dXJtenhObDR2a0dQMUFCQXJ0cDFiUXpnYWFmNDdhNXBlT1laUGhlNFB3cV81UzJYc3UtaDR4S1BfRVhQek0w?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Mind over Machine: Navigating the Legal and Ethical Frontier of Neurotech&nbsp;&nbsp;Petrie-Flom Center",
     "category": "neuroethics"
   }
 ]
