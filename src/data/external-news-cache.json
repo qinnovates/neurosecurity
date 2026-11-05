@@ -1,30 +1,39 @@
 [
   {
     "type": "external",
-    "title": "Cognixion Now Enrolling NIH-Funded Study of Wearable Brain-Computer Interface Communication Device for People with ALS - PR Newswire",
-    "date": "2026-11-04",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMigwJBVV95cUxPMzJETE1uTmJRdld3eGVuOVJmOHJxOVQ1RWRlSFpQblRINUxURkNCUDZ6MGdtYmJ4bVdSZlZrR3V2QVVwQVNCOVZndVltcXp1ZDZ6X2FqSURpSXBjMkFjRXZjZ1hGczN6OVVFREduc0labnVVakE2OUg5RXBubGRfb0FVdTExcFQ5d3JUV0tMUjV3Z09vMHprcndnd0N2WWF1MUJYZjhuQnNZcXNLcmN5SGFBOUNmVWE3bktFTnpLUTBxaWxTOVM1bE5kMG9WZThtTzFtOUtBVWVqd1NDVFRES3F5SC1xR0ZfYktCOXBsNDlVX1owLUxraUpQWmxFU3lRYkJ3?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Cognixion Now Enrolling NIH-Funded Study of Wearable Brain-Computer Interface Communication Device for People with ALS&nbsp;&nbsp;PR Newswire",
+    "title": "A minimal E/I circuit model explains differential recovery from amblyopia under TTX and reverse occlusion",
+    "date": "2026-11-05",
+    "url": "hxxps://arxiv[.]org/abs/2611[.]06189",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2611.06189v1 Announce Type: new Abstract: Recovery from amblyopia beyond the critical period remains a major challenge in visual neuroscience. Experimental studies show that transient inactivati",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Mind Control of LLMs via Closed-Loop Stimulation: Out-of-Distribution Robustness",
+    "date": "2026-11-05",
+    "url": "hxxps://arxiv[.]org/abs/2611[.]06418",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2611.06418v1 Announce Type: new Abstract: Brains and large language models need not be considered equivalent systems to reveal an interpretable commonality: both exhibit high-dimensional, nonlin",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Synchronized Hearts, Desynchronized Brains: A Nonlinear Dynamics Perspective for Function and Failure",
+    "date": "2026-11-05",
+    "url": "hxxps://arxiv[.]org/abs/2611[.]06618",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2611.06618v1 Announce Type: new Abstract: Both the heart and the brain are built from electrically excitable cells, yet the emergent dynamics of these organs could not differ more. In the myocar",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Brain Stimulation Device Aims to Treat Women’s Health Conditions",
+    "date": "2026-11-05",
+    "url": "hxxps://spectrum[.]ieee[.]org/samphire-neuroscience-tdcs-pmdd-treatment",
+    "source": "IEEE Spectrum",
+    "summary": "Most women report menstruation-related pain or mood changes, and for around one in five women, strong symptoms disrupt daily life. Standard treatment options tend to focus on hormonal regulation, phar",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Evolved Spiking Neural Networks for EEG Seizure Detection: Calcium Dynamics and Delay Mechanics",
-    "date": "2026-11-04",
-    "url": "hxxps://arxiv[.]org/abs/2611[.]03841",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2611.03841v1 Announce Type: new Abstract: Neuroevolution can discover compact network designs that are hard to specify by hand. The EONS framework evolves the topology, weights, thresholds and d",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "A Bayesian Optimized Biquad Filter-Burg Model for Real-Time EEG Phase Estimation",
-    "date": "2026-11-04",
-    "url": "hxxps://arxiv[.]org/abs/2611[.]05374",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2611.05374v1 Announce Type: cross Abstract: Real-time phase estimation on stimulus-aligned transient EEG is critical for closed-loop neuromodulation systems targeting the theta-band, yet most re",
-    "category": "research"
   },
   {
     "type": "external",
@@ -37,11 +46,11 @@
   },
   {
     "type": "external",
-    "title": "Neuralink’s China Rival Targets Obesity With ‘Electronic’ GLP-1 - Bloomberg.com",
+    "title": "What to know about Elon Musk’s Neuralink brain chip implant - ABC News - Breaking News, Latest News and Videos",
     "date": "2026-11-03",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAFBVV95cUxNbEZhcHpJV0lwWmZlNmtES2xIdFVHM3luYm9KcGI5MkwySTgxdDNPZzctU0V6ckNKTkRVTDh0QU5VWElTOW9vRGlQdnZjelpwakxRWDlwTFZUQkh1Q3VVc3lhWU1lRFVJZjBaU3NoZExsWEYtMU9mZGo4em5FcUpKa1hiV3A0SzFVS210eU5aM2ZHXzRwSUsweXZTa0dDSnZsaVB5V3JhcjM2SnJSbE1KUUxkbG9kNDh6TEg2SXlrQ3c?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijgFBVV95cUxPS0ZWRlNqRWxDeXdhM2RDSVNsX01jSnh4dXlXZE5GOHg4RkZmU3czcmtjcnc3QmF6NFlPWUp3ODAzcnRKMDBTU2NBS2RLMlNwWUQzLXl1c1ZOQTdFbGxfc1hXSGo4SjNIOGxJOW53SXhrYnNlWU9tSFp5dHY5Z25RZ3FvNmkyVjZzakltTXN30gGTAUFVX3lxTFBfX1E1SzVyTDM3VnVyYUpPMnRPY3BJdzJpRjc2eG81U18weGlrSkRWOU8xZHVQcHRpRm1yQzdFbGsyTThaTUpDblczY3ZkUndCbTRIaGV6ay02eU9RNnpuOHZTSVNNckY5UFFMTUtXV2VVUE5aMHFvQXpTNXZsMlB6WVFWUE1Ub0FPSGprT0ZsSFQyTQ?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Neuralink’s China Rival Targets Obesity With ‘Electronic’ GLP-1&nbsp;&nbsp;Bloomberg.com",
+    "summary": "What to know about Elon Musk’s Neuralink brain chip implant&nbsp;&nbsp;ABC News - Breaking News, Latest News and Videos",
     "category": "neurotechnology"
   },
   {
@@ -51,6 +60,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMitAFBVV95cUxQSG9lT2ROMWN1V3ZJbWR6VUdsT2tPRkJwRDV6QmQ4WU9hU19mbWV1UVlKUS1oTlNPODdtV1g2S3JqQkZWX0VpVURwN1VmYmIwcVlVS1FaUVhfSUp5ZGJqa1AyNF9VQzBUUWxPaXVIdXZhYXZPNlVDdmNlN0xsd2gzLVA5eVp1M3FuV2pzUTItSUhVa2hpMTFGR2dybV9qbXY5YUhnVXRVTFZwMUFzMk9fOVIxb2o?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Elon Musk Says Neuralink's Blindsight Will Bring Sight to the Blind&nbsp;&nbsp;TechNewsWorld",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink’s China Rival Targets Obesity With ‘Electronic’ GLP-1 - Bloomberg.com",
+    "date": "2026-11-03",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAFBVV95cUxNbEZhcHpJV0lwWmZlNmtES2xIdFVHM3luYm9KcGI5MkwySTgxdDNPZzctU0V6ckNKTkRVTDh0QU5VWElTOW9vRGlQdnZjelpwakxRWDlwTFZUQkh1Q3VVc3lhWU1lRFVJZjBaU3NoZExsWEYtMU9mZGo4em5FcUpKa1hiV3A0SzFVS210eU5aM2ZHXzRwSUsweXZTa0dDSnZsaVB5V3JhcjM2SnJSbE1KUUxkbG9kNDh6TEg2SXlrQ3c?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink’s China Rival Targets Obesity With ‘Electronic’ GLP-1&nbsp;&nbsp;Bloomberg.com",
     "category": "neurotechnology"
   },
   {
@@ -118,20 +136,20 @@
   },
   {
     "type": "external",
-    "title": "Computer science student takes engineering skills to Neuralink - UT San Antonio Today",
-    "date": "2026-10-21",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimAFBVV95cUxOMkIwamstY3g1M2NCSVNVSnlCTjJ6S20zYUtpU0FmVTdNUnhtZ2NKQ3VuLWxnc0JiVm5COWR2c0IyMFpfVm03UWFqVUFqWXhLUTJQV2xnREtDdmpNOEhacXhTR2hDOHNzVDY3RTFuN1k1RnNyZkE4ZFBfamhhM3BYZHhSX1FhYl9BbW94RkpkQTRDM0RTeHp2Vg?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Computer science student takes engineering skills to Neuralink&nbsp;&nbsp;UT San Antonio Today",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Under-Skin Implant Controls Prosthetic Arms",
     "date": "2026-10-20",
     "url": "hxxps://spectrum[.]ieee[.]org/phantom-neuro-prosthetic-arm-implant",
     "source": "IEEE Spectrum",
     "summary": "Two patients in Melbourne, Australia, recently became the first recipients of a novel type of implant for controlling prosthetic arms. The 2-by-10-centimeter device, produced by Phantom Neuro, wraps a",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Clinical safety assessment of implanted brain-computer interfaces: current evidence and a pathway to standardization - Frontiers",
+    "date": "2026-10-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxPdXQ5YUctaFI3Tm1ESWtCUWFUX3JacXlHYWxhS3VUd2t3aF9fYWE3TjRqcUVyX0NaNzRKb2JfZnROQm1LbUhmLUJBY2pCSVZSaHpmSi15M1hKNnB3cVhrV3hIT21PYmppYzgtNnVkTm9USlMybDVIQkdhdHJkTnFjV0lKZXQtVXFjcGRFRzllT1ZiSkdT?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Clinical safety assessment of implanted brain-computer interfaces: current evidence and a pathway to standardization&nbsp;&nbsp;Frontiers",
     "category": "neurotechnology"
   },
   {
