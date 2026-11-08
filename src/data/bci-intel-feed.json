@@ -1,5 +1,248 @@
 [
   {
+    "id": "1af4f6fa",
+    "title": "After the pulse: Why post-stimulation task demands matter for detecting neural effects of non-invasive brain stimulation",
+    "date": "2026-11-08",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26002214?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: November–December 2026Source: Brain Stimulation, Volume 19, Issue 6Author(s): Isabell Int-Veen, Ann-Christine Ehlis",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "eabb8452",
+    "title": "Temporal coupling shapes the effects of prolonged muscle-tendon vibration on sensorimotor EEG activity during motor imagery",
+    "date": "2026-11-08",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1053811926006452?dgcid=rss_sd_all",
+    "source": "NeuroImage",
+    "source_category": "research",
+    "summary": "Publication date: 1 December 2026Source: NeuroImage, Volume 343Author(s): Nicolas Amiez, Aymeric Guillot, Florian Monjo, Florian Marchand, Sébastien Daligault, Franck Di Rienzo",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "a8747537",
+    "title": "Brain-heart decoupling in somatic depression: Desynchronization between salience network neuropsychological connectivity and heart rate variability",
+    "date": "2026-11-08",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1053811926006464?dgcid=rss_sd_all",
+    "source": "NeuroImage",
+    "source_category": "research",
+    "summary": "Publication date: 1 December 2026Source: NeuroImage, Volume 343Author(s): Yi Xia, Junling Sheng, Xiaoqin Wang, Ciqing Bao, Yujue Wang, Xumiao Wang, Zhijian Yao, Qing Lu",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "5a93c722",
+    "title": "Research progress and prospects of cochlear implant technology",
+    "date": "2026-11-08",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnins[.]2026[.]2002803",
+    "source": "Frontiers Neuroscience",
+    "source_category": "research",
+    "summary": "Traditional cochlear implant systems depend on external devices and face challenges related to convenience, esthetics, and auditory performance in complex soundscapes. Recently, research has shifted f",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "205ee7b6",
+    "title": "The butyrate-m6A-BDNF axis: a hypothesis of gut-brain signal transduction in PSD",
+    "date": "2026-11-08",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnins[.]2026[.]1869522",
+    "source": "Frontiers Neuroscience",
+    "source_category": "research",
+    "summary": "A reduction in brain-derived neurotrophic factor (BDNF) protein levels has been reported in post-stroke depression (PSD). However, whether transcript abundance and translation efficiency change in par",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "5df681e3",
+    "title": "Temporal dissociation across the eye-brain-muscle cascade delineates a preparation window before muscle activation in subacute stroke",
+    "date": "2026-11-08",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnhum[.]2026[.]2002490",
+    "source": "Frontiers Human Neuro",
+    "source_category": "research",
+    "summary": "Upper-limb motor impairment after stroke is compounded by a disrupted sensorimotor cascade linking visual attention, cortical motor preparation, and peripheral muscle activation. Whether these stages ",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "0462546d",
+    "title": "Dynamical disorders: synchronization dynamics in complex emotional conditions",
+    "date": "2026-11-08",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnhum[.]2026[.]1878289",
+    "source": "Frontiers Human Neuro",
+    "source_category": "research",
+    "summary": "IntroductionMental health conditions present a particular challenge to categorical nosology. We propose that such conditions are better understood as Dynamical Disorders, defined not only by symptom c",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "a09ebe94",
+    "title": "PulseAI’s arrhythmia analysis model for wearables lands FDA clearance",
+    "date": "2026-11-06",
+    "url": "hxxps://www[.]medicaldevice-network[.]com/news/pulseai-arrhythmia-analysis-model-for-wearables-lands-fda-clearance/",
+    "source": "Medical Device Network",
+    "source_category": "product",
+    "summary": "The company’s AI model analyses ECG data from compatible devices to identify heart arrhythmias, to give clinicians the ability to assess stroke risk. The post PulseAI’s arrhythmia analysis model for w",
+    "tags": [
+      "product",
+      "regulatory",
+      "opinion"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "1471ddeb",
+    "title": "The calibration-to-accuracy mapping in P300 spellers does not transport across cohorts and was not restored by tested alignment or local recalibration",
+    "date": "2026-11-06",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/aeb62c",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. A calibration-derived score has been related to online P300-speller accuracy in the same session, always within the cohort measured. We evaluated whether a mapping from that score to expect",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "ceb62674",
+    "title": "ACF-Net: design of an adaptive cross-modal fusion network for cross-subject wearable EEG-EMG gesture recognition",
+    "date": "2026-11-06",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/aeb723",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Cross-subject gesture recognition in wearable brain–computer interfaces is constrained by four structural deficiencies: symmetric cross-modal attention discarding cortical precedence over m",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "98bdf842",
+    "title": "Transformer networks are robust learners of source localization for EEG measurements",
+    "date": "2026-11-06",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/aeb82c",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. EEG source localization is an ill-posed inverse problem complicated by measurement noise, electrode dropout from sensor miscalibration, and variability in the number of active sources. Clas",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "40e2976b",
+    "title": "REFS: robust EEG feature selection with incomplete labels for multi-dimensional emotion recognition",
+    "date": "2026-11-06",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/aeb97e",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Compared to single-type features, multi-type electroencephalography (EEG) features provide a multi-level representation for analyzing multi-dimensional emotions. However, the high dimension",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "ea8e6f01",
+    "title": "Bispecific J&#038;J Drug Wins Speedy FDA Approval for Treating Head &#038; Neck Cancer",
+    "date": "2026-11-06",
+    "url": "hxxps://medcitynews[.]com/2026/11/johnson-johnson-rybrevant-faspro-fda-approval-bispecific-antibody-egfr-met-head-neck-cancer-oncology-jnj/",
+    "source": "MedCity News",
+    "source_category": "funding",
+    "summary": "Accelerated FDA approval of Johnson & Johnson’s Rybrevant Faspro covers advanced cases of head and neck cancer. The bispecific antibody was initially approved for treating certain lung cancers. The po",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "4078fd9b",
+    "title": "Brain Stimulation Device Aims to Treat Women’s Health Conditions",
+    "date": "2026-11-05",
+    "url": "hxxps://spectrum[.]ieee[.]org/samphire-neuroscience-tdcs-pmdd-treatment",
+    "source": "IEEE Spectrum",
+    "source_category": "research",
+    "summary": "Most women report menstruation-related pain or mood changes, and for around one in five women, strong symptoms disrupt daily life. Standard treatment options tend to focus on hormonal regulation, phar",
+    "tags": [
+      "funding",
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "5796d9d1",
+    "title": "Medical Device Cybersecurity - U.S. Food and Drug Administration (.gov)",
+    "date": "2026-11-05",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMickFVX3lxTE1OVDVNWlNkM0F0SnF5UWhfcG1wQkVoZTdwbUxOUWFOb1FhVHBzRmFoM0NuZ2JfSEY0dHNUN29PbF83eWRBdmlFYTRHRVp2NlhuM2ZlVUgyZUxiREQ1ZzgtN05SQUZpWWowdHJUUVM3VEFUZw?oc=5",
+    "source": "GN: MedDevice Security",
+    "source_category": "regulatory",
+    "summary": "Medical Device Cybersecurity&nbsp;&nbsp;U.S. Food and Drug Administration (.gov)",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "fd199406",
+    "title": "Towards semantic brain-computer interfacing: the graded inventory of semantic triggers (GIST) paradigm",
+    "date": "2026-11-04",
+    "url": "hxxps://iopscience[.]iop[.]org/article/10[.]1088/1741-2552/aeb724",
+    "source": "J Neural Engineering",
+    "source_category": "research",
+    "summary": "Objective. Semantic brain-computer interfaces (sBCIs) aim to decode conceptual information directly from neural activity, enabling more efficient and natural communication for individuals with severe ",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "9e96e954",
+    "title": "Postdoctoral position available in the Slutzky Neuroprosthetics Laboratory, Department of Neurology, Northwestern University",
+    "date": "2026-11-04",
+    "url": "hxxps://bcisociety[.]org/postdoctoral-position-available-in-the-slutzky-neuroprosthetics-laboratory-department-of-neurology-northwestern-university/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=postdoctoral-position-available-in-the-slutzky-neuroprosthetics-laboratory-department-of-neurology-northwestern-university",
+    "source": "BCI Society",
+    "source_category": "research",
+    "summary": "We are actively seeking a postdoctoral fellow to join our research team on an exciting new brain computer interface project. This project involves using intracranial EEG and ultra high-density recordi",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
     "id": "1babeb40",
     "title": "Cortical long-range dynamics track excitation-inhibition balance across cognitive states and organizational principles",
     "date": "2026-11-01",
@@ -1859,6 +2102,20 @@
     "fetched": "2026-10-25"
   },
   {
+    "id": "e4edf4e6",
+    "title": "Smartphone Video-Based Knee Extension Moments During Chair Rise Relate to MRI Measures of Muscle Force-Generating Capacity",
+    "date": "2026-08-27",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11668984",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Preserving muscle function is essential for maintaining independence during aging, but muscle force-generating capacity is not commonly measured clinically due to a lack of accessible, sensitive tools",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
     "id": "eb8118ce",
     "title": "Postdoctoral Researcher: Next-Generation Wearable &#038; Sensing Systems &#8211; Dartmouth College, Hanover, New Hampshire, USA",
     "date": "2026-08-26",
@@ -1903,6 +2160,20 @@
     "fetched": "2026-10-25"
   },
   {
+    "id": "a60e7869",
+    "title": "The Cost of Assistance: High Prosthetic Knee Torque Reduces Biological Joint Work But Induces Symmetry Tradeoffs in Knee Power and Center-of-Mass Velocity During Stair Ascent",
+    "date": "2026-08-26",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11667705",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Stair ascent is a biomechanically demanding activity for individuals with transfemoral amputation, often requiring significant overreliance on the residual hip and sound biological joints to compensat",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
     "id": "32a344fd",
     "title": "Precision Neuroscience Number of Employees 2026 | Employee Count & Headcount Data - Revelio Labs",
     "date": "2026-08-20",
@@ -1917,6 +2188,36 @@
       "Precision Neuroscience"
     ],
     "fetched": "2026-10-25"
+  },
+  {
+    "id": "f1e58a24",
+    "title": "Biomechanics-Embedded Deep Learning for Joint Moment Estimation in Clinical Gait Analysis for Cerebral Palsy: A Learnable Hill-Type Pathway",
+    "date": "2026-08-20",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11658974",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Accurate lower-limb joint moment estimation is essential for clinical gait analysis in children with cerebral palsy (CP), yet conventional methods require force plates for ground reaction force (GRF) ",
+    "tags": [
+      "funding",
+      "policy",
+      "opinion"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
+    "id": "a5ae5bc8",
+    "title": "EEG Connectomics in Rotator Cuff Injury: Central Network Reorganization During Three-Plane Antagonistic Shoulder Tasks",
+    "date": "2026-08-20",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11661376",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "We characterised central nervous system reorganisation in rotator cuff injury (RCI) during three-plane antagonistic shoulder tasks using electroencephalography (EEG) connectomics, and tested whether g",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
   },
   {
     "id": "fa6e144f",
@@ -1945,6 +2246,20 @@
     ],
     "companies": [],
     "fetched": "2026-10-11"
+  },
+  {
+    "id": "6bfef094",
+    "title": "Deep Learning for Scalp-Level Nonlinear Source Separation in Electroencephalogram: A Comparative Evaluation of Spatiotemporal Architectures",
+    "date": "2026-08-18",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11658781",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Electroencephalography (EEG) is a common technique to measure field potentials of various brain regions, and event-related potentials (ERPs) reflect stimulus- or response-locked brain responses that a",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
   },
   {
     "id": "c0cb485d",
@@ -15975,6 +16290,22 @@
     "fetched": "2026-04-12"
   },
   {
+    "id": "a80404c7",
+    "title": "Neuralink Pairing Patent Protects Against Brain Cyber Attacks - The Daily Upside",
+    "date": "2024-07-25",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipwFBVV95cUxNbmt3ejdBQXZRbE9DWnNJQUhZYWZITEVDOHZDR3Z2eUlWVEZPX3VXTE9CWTVLU2dzaEpPZkpFa1BIQXJTd2hmbFBYelNNVGdpcWJ0YTdPWFRfQjVaZF9GTjJ4Zk05VUxENGxFNlp4SXFZamc5WUhhZEo3Z291aUd4LXFhaWRfOURpdTNULXNreHJNV0dKdHNVV0otZWFYTTdlVXF4NENYQQ?oc=5",
+    "source": "GN: Neurotech Patents",
+    "source_category": "product",
+    "summary": "Neuralink Pairing Patent Protects Against Brain Cyber Attacks&nbsp;&nbsp;The Daily Upside",
+    "tags": [
+      "patent"
+    ],
+    "companies": [
+      "Neuralink"
+    ],
+    "fetched": "2026-11-08"
+  },
+  {
     "id": "b25f918a",
     "title": "Online transcranial Doppler ultrasonographic control of an onscreen keyboard - Frontiers",
     "date": "2024-07-03",
@@ -16104,6 +16435,20 @@
     "fetched": "2026-11-01"
   },
   {
+    "id": "034c097e",
+    "title": "Colorado Protects Brain Wave Privacy With First Neurodata Law - Bloomberg Government News",
+    "date": "2024-04-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxOb2FjWm5HR1RiN2JHT2MzWFRRbTJlajVpbF9Mc3R6NmFHT1RjdEs2RGdSaTFXeWNCMnlKYXdrY3drQloxNU9lWmhyeHRGOWhZeE5QYnFuS3VmMVpwVVNDWEpVZDNUdGNCVjNPdXhqT291bVAwSGtRTjVqMjk5RFZydlREMklWeF9iN3ZWcndpX2hjSU5tNm81TjNKOC13bm8?oc=5",
+    "source": "GN: Neurorights",
+    "source_category": "policy",
+    "summary": "Colorado Protects Brain Wave Privacy With First Neurodata Law&nbsp;&nbsp;Bloomberg Government News",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
     "id": "70453789",
     "title": "Navigating Section 524B - Wind River Software",
     "date": "2024-03-14",
@@ -16116,6 +16461,20 @@
     ],
     "companies": [],
     "fetched": "2026-04-19"
+  },
+  {
+    "id": "b4b3fc80",
+    "title": "The Battle for Your Brain: A Legal Scholar’s Argument for Protecting Brain Data and Cognitive Liberty - Judicature",
+    "date": "2024-03-07",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi0wFBVV95cUxQMmpwWVJmcWR6dlllY3EzbkFFNGd2cjZBcU1WVU9vUmczRFZpQmVxM2NKQ2JFZG1FOEhKSjJpZHNPVlVGa1NOSTRNektFeFFpRm9lcFdIc3hhZV9McFBTV01EUmc1RUhQMDc5VnFmMzVTblk5dTBIdXdMdVdTZGduSGpaVUxqOU81QUI0UjZ4aC1aejNRUEpOcXkwYlVIQi0yZzdUeF9lRnNtejZvVlZvalFUSUQ1dEcwc2RZTl9mQUxhaTN6ZWlsM2lKQ3JMODNmQlZ3?oc=5",
+    "source": "GN: Neurorights",
+    "source_category": "policy",
+    "summary": "The Battle for Your Brain: A Legal Scholar’s Argument for Protecting Brain Data and Cognitive Liberty&nbsp;&nbsp;Judicature",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
   },
   {
     "id": "dd3a882a",
@@ -16195,6 +16554,20 @@
     "fetched": "2026-10-25"
   },
   {
+    "id": "f8b6e79e",
+    "title": "16-11-2023 16:00 Neurotechnology and neurorights - Privacy's last frontier - European Parliament",
+    "date": "2023-11-07",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxQTHJlRkZHQmtIbWRPQVhUWVhSVXhFX20tOC1ORWFBWHJBLXk0d2hLSm52cS1tVGtvZWhzVlhvSFE0RTFsX3lDaVU2eERfbklYNGlyTlNJY3NjRWY4clRwTUR2UnBwQU13S0JMVS1aQ3lCZTVVbTlZa1Zyd25fQ1p2UFFnRGk5cUdPRWVDMTNQdDJNa1FmT3E4YVRKdkJvOFg5Z0dTQ2lMWUhnMDF2b2VZV1NlMng0X00?oc=5",
+    "source": "GN: Neurorights",
+    "source_category": "policy",
+    "summary": "16-11-2023 16:00 Neurotechnology and neurorights - Privacy's last frontier&nbsp;&nbsp;European Parliament",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
+  },
+  {
     "id": "79fad7f5",
     "title": "Survey on 100-Year Anniversary of the Discovery of Human EEG",
     "date": "2023-11-03",
@@ -16223,6 +16596,20 @@
     ],
     "companies": [],
     "fetched": "2026-04-19"
+  },
+  {
+    "id": "68069282",
+    "title": "Neurorights: Between ethics and law - Open Global Rights",
+    "date": "2023-10-12",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMid0FVX3lxTE5FNGJfZlcyYXNSNXltZUVUOW9KLUN5ZExZQmN0dmRGSUdBNDMxWnBGWk5FNllpc25Yd0lpM0E3R0JpZDlhZC1EVUJNajlTMExiOGJ5TjVCcXNwR2JjQURTV2RIQUpNekNIY2VGbksxQWRFOWswUVlZ?oc=5",
+    "source": "GN: Neurorights",
+    "source_category": "policy",
+    "summary": "Neurorights: Between ethics and law&nbsp;&nbsp;Open Global Rights",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
   },
   {
     "id": "349c10d1",
@@ -16373,6 +16760,20 @@
     ],
     "companies": [],
     "fetched": "2026-11-01"
+  },
+  {
+    "id": "3d0ae4f6",
+    "title": "Patent landscape of brain–machine interface technology - Nature",
+    "date": "2021-10-07",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiX0FVX3lxTE1mNmFHb3V5Nm9vSTJhMEpUYmRQQTkxQ0VKUmdETGpRZzNrWVZqTU9ONGJRRWF0NVBkTkVWT0JzLXBjMFNvcE5uN2JLb3JRRGFuZUhEY1pPOW5EZXFQc2xR?oc=5",
+    "source": "GN: Neurotech Patents",
+    "source_category": "product",
+    "summary": "Patent landscape of brain–machine interface technology&nbsp;&nbsp;Nature",
+    "tags": [
+      "patent"
+    ],
+    "companies": [],
+    "fetched": "2026-11-08"
   },
   {
     "id": "cc96a4d2",
