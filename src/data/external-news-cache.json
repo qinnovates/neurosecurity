@@ -1,12 +1,39 @@
 [
   {
     "type": "external",
-    "title": "Review proposes AI-driven BCI framework for Alzheimer’s care - Bioengineer.org",
-    "date": "2026-11-08",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijAFBVV95cUxPRFp1aGpHcUYwVWhnb3hiNVhBZDI0OVVNbUpGN0lhMnpIaEQ2RTdDWkljaUU0ZUZzZHlhVTMxc2dkQ0o2Ums2eks0VW9NT0E1X0UwQWN0c0J3VG1fWlB4WXVpcDA3V0ZlcFB0ZU5jRXJSZkxvTGRENFFvXzBnVXpMNEJaSTAzaGJnMXN3cA?oc=5",
+    "title": "Spiking Neural Networks Protect Brain Computer Interfaces from Severe Signal Noise - Bioengineer.org",
+    "date": "2026-11-09",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiqwFBVV95cUxNWFZkUWVhNkJNTVJGQkxqa1JFaHpNY0ZoeTZPVGlOTFV0TjQwMjRfaV81Wlo4cU1mNzhYMFR1T3hKQ2FIZmVkajBpc1JqZ2VLTmJRMElUOTItbnNvb1N2TzBfLWxmVXpmeW1UdkNXVm9JZ3JUejBmd1FTR2xHY2dPdkJaTnFmSWgxc0VOMmVqYlZELWZOazZlRDVEUXI3RjZBOFhCbkZDbzRBbjA?oc=5",
     "source": "Google News — BCI",
-    "summary": "Review proposes AI-driven BCI framework for Alzheimer’s care&nbsp;&nbsp;Bioengineer.org",
+    "summary": "Spiking Neural Networks Protect Brain Computer Interfaces from Severe Signal Noise&nbsp;&nbsp;Bioengineer.org",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Bill Ackman’s bold plan to transform brain research - STAT",
+    "date": "2026-11-09",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMijwFBVV95cUxOWUZjeXZwTWlWYmYyaS1CTTRpajZrbklhc2F5eTZya1Iyb1kwZ2htTjkwOURZdUkwVjRWeTEzWnRmTkRsMjZuSkd3azBNZGNpWUotRldGaWxkOU1jSm56eTV3U04ydGtnbHFDbjl2Q1BxTDl5eTBMSHR6aW5jajBaRWRWNEVsdkVlZ3Y0MjYyOA?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Bill Ackman’s bold plan to transform brain research&nbsp;&nbsp;STAT",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Structure is in the zoom: probing neural symmetry through dimensionality scaling",
+    "date": "2026-11-09",
+    "url": "hxxps://arxiv[.]org/abs/2611[.]08506",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2611.08506v1 Announce Type: new Abstract: How much of a neural population's measured dimensionality is the code, and how much is the act of measuring it? The slope of the participation ratio aga",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Decoding spatial and semantic information from large-scale visual cortical activity for natural-movie reconstruction",
+    "date": "2026-11-09",
+    "url": "hxxps://arxiv[.]org/abs/2611[.]08887",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2611.08887v1 Announce Type: cross Abstract: Reconstructing natural visual experience from cortical population activity is a central challenge in neural decoding, particularly for calcium imaging",
+    "category": "research"
   },
   {
     "type": "external",
@@ -28,20 +55,11 @@
   },
   {
     "type": "external",
-    "title": "Neuralink’s China Rival Targets Obesity With ‘Electronic’ GLP-1 - Bloomberg.com",
+    "title": "Neuralink’s China Rival Targets Obesity With ‘Electronic’ GLP-1 - Bloomberg",
     "date": "2026-11-03",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAFBVV95cUxNbEZhcHpJV0lwWmZlNmtES2xIdFVHM3luYm9KcGI5MkwySTgxdDNPZzctU0V6ckNKTkRVTDh0QU5VWElTOW9vRGlQdnZjelpwakxRWDlwTFZUQkh1Q3VVc3lhWU1lRFVJZjBaU3NoZExsWEYtMU9mZGo4em5FcUpKa1hiV3A0SzFVS210eU5aM2ZHXzRwSUsweXZTa0dDSnZsaVB5V3JhcjM2SnJSbE1KUUxkbG9kNDh6TEg2SXlrQ3c?oc=5",
     "source": "Google News — Neuralink",
-    "summary": "Neuralink’s China Rival Targets Obesity With ‘Electronic’ GLP-1&nbsp;&nbsp;Bloomberg.com",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Elon Musk's Neuralink aims to restore sight to the blind - Fox News",
-    "date": "2026-11-02",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiVkFVX3lxTE9MTjFFSExJbERBRmJPOVhNUWstM1AzWU94cE5PdmFMWFdtNEFGNWh0NW92cks1akFSNVV5MGlHZ3dfZTlhcXRvR0pVd0tQazRsVjhDNVBn?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk's Neuralink aims to restore sight to the blind&nbsp;&nbsp;Fox News",
+    "summary": "Neuralink’s China Rival Targets Obesity With ‘Electronic’ GLP-1&nbsp;&nbsp;Bloomberg",
     "category": "neurotechnology"
   },
   {
@@ -118,20 +136,20 @@
   },
   {
     "type": "external",
-    "title": "Clinical safety assessment of implanted brain-computer interfaces: current evidence and a pathway to standardization - Frontiers",
-    "date": "2026-10-16",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMilAFBVV95cUxPdXQ5YUctaFI3Tm1ESWtCUWFUX3JacXlHYWxhS3VUd2t3aF9fYWE3TjRqcUVyX0NaNzRKb2JfZnROQm1LbUhmLUJBY2pCSVZSaHpmSi15M1hKNnB3cVhrV3hIT21PYmppYzgtNnVkTm9USlMybDVIQkdhdHJkTnFjV0lKZXQtVXFjcGRFRzllT1ZiSkdT?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Clinical safety assessment of implanted brain-computer interfaces: current evidence and a pathway to standardization&nbsp;&nbsp;Frontiers",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "A New Neurotech Startup Launches to Rival Sam Altman’s Merge Labs - WIRED",
     "date": "2026-10-06",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxPZHdGc3pUdVhTQWdlTFRnSXl5VmVTZFR1NlpnRmVuVHJ4dzhrbkZ3dWw5QXZaOXA5WUI1Q1dEN0ItNmN6c0huU2kyMW4zZWNXNktYUEg5QVo2aWlfZXNWU2FtZjgxb0ZtTkxiNDdsM3BkZ01Fa1hFLW5WMkhLanhaSzVrWW91eXp0?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "A New Neurotech Startup Launches to Rival Sam Altman’s Merge Labs&nbsp;&nbsp;WIRED",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink brain implant helps man with ALS speak using his thoughts - MobiHealthNews",
+    "date": "2026-09-23",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxPYm9qUFd2LWdiSGs5NzExN014MDgxT005dnpQdFl4Uk5IRVhpYjljN1VRMU5BQW5kdUt5dWk4WHFkSG5YQUQzNUNlN19QWlYwUU1pSzYyd1daUDdXQ3NwdURpSnF3SzhKWVAxbTdMYmRmZnFacml5RUh6MGhzX0NscEdkdHlfUW42c0xkSFRKS0N6dEFrMzRtcnFkU0YyLW8?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink brain implant helps man with ALS speak using his thoughts&nbsp;&nbsp;MobiHealthNews",
     "category": "neurotechnology"
   },
   {
