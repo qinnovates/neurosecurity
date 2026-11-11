@@ -1,6 +1,33 @@
 [
   {
     "type": "external",
+    "title": "BCI Implant Recipients Release Ethical Recommendations, Calling for Greater Control Over Neural Data and Device Ownership - The Debrief",
+    "date": "2026-11-11",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi3AFBVV95cUxQbkR6YXp1MmRuTGd1ejJQQW9wN3drUGYtUmYtS2J0SDViZEVhLUFuTXdieU1KWEFVTVRlcUVrcmF2emFaQTdXdWtGZzZUT2hIdWhhSnVzanRpWlFYRXVpRHZtMTl6MTIwOHhZQW9EX1ZvcWxQMjJYN3NMR2ZTYmY4eTllNzI5cmZ4cjhJS1JYa2xZbjFUdlJiSU9KdEJWd3VlYy1kVXdJdGtWRWNYeC01YTJJQmFHLU1LOFZYR0R2c0x2a0l4MXBkQlJfTzVOWEU1WGdIM2NFODJ0VjNs?oc=5",
+    "source": "Google News — BCI",
+    "summary": "BCI Implant Recipients Release Ethical Recommendations, Calling for Greater Control Over Neural Data and Device Ownership&nbsp;&nbsp;The Debrief",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "A probabilistic model of visual segmentation explains early visual cortical dynamics",
+    "date": "2026-11-11",
+    "url": "hxxps://arxiv[.]org/abs/2611[.]13316",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2611.13316v1 Announce Type: new Abstract: Neural dynamics are a central feature of biological neural systems. In the visual cortex, the functional role of neural dynamics is poorly understood, p",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Similar visual tuning conceals different recovery dynamics in a model of macaque V1",
+    "date": "2026-11-11",
+    "url": "hxxps://arxiv[.]org/abs/2611[.]13692",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2611.13692v1 Announce Type: new Abstract: Biologically detailed neuronal networks can model how brain circuits perform observed functions, but their high computational cost limits the comparison",
+    "category": "research"
+  },
+  {
+    "type": "external",
     "title": "Brain-Computer Interfaces Raise New Questions about Mental Privacy - The Hastings Center for Bioethics",
     "date": "2026-11-10",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMitgFBVV95cUxOSnpUX1J3bTVvSkx3TjA0aE0ycm5hMVBXc3J3RTRyVS1LVFNMZkVoNWVUcjhQbXVCbG9PamQyZ0p1R3ZGdnZqdjYweHgtYXJmQ1VCQmpNTlVlZ2lPODJxUTZrWlBablVhTEJpTWZnMkh1MUp3dDl6M1hCYktqTDFRSFJ0bjJhclZUa3lOa0VfYjZ2eVZhc09rYld5RzdzSWhweDhvT09VOXJud0dhOXdaaExoRUE1Zw?oc=5",
@@ -19,6 +46,15 @@
   },
   {
     "type": "external",
+    "title": "miHoYo exits brain-computer startup Lingweiyisi as university fund takes control - Dealroom",
+    "date": "2026-11-10",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitAFBVV95cUxNLVJzVFNGai12X0RMa3hSU3VybG5hbTY0Q1hoRTZFWjRFandad3FsV2FCYXRHNjJ4bVJyNGFTMEpyemJTWlczR1ZyRGViTzk1d09jM0x6ckE3cU9mZGI4M1ZXR2pGaFpnWGNNX0stY3ljS2ZvdTExbHJ3RGhlMFpVS3ByYllVS3paUHd0OXNsRE1KZnVWNEhLNkJMZF83bGhlZG1tRExpbEV6QkI3dVR0bnZyNng?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "miHoYo exits brain-computer startup Lingweiyisi as university fund takes control&nbsp;&nbsp;Dealroom",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Brain Stimulation Device Aims to Treat Women’s Health Conditions",
     "date": "2026-11-05",
     "url": "hxxps://spectrum[.]ieee[.]org/samphire-neuroscience-tdcs-pmdd-treatment",
@@ -28,20 +64,20 @@
   },
   {
     "type": "external",
-    "title": "Elon Musk Says Neuralink's Blindsight Will Bring Sight to the Blind - TechNewsWorld",
-    "date": "2026-11-03",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitAFBVV95cUxQSG9lT2ROMWN1V3ZJbWR6VUdsT2tPRkJwRDV6QmQ4WU9hU19mbWV1UVlKUS1oTlNPODdtV1g2S3JqQkZWX0VpVURwN1VmYmIwcVlVS1FaUVhfSUp5ZGJqa1AyNF9VQzBUUWxPaXVIdXZhYXZPNlVDdmNlN0xsd2gzLVA5eVp1M3FuV2pzUTItSUhVa2hpMTFGR2dybV9qbXY5YUhnVXRVTFZwMUFzMk9fOVIxb2o?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk Says Neuralink's Blindsight Will Bring Sight to the Blind&nbsp;&nbsp;TechNewsWorld",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Neuralink’s China Rival Targets Obesity With ‘Electronic’ GLP-1 - Bloomberg.com",
     "date": "2026-11-03",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAFBVV95cUxNbEZhcHpJV0lwWmZlNmtES2xIdFVHM3luYm9KcGI5MkwySTgxdDNPZzctU0V6ckNKTkRVTDh0QU5VWElTOW9vRGlQdnZjelpwakxRWDlwTFZUQkh1Q3VVc3lhWU1lRFVJZjBaU3NoZExsWEYtMU9mZGo4em5FcUpKa1hiV3A0SzFVS210eU5aM2ZHXzRwSUsweXZTa0dDSnZsaVB5V3JhcjM2SnJSbE1KUUxkbG9kNDh6TEg2SXlrQ3c?oc=5",
     "source": "Google News — Neuralink",
     "summary": "Neuralink’s China Rival Targets Obesity With ‘Electronic’ GLP-1&nbsp;&nbsp;Bloomberg.com",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Elon Musk Says Neuralink's Blindsight Will Bring Sight to the Blind - TechNewsWorld",
+    "date": "2026-11-03",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitAFBVV95cUxQSG9lT2ROMWN1V3ZJbWR6VUdsT2tPRkJwRDV6QmQ4WU9hU19mbWV1UVlKUS1oTlNPODdtV1g2S3JqQkZWX0VpVURwN1VmYmIwcVlVS1FaUVhfSUp5ZGJqa1AyNF9VQzBUUWxPaXVIdXZhYXZPNlVDdmNlN0xsd2gzLVA5eVp1M3FuV2pzUTItSUhVa2hpMTFGR2dybV9qbXY5YUhnVXRVTFZwMUFzMk9fOVIxb2o?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk Says Neuralink's Blindsight Will Bring Sight to the Blind&nbsp;&nbsp;TechNewsWorld",
     "category": "neurotechnology"
   },
   {
@@ -91,15 +127,6 @@
   },
   {
     "type": "external",
-    "title": "China takes step to standardise technology linking human minds to computers - South China Morning Post",
-    "date": "2026-10-22",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiyAFBVV95cUxOM0RWcVpJemZ1ZnlVZkt5WG9WZGdZUzlfS0hVd01qR2VwSWoxQXVsQmNkOW13SFJveE0tS0ZCVHM2SjA5NXVabWo3QVRkVFZiR1JiUlZObVlsUnFHcno4cGVIbDRHWFNkVlRpU0lNSFQ3aEM3QlgzU0VVUTRWSjJiOGpYZGdOWUhZWS1laVczSTdwOTFLQ0FSV00tdUNEa1BHZzJqRkhZLW1PTnNETVU0LUFtTG1qU29yNzVHdUo4bWNqVWpxeHJiWA?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China takes step to standardise technology linking human minds to computers&nbsp;&nbsp;South China Morning Post",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Computer science student takes engineering skills to Neuralink - UT San Antonio Today",
     "date": "2026-10-21",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMimAFBVV95cUxOMkIwamstY3g1M2NCSVNVSnlCTjJ6S20zYUtpU0FmVTdNUnhtZ2NKQ3VuLWxnc0JiVm5COWR2c0IyMFpfVm03UWFqVUFqWXhLUTJQV2xnREtDdmpNOEhacXhTR2hDOHNzVDY3RTFuN1k1RnNyZkE4ZFBfamhhM3BYZHhSX1FhYl9BbW94RkpkQTRDM0RTeHp2Vg?oc=5",
@@ -145,20 +172,11 @@
   },
   {
     "type": "external",
-    "title": "Post-2000s Tsinghua doctoral student launches a \"neural interface\" startup: turning human muscle reactions into tokens - 36氪",
+    "title": "Post-2000s Tsinghua doctoral student launches a \"neural interface\" startup: turning human muscle reactions into tokens - eu.36kr.com",
     "date": "2026-08-23",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiU0FVX3lxTFBLOXdWeEQ1NlF3MlNyVDJmSTFxdHdxbkRzRkV1dFdVUlBYcThRbkgwQU15MExOLThCbm1PTG5NdlpCQ3o4ekc4cFhiVC16UWpKVjJr?oc=5",
     "source": "Google News — Neural Startups",
-    "summary": "Post-2000s Tsinghua doctoral student launches a \"neural interface\" startup: turning human muscle reactions into tokens&nbsp;&nbsp;36氪",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Forget Neuralink. This startup thinks your tongue is the better interface - Fast Company",
-    "date": "2026-08-05",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihwFBVV95cUxQa2tXYzZsMmItTGdqY0Z1SlFKa2RHNE9OeXdSVmJxN3F2c0NvbDZRa3hfZ1ZpTXFoZVQ1cFF3ZG5sTHM0LTBBS0JLcktfV1pNZ1kyYk5haDVHclJycEJiZEthdDZRTXU5S2p3NkU4Z2h0b2tzbXAtd2lueUtiOHUyMmt3bFFsMGs?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Forget Neuralink. This startup thinks your tongue is the better interface&nbsp;&nbsp;Fast Company",
+    "summary": "Post-2000s Tsinghua doctoral student launches a \"neural interface\" startup: turning human muscle reactions into tokens&nbsp;&nbsp;eu.36kr.com",
     "category": "neurotechnology"
   },
   {
@@ -199,11 +217,11 @@
   },
   {
     "type": "external",
-    "title": "The MIND Act: Balancing Innovation and Privacy in Neurotechnology - JD Supra",
-    "date": "2025-09-26",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihwFBVV95cUxQYkt5Qk5UWFcxakVtUE0tRVVSWUZyZ0RSQ2JYaHRDWVBILW85LXVjU3lBMVNhNDBFdm41aWpaTUZBbnlsMmRmaWlIVk1CNERFLU84ZXNmWC1MOHZmSnFWbWY3dnRHS1hXSzhsSlpQdVFCVk4tN092S0hncXRGNHBTblpyY2kyY2c?oc=5",
+    "title": "Mind over Machine: Navigating the Legal and Ethical Frontier of Neurotech - Petrie-Flom Center",
+    "date": "2025-02-27",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiuwFBVV95cUxPN0RJTWI5UzFiUUxSbnFfZFh0RUdQYkw0LUJDTkctc21sNFUteENfTHFBZk1lSnpVaW42NWJ2a3VmaHlDQ2xiR0VLWDVBVnBpNWV4UWQ2UDVualBoQTlkTkpiYWo4V0J3Wmo5SkhSQ2JmUFg1em5zLVlNQ0Z6dXJtenhObDR2a0dQMUFCQXJ0cDFiUXpnYWFmNDdhNXBlT1laUGhlNFB3cV81UzJYc3UtaDR4S1BfRVhQek0w?oc=5",
     "source": "Google News — MIND Act",
-    "summary": "The MIND Act: Balancing Innovation and Privacy in Neurotechnology&nbsp;&nbsp;JD Supra",
+    "summary": "Mind over Machine: Navigating the Legal and Ethical Frontier of Neurotech&nbsp;&nbsp;Petrie-Flom Center",
     "category": "neuroethics"
   }
 ]
