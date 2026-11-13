@@ -1,20 +1,65 @@
 [
   {
     "type": "external",
-    "title": "Synchron Pauses Trials of Its Brain Implant Due to Performance Issues - WIRED",
-    "date": "2026-11-12",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxPMERPTy04TnV2RlFmTHBlZ1BpY0NfTkNtaXA3NWkySzE1dFdsRFhLWjEwZGtyN3dnTXFXUktZRTJWcmdBbW5oRUlyR1FRaTNaT0RSTW9jWk15bUJneHNvR1RtM0cweHRuV2hZb09Rc2hOeDVmUlFra0I3dXhWQ19KQnlhMndKRnJMWUVMbnlaS1FMcngxTzcxNDBVUk13bW8?oc=5",
+    "title": "More autonomy, fewer NDAs: Volunteers have new requests for brain implant trials",
+    "date": "2026-11-13",
+    "url": "hxxps://www[.]technologyreview[.]com/2026/11/13/1148474/more-autonomy-fewer-ndas-volunteers-have-new-requests-for-brain-implant-trials/",
+    "source": "MIT Technology Review",
+    "summary": "Scientists have been working on ways to decode brain activity for decades. Teams have developed brain implants that can be used to control robotic limbs and computers, and even to “speak.” The people ",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Silicon Valley claims to know the future. So why did it get the midterms so wrong?",
+    "date": "2026-11-13",
+    "url": "hxxps://www[.]technologyreview[.]com/2026/11/13/1148498/silicon-valley-claims-to-know-the-future-so-why-did-it-get-the-midterms-so-wrong/",
+    "source": "MIT Technology Review",
+    "summary": "The self-styled visionaries of Silicon Valley, leaders like OpenAI chief executive Sam Altman and SpaceX boss Elon Musk, have built careers claiming to see the future. Long-term vision is currency: Me",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "VA Research Wrap Up: New findings on cancer, PTSD and brain-computer interfaces - VA News (.gov)",
+    "date": "2026-11-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMigwFBVV95cUxPVWYwMFhFRERDaTJRYno2XzZVNVVXTjJlRlZ2NDB6clJZQnpucWpyZ204dWxmQ05kV1MxTjlaWXI0a0NfM3NYOVpDWkYzWWVYaXdnYjBCcko2a3Q5TFBFZ2F3MXRNRWl3NkN1STltTEtNWkx0bDhQc0twWmliVk9fRUpEOA?oc=5",
     "source": "Google News — BCI",
-    "summary": "Synchron Pauses Trials of Its Brain Implant Due to Performance Issues&nbsp;&nbsp;WIRED",
+    "summary": "VA Research Wrap Up: New findings on cancer, PTSD and brain-computer interfaces&nbsp;&nbsp;VA News (.gov)",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "Riemannian Weighting Enhances Multiclass Motor Imagery Brain Computer Interface Classification Accuracy - Bioengineer.org",
-    "date": "2026-11-12",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMixwFBVV95cUxNV2VjZDViekJiSmI0Z2kxYUdxRHpNVlJ2c1RYekJXWTkxbXFheHR6bnUxQXFTcFYtZ0NTS1dCcmhaaHdlYVhVbVhpZllmcF9YWFFhZXhXazBHUHEtaGJSeXU4MW4yYkJRNU1OazVLT2dCN0lPNjRJS2xOcWNQUU12X1BMcEMwNmlZQ29DdTBtXzBidkNza0hvSFpxZkRheU1HcnZwVXM3cVk0ai14SWNBTllvNjY1b2t0MTBubVRraWRJQUdPZ0xv?oc=5",
+    "title": "China's Brain-Computer Interface Sector Enters First Year of Clinical Application: World's First Approval Leads to 12 Commercial Implants, Shanghai's Huibao Reimburses Up to 30% - BigGo Finance",
+    "date": "2026-11-13",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMidkFVX3lxTFBEdDF0Q3NMSEE3OGhxWk9tNjBLaFlLcXdCRkRGYWc1Vkp2YWFiV3Z6RWx4TjN2b2FmQTczM1FYV0FteDZmR0xvcDNZeUxwX0FJblpIVVJwNEJxdDdvMEIzb0hra0V1dWh2M1h4cXhoeWpUQ2Fwb0E?oc=5",
     "source": "Google News — BCI",
-    "summary": "Riemannian Weighting Enhances Multiclass Motor Imagery Brain Computer Interface Classification Accuracy&nbsp;&nbsp;Bioengineer.org",
+    "summary": "China's Brain-Computer Interface Sector Enters First Year of Clinical Application: World's First Approval Leads to 12 Commercial Implants, Shanghai's Huibao Reimburses Up to 30%&nbsp;&nbsp;BigGo Finan",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Mind-wandering preserves word-level coupling while disrupting comprehension",
+    "date": "2026-11-13",
+    "url": "hxxps://arxiv[.]org/abs/2611[.]14814",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2611.14814v1 Announce Type: new Abstract: Readers can move their eyes through a page but retain little of its meaning when their minds wander. We tested whether word properties still guide their",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Prototypes of the Mind: A Unified Framework for Probing the Visual Brain",
+    "date": "2026-11-13",
+    "url": "hxxps://arxiv[.]org/abs/2611[.]15046",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2611.15046v1 Announce Type: new Abstract: Deep learning has driven substantial progress in modeling fMRI responses, yet most existing approaches are optimized for a single objective---such as ne",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Synchron halts BCI trials after device fails to perform as expected - MassDevice",
+    "date": "2026-11-12",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitAFBVV95cUxPTGJZMldTRnNEUUlhWGt5VndjS2Iwbi1DZ2ZQX25hdjVCbDVCcTFhcnRiV1JEaW03X3VyM3h1ZVZtbzR3VUNsendwcnJZcXpVbDlNcV8wYUJjYmdUWGlacUQwQWJMc0FCcmY5WTdCc2FHbjJwR3IwdE9icnN5U3F5aEt4ejhnLVRoSzhMbkU5Q1YtMVB2UENjaE1Ga1lYTWc5X01mWFNaTkRoMm8tdG5WYzJrTHg?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Synchron halts BCI trials after device fails to perform as expected&nbsp;&nbsp;MassDevice",
     "category": "neurotechnology"
   },
   {
@@ -87,15 +132,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipAFBVV95cUxPMzZELUlXckdpMmdYelIySFUtZVpCMUFaV29vcTUzN2EtZ3h0QW40R1ROTWdhSkpHVGNMdEJsdDJTVFNiRDJUQVE3TzhNSGNheHQ1Q2hIRmxyRENrUVJWX1R2MVlDNUZHY1A2dTc3Nmt2b1VBQ3JnQ0NIZlAxUm5rOGxHZVh1dWZleU5YeWxMQ2NhUV93YnBEcGxZZ1c3ZlZlcXRZSA?oc=5",
     "source": "Google News — BCI",
     "summary": "How long until wearable brain-computer interfaces become mainstream?&nbsp;&nbsp;The Conversation",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "China takes step to standardise technology linking human minds to computers - South China Morning Post",
-    "date": "2026-10-22",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiyAFBVV95cUxOM0RWcVpJemZ1ZnlVZkt5WG9WZGdZUzlfS0hVd01qR2VwSWoxQXVsQmNkOW13SFJveE0tS0ZCVHM2SjA5NXVabWo3QVRkVFZiR1JiUlZObVlsUnFHcno4cGVIbDRHWFNkVlRpU0lNSFQ3aEM3QlgzU0VVUTRWSjJiOGpYZGdOWUhZWS1laVczSTdwOTFLQ0FSV00tdUNEa1BHZzJqRkhZLW1PTnNETVU0LUFtTG1qU29yNzVHdUo4bWNqVWpxeHJiWA?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China takes step to standardise technology linking human minds to computers&nbsp;&nbsp;South China Morning Post",
     "category": "neurotechnology"
   },
   {
