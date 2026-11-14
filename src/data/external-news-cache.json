@@ -1,6 +1,42 @@
 [
   {
     "type": "external",
+    "title": "The OpenAI board member who fired Sam Altman says we still can&#8217;t trust AI CEOs",
+    "date": "2026-11-14",
+    "url": "hxxps://www[.]theverge[.]com/podcast/1032907/helen-toner-openai-cset-ai-safety-policy-interview",
+    "source": "The Verge",
+    "summary": "Today, I’m talking with Helen Toner, the executive director of the Center for Security and Emerging Technology at Georgetown University. This episode is part two of our series on AI in real life. Hele",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Brain-computer interfaces: A new voice for people with paralysis - Medical Xpress",
+    "date": "2026-11-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiwFBVV95cUxQbW1DSGdoRUFyMm9kRjVWUjdQVU9lMzBLVnVUOUU5YWNRZHB2YTE1SG91SWx1b0tZYUVUMWZ6SGhtQkpsYjVKbTNtUndUcnBZMFdmX1NpNVNSd3g0aFlrUjFadjVPWHpvN1RxZ0VzcHRMS3ZjdWVIMDNDYWowaHAxalh2RU40T3UzSnNv?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain-computer interfaces: A new voice for people with paralysis&nbsp;&nbsp;Medical Xpress",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "China Approves Drafting of Brain-Computer Interface Standards; No Implant Link Security Text Public - Tech Times",
+    "date": "2026-11-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi5AFBVV95cUxPcFg3RGFSWlNZZFR1Z2swWHlrZk0tT2JaQVdnNGhSOUJaYWp6RDBwd1hGLWJyeEIycFRDNEpFZkNFRHhGcDFFT3Jha0pSOV9sdVJ1YlVQU3RqVWZJRWpvam9FOXNrUjhCVEVyZzdQUWpZb1hYdC1CQU1QTGVrVHJQVjdwUldPWjJZRVBMZ1lJcHVOZTR4UmNWaEY5REJRcm4tRzA5ams0X1FyQU55YzlBbVJNQWNKNnNvSkdKdVZ1bTlhRjBCcUpQODRwdDZfNTdvcll5ZWQ4MFJ0QjlZMVNvOURFdFo?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China Approves Drafting of Brain-Computer Interface Standards; No Implant Link Security Text Public&nbsp;&nbsp;Tech Times",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Scientists created a Doctor Octopus-inspired brain interface for controlling robotic arms - PsyPost",
+    "date": "2026-11-14",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitAFBVV95cUxOX3FDeXpSLXR3YnNqQnRRZGlDRUJ3bnZYaFVuODM1MHM4R0tfNEI2dE5KM1RJOXR2dzZWQlhlbVVSUlprUktpellxZzF2XzE1ZTVpQVlwVjRxZWtuNWM2VzVQcTZ4dEFLUnRrNjdFWTNwT1pQSkNCU3ZRdnBENjQwUk0wLWVWZmZKYm1WRS1UcnBaMmVUNEtqaXZWUFVFU1Vsb0NjeHdDQVNoR2ZybGtHbm5BSFQ?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Scientists created a Doctor Octopus-inspired brain interface for controlling robotic arms&nbsp;&nbsp;PsyPost",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "More autonomy, fewer NDAs: Volunteers have new requests for brain implant trials",
     "date": "2026-11-13",
     "url": "hxxps://www[.]technologyreview[.]com/2026/11/13/1148474/more-autonomy-fewer-ndas-volunteers-have-new-requests-for-brain-implant-trials/",
@@ -28,33 +64,6 @@
   },
   {
     "type": "external",
-    "title": "China's Brain-Computer Interface Sector Enters First Year of Clinical Application: World's First Approval Leads to 12 Commercial Implants, Shanghai's Huibao Reimburses Up to 30% - BigGo Finance",
-    "date": "2026-11-13",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMidkFVX3lxTFBEdDF0Q3NMSEE3OGhxWk9tNjBLaFlLcXdCRkRGYWc1Vkp2YWFiV3Z6RWx4TjN2b2FmQTczM1FYV0FteDZmR0xvcDNZeUxwX0FJblpIVVJwNEJxdDdvMEIzb0hra0V1dWh2M1h4cXhoeWpUQ2Fwb0E?oc=5",
-    "source": "Google News — BCI",
-    "summary": "China's Brain-Computer Interface Sector Enters First Year of Clinical Application: World's First Approval Leads to 12 Commercial Implants, Shanghai's Huibao Reimburses Up to 30%&nbsp;&nbsp;BigGo Finan",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Mind-wandering preserves word-level coupling while disrupting comprehension",
-    "date": "2026-11-13",
-    "url": "hxxps://arxiv[.]org/abs/2611[.]14814",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2611.14814v1 Announce Type: new Abstract: Readers can move their eyes through a page but retain little of its meaning when their minds wander. We tested whether word properties still guide their",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Prototypes of the Mind: A Unified Framework for Probing the Visual Brain",
-    "date": "2026-11-13",
-    "url": "hxxps://arxiv[.]org/abs/2611[.]15046",
-    "source": "arXiv Neuroscience",
-    "summary": "arXiv:2611.15046v1 Announce Type: new Abstract: Deep learning has driven substantial progress in modeling fMRI responses, yet most existing approaches are optimized for a single objective---such as ne",
-    "category": "research"
-  },
-  {
-    "type": "external",
     "title": "Synchron halts BCI trials after device fails to perform as expected - MassDevice",
     "date": "2026-11-12",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMitAFBVV95cUxPTGJZMldTRnNEUUlhWGt5VndjS2Iwbi1DZ2ZQX25hdjVCbDVCcTFhcnRiV1JEaW03X3VyM3h1ZVZtbzR3VUNsendwcnJZcXpVbDlNcV8wYUJjYmdUWGlacUQwQWJMc0FCcmY5WTdCc2FHbjJwR3IwdE9icnN5U3F5aEt4ejhnLVRoSzhMbkU5Q1YtMVB2UENjaE1Ga1lYTWc5X01mWFNaTkRoMm8tdG5WYzJrTHg?oc=5",
@@ -69,15 +78,6 @@
     "url": "hxxps://spectrum[.]ieee[.]org/samphire-neuroscience-tdcs-pmdd-treatment",
     "source": "IEEE Spectrum",
     "summary": "Most women report menstruation-related pain or mood changes, and for around one in five women, strong symptoms disrupt daily life. Standard treatment options tend to focus on hormonal regulation, phar",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink’s China Rival Targets Obesity With ‘Electronic’ GLP-1 - Bloomberg.com",
-    "date": "2026-11-03",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwAFBVV95cUxNbEZhcHpJV0lwWmZlNmtES2xIdFVHM3luYm9KcGI5MkwySTgxdDNPZzctU0V6ckNKTkRVTDh0QU5VWElTOW9vRGlQdnZjelpwakxRWDlwTFZUQkh1Q3VVc3lhWU1lRFVJZjBaU3NoZExsWEYtMU9mZGo4em5FcUpKa1hiV3A0SzFVS210eU5aM2ZHXzRwSUsweXZTa0dDSnZsaVB5V3JhcjM2SnJSbE1KUUxkbG9kNDh6TEg2SXlrQ3c?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink’s China Rival Targets Obesity With ‘Electronic’ GLP-1&nbsp;&nbsp;Bloomberg.com",
     "category": "neurotechnology"
   },
   {
@@ -100,6 +100,15 @@
   },
   {
     "type": "external",
+    "title": "Neuralink Unveils 'Telepathy': Think-to-Type Brain Interface Goes Public - BASENOR - Tesla Accessories",
+    "date": "2026-10-29",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipwFBVV95cUxNbHJsbEg3c212ckZQT2tYSVAtd0h1dVNIb0haTVJ1blZCR0FsbG05S3dST1Uxc0RDdDRPWUpKXzBTYmFsbTQtZ0lDR2pnRVNteUtMMy1aU1dIbWwtWWdwZHZVX3NkQVhVRXNoaEQzZk5kV0FKR0lvZkhjbFNxTmg1Ql8zTXA2UXFsM1c1TV9nanJhdWVQT3oxd3ZmMGlmZFYyekpmTUI1MA?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink Unveils 'Telepathy': Think-to-Type Brain Interface Goes Public&nbsp;&nbsp;BASENOR - Tesla Accessories",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Mesh Woven Into Heart Tissue Harvests Energy From Motion",
     "date": "2026-10-29",
     "url": "hxxps://spectrum[.]ieee[.]org/medical-implant-energy-harvesting-mesh",
@@ -114,24 +123,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMivAFBVV95cUxQVk5HcW1BNjY2M295M1k4YjFSNl9jS09WZ0ZSUktPU1ZVRDYxMVMwNEdib0g2QmU0UzlTZThWRGRDSWFfck9Id1RfTFNBcGZLOElIaV9nbUFWT3dJZkVpd2g3WGFpazNiUWlScEJ4TE1hZlI5a21CUGlDdkJHTDNLaXdKT1pDOGdSN3RFTHo3SmpkWTJ3X25SWHlwLUtRemNCd1JBRkpMMWoxMVhrOExWSzJCRmxXNGRENzVYYg?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "U.K. Startup Demonstrates Controlling Drones via Brain Signals&nbsp;&nbsp;National Defense Magazine",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "A Brain-Computer Interface May Give Unresponsive ICU Patients a Voice - Columbia University Irving Medical Center",
-    "date": "2026-10-22",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiowFBVV95cUxNLWc0dEFGNncxbzVsdUthWkwxaU9jTHExeHhHOFdMSU41dXllYm9EWDRaQ2VWRTBqcEdIY1VyVjN4dlE0UDk4WDhzTmlsR2FQUl80SHdpMEtxdFNKUHN4eDJaWkpTNTQwRGNuck1xaGl0b0hLYjkzRHhBNDc5SEYzWDV2ZVpxTHNFOWtTSjc1SDVSMUNMN1FuR0lZRzFNSFhXd3V3?oc=5",
-    "source": "Google News — BCI",
-    "summary": "A Brain-Computer Interface May Give Unresponsive ICU Patients a Voice&nbsp;&nbsp;Columbia University Irving Medical Center",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "How long until wearable brain-computer interfaces become mainstream? - The Conversation",
-    "date": "2026-10-22",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipAFBVV95cUxPMzZELUlXckdpMmdYelIySFUtZVpCMUFaV29vcTUzN2EtZ3h0QW40R1ROTWdhSkpHVGNMdEJsdDJTVFNiRDJUQVE3TzhNSGNheHQ1Q2hIRmxyRENrUVJWX1R2MVlDNUZHY1A2dTc3Nmt2b1VBQ3JnQ0NIZlAxUm5rOGxHZVh1dWZleU5YeWxMQ2NhUV93YnBEcGxZZ1c3ZlZlcXRZSA?oc=5",
-    "source": "Google News — BCI",
-    "summary": "How long until wearable brain-computer interfaces become mainstream?&nbsp;&nbsp;The Conversation",
     "category": "neurotechnology"
   },
   {
@@ -199,15 +190,6 @@
   },
   {
     "type": "external",
-    "title": "AI-powered military neurotech: Mind enhancement or control? - Institute for National Strategic Studies (INSS)",
-    "date": "2026-01-26",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi0wFBVV95cUxPRkVaRGVUZUV6ZlNZOWpHanZxdVZFTzRvaDBoWUJySkM5S3JmVXJ6TC1hRmtNeHFIb0JsTTZobmRjRjU0dlpIVjRJTDJsRXAtZnFuMUoxcndxTU1DM0pzV0xveHJ3WloycVBsVmx2VzJzY3J5TzNaNDJ1blh0ZDBuNERaM2hwMUM0S3JDa3F3dWV5MkZSWUtybHNFSmdwcDRaUnl5ZHVWeDJqaUJrTlROdzZ4cW56UEkwblpiY3dVUkVVYTJmNzJxaDY1MlFvT3JVOG04?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "AI-powered military neurotech: Mind enhancement or control?&nbsp;&nbsp;Institute for National Strategic Studies (INSS)",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
     "title": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology - CSIS | Center for Strategic and International Studies",
     "date": "2025-11-04",
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPanNMOEN0Yy16RElvSXJjMk4zR25qd2tGQXhDZDI2cmo0Yk5kSmZNQXJfSnhQb0tOdUJUY3BOQlc0akVlOGZ5aGpBekVWd0NNV1R6enN5Q0RVRnFKX2JhSWRuVVA2MUNkNHJOd0k4NjRLdjZtVUxkZlluWFVUNU0zN21VajFiOW9Udl9aTjhTQ1dkSEphZTAtWVR5MU5ZalQySDdJWTFB?oc=5",
@@ -231,6 +213,15 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxNS3FBelpMZGNUWExYbEtEQzZtLXNYRGJnRjhsNjFTYTRrMHpMYW9iU2ZlM3JqM3BBendfblNmNHVNUURrNG4xNzlRNU1xLWN5ZmIzNVJSR1JBRTFBclU5NHFQMTUxLVQ2OEY4bVJJS3VRRFVFcm95NEZpbTRtY1lhWDdBdmJydTI2MHBLNVJvVkxUS0E?oc=5",
     "source": "Google News — MIND Act",
     "summary": "Senators ask FTC to study neurotechnology's promises, implications&nbsp;&nbsp;IAPP",
+    "category": "neuroethics"
+  },
+  {
+    "type": "external",
+    "title": "Congress Introduces Neural Data Bill - Inside Privacy",
+    "date": "2025-10-03",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiigFBVV95cUxQcW5Tb0RFN2dJOE1rRmtJZjltdUVlNzhTdGpUN0U1Y1RIMVhJVllNWXZGc3ZBNGt1VHRqNWQ5YUx2dVFfZUxZRFZhRW9CbzNoLUk0VWdJY0kzczc3dTQ5X1NoOF9pYy1HR01OallOMFFHaC1pdlJ2U3NON0JzdGRfenNYYlhGYzJXdXc?oc=5",
+    "source": "Google News — MIND Act",
+    "summary": "Congress Introduces Neural Data Bill&nbsp;&nbsp;Inside Privacy",
     "category": "neuroethics"
   },
   {
