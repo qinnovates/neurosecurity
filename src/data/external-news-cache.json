@@ -1,66 +1,12 @@
 [
   {
     "type": "external",
-    "title": "Brain-computer interfaces: A new voice for people with paralysis - Medical Xpress",
-    "date": "2026-11-14",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiwFBVV95cUxQbW1DSGdoRUFyMm9kRjVWUjdQVU9lMzBLVnVUOUU5YWNRZHB2YTE1SG91SWx1b0tZYUVUMWZ6SGhtQkpsYjVKbTNtUndUcnBZMFdmX1NpNVNSd3g0aFlrUjFadjVPWHpvN1RxZ0VzcHRMS3ZjdWVIMDNDYWowaHAxalh2RU40T3UzSnNv?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain-computer interfaces: A new voice for people with paralysis&nbsp;&nbsp;Medical Xpress",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Brain Implants Give A.L.S. Patients the Voice to Speak and Sing - The New York Times",
-    "date": "2026-11-14",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMifEFVX3lxTE9GbVlXdWZLZFhINUJ5WEw5dC1sQWxtT0o2QjlWQl9QWXg0djVXLXdEWkVuV1E2V3BVZ2dhUmphQ0lIV1dFYjFGUnNGWmtvUWtBNzlwd21xbnNmYUQ0ZlhXbzFWWk9xZDZXLUNzelA4UHFWZWFONEtQeG1rZ2I?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain Implants Give A.L.S. Patients the Voice to Speak and Sing&nbsp;&nbsp;The New York Times",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Implanted Brain-Computer Interfaces Help Paralyzed Clinical Trial Participants Restore Expressive Communication - Bioengineer.org",
-    "date": "2026-11-14",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi0gFBVV95cUxPZjlTX0JWYWp6MVc1X25GWnJXUUJGRkY0RFVLaldBamdSRm1ZSzV1UUYzVDlpZXhqOFpnNy1QLWltbTZleHBWUTBIWmI3S1JpdW4wd0tPYUtWejN1WWNRQkZDeXFxR0djZGkxWjVCZGtXWkNVZ2FuYzhTNU1vdzZvakRxcHdKc056a0hzOGlteVVnSk1pLS0xRlloQnpWNXFNSUJLd19DVzUxT0F5SlJsQmtQR2kyQjV3WS16d3RUcFloYjVOeV8yeXVXV1VHZ2VHQlE?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Implanted Brain-Computer Interfaces Help Paralyzed Clinical Trial Participants Restore Expressive Communication&nbsp;&nbsp;Bioengineer.org",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "More autonomy, fewer NDAs: Volunteers have new requests for brain implant trials",
-    "date": "2026-11-13",
-    "url": "hxxps://www[.]technologyreview[.]com/2026/11/13/1148474/more-autonomy-fewer-ndas-volunteers-have-new-requests-for-brain-implant-trials/",
-    "source": "MIT Technology Review",
-    "summary": "Scientists have been working on ways to decode brain activity for decades. Teams have developed brain implants that can be used to control robotic limbs and computers, and even to “speak.” The people ",
+    "title": "An In-Silico Audit of Topographic Organization in a Multimodal Brain-Response Model",
+    "date": "2026-11-16",
+    "url": "hxxps://arxiv[.]org/abs/2611[.]18105",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2611.18105v1 Announce Type: new Abstract: TRIBE v2 (d'Ascoli et al., 2026) predicts fMRI responses across the cortical surface from video, audio and text. Its authors validated it with category-",
     "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "Silicon Valley claims to know the future. So why did it get the midterms so wrong?",
-    "date": "2026-11-13",
-    "url": "hxxps://www[.]technologyreview[.]com/2026/11/13/1148498/silicon-valley-claims-to-know-the-future-so-why-did-it-get-the-midterms-so-wrong/",
-    "source": "MIT Technology Review",
-    "summary": "The self-styled visionaries of Silicon Valley, leaders like OpenAI chief executive Sam Altman and SpaceX boss Elon Musk, have built careers claiming to see the future. Long-term vision is currency: Me",
-    "category": "research"
-  },
-  {
-    "type": "external",
-    "title": "VA Research Wrap Up: New findings on cancer, PTSD and brain-computer interfaces - VA News (.gov)",
-    "date": "2026-11-13",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMigwFBVV95cUxPVWYwMFhFRERDaTJRYno2XzZVNVVXTjJlRlZ2NDB6clJZQnpucWpyZ204dWxmQ05kV1MxTjlaWXI0a0NfM3NYOVpDWkYzWWVYaXdnYjBCcko2a3Q5TFBFZ2F3MXRNRWl3NkN1STltTEtNWkx0bDhQc0twWmliVk9fRUpEOA?oc=5",
-    "source": "Google News — BCI",
-    "summary": "VA Research Wrap Up: New findings on cancer, PTSD and brain-computer interfaces&nbsp;&nbsp;VA News (.gov)",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Synchron halts BCI trials after device fails to perform as expected - MassDevice",
-    "date": "2026-11-12",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitAFBVV95cUxPTGJZMldTRnNEUUlhWGt5VndjS2Iwbi1DZ2ZQX25hdjVCbDVCcTFhcnRiV1JEaW03X3VyM3h1ZVZtbzR3VUNsendwcnJZcXpVbDlNcV8wYUJjYmdUWGlacUQwQWJMc0FCcmY5WTdCc2FHbjJwR3IwdE9icnN5U3F5aEt4ejhnLVRoSzhMbkU5Q1YtMVB2UENjaE1Ga1lYTWc5X01mWFNaTkRoMm8tdG5WYzJrTHg?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Synchron halts BCI trials after device fails to perform as expected&nbsp;&nbsp;MassDevice",
-    "category": "neurotechnology"
   },
   {
     "type": "external",
@@ -178,50 +124,5 @@
     "source": "Google News — Neural Startups",
     "summary": "Forget Neuralink. This startup thinks your tongue is the better interface&nbsp;&nbsp;Fast Company",
     "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "AI-powered military neurotech: Mind enhancement or control? - Institute for National Strategic Studies (INSS)",
-    "date": "2026-01-26",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMi0wFBVV95cUxPRkVaRGVUZUV6ZlNZOWpHanZxdVZFTzRvaDBoWUJySkM5S3JmVXJ6TC1hRmtNeHFIb0JsTTZobmRjRjU0dlpIVjRJTDJsRXAtZnFuMUoxcndxTU1DM0pzV0xveHJ3WloycVBsVmx2VzJzY3J5TzNaNDJ1blh0ZDBuNERaM2hwMUM0S3JDa3F3dWV5MkZSWUtybHNFSmdwcDRaUnl5ZHVWeDJqaUJrTlROdzZ4cW56UEkwblpiY3dVUkVVYTJmNzJxaDY1MlFvT3JVOG04?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "AI-powered military neurotech: Mind enhancement or control?&nbsp;&nbsp;Institute for National Strategic Studies (INSS)",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology - CSIS | Center for Strategic and International Studies",
-    "date": "2025-11-04",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPanNMOEN0Yy16RElvSXJjMk4zR25qd2tGQXhDZDI2cmo0Yk5kSmZNQXJfSnhQb0tOdUJUY3BOQlc0akVlOGZ5aGpBekVWd0NNV1R6enN5Q0RVRnFKX2JhSWRuVVA2MUNkNHJOd0k4NjRLdjZtVUxkZlluWFVUNU0zN21VajFiOW9Udl9aTjhTQ1dkSEphZTAtWVR5MU5ZalQySDdJWTFB?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "When Thought Becomes Data: The MIND Act and the Coming Debate Over Neurotechnology&nbsp;&nbsp;CSIS | Center for Strategic and International Studies",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data - Davis Wright Tremaine",
-    "date": "2025-10-15",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgFBVV95cUxPR0g3MFdtRG5ZekMyUFlxbXEzVkJ3SVJ5c2hqTTlIRHVyb0lNc2NzRTdSN3VYT2NNSl9VQ043b3l1ei1aZEpkajNiU1FRY2tYb3hBWE9IOUVmRVoxZTh2bzM0MGRTa00yeDFVT2d5c21aa1VJRFJzNExhRVlvTl9TejNKaFB5eHEwTUd2eHFQcHlKTWhtWHJseWxFNmU0aWJvZGZzSVh3?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "U.S. Senators Propose \"MIND Act\" to Study and Recommend National Standards for Protecting Consumers' Neural Data&nbsp;&nbsp;Davis Wright Tremaine",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "Senators ask FTC to study neurotechnology's promises, implications - IAPP",
-    "date": "2025-10-03",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMikwFBVV95cUxNS3FBelpMZGNUWExYbEtEQzZtLXNYRGJnRjhsNjFTYTRrMHpMYW9iU2ZlM3JqM3BBendfblNmNHVNUURrNG4xNzlRNU1xLWN5ZmIzNVJSR1JBRTFBclU5NHFQMTUxLVQ2OEY4bVJJS3VRRFVFcm95NEZpbTRtY1lhWDdBdmJydTI2MHBLNVJvVkxUS0E?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Senators ask FTC to study neurotechnology's promises, implications&nbsp;&nbsp;IAPP",
-    "category": "neuroethics"
-  },
-  {
-    "type": "external",
-    "title": "Mind over Machine: Navigating the Legal and Ethical Frontier of Neurotech - Petrie-Flom Center",
-    "date": "2025-02-27",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiuwFBVV95cUxPN0RJTWI5UzFiUUxSbnFfZFh0RUdQYkw0LUJDTkctc21sNFUteENfTHFBZk1lSnpVaW42NWJ2a3VmaHlDQ2xiR0VLWDVBVnBpNWV4UWQ2UDVualBoQTlkTkpiYWo4V0J3Wmo5SkhSQ2JmUFg1em5zLVlNQ0Z6dXJtenhObDR2a0dQMUFCQXJ0cDFiUXpnYWFmNDdhNXBlT1laUGhlNFB3cV81UzJYc3UtaDR4S1BfRVhQek0w?oc=5",
-    "source": "Google News — MIND Act",
-    "summary": "Mind over Machine: Navigating the Legal and Ethical Frontier of Neurotech&nbsp;&nbsp;Petrie-Flom Center",
-    "category": "neuroethics"
   }
 ]
