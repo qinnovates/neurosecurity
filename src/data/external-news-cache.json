@@ -1,12 +1,39 @@
 [
   {
     "type": "external",
-    "title": "Brain-Computer Interfaces Aid Attention After Stroke but Global Cognitive Benefits Remain Uncertain - Bioengineer.org",
-    "date": "2026-11-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiwgFBVV95cUxQU0VqbmJfaDFiWEI2akliYVc1WGc0NEFQTl96cW00VkFxM3ExWkgtN0g2cjNFYk1XbkMtWjh1VElTM2UybEd4R0szd3lqc0FLZEpINnhuUXlpZmJwN2dLZUJhcUtoMktYMFhWTWMxM2VNM3NGbDNIZ1kxMGFRdDFqRy14X2E1TkZ5TG5YN3FyUm9JelJEYkhzV1NXUTEzMEZRMXp5SWc4TERxRHladkZZeDBQMTFzYUU1T1NYajcxU1hKdw?oc=5",
+    "title": "Noninvasive brain interface uses AI suggestions to convey messages nearly three times faster - Tech Xplore",
+    "date": "2026-11-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihAFBVV95cUxPMGdMQy1lVnVBdHhOMTV6VXV5eFlOTzFnRTk2OGJ6QlhocXViUkRURElGY1A5TW9ES0pMeVdqQjJuYVNoRGtxVmQxX1JucUhwY2VwN2t0S2lySWFuRi0tSkNfWkNFeWhJQldLVDYweU1hem5PUWRkUDZIZUdaZDRSV0FDQnI?oc=5",
     "source": "Google News — BCI",
-    "summary": "Brain-Computer Interfaces Aid Attention After Stroke but Global Cognitive Benefits Remain Uncertain&nbsp;&nbsp;Bioengineer.org",
+    "summary": "Noninvasive brain interface uses AI suggestions to convey messages nearly three times faster&nbsp;&nbsp;Tech Xplore",
     "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Brain-Computer Interfaces Help Paralyzed Patients Speak Again - The Scientist",
+    "date": "2026-11-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMingFBVV95cUxNQm16TGhmaDk3YWZ5dXB6T0UyQ1NOWUx2U2VzRU9TY3R1Q1cwbUFPdGdUUlltSHQ4MTlOVnB6a2ZTS2tRTjA5Z0ZXSW5vVWVPYzNWcGtzU3g3XzJ0UW9qSHJmZWcteEYzQ2xSam1EYm1iNG5rbU5TTnJUMHFEMENsN2xLQUZqOUZJckdzeFZtRFpWczhoejdMaE5jeGhtUQ?oc=5",
+    "source": "Google News — BCI",
+    "summary": "Brain-Computer Interfaces Help Paralyzed Patients Speak Again&nbsp;&nbsp;The Scientist",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Regime-dependent reconstruction of structural connectivity: an in silico study of spatially constrained modular neuronal networks",
+    "date": "2026-11-20",
+    "url": "hxxps://arxiv[.]org/abs/2611[.]25830",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2611.25830v1 Announce Type: new Abstract: Inferring structural connectivity from neuronal activity is a major challenge in neuroscience, yet the conditions under which inferred interactions fait",
+    "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "When Should Deployed BCI Decoders Adapt? A Resource-Priced Ladder for Frozen EEG Trunks",
+    "date": "2026-11-20",
+    "url": "hxxps://arxiv[.]org/abs/2611[.]25315",
+    "source": "arXiv Neuroscience",
+    "summary": "arXiv:2611.25315v1 Announce Type: cross Abstract: When should a deployed MI decoder spend adaptation resources-not only how to adapt under shift? We study a thin control layer outside a frozen encoder",
+    "category": "research"
   },
   {
     "type": "external",
@@ -19,20 +46,11 @@
   },
   {
     "type": "external",
-    "title": "Synchron Pauses Clinical Trial On Brain Interface, Plans To Resume Trial With Upgraded System - insights.citeline.com",
-    "date": "2026-11-19",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgJBVV95cUxPYVdGTng1SDhvSHAxUVFreDBkRzQ3UW1XeUk5cEhySTN2R3p4RDVyQnMwZDhIQU52RVlRcm1zeGJrVXQydjVycFNzYlRnZ0k4SjhqNFh1Zmx6TzBFc0NPRUlJaWlxbHBLYmZWczR4SkVZanAtaUVtb3RIUDBkM0JWREpxczNJUzFKTlVBLWZrb0U5UmlOUzVPd0YzSDAzeUs3Y0dDbmFLX1lYSk9VZ25oM05mV21xeXg1N29DdkJzZktTM01EekdqbkpRV2tMNy1wX0F4M3RuX0FydGJsVklTRlhUcU9Xa29xMXpzUE1RY0lva2ZCRHNEb0VYY2lxeTF0a2ZPVHFURml6UkpqbmxwQkRXY1lvZVdSTll0bWRJNV9oRHFSLXc?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Synchron Pauses Clinical Trial On Brain Interface, Plans To Resume Trial With Upgraded System&nbsp;&nbsp;insights.citeline.com",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "ALS community to have a say in brain-computer interface development - ALS News Today",
+    "title": "Science Corporation raises $400M to commercialize BCI device - MedTech Dive",
     "date": "2026-11-18",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMihwFBVV95cUxQMm9ic2FzSDJOd2lmX1F5VnBabkpDNkJXQXcwOTZLelJMTURDYmY5b1J3WXRRN1BwQVNMejRiNEpLYjZUMnVxXzA0c1pOS0VoSTluYlpCUG54N1kzUmtDeHlJc01wcUV1OGRRNW9Cd21qZEtXVTdJX0RSOEtlQVdGX3RvV19iU3M?oc=5",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiogFBVV95cUxQbVVQTFUweE96YnZQcTlidHpNV0xLSUNkOHFKc3Z4R1JmaXRUY05fMXZYQkUxTF9tNXM1cGY3OURTQ2MtYm5hTHlfLVd4WHlkdkdodWRiZkJpUldEaVdMeDhzWi0xMjcyNjZ3ZVFmdW1kWEVfQlhCY3RXY1hxakNCcjZlT2dJcGJoTkpHNGtVT1J4b1FJN3hRMEZaNEFsbXkxREE?oc=5",
     "source": "Google News — BCI",
-    "summary": "ALS community to have a say in brain-computer interface development&nbsp;&nbsp;ALS News Today",
+    "summary": "Science Corporation raises $400M to commercialize BCI device&nbsp;&nbsp;MedTech Dive",
     "category": "neurotechnology"
   },
   {
@@ -46,38 +64,11 @@
   },
   {
     "type": "external",
-    "title": "Brain-computer interfaces: A new voice for people with paralysis - Medical Xpress",
-    "date": "2026-11-14",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiwFBVV95cUxQbW1DSGdoRUFyMm9kRjVWUjdQVU9lMzBLVnVUOUU5YWNRZHB2YTE1SG91SWx1b0tZYUVUMWZ6SGhtQkpsYjVKbTNtUndUcnBZMFdmX1NpNVNSd3g0aFlrUjFadjVPWHpvN1RxZ0VzcHRMS3ZjdWVIMDNDYWowaHAxalh2RU40T3UzSnNv?oc=5",
-    "source": "Google News — BCI",
-    "summary": "Brain-computer interfaces: A new voice for people with paralysis&nbsp;&nbsp;Medical Xpress",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Brain Stimulation Device Aims to Treat Women’s Health Conditions",
     "date": "2026-11-05",
     "url": "hxxps://spectrum[.]ieee[.]org/samphire-neuroscience-tdcs-pmdd-treatment",
     "source": "IEEE Spectrum",
     "summary": "Most women report menstruation-related pain or mood changes, and for around one in five women, strong symptoms disrupt daily life. Standard treatment options tend to focus on hormonal regulation, phar",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "A 72-Hour Engineering Sprint for Translating Thought to Speech | Updates - Neuralink",
-    "date": "2026-10-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiZEFVX3lxTE5SZ0JETzVITktIOUVDZU9TMTB5UDNWbzNiVlJGTE5leUlGLWYzYUVlbjZiZVFVOFBJVF95LUZYcHJYeU5NTGk3SUZqVzNocEg2STdjVFJnaVNvTWM0NTZRc2tuZWE?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "A 72-Hour Engineering Sprint for Translating Thought to Speech | Updates&nbsp;&nbsp;Neuralink",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink Unveils 'Telepathy': Think-to-Type Brain Interface Goes Public - BASENOR - Tesla Accessories",
-    "date": "2026-10-29",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipwFBVV95cUxNbHJsbEg3c212ckZQT2tYSVAtd0h1dVNIb0haTVJ1blZCR0FsbG05S3dST1Uxc0RDdDRPWUpKXzBTYmFsbTQtZ0lDR2pnRVNteUtMMy1aU1dIbWwtWWdwZHZVX3NkQVhVRXNoaEQzZk5kV0FKR0lvZkhjbFNxTmg1Ql8zTXA2UXFsM1c1TV9nanJhdWVQT3oxd3ZmMGlmZFYyekpmTUI1MA?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink Unveils 'Telepathy': Think-to-Type Brain Interface Goes Public&nbsp;&nbsp;BASENOR - Tesla Accessories",
     "category": "neurotechnology"
   },
   {
@@ -100,11 +91,11 @@
   },
   {
     "type": "external",
-    "title": "Computer science student takes engineering skills to Neuralink - UT San Antonio Today",
-    "date": "2026-10-21",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMimAFBVV95cUxOMkIwamstY3g1M2NCSVNVSnlCTjJ6S20zYUtpU0FmVTdNUnhtZ2NKQ3VuLWxnc0JiVm5COWR2c0IyMFpfVm03UWFqVUFqWXhLUTJQV2xnREtDdmpNOEhacXhTR2hDOHNzVDY3RTFuN1k1RnNyZkE4ZFBfamhhM3BYZHhSX1FhYl9BbW94RkpkQTRDM0RTeHp2Vg?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Computer science student takes engineering skills to Neuralink&nbsp;&nbsp;UT San Antonio Today",
+    "title": "China wants to get inside your head - The Economist",
+    "date": "2026-10-06",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxPWVpQR3l0akJTSHo1Qk1ud0lTSDJ2a0JvekQzalVLR3duZWt0alBIdnZMYXd6STBYbzh2ZmdtanRhclB5c1NWc0x3cEpCelFjQlVmbUMwOHg4WEFobUd1Qi14cC1qNWgzYTZValBVT1V2VlNiMjlJZzFWYU0yWUJ2T0FzNHdtUGRD?oc=5",
+    "source": "Google News — BCI",
+    "summary": "China wants to get inside your head&nbsp;&nbsp;The Economist",
     "category": "neurotechnology"
   },
   {
@@ -114,15 +105,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxPZHdGc3pUdVhTQWdlTFRnSXl5VmVTZFR1NlpnRmVuVHJ4dzhrbkZ3dWw5QXZaOXA5WUI1Q1dEN0ItNmN6c0huU2kyMW4zZWNXNktYUEg5QVo2aWlfZXNWU2FtZjgxb0ZtTkxiNDdsM3BkZ01Fa1hFLW5WMkhLanhaSzVrWW91eXp0?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "A New Neurotech Startup Launches to Rival Sam Altman’s Merge Labs&nbsp;&nbsp;WIRED",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Neuralink brain implant helps man with ALS speak using his thoughts - MobiHealthNews",
-    "date": "2026-09-23",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxPYm9qUFd2LWdiSGs5NzExN014MDgxT005dnpQdFl4Uk5IRVhpYjljN1VRMU5BQW5kdUt5dWk4WHFkSG5YQUQzNUNlN19QWlYwUU1pSzYyd1daUDdXQ3NwdURpSnF3SzhKWVAxbTdMYmRmZnFacml5RUh6MGhzX0NscEdkdHlfUW42c0xkSFRKS0N6dEFrMzRtcnFkU0YyLW8?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink brain implant helps man with ALS speak using his thoughts&nbsp;&nbsp;MobiHealthNews",
     "category": "neurotechnology"
   },
   {
@@ -141,15 +123,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMimAFBVV95cUxPZ1c4THJlSTJtVER2WmN2S0hXNFpBdm9qZ2IwSXNFVWNjWHZHdU1CcWpYQ2hublhVc1VtUWZFcExhaEp4dkhiY2k3VEFFajhES1ZjMU9OT1JVemNtb0xnTkhzRXM2bmxCQVhWRFpKeExQSC1SdzA0VjBOUElFZVpEMEdyZ3lpdFJvdDR2SVNKdkx6elhYa2Nwdg?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Ray Kurzweil joins Subsense, the brain interface startup you snort&nbsp;&nbsp;Startup Fortune",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Elon Musk’s Neuralink Chip Changed My Life - Macleans.ca",
-    "date": "2026-08-14",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiiAFBVV95cUxNRTh4WldQd1dzVGJjVHhEUUFtX2JURmt2ajZjNGpZWWhYLThGcnk2aHlZeTV2UmJTenZZbGJzd0xlVlVmNXFucjd1OC1zZXllaU5jWU54VXprLXJldFppSjFydWZ3UE5nYy13V2drd1c2UW9DUHU5bzFLbGVwdnA2UlJGOXVwRWFS?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Elon Musk’s Neuralink Chip Changed My Life&nbsp;&nbsp;Macleans.ca",
     "category": "neurotechnology"
   },
   {
