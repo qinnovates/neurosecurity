@@ -20,7 +20,7 @@ jobs:
           # Full history: the identity check derives protected names from git authorship,
           # and a depth-1 clone with a bot-authored HEAD would leave it nothing to check.
           fetch-depth: 0
-      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: '3.12'
       # Runs before npm ci so a leak fails fast, before any third-party code executes.
