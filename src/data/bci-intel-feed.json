@@ -1,5 +1,226 @@
 [
   {
+    "id": "ea3765f3",
+    "title": "Corrigendum to “Optical cortico-cortical evoked potentials reveal structural and state-dependent cortical communication” [Brain Stimul 19 (6)]",
+    "date": "2026-11-22",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1935861X26002329?dgcid=rss_sd_all",
+    "source": "Brain Stimulation",
+    "source_category": "research",
+    "summary": "Publication date: January–February 2027Source: Brain Stimulation, Volume 20, Issue 1Author(s): Francesco Resta, Alessandro Scaglione, Emilia Conti, Elisabetta Gerace, Francesco Saverio Pavone",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
+  },
+  {
+    "id": "cdd0c081",
+    "title": "From features to digital biomarkers: EEG–fNIRS classification pipelines for brain monitoring",
+    "date": "2026-11-22",
+    "url": "hxxps://www[.]sciencedirect[.]com/science/article/pii/S1053811926006592?dgcid=rss_sd_all",
+    "source": "NeuroImage",
+    "source_category": "research",
+    "summary": "Publication date: 15 December 2026Source: NeuroImage, Volume 344Author(s): Radana Vilimkova Kahankova, Andrea Vinklerova, Jarosław Zygarlicki, Amir F. Al-Bakri, Aleksandra Kawala-Sterniuk",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
+  },
+  {
+    "id": "c02c3137",
+    "title": "Synthetic neural data augmentation for robust deep learning-based neural decoding",
+    "date": "2026-11-22",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnins[.]2026[.]1954119",
+    "source": "Frontiers Neuroscience",
+    "source_category": "research",
+    "summary": "ObjectiveTraining deep learning neural motor decoders requires large datasets, which are often difficult to obtain in human experiments. With the advent of complex stimulation feedback and compact wir",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
+  },
+  {
+    "id": "ebde8902",
+    "title": "A convergent role of ontogenetic alterations of glutamatergic transmission in centro-temporal spike generation: a hypothesis",
+    "date": "2026-11-22",
+    "url": "hxxps://www[.]frontiersin[.]org/articles/10[.]3389/fnhum[.]2026[.]1973477",
+    "source": "Frontiers Human Neuro",
+    "source_category": "research",
+    "summary": "Centro-temporal spikes (CTS) are age-dependent epileptiform EEG abnormalities linked to speech-related epilepsy syndromes, yet their neurobiological basis remains unclear. We hypothesize that impaired",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
+  },
+  {
+    "id": "c7a9e43e",
+    "title": "The Week’s 10 Biggest Funding Rounds: $400M For Neurotech Leads, Followed By Big Deals For AI, Fintech, Biotech And More",
+    "date": "2026-11-20",
+    "url": "hxxps://news[.]crunchbase[.]com/venture/biggest-startup-rounds-science-neurotech-model-ml-galvanize-therapeutics/",
+    "source": "Crunchbase News",
+    "source_category": "funding",
+    "summary": "U.S. startups continued to secure sizable rounds, led by brain-computer interface company Science securing a fresh $400 million.",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
+  },
+  {
+    "id": "9c04227a",
+    "title": "Canada appoints US-based Financial Data Exchange to set technical standards for open banking",
+    "date": "2026-11-20",
+    "url": "hxxps://betakit[.]com/canada-to-appoint-us-based-financial-data-exchange-to-set-technical-standards-for-open-banking/",
+    "source": "BetaKit",
+    "source_category": "news",
+    "summary": "Feds say FDX was selected as it’s the globally recognized standard, with most widespread support. The post Canada appoints US-based Financial Data Exchange to set technical standards for open banking ",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
+  },
+  {
+    "id": "4717691d",
+    "title": "J&J to install first Ottava robot in US hospital",
+    "date": "2026-11-20",
+    "url": "hxxps://www[.]medtechdive[.]com/news/jj-to-install-first-ottava-robot-in-us-hospital/875343/",
+    "source": "MedTech Dive",
+    "source_category": "product",
+    "summary": "The commercial agreement with Memorial Hermann-Texas Medical Center comes in the same week that rival Medtronic revealed expanded FDA clearance for its Hugo robot in general surgical procedures.",
+    "tags": [
+      "product",
+      "regulatory",
+      "partnership"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
+  },
+  {
+    "id": "2c8c8ce8",
+    "title": "Patients have little say in how brain implant trials are done. Ian Burkhart wants to change that - STAT",
+    "date": "2026-11-20",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiogFBVV95cUxQRlNlZDFrVzhPUzB6T3hxVGFSb3kwUzVpTDVtRUtyTTNoSmlEZU15X1c3UUlDY0NZRk92a013NXlHTUxFSVZtQ2ZUeGNyOUo1YnROUXBvdEtRZ2piS2VMTmowQ0xBcnl4dE9PcXV4U3Z5bVIxMDd3RFdxTTRYQnJFN0pZVzJydkF2bnpvRHlqZ2Nvel8zT0FDcEMxREhUZGVEQkE?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "Patients have little say in how brain implant trials are done. Ian Burkhart wants to change that&nbsp;&nbsp;STAT",
+    "tags": [
+      "product",
+      "research",
+      "clinical"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
+  },
+  {
+    "id": "9f29c8ee",
+    "title": "FDA clears Masimo’s brain function monitor",
+    "date": "2026-11-19",
+    "url": "hxxps://www[.]medicaldevice-network[.]com/news/fda-masimos-smartsedline-brain-monitor/",
+    "source": "Medical Device Network",
+    "source_category": "product",
+    "summary": "Masimo has secured 510(k) clearance from the US Food and Drug Administration (FDA) for its smartSedLine brain function monitoring system. The post FDA clears Masimo’s brain function monitor appeared f",
+    "tags": [
+      "product",
+      "regulatory"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
+  },
+  {
+    "id": "7a4a502f",
+    "title": "Synchron Pauses Clinical Trial On Brain Interface, Plans To Resume Trial With Upgraded System - Medtech Insight",
+    "date": "2026-11-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMipgJBVV95cUxPYVdGTng1SDhvSHAxUVFreDBkRzQ3UW1XeUk5cEhySTN2R3p4RDVyQnMwZDhIQU52RVlRcm1zeGJrVXQydjVycFNzYlRnZ0k4SjhqNFh1Zmx6TzBFc0NPRUlJaWlxbHBLYmZWczR4SkVZanAtaUVtb3RIUDBkM0JWREpxczNJUzFKTlVBLWZrb0U5UmlOUzVPd0YzSDAzeUs3Y0dDbmFLX1lYSk9VZ25oM05mV21xeXg1N29DdkJzZktTM01EekdqbkpRV2tMNy1wX0F4M3RuX0FydGJsVklTRlhUcU9Xa29xMXpzUE1RY0lva2ZCRHNEb0VYY2lxeTF0a2ZPVHFURml6UkpqbmxwQkRXY1lvZVdSTll0bWRJNV9oRHFSLXc?oc=5",
+    "source": "GN: BCI Trials",
+    "source_category": "clinical",
+    "summary": "Synchron Pauses Clinical Trial On Brain Interface, Plans To Resume Trial With Upgraded System&nbsp;&nbsp;Medtech Insight",
+    "tags": [
+      "research",
+      "clinical"
+    ],
+    "companies": [
+      "Synchron"
+    ],
+    "fetched": "2026-11-22"
+  },
+  {
+    "id": "beb84305",
+    "title": "Science raises $400m to expand retinal implant rollout",
+    "date": "2026-11-18",
+    "url": "hxxps://www[.]medicaldevice-network[.]com/news/science-400m-expand-retinal-implant-rollout/",
+    "source": "Medical Device Network",
+    "source_category": "product",
+    "summary": "The company will use the funds to expand access to Prima across Europe, where the device is designed to restore form vision. The post Science raises $400m to expand retinal implant rollout appeared fi",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
+  },
+  {
+    "id": "16df4ce9",
+    "title": "Science Corp raises $400M to expand its PRIMA vision implant in Europe and prepare for a US launch - Tech Funding News",
+    "date": "2026-11-18",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMixAFBVV95cUxQTUtxRGhQdWIzTlh5MXRNZ2tqczhPYm85RTN2THhjbmZhYURMb1kwTXVQV2tJU1hHVThoWERQTEtmXzVYdHk5ODBfcW95eWxJbUhWMFRfanJFZ2J3TTJyU3RkQVdVbnI4VDdZeGk1SmtWSlVFbC1FRVVFenFDRUpVYV9GalNSOGNYSHNPS2VhUm51YlliM0Y1czJlM3VlR01WMGEwWkxaOUJtMlZsaUxlU0RCcWd1NGh3ajlhbWEtemFwQXFE?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "Science Corp raises $400M to expand its PRIMA vision implant in Europe and prepare for a US launch&nbsp;&nbsp;Tech Funding News",
+    "tags": [
+      "funding",
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
+  },
+  {
+    "id": "5263078f",
+    "title": "Can Flashing Lights Slow Alzheimer’s? Only if You Start Early",
+    "date": "2026-11-17",
+    "url": "hxxps://spectrum[.]ieee[.]org/40-hz-therapy-alzheimers",
+    "source": "IEEE Spectrum",
+    "source_category": "research",
+    "summary": "Flashing lights and beeping tones may slow Alzheimer’s disease—but only if treatment starts early enough. That’s the upshot of the largest test yet of the idea that syncing brain activity to 40 hertz ",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
+  },
+  {
+    "id": "2071188e",
+    "title": "Science Corp. raises $400M to support retinal vision-restoring implant - MassDevice",
+    "date": "2026-11-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMinwFBVV95cUxPLWNuNkx4cnNpdlczQWg5NkdLR05yUEU4bkRyMFVaMzlGaWhRajRVdE1fQlRuMHlONlhNcm1ZdFlLOTNndDhNcklhQXhrSXZKd1puZnFZbFV1MDI5WURoWkRNSTQ0M0oxMmJjYmJ3dXV0YWx3UlpXUkxlSFF0Rm1UTmlENkVYNXhmMkJlWkpyVHlhdGVWeUFvNE56bmpOaFE?oc=5",
+    "source": "GN: BCI Funding",
+    "source_category": "funding",
+    "summary": "Science Corp. raises $400M to support retinal vision-restoring implant&nbsp;&nbsp;MassDevice",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
+  },
+  {
+    "id": "a60888a0",
+    "title": "Science Corp Raises $400 Million at $3.5 Billion Valuation to Advance Retinal and Brain Implants - BigGo Finance",
+    "date": "2026-11-17",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMidkFVX3lxTE93RzkyalE4LU1GdXVTZWFQenVKejNSc3UydkhBb24tYUJPM0xfeV83LU52bGpBVUQ3NXBrUkkzOUtvX3NjQkRTVlBvanZTSVZoRllnUTBaeGhfNVY2d3Z5YVoyRWcyM3J2R2xEeEFOUnhlbWdXX2c?oc=5",
+    "source": "GN: BCI Companies",
+    "source_category": "product",
+    "summary": "Science Corp Raises $400 Million at $3.5 Billion Valuation to Advance Retinal and Brain Implants&nbsp;&nbsp;BigGo Finance",
+    "tags": [
+      "funding",
+      "product",
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
+  },
+  {
     "id": "a02c9d2b",
     "title": "Letter to the Editor: Cannabis use and clinical outcomes of rTMS among adults with major depressive disorder: Insights from a naturalistic clinical cohort",
     "date": "2026-11-15",
@@ -680,6 +901,20 @@
     ],
     "companies": [],
     "fetched": "2026-11-08"
+  },
+  {
+    "id": "e79bfea5",
+    "title": "Wearable device makers are harvesting brain data to train AI—without telling users - Science | AAAS",
+    "date": "2026-11-04",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiuwFBVV95cUxQMVBxYTBfT3piS0N2a1FEZU11RWlFLXdaT2E5S2tBSi1UeEc3amtzWTVRbDJXNWpTaGcyMzh3elRqMFlYUGdBZEJOTGpUWVJKVTVRamFDNGZtVjVIRGxkWHdiWkNkM3hmUDVKQW9rNm9DVG9XcDQ3TnZTQXZvOFZQcUYyc2JuRzF1a0NVZ2pPd0lISk1jSjJjWnpqV3BhX1UyS191TVRxZWdWcEFtQjJxWTFMVXRROElJN0g4?oc=5",
+    "source": "GN: Consumer EEG",
+    "source_category": "product",
+    "summary": "Wearable device makers are harvesting brain data to train AI—without telling users&nbsp;&nbsp;Science | AAAS",
+    "tags": [
+      "product"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
   },
   {
     "id": "1babeb40",
@@ -2422,6 +2657,21 @@
     "fetched": "2026-10-11"
   },
   {
+    "id": "b501f850",
+    "title": "Why Medical Device Cybersecurity Isn’t Just IT Security With Extra Paperwork - Inter Press Service",
+    "date": "2026-09-16",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitwFBVV95cUxNcHJMSERVNUVUbE5kMFRxMFhPRm1oTU5UaEZwem1sM29VbWVDYmxuUzcxakVVaFBocDZiR1FwZTIwMVEyVDlBMThPbTZ3YnJLcTNjcDJIc1pObjJHbS1NaFp4bU9EcnBFYUJWZ3RoRDhQcDdrR1o0WHA2Ti0xbzZ0RDc0cjl0U2RzbnNqMnBhbnZkU3hNQXVqa29ZS3lNNm9QUWJCX3k4NW00TEtrd25QTWFhMm1OSHM?oc=5",
+    "source": "GN: MedDevice Security",
+    "source_category": "regulatory",
+    "summary": "Why Medical Device Cybersecurity Isn’t Just IT Security With Extra Paperwork&nbsp;&nbsp;Inter Press Service",
+    "tags": [
+      "product",
+      "research"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
+  },
+  {
     "id": "95b1c5f8",
     "title": "‘I Have a Lot to Say’: Brain Implant Helps a Disabled Patient Speak - The New York Times",
     "date": "2026-09-14",
@@ -2435,6 +2685,20 @@
     ],
     "companies": [],
     "fetched": "2026-10-25"
+  },
+  {
+    "id": "b330655f",
+    "title": "Bridge-Disease Curriculum Transfer Enables Smartphone-Based Balance Assessment in Rare Neurologic Disorders",
+    "date": "2026-09-11",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11686857",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Video-based motor assessment could enable scalable assessment of neurological function, but rare-disease applications are constrained by extreme data scarcity and poor generalization from small cohort",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
   },
   {
     "id": "0212224a",
@@ -2453,6 +2717,34 @@
       "BrainGate"
     ],
     "fetched": "2026-10-11"
+  },
+  {
+    "id": "b7881bf8",
+    "title": "Robust Brain–Computer Interface (BCI) Control During Frequency-Tuned Transcranial Alternating Current Stimulation (tACS)",
+    "date": "2026-09-10",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11686070",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Integrating frequency-tuned, adaptive brain stimulation with brain-computer interfaces (BCIs) allows direct tests of the causal role of brain oscillations and advances BCIs toward bi-directional opera",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
+  },
+  {
+    "id": "6c0ed22f",
+    "title": "Versatile Exoskeleton Control Supports Elderly Joint Energetics During Hip-Intensive Tasks",
+    "date": "2026-09-10",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11686068",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Age-related mobility decline is frequently accompanied by a redistribution of joint kinetics, where older adults compensate for reduced ankle function by increasing demand on the hip. Paradoxically, t",
+    "tags": [
+      "general"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
   },
   {
     "id": "1237bc0a",
@@ -2481,6 +2773,20 @@
     ],
     "companies": [],
     "fetched": "2026-10-25"
+  },
+  {
+    "id": "b0d8b8b5",
+    "title": "Energy-Efficient Peripheral Magnetic Stimulation via Pulse-Shape Optimization Using a Dual-Coil Architecture With Monopolar-Like Nerve-Axis Field",
+    "date": "2026-09-04",
+    "url": "hxxp://ieeexplore[.]ieee[.]org/document/11679058",
+    "source": "IEEE TNSRE",
+    "source_category": "research",
+    "summary": "Peripheral magnetic stimulation (PMS) has emerged as a non-contact neuromodulation technique for rehabilitation and neuroprosthetic applications. However, its practical use remains limited by high pow",
+    "tags": [
+      "policy"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
   },
   {
     "id": "a7f3569b",
@@ -17298,6 +17604,20 @@
     ],
     "companies": [],
     "fetched": "2026-11-08"
+  },
+  {
+    "id": "bb1b254d",
+    "title": "DARPA Is Funding Nanoparticles That Permeate Brain to Read Neural Signals - Futurism",
+    "date": "2021-03-19",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiekFVX3lxTE1DbVY1Q2RUUVVBRVpSQ1FGX1VfckRJYVN4YVNJNnRUQlc4Ym1QUDAxRUpkNE8tck5hVUtKc01LdmtEWFJ1anNqeUlsRFBPWjJWeVpuLWJxT1hWbnBLTHZUbDE4bG1Sc0w0WDdwbXBFWDN6amdqeExtLTJR?oc=5",
+    "source": "GN: Gov Funding Neuro",
+    "source_category": "funding",
+    "summary": "DARPA Is Funding Nanoparticles That Permeate Brain to Read Neural Signals&nbsp;&nbsp;Futurism",
+    "tags": [
+      "funding"
+    ],
+    "companies": [],
+    "fetched": "2026-11-22"
   },
   {
     "id": "cc96a4d2",
