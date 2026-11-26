@@ -1,30 +1,57 @@
 [
   {
     "type": "external",
-    "title": "STAT+: Roche&#8217;s potential breast cancer blockbuster drug wins second FDA nod",
-    "date": "2026-11-24",
-    "url": "hxxps://www[.]statnews[.]com/2026/11/24/biotech-news-roche-potential-breast-cancer-blockbluster-drug-wins-second-fda-nod/?utm_campaign=rss",
-    "source": "STAT News",
-    "summary": "Roche's breast cancer pill has picked up its second FDA clearance in a week, this time in early-stage breast cancer for use after surgery.",
+    "title": "Elon Musk’s Neuralink Moves Toward Implanting Computer Chips in Human Brain - Newsweek",
+    "date": "2026-11-26",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMirAFBVV95cUxNcjBDdjBwS0U2R0xyRWducElaUjFnZ0tNS1Fqa04tRFZkdW5pZzI4Y281REJhTDlrSnp2SUpVNS1qUHBlTERWRzRqRWZRYmx3dllCZVVpYVZwQVVHakxvaEZoWGp4bzlPLURpdk1lTHh3WGUyY3dDSmZaRldjaEphRGp5YXFfM0ZDT2QwR0FVaXMtcncxaTZVX1k2dENxejFBTmFmMWdYRENaZnVy?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Elon Musk’s Neuralink Moves Toward Implanting Computer Chips in Human Brain&nbsp;&nbsp;Newsweek",
     "category": "neurotechnology"
   },
   {
     "type": "external",
-    "title": "A generative framework for unified representations bridging electrophysiological and haemodynamic brain activity",
-    "date": "2026-11-24",
-    "url": "hxxps://arxiv[.]org/abs/2611[.]28507",
+    "title": "STAT+: FDA approves Cogent&#8217;s drug for rare stomach cancer",
+    "date": "2026-11-25",
+    "url": "hxxps://www[.]statnews[.]com/2026/11/25/biotech-news-fda-approves-cogents-drug-for-rare-stomach-cancer/?utm_campaign=rss",
+    "source": "STAT News",
+    "summary": "Cogent Biosciences won FDA clearance for its stomach cancer treatment, in combination with a much older drug from Pfizer called Sutent.",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Neuralink Gets Clearance for Brain-Implant Trial in ALS Patients - Bloomberg",
+    "date": "2026-11-25",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitgFBVV95cUxPQWN4ZHluMUFFcjNHN25ObnNSTmIxREtLTUZibEd2dmp2dGhkU2hMY2hwMEY5Z3FHT3R6b2g0eGdvVENyT1gtdVBWUFJ3ZHBZTU5DSHRQLS1lNzlPeHlxckVkM1ZHWkJuMmp4UXE5YkNCZEdDQXZ2ekRnUVg4R2xqemdHcDBkZTRxRF9OY1B6RW1weUlGQ28xWm1NTXlUOFpGOVNDMU9TVDFSNU81dXQwZ1NaZTFXUQ?oc=5",
+    "source": "Google News — Neuralink",
+    "summary": "Neuralink Gets Clearance for Brain-Implant Trial in ALS Patients&nbsp;&nbsp;Bloomberg",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
+    "title": "Direct Conditioning of Audio Diffusion Transformers on fMRI Reveals Cortical Contributions to Sound Reconstruction",
+    "date": "2026-11-25",
+    "url": "hxxps://arxiv[.]org/abs/2611[.]12603",
     "source": "arXiv Neuroscience",
-    "summary": "arXiv:2611.28507v1 Announce Type: new Abstract: Electrophysiological and haemodynamic recordings resolve brain activity at complementary temporal and spatial scales, yet paired acquisition remains dif",
+    "summary": "arXiv:2611.12603v1 Announce Type: cross Abstract: Reconstructing audio from brain activity remains challenging. Existing brain-to-audio pipelines typically map neural responses to predefined stimulus ",
     "category": "research"
   },
   {
     "type": "external",
-    "title": "History-bearing thalamocortical signals reconstruct and redirect later decisions in a circuit model",
-    "date": "2026-11-24",
-    "url": "hxxps://arxiv[.]org/abs/2611[.]28799",
+    "title": "The Self-Assembling Brain: Emergent Routing and Its Open Challenges",
+    "date": "2026-11-25",
+    "url": "hxxps://arxiv[.]org/abs/2611[.]31629",
     "source": "arXiv Neuroscience",
-    "summary": "arXiv:2611.28799v1 Announce Type: new Abstract: Experience can guide an ambiguous choice or bias a choice despite strong current evidence. We asked how a thalamocortical circuit carries historical con",
+    "summary": "arXiv:2611.31629v1 Announce Type: cross Abstract: Biologically inspired alternatives to backpropagation, such as feedback alignment, relax the requirement for exact synaptic weight symmetry but still ",
     "category": "research"
+  },
+  {
+    "type": "external",
+    "title": "Conductive Dyes Could Turn Hair Into EEG Electrodes",
+    "date": "2026-11-25",
+    "url": "hxxps://spectrum[.]ieee[.]org/hair-dye-eeg-electroencephalography",
+    "source": "IEEE Spectrum",
+    "summary": "The most common way to analyze brain signals, electroencephalography (EEG), requires sticking electrodes onto the scalp to detect electrical activity. However, a person’s hair can hinder electrode-ski",
+    "category": "neurotechnology"
   },
   {
     "type": "external",
@@ -82,24 +109,6 @@
   },
   {
     "type": "external",
-    "title": "Neuralink Lets Man Play GTA 6 With His Mind - PCMag",
-    "date": "2026-11-22",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiekFVX3lxTE96ODNoN2pES0RIT1F5RWRhNVJRNG1VME9CT3NmYjdPLVNveTJBVGdHTUYzcHY1ZjNCcmNPN0hQUG1TVEhfM3Zna3l0c0NPRkU5UEl3dktUNXJqWXRWZnIwS2tQRVR6SXZfYWNCX0ZwT053bC15N0QxRC1B?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "Neuralink Lets Man Play GTA 6 With His Mind&nbsp;&nbsp;PCMag",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "GTA 6 reportedly played using Neuralink brain chip in new video - Mashable",
-    "date": "2026-11-21",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMiU0FVX3lxTE9ZMjRGc2kwUlN5Wm1xYzZlczItSkFubUhiY2h4VEVoX2NiR2xvNnBuUFBkZFQ3eklYM2c4TVFWWV9EUGh0blZEd2MxV0V6VTlGd3VZ?oc=5",
-    "source": "Google News — Neuralink",
-    "summary": "GTA 6 reportedly played using Neuralink brain chip in new video&nbsp;&nbsp;Mashable",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
     "title": "Can Flashing Lights Slow Alzheimer’s? Only If You Start Early",
     "date": "2026-11-17",
     "url": "hxxps://spectrum[.]ieee[.]org/40-hz-therapy-alzheimers",
@@ -109,20 +118,20 @@
   },
   {
     "type": "external",
+    "title": "miHoYo exits brain-computer startup Lingweiyisi as university fund takes control - Dealroom",
+    "date": "2026-11-10",
+    "url": "hxxps://news[.]google[.]com/rss/articles/CBMitAFBVV95cUxNLVJzVFNGai12X0RMa3hSU3VybG5hbTY0Q1hoRTZFWjRFandad3FsV2FCYXRHNjJ4bVJyNGFTMEpyemJTWlczR1ZyRGViTzk1d09jM0x6ckE3cU9mZGI4M1ZXR2pGaFpnWGNNX0stY3ljS2ZvdTExbHJ3RGhlMFpVS3ByYllVS3paUHd0OXNsRE1KZnVWNEhLNkJMZF83bGhlZG1tRExpbEV6QkI3dVR0bnZyNng?oc=5",
+    "source": "Google News — Neural Startups",
+    "summary": "miHoYo exits brain-computer startup Lingweiyisi as university fund takes control&nbsp;&nbsp;Dealroom",
+    "category": "neurotechnology"
+  },
+  {
+    "type": "external",
     "title": "Brain Stimulation Device Aims to Treat Women’s Health Conditions",
     "date": "2026-11-05",
     "url": "hxxps://spectrum[.]ieee[.]org/samphire-neuroscience-tdcs-pmdd-treatment",
     "source": "IEEE Spectrum",
     "summary": "Most women report menstruation-related pain or mood changes, and for around one in five women, strong symptoms disrupt daily life. Standard treatment options tend to focus on hormonal regulation, phar",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Mesh Woven Into Heart Tissue Harvests Energy From Motion",
-    "date": "2026-10-29",
-    "url": "hxxps://spectrum[.]ieee[.]org/medical-implant-energy-harvesting-mesh",
-    "source": "IEEE Spectrum",
-    "summary": "Medical implants like pacemakers and deep brain stimulators now rely on batteries that are bulky, stiff, and eventually need replacing. But what if these devices could be powered by the body itself? R",
     "category": "neurotechnology"
   },
   {
@@ -159,15 +168,6 @@
     "url": "hxxps://news[.]google[.]com/rss/articles/CBMirgFBVV95cUxOLXpXNkJyYkhncDE1N3lYTGg3Tk5kd2tocGVjaDdaR21jcDQ3TXpVZ3BZQVdiVEFmelEtM1A0dVNXVDB6MG5wSjEtUlZlN2FmeW8xT0taLUN3ODZ3YmJHWXdmakVGUDlMLTVFd21vamRTdVlSZkd0bk13RDVUTVFhZ2QwVHlqaFlscmJldkxBeURMSUtBNV9JOVRZMkViRVVNM2pxUFlXS0xyZUM2X2c?oc=5",
     "source": "Google News — Neural Startups",
     "summary": "Butterfly Network, Merge Labs partner on ultrasound brain-computer interfaces&nbsp;&nbsp;MobiHealthNews",
-    "category": "neurotechnology"
-  },
-  {
-    "type": "external",
-    "title": "Merge Labs and Butterfly Network Partner to Advance Ultrasound-Based Brain-Computer Interfaces - Yahoo Finance",
-    "date": "2026-09-01",
-    "url": "hxxps://news[.]google[.]com/rss/articles/CBMingFBVV95cUxNcnVTeVdlODNYSnJkeWY1TTVVamhiaGFzaVFmc1NNQU51emJVZnhxM2dEOW5KMkZBTG5DU016MW5OLWV2c000dG1fZmppOFlfQjRWYlBENldDWlJsRi1qbjZpSk9kbVZLOUdHdno4N3VzOU5Fa1R1RHpQX21OOWdZUS1VaWh5QUwyajNPREFJaFhhOWhld19qOXNGQXVfdw?oc=5",
-    "source": "Google News — Neural Startups",
-    "summary": "Merge Labs and Butterfly Network Partner to Advance Ultrasound-Based Brain-Computer Interfaces&nbsp;&nbsp;Yahoo Finance",
     "category": "neurotechnology"
   },
   {
